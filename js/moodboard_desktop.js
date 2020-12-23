@@ -1,113 +1,117 @@
-$(document).ready(function(){
+/*$(document).ready(function(){
     main();
-})
+})*/
 
-function main() {
+function moodboard__main() {
+    moodboard__activate();
+
+    $(window).resize(function() {
+        
+        moodboard__deactivate();
+
+        moodboard__activate();
+    });
+}
+
+function moodboard__activate(bar_gr){
+
+    document.title = "moodboard"
+    window.history.pushState({page: "moodboard"},"", "#moodboard");
+
     $("body").append(`
-        <div id="wrapper">
-        </div>
-        <div id="headline__info">
+        <div id="moodboard">
+            <div id="wrapper">
+            </div>
+            <div id="headline__info">
+            </div>
         </div>
     `);
 
-    function create_responsive() {
+    moodboard__create_responsive(bar_gr);
+    current_page = "moodboard";
+}
 
-        var screen_width_in_px  = window.innerWidth;
-        var screen_height = window.innerHeight;
+function moodboard__deactivate(){
+    $("#moodboard").remove();
+    $("#contact_wrapper").remove();
 
-        $("#wrapper").css({                    
-            "background-color": '#759aa292',
-            "position":         "relative",
-            "height":           screen_height,
-            "width":            screen_width_in_px
-        }); 
+    /*remove_triggers("contact_canvas__trigger") // contact_canvas TRIGGER*/
+}
+function moodboard__create_responsive(bar_gr) {
 
-        $("#headline__info").css({                    
-            "background-color": '#fff',
-            "position":         "relative",
-            "height":           screen_height/2,
-            "width":            screen_width_in_px,
-            
-        }); 
+    var screen_width_in_px  = window.innerWidth;
+    var screen_height       = window.innerHeight;
 
-        var container       = SVG().addTo("#wrapper").size(screen_width_in_px, screen_height)
-        var container_gr    = container.nested()   
+    $("#moodboard #wrapper").css({                    
+        "background-color": '#759aa292',
+        "position":         "relative",
+        "height":           screen_height,
+        "width":            screen_width_in_px
+    }); 
 
+    $("#moodboard #headline__info").css({                    
+        "background-color": '#fff',
+        "position":         "relative",
+        "height":           screen_height/2,
+        "width":            screen_width_in_px,
+        
+    }); 
 
-        var headline_canvas     = SVG().addTo("#headline__info").size(screen_width_in_px, screen_height/2)
-        var headline_canvas__gr = headline_canvas.nested()   
+    var container    = SVG().addTo("#moodboard #wrapper").size(screen_width_in_px, screen_height)
+    var container_gr = container.nested()   
 
-        var screen_physical_width_cm = get_physical_screen_width(screen_width_in_px);
-        console.log(screen_physical_width_cm, '!!!SCREEN WIDTH')
+    var headline_canvas     = SVG().addTo("#moodboard #headline__info").size(screen_width_in_px, screen_height/2)
+    var headline_canvas__gr = headline_canvas.nested()   
 
-        if (screen_physical_width_cm < 20.5) {
-            // MOBILE
-            //intro(container_gr, screen_width_in_px, screen_height)
-            nevena(container_gr, screen_width_in_px, screen_height)
-            //web_design(container_gr, screen_width_in_px, screen_height)
-            //web_development(container_gr, screen_width_in_px, screen_height)
-            //animation(container_gr, screen_width_in_px, screen_height)
-            //contact(container_gr, screen_width_in_px, screen_height)
-        }
-        else if (screen_physical_width_cm < 33.8) { // max width for tablet 2736px, max height 2048px
+    var screen_physical_width_cm = get_physical_screen_width(screen_width_in_px);
+    console.log(screen_physical_width_cm, '!!!SCREEN WIDTH')
 
-            // TABLET
-            //var layout_tablet_gr = create_background__tablet(container_gr, screen_width_in_px, screen_height)
-            //var background_white_tablet_gr = layout_tablet_gr.findOne('#background_white_tablet_gr')
-            //section_images__tablet(background_white_tablet_gr, screen_width_in_px, screen_height)
-            //create_text__tablet(container_gr, wrapperscreen_width_in_px, screen_height)
-            //buttons_tablet(container_gr, screen_height, screen_width_in_px)
-            //create_contact_section(contact_gr, screen_width_in_px)
+    if (screen_physical_width_cm < 20.5) {
+        // MOBILE
+        //intro(container_gr, screen_width_in_px, screen_height)
+        nevena(container_gr, screen_width_in_px, screen_height)
+        //web_design(container_gr, screen_width_in_px, screen_height)
+        //web_development(container_gr, screen_width_in_px, screen_height)
+        //animation(container_gr, screen_width_in_px, screen_height)
+        //contact(container_gr, screen_width_in_px, screen_height)
+    }
+    else if (screen_physical_width_cm < 33.8) { // max width for tablet 2736px, max height 2048px
 
-        }
+        // TABLET
+        //var layout_tablet_gr = create_background__tablet(container_gr, screen_width_in_px, screen_height)
+        //var background_white_tablet_gr = layout_tablet_gr.findOne('#background_white_tablet_gr')
+        //section_images__tablet(background_white_tablet_gr, screen_width_in_px, screen_height)
+        //create_text__tablet(container_gr, wrapperscreen_width_in_px, screen_height)
+        //buttons_tablet(container_gr, screen_height, screen_width_in_px)
+        //create_contact_section(contact_gr, screen_width_in_px)
 
-        else {
-            var layout_gr = intro_section__desktop(container_gr, screen_width_in_px, screen_height)
-            var background_gr = layout_gr.find("#background_gr")
-            images__desktop(background_gr, screen_width_in_px, screen_height)
-
-            headline__info(headline_canvas__gr, screen_width_in_px, screen_height)
-            masonry(screen_width_in_px, screen_height)
-            video(screen_width_in_px, screen_height)
-
-            quote_and_scroll__desktop(container_gr, screen_width_in_px, screen_height)
-            create_contact_section(screen_width_in_px, screen_height)
-            //var white_background_gr = layout_gr.find("#white_background_gr")
-            //section_images__desktop(white_background_gr)
-            //buttons(container_gr, screen_height, screen_width_in_px)
-            //create_contact_section(contact_gr, screen_width_in_px)
-        }
     }
 
-    create_responsive();
+    else {
+        var moodboard__layout_gr = moodboard__intro_section__desktop(container_gr, bar_gr, screen_width_in_px, screen_height)
+        var moodboard__background_gr = moodboard__layout_gr.find("#moodboard__background_gr")
+        moodboard__images__desktop(moodboard__background_gr, screen_width_in_px, screen_height)
 
-    $(window).resize(function() {
-        $("#wrapper svg").remove();
-        $("#contact_wrapper").remove();
-        //container_gr.remove(); // IMPORTANT!! - remove everything previously drawnscreen_width_in_px, screen_height
-        //container_gr = container.nested();
+        moodboard__headline__info(headline_canvas__gr, screen_width_in_px, screen_height)
+        masonry(screen_width_in_px, screen_height)
+        moodboard__video(screen_width_in_px, screen_height)
 
-
-        //$('#wrapper').attr('height', $(window).height());
-        //$('#wrapper').attr('width', $(window).width());
-        //create_background__desktop(container_gr, screen_width_in_px, screen_height)
-        // create_text__desktop(container_gr, screen_width_in_px, screen_height)
-        // section_images__desktop(container_gr)
-
-        create_responsive();
-    });
+        moodboard__quote_and_scroll__desktop(container_gr, screen_width_in_px, screen_height)
+        create_contact_section(screen_width_in_px, screen_height)
+    }
 }
+
 //----------------------------------------------CREATE-LAYOUT-DESKTOP----------------------------------------------------------------
-function intro_section__desktop(parent_gr, screen_width_in_px, screen_height){
+function moodboard__intro_section__desktop(parent_gr, bar_gr, screen_width_in_px, screen_height){
 
-    var layout_gr = parent_gr.nested()
+    var moodboard__layout_gr = parent_gr.nested()
 
-    var background_gr = layout_gr.nested()
+    var moodboard__background_gr = moodboard__layout_gr.nested()
         .attr({
-            id: "background_gr",
+            id: "moodboard__background_gr",
         })
 
-    var background_color = background_gr.rect(screen_width_in_px,screen_height)
+    var background_color = moodboard__background_gr.rect(screen_width_in_px,screen_height)
         .fill('#f7cd97e3')
         .attr({
             id:      "background_color",
@@ -133,7 +137,7 @@ function intro_section__desktop(parent_gr, screen_width_in_px, screen_height){
             
             // ANIMATE
             console.log(create_menu)
-            create_menu(parent_gr, screen_width_in_px, screen_height)
+            create_menu(parent_gr, bar_gr, screen_width_in_px, screen_height)
 
             menu_rect_clicked = true;
         }
@@ -142,17 +146,17 @@ function intro_section__desktop(parent_gr, screen_width_in_px, screen_height){
         else {
 
             // ANIMATE
-            create_menu(parent_gr, screen_width_in_px, screen_height)
+            create_menu(parent_gr, bar_gr, screen_width_in_px, screen_height)
 
             menu_rect_clicked = false;
         }
     })
 
-    return layout_gr;
+    return moodboard__layout_gr;
 }
 
 //----------------------------------------------TEXT----------------------------------------------------------------
-function quote_and_scroll__desktop(parent_gr, screen_width_in_px, screen_height){
+function moodboard__quote_and_scroll__desktop(parent_gr, screen_width_in_px, screen_height){
     var text_gr = parent_gr.nested()
 
     var moodboard_title = text_gr.text(function(text_element){
@@ -169,22 +173,6 @@ function quote_and_scroll__desktop(parent_gr, screen_width_in_px, screen_height)
         x: 160,
         y: screen_height/2-moodboard_title.bbox().height/2
     })
-
-    //-----------------QUOTES------------------------
-    /*var quotes_up = text_gr.text(function(text_element){
-        text_element.tspan('"')
-    })
-        .font({
-            opacity: 1.0,
-            weight:  700,
-            fill:    '#846693ff',
-            family:  'Quicksand',
-            size:    60
-        })    
-    quotes_up.attr({
-        x: 145,
-        y: screen_height/2+40
-    })*/
 
     var paragraph = text_gr.text(function(add){
         add.tspan('Custom made masonry galleries that are').newLine()
@@ -204,21 +192,6 @@ function quote_and_scroll__desktop(parent_gr, screen_width_in_px, screen_height)
         x: 180,
         y: screen_height/2
     })  
-
-    /*var quotes_down = text_gr.text(function(text_element){
-        text_element.tspan('"')
-    })
-        .font({
-            opacity: 1.0,
-            weight:  700,
-            fill:    '#846693ff',
-            family:  'Quicksand',
-            size:    60
-        })    
-    quotes_down.attr({
-        x: paragraph.bbox().x+paragraph.bbox().width-45,
-        y: screen_height/2+paragraph.bbox().height-quotes_down.bbox().height/2-5
-    })*/
 
     var scroll_text = text_gr.text(function(text_element){
         text_element.tspan('Scroll through my work')
@@ -281,7 +254,7 @@ function quote_and_scroll__desktop(parent_gr, screen_width_in_px, screen_height)
 }
 
 //----------------------------------------------IMAGES-DESKTOP----------------------------------------------------------------
-function images__desktop(parent_gr, screen_width_in_px, screen_height){
+function moodboard__images__desktop(parent_gr, screen_width_in_px, screen_height){
 
     var images_gr = parent_gr.nested()
     .attr({
@@ -296,7 +269,7 @@ function images__desktop(parent_gr, screen_width_in_px, screen_height){
 
         'elements_data':[
             {
-                'img_url':   './media/rubic.png',
+                'img_url':   './../portfolio-app-media/media/rubic.png',
                 'width':     '340',
                 'position_x': 250,
                 'position_y': 20,
@@ -304,7 +277,7 @@ function images__desktop(parent_gr, screen_width_in_px, screen_height){
                 'view_box_y': '0'
             },
             {
-                'img_url':   './media/rubic.png',
+                'img_url':   './../portfolio-app-media/media/rubic.png',
                 'width':     '400', 
                 'position_x': 355,
                 'position_y': 200,
@@ -312,7 +285,7 @@ function images__desktop(parent_gr, screen_width_in_px, screen_height){
                 'view_box_y': '0'
             },
             {
-                'img_url':   './media/rubic.png',
+                'img_url':   './../portfolio-app-media/media/rubic.png',
                 'width':     '660',
                 'position_x': 210,
                 'position_y': 380,
@@ -321,7 +294,7 @@ function images__desktop(parent_gr, screen_width_in_px, screen_height){
             },
 
             {
-                'img_url':   './media/rubic.png',
+                'img_url':   './../portfolio-app-media/media/rubic.png',
                 'width':     '550',
                 'position_x': 210,
                 'position_y': 560,
@@ -329,7 +302,7 @@ function images__desktop(parent_gr, screen_width_in_px, screen_height){
                 'view_box_y': '0'
             },
             /*{
-                'img_url':   './media/mosaic2.jpg',
+                'img_url':   './../portfolio-app-media/media/mosaic2.jpg',
                 'width':     '850',
                 'position_x': 100,
                 'position_y': 590,
@@ -337,7 +310,7 @@ function images__desktop(parent_gr, screen_width_in_px, screen_height){
                 'view_box_y': '0'
             },*/
             {
-                'img_url':   './media/rubic.png',
+                'img_url':   './../portfolio-app-media/media/rubic.png',
                 'width':     '400',
                 'position_x': 195,
                 'position_y': 740,
@@ -411,7 +384,8 @@ function images__desktop(parent_gr, screen_width_in_px, screen_height){
         // A__RECT 
         var rect_width = 160;
         var rects_gr = images_gr.nested()
-    
+        var colors_map = get_colors();
+
         var a_rect_gr = rects_gr.nested()
         var a_rect_width  = image_gr_0.width()
         var a_rect_height = image_gr_0.height()
@@ -420,7 +394,7 @@ function images__desktop(parent_gr, screen_width_in_px, screen_height){
     
         var a_rect = a_rect_gr.rect(rect_width,a_rect_height)
         a_rect.attr({
-                fill: "#b42541e6",
+                fill: colors_map["moodboard"]["main_color"],
                 x: a_rect_x,
                 y: a_rect_y
             })
@@ -434,7 +408,7 @@ function images__desktop(parent_gr, screen_width_in_px, screen_height){
     
         var b_rect = b_rect_gr.rect(rect_width,b_rect_height)
         b_rect.attr({
-                fill: "#b42541e6",
+                fill: colors_map["moodboard"]["main_color"],
                 x: b_rect_x,
                 y: b_rect_y
             })
@@ -448,7 +422,7 @@ function images__desktop(parent_gr, screen_width_in_px, screen_height){
      
         var c_rect = c_rect_gr.rect(rect_width,c_rect_height)
             .attr({
-                fill: "#b42541e6",
+                fill: colors_map["moodboard"]["main_color"],
                 x: c_rect_x,
                 y: c_rect_y
             })
@@ -462,13 +436,13 @@ function images__desktop(parent_gr, screen_width_in_px, screen_height){
     
         var d_rect = d_rect_gr.rect(rect_width,d_rect_height)
             .attr({
-                fill: "#b42541e6",
+                fill: colors_map["moodboard"]["main_color"],
                 x: d_rect_x,
                 y: d_rect_y
             })
 }
 
-function headline__info(parent_gr, screen_width_in_px, screen_height){
+function moodboard__headline__info(parent_gr, screen_width_in_px, screen_height){
     var headline_gr = parent_gr.nested()
 
     var pink_rect = headline_gr.rect(screen_width_in_px/2-350,100)
@@ -514,13 +488,13 @@ function headline__info(parent_gr, screen_width_in_px, screen_height){
 
 function masonry(screen_width_in_px, screen_height){
     //------------------FOOD MASONRY-------------------------//
-    $("body").append(`
+    $("#moodboard").append(`
         <div id="food_masonry_section">
 
             <div id="masonry_food">
 
                 <div class="item">
-                <img src="./masonry/blog_media/food_1.png">
+                <img src="./../portfolio-app-media/masonry/blog_media/food_1.png">
                     <div class="item__body">
                         <div class="relative">
                             <a class="item__link" target="_blank" href="https://www.google.com/search?q=concrete+design&tbm=isch&ved=2ahUKEwiB3JrXgJztAhUI_4UKHW8XAooQ2-cCegQIABAA&oq=concrete+design&gs_lcp=CgNpbWcQAzICCAAyAggAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADICCABQpyJYqydg8ihoAHAAeACAAYYBiAGjBZIBAzAuNpgBAKABAaoBC2d3cy13aXotaW1nwAEB&sclient=img&ei=EGu9X4GUB4j-lwTvrojQCA&bih=969&biw=1920&client=ubuntu" ></a>
@@ -534,7 +508,7 @@ function masonry(screen_width_in_px, screen_height){
                 </div>
 
                 <div class="item">
-                    <img src="./masonry/blog_media/food_2.png">
+                    <img src="./../portfolio-app-media/masonry/blog_media/food_2.png">
                         <div class="item__body">
                         <div class="relative">
                             <a class="item__link" target="_blank" href="https://www.google.com/search?q=airplane+wings&tbm=isch&ved=2ahUKEwi8oaXl_5vtAhVF5IUKHfK0AlIQ2-cCegQIABAA&oq=airplane+&gs_lcp=CgNpbWcQARgAMgQIABBDMgQIABBDMgIIADICCAAyBAgAEEMyAggAMgQIABBDMgIIADICCAAyAggAUJEgWNU0YPM_aABwAHgAgAGJAYgBzQiSAQMwLjmYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=IWq9X_yMDcXIlwTy6YqQBQ&bih=969&biw=1920&client=ubuntu" ></a>
@@ -548,7 +522,7 @@ function masonry(screen_width_in_px, screen_height){
                 </div>
 
                 <div class="item">
-                <img src="./masonry/blog_media/food_3.png">
+                <img src="./../portfolio-app-media/masonry/blog_media/food_3.png">
                     <div class="item__body">
                         <div class="relative">
                             <a class="item__link" target="_blank" href="https://www.google.com/search?q=architecture+maquette&tbm=isch&ved=2ahUKEwjy8OSNgZztAhXa44UKHdb_B2IQ2-cCegQIABAA&oq=architecture+maqu&gs_lcp=CgNpbWcQARgAMgIIADICCAAyBggAEAUQHjIGCAAQCBAeMgYIABAIEB4yBggAEAgQHjIGCAAQCBAeMgYIABAIEB4yBggAEAgQHjIECAAQHjoECAAQQ1CsDlivKWCSNWgAcAB4AIAB8gKIAe0SkgEIMS4xMy4yLjGYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=gmu9X_KnI9rHlwTW_5-QBg&bih=969&biw=1920&client=ubuntu" ></a>
@@ -562,7 +536,7 @@ function masonry(screen_width_in_px, screen_height){
                 </div>
 
                 <div class="item">
-                <img src="./masonry/blog_media/food_4.png">
+                <img src="./../portfolio-app-media/masonry/blog_media/food_4.png">
                     <div class="item__body">
                         <div class="relative">
                             <a class="item__link" target="_blank" href="https://www.google.com/search?q=architecture+maquette&tbm=isch&ved=2ahUKEwjy8OSNgZztAhXa44UKHdb_B2IQ2-cCegQIABAA&oq=architecture+maqu&gs_lcp=CgNpbWcQARgAMgIIADICCAAyBggAEAUQHjIGCAAQCBAeMgYIABAIEB4yBggAEAgQHjIGCAAQCBAeMgYIABAIEB4yBggAEAgQHjIECAAQHjoECAAQQ1CsDlivKWCSNWgAcAB4AIAB8gKIAe0SkgEIMS4xMy4yLjGYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=gmu9X_KnI9rHlwTW_5-QBg&bih=969&biw=1920&client=ubuntu" ></a>
@@ -576,7 +550,7 @@ function masonry(screen_width_in_px, screen_height){
                 </div>
 
                 <div class="item">
-                <img src="./masonry/blog_media/food_5.png">
+                <img src="./../portfolio-app-media/masonry/blog_media/food_5.png">
                     <div class="item__body">
                         <div class="relative">
                             <a class="item__link" target="_blank" href="https://www.google.com/search?q=wooden+structure&tbm=isch&ved=2ahUKEwi_7sDq_5vtAhVX-4UKHY55DlgQ2-cCegQIABAA&oq=wooden+stru&gs_lcp=CgNpbWcQARgAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADoECAAQQ1CB6QNYn5YEYKmlBGgCcAB4AIABf4gB5wuSAQQwLjEzmAEAoAEBqgELZ3dzLXdpei1pbWfAAQE&sclient=img&ei=LGq9X7-oCdf2lwSO87nABQ&bih=969&biw=1920&client=ubuntu" ></a>
@@ -590,7 +564,7 @@ function masonry(screen_width_in_px, screen_height){
                 </div>
 
                 <div class="item">
-                <img src="./masonry/blog_media/food_6.png">
+                <img src="./../portfolio-app-media/masonry/blog_media/food_6.png">
                     <div class="item__body">
                         <div class="relative">
                             <a class="item__link" target="_blank" href="https://www.google.com/search?q=antennas&tbm=isch&ved=2ahUKEwit-7qSgZztAhVHZRoKHapQCJUQ2-cCegQIABAA&oq=antennas&gs_lcp=CgNpbWcQAzICCAAyAggAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADICCAA6BAgAEENQ4OECWND0AmCw9gJoAHAAeACAAY8BiAGvB5IBAzAuOJgBAKABAaoBC2d3cy13aXotaW1nwAEB&sclient=img&ei=jGu9X62FF8fKaaqhoagJ&bih=969&biw=1920&client=ubuntu" ></a>
@@ -604,7 +578,7 @@ function masonry(screen_width_in_px, screen_height){
                 </div>
 
                 <div class="item">
-                <img src="./masonry/blog_media/food_7.png">
+                <img src="./../portfolio-app-media/masonry/blog_media/food_7.png">
                     <div class="item__body">
                         <div class="relative">
                             <a class="item__link" target="_blank" href="https://www.google.com/search?q=concrete+design&tbm=isch&ved=2ahUKEwiB3JrXgJztAhUI_4UKHW8XAooQ2-cCegQIABAA&oq=concrete+design&gs_lcp=CgNpbWcQAzICCAAyAggAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADICCABQpyJYqydg8ihoAHAAeACAAYYBiAGjBZIBAzAuNpgBAKABAaoBC2d3cy13aXotaW1nwAEB&sclient=img&ei=EGu9X4GUB4j-lwTvrojQCA&bih=969&biw=1920&client=ubuntu" ></a>
@@ -618,7 +592,7 @@ function masonry(screen_width_in_px, screen_height){
                 </div>
 
                 <div class="item">
-                    <img src="./masonry/blog_media/food_8.png">
+                    <img src="./../portfolio-app-media/masonry/blog_media/food_8.png">
                     <div class="item__body">
                         <div class="relative">
                             <a class="item__link" target="_blank" href="https://www.google.com/search?q=concrete+design&tbm=isch&ved=2ahUKEwiB3JrXgJztAhUI_4UKHW8XAooQ2-cCegQIABAA&oq=concrete+design&gs_lcp=CgNpbWcQAzICCAAyAggAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADICCABQpyJYqydg8ihoAHAAeACAAYYBiAGjBZIBAzAuNpgBAKABAaoBC2d3cy13aXotaW1nwAEB&sclient=img&ei=EGu9X4GUB4j-lwTvrojQCA&bih=969&biw=1920&client=ubuntu" ></a>
@@ -632,7 +606,7 @@ function masonry(screen_width_in_px, screen_height){
                 </div>
 
                 <div class="item">
-                    <img src="./masonry/blog_media/food_9.png">
+                    <img src="./../portfolio-app-media/masonry/blog_media/food_9.png">
                     <div class="item__body">
                         <div class="relative">
                             <a class="item__link" target="_blank" href="https://www.google.com/search?q=architecture+maquette&tbm=isch&ved=2ahUKEwjy8OSNgZztAhXa44UKHdb_B2IQ2-cCegQIABAA&oq=architecture+maqu&gs_lcp=CgNpbWcQARgAMgIIADICCAAyBggAEAUQHjIGCAAQCBAeMgYIABAIEB4yBggAEAgQHjIGCAAQCBAeMgYIABAIEB4yBggAEAgQHjIECAAQHjoECAAQQ1CsDlivKWCSNWgAcAB4AIAB8gKIAe0SkgEIMS4xMy4yLjGYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=gmu9X_KnI9rHlwTW_5-QBg&bih=969&biw=1920&client=ubuntu" ></a>
@@ -646,7 +620,7 @@ function masonry(screen_width_in_px, screen_height){
                 </div>
 
                 <div class="item">
-                    <img src="./masonry/blog_media/food_10.png">
+                    <img src="./../portfolio-app-media/masonry/blog_media/food_10.png">
                     <div class="item__body">
                         <div class="relative">
                             <a class="item__link" target="_blank" href="https://www.google.com/search?q=wooden+structure&tbm=isch&ved=2ahUKEwi_7sDq_5vtAhVX-4UKHY55DlgQ2-cCegQIABAA&oq=wooden+stru&gs_lcp=CgNpbWcQARgAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADoECAAQQ1CB6QNYn5YEYKmlBGgCcAB4AIABf4gB5wuSAQQwLjEzmAEAoAEBqgELZ3dzLXdpei1pbWfAAQE&sclient=img&ei=LGq9X7-oCdf2lwSO87nABQ&bih=969&biw=1920&client=ubuntu" ></a>
@@ -660,7 +634,7 @@ function masonry(screen_width_in_px, screen_height){
                 </div>
 
                 <div class="item">
-                    <img src="./masonry/blog_media/food_11.png">
+                    <img src="./../portfolio-app-media/masonry/blog_media/food_11.png">
                     <div class="item__body">
                         <div class="relative">
                             <a class="item__link" target="_blank" href="https://www.google.com/search?q=wooden+structure&tbm=isch&ved=2ahUKEwi_7sDq_5vtAhVX-4UKHY55DlgQ2-cCegQIABAA&oq=wooden+stru&gs_lcp=CgNpbWcQARgAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADoECAAQQ1CB6QNYn5YEYKmlBGgCcAB4AIABf4gB5wuSAQQwLjEzmAEAoAEBqgELZ3dzLXdpei1pbWfAAQE&sclient=img&ei=LGq9X7-oCdf2lwSO87nABQ&bih=969&biw=1920&client=ubuntu" ></a>
@@ -674,7 +648,7 @@ function masonry(screen_width_in_px, screen_height){
                 </div>
 
                 <div class="item">
-                    <img src="./masonry/blog_media/food_12.png">
+                    <img src="./../portfolio-app-media/masonry/blog_media/food_12.png">
                     <div class="item__body">
                         <div class="relative">
                             <a class="item__link" target="_blank" href="https://www.google.com/search?q=wooden+structure&tbm=isch&ved=2ahUKEwi_7sDq_5vtAhVX-4UKHY55DlgQ2-cCegQIABAA&oq=wooden+stru&gs_lcp=CgNpbWcQARgAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADoECAAQQ1CB6QNYn5YEYKmlBGgCcAB4AIABf4gB5wuSAQQwLjEzmAEAoAEBqgELZ3dzLXdpei1pbWfAAQE&sclient=img&ei=LGq9X7-oCdf2lwSO87nABQ&bih=969&biw=1920&client=ubuntu" ></a>
@@ -716,7 +690,7 @@ function masonry(screen_width_in_px, screen_height){
 
 
     //------------------BLOG MASONRY-------------------------//
-    $("body").append(`
+    $("#moodboard").append(`
         <div id="blog_masonry_section">
 
             <h1>Nourishing body & mind</h1>
@@ -724,35 +698,35 @@ function masonry(screen_width_in_px, screen_height){
                 <div id="masonry_blog">
                     <div class="blog_item">
                         #shoes
-                        <img src="./masonry/blog_media/self_care_6.png">
+                        <img src="./../portfolio-app-media/masonry/blog_media/self_care_6.png">
                     </div>
                     <div class="blog_item">
                         #bamboo_shampoo
-                        <img src="./masonry/blog_media/self_care_2.png">
+                        <img src="./../portfolio-app-media/masonry/blog_media/self_care_2.png">
                     </div>
                     <div class="blog_item">
                         #plant
-                        <img src="./masonry/blog_media/self_care_3.png">
+                        <img src="./../portfolio-app-media/masonry/blog_media/self_care_3.png">
                     </div>
                     <div class="blog_item">
                         #t-shirts
-                        <img src="./masonry/blog_media/self_care_5.png">
+                        <img src="./../portfolio-app-media/masonry/blog_media/self_care_5.png">
                     </div>
                     <div class="blog_item">
                         #scrubs
-                        <img src="./masonry/blog_media/self_care_4.png">
+                        <img src="./../portfolio-app-media/masonry/blog_media/self_care_4.png">
                     </div>
                     <div class="blog_item">
                         #women_smiling
-                        <img src="./masonry/blog_media/self_care_8.png">
+                        <img src="./../portfolio-app-media/masonry/blog_media/self_care_8.png">
                     </div>
                     <div class="blog_item">
                         #vitality_shot
-                        <img src="./masonry/blog_media/self_care_7.png">
+                        <img src="./../portfolio-app-media/masonry/blog_media/self_care_7.png">
                     </div>
                     <div class="blog_item">
                         #perfume
-                        <img src="./masonry/blog_media/self_care_1.png">    
+                        <img src="./../portfolio-app-media/masonry/blog_media/self_care_1.png">    
                     </div>
                 </div>
         </div>
@@ -783,19 +757,19 @@ function masonry(screen_width_in_px, screen_height){
 
 }
 
-function video(screen_width_in_px, screen_height){
+function moodboard__video(screen_width_in_px, screen_height){
 
-    $("body").append(`
+    $("#moodboard").append(`
     <div id="video__info">
         <div id="video__container">
             <video width="320" height="240" id='video__a' autoplay loop muted>
-                <source src='./media/sculpture_kadar_1.mp4' type='video/mp4'>
+                <source src='./../portfolio-app-media/media/sculpture_kadar_1.mp4' type='video/mp4'>
             </video>
             <video width="320" height="240" id='video__b' autoplay loop muted>
-                <source src='./media/sculpture_kadar_2.mp4' type='video/mp4'>
+                <source src='./../portfolio-app-media/media/sculpture_kadar_2.mp4' type='video/mp4'>
             </video>
             <video width="320" height="240" id='video__c' autoplay loop muted>
-                <source src='./media/sculpture_kadar_3.mp4' type='video/mp4'>
+                <source src='./../portfolio-app-media/media/sculpture_kadar_3.mp4' type='video/mp4'>
             </video>
         </div>
     </div>`);

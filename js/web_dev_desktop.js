@@ -1,166 +1,170 @@
-$(document).ready(function(){
-    main();
-})
+function web_development__main() {
 
-function main() {
+    web_development__activate();
+
+    $(window).resize(function() {
+        
+        web_development__deactivate();
+
+        web_development__activate();
+    });
+}
+
+function web_development__activate(bar_gr) {
+
+    document.title = "web_development"
+    window.history.pushState({page: "web_development"},"", "#web_development");
+
     $("body").append(`
-        <div id="wrapper">
-        </div>
-        <div id="headline__info">
-        </div>
-        <div id="technologies">
-        </div>
-        <div id="headline_animation_info">
-        </div>
-        <div id="animations">
-        </div>
-        <div id="video__info">
+        <div id="web_development">
+            <div id="wrapper">
+            </div>
+
+            <div id="web_development__headline_animation_info">
+            </div>
+            <div id="web_development__animations">
+            </div>
+
+            <div id="web_development__headline__info">
+            </div>
+            <div id="technologies">
+            </div>
+
+            <div id="video__info">
+            </div>
         </div>
     `);
 
-    function create_responsive() {
+    web_development__create_responsive(bar_gr);
+    current_page = "web_development"
+}
+    
+function web_development__deactivate() {
 
-        var screen_width_in_px  = window.innerWidth;
-        var screen_height       = window.innerHeight;
+    $("#web_development").remove();
+    $("#sketch_p5").remove();
+    $("#contact_wrapper").remove();
 
-        //-------STYLE-------
-        $("#wrapper").css({                    
-            "background-color": '#f5f0e1',
-            "position":         "relative",
-            "height":           screen_height,
-            "width":            screen_width_in_px
-        }); 
+    /*remove_triggers("contact_canvas__trigger") // contact_canvas TRIGGER*/
 
+}
 
-        $("#headline__info").css({                    
-            "background-color": '#f8f1f1',
-            "position":         "relative",
-            "height":           screen_height/2,
-            "width":            screen_width_in_px
-        }); 
+function web_development__create_responsive(bar_gr) {
 
-        $("#technologies").css({                    
-            "background-color": '#f8f1f1',
-            "position":         "relative",
-            "width":            screen_width_in_px
-        });
-        
+    var screen_width_in_px  = window.innerWidth;
+    var screen_height       = window.innerHeight;
 
-        $("#headline_animation_info").css({                    
-            "background-color": '#060126',
-            "position":         "relative",
-            "height":           screen_height/2,
-            "width":            screen_width_in_px
-        }); 
+    //-------STYLE-------
+    $("#web_development #wrapper").css({                    
+        "background-color": '#41939688',
+        "position":         "relative",
+        "height":           screen_height,
+        "width":            screen_width_in_px
+    }); 
 
-        $("#animations").css({                    
-            "background-color": '#fff',
-            "position":         "relative",
-            "width":            screen_width_in_px
-        });
+    $("#web_development #web_development__headline_animation_info").css({                    
+        "background-color": '#073f48ff',
+        "position":         "relative",
+        "height":           screen_height/2,
+        "width":            screen_width_in_px
+    }); 
 
-        $("#video__info").css({                    
-            "background-color": '#060126',
-            "position":         "relative",
-            "height":           screen_height,
-            "width":            screen_width_in_px
-        }); 
+    $("#web_development #web_development__animations").css({                    
+        "background-color": '#073f48ff',
+        "position":         "relative",
+        "width":            screen_width_in_px
+    });
 
-        var container       = SVG().addTo("#wrapper").size(screen_width_in_px, screen_height)
-        var container_gr    = container.nested()   
+    $("#web_development #web_development__headline__info").css({                    
+        "background-color": '#005767d7',
+        "position":         "relative",
+        "height":           screen_height/2,
+        "width":            screen_width_in_px
+    }); 
 
-        var headline_container     = SVG().addTo("#headline__info").size(screen_width_in_px, screen_height/2)
-        var headline__container_gr = headline_container.nested()
+    $("#web_development #technologies").css({                    
+        "background-color": '#005767d7',
+        "position":         "relative",
+        "width":            screen_width_in_px
+    });
 
-        var technologies_canvas    = SVG().addTo("#technologies").size(screen_width_in_px, 1800)
-        var technologies_canvas_gr = technologies_canvas.nested()
+    $("#web_development #video__info").css({                    
+        "background-color": '#073f48ff',
+        "position":         "relative",
+        "height":           screen_height,
+        "width":            screen_width_in_px
+    }); 
 
-        var headline_animation__container    = SVG().addTo("#headline_animation_info").size(screen_width_in_px, screen_height/2)
-        var headline_animation__container_gr = headline_animation__container.nested()
+    var container       = SVG().addTo("#web_development #wrapper").size(screen_width_in_px, screen_height)
+    var container_gr    = container.nested()   
 
-        var animations_canvas     = SVG().addTo("#animations").size(screen_width_in_px, 3000)
-        var animations_canvas_gr = animations_canvas.nested()
+    var headline_animation__container    = SVG().addTo("#web_development #web_development__headline_animation_info").size(screen_width_in_px, screen_height/2)
+    var headline_animation__container_gr = headline_animation__container.nested()
 
-        var video_canvas    = SVG().addTo("#video__info").size(screen_width_in_px, screen_height)
-        var video_canvas_gr = video_canvas.nested()
+    var web_development__animations_canvas     = SVG().addTo("#web_development #web_development__animations").size(screen_width_in_px, 3000)
+    var web_development__animations_canvas_gr = web_development__animations_canvas.nested()
 
-        var screen_physical_width_cm = get_physical_screen_width(screen_width_in_px);
-        console.log(screen_physical_width_cm, '!!!SCREEN WIDTH')
+    var headline_container     = SVG().addTo("#web_development #web_development__headline__info").size(screen_width_in_px, screen_height/2)
+    var headline__container_gr = headline_container.nested()
 
-        if (screen_physical_width_cm < 20.5) {
-            // MOBILE
-            //intro(container_gr, screen_width_in_px, screen_height)
-            nevena(container_gr, screen_width_in_px, screen_height)
-            //web_design(container_gr, screen_width_in_px, screen_height)
-            //web_development(container_gr, screen_width_in_px, screen_height)
-            //animation(container_gr, screen_width_in_px, screen_height)
-            //contact(container_gr, screen_width_in_px, screen_height)
-        }
-        else if (screen_physical_width_cm < 33.8) { // max width for tablet 2736px, max height 2048px
+    var technologies_canvas    = SVG().addTo("#web_development #technologies").size(screen_width_in_px, 1800)
+    var technologies_canvas_gr = technologies_canvas.nested()
 
-            // TABLET
-            //var layout_tablet_gr = create_background__tablet(container_gr, screen_width_in_px, screen_height)
-            //var background_white_tablet_gr = layout_tablet_gr.findOne('#background_white_tablet_gr')
-            //section_images__tablet(background_white_tablet_gr, screen_width_in_px, screen_height)
-            //create_text__tablet(container_gr, wrapperscreen_width_in_px, screen_height)
-            //buttons_tablet(container_gr, screen_height, screen_width_in_px)
-            //create_contact_section(contact_gr, screen_width_in_px)
+    var video_canvas    = SVG().addTo("#web_development #video__info").size(screen_width_in_px, screen_height)
+    var video_canvas_gr = video_canvas.nested()
 
-        }
+    var screen_physical_width_cm = get_physical_screen_width(screen_width_in_px);
+    console.log(screen_physical_width_cm, '!!!SCREEN WIDTH')
 
-        else {
-            var layout_gr = create_background__desktop(container_gr, screen_width_in_px, screen_height)
-            var background_gr = layout_gr.find("#background_gr")
-            images__desktop(background_gr, screen_width_in_px, screen_height)
+    if (screen_physical_width_cm < 20.5) {
+        // MOBILE
+        //intro(container_gr, screen_width_in_px, screen_height)
+        nevena(container_gr, screen_width_in_px, screen_height)
+        //web_design(container_gr, screen_width_in_px, screen_height)
+        //web_development(container_gr, screen_width_in_px, screen_height)
+        //animation(container_gr, screen_width_in_px, screen_height)
+        //contact(container_gr, screen_width_in_px, screen_height)
+    }
+    else if (screen_physical_width_cm < 33.8) { // max width for tablet 2736px, max height 2048px
 
-            quote_and_scroll__desktop(container_gr, screen_width_in_px, screen_height)
+        // TABLET
+        //var layout_tablet_gr = create_background__tablet(container_gr, screen_width_in_px, screen_height)
+        //var background_white_tablet_gr = layout_tablet_gr.findOne('#background_white_tablet_gr')
+        //section_images__tablet(background_white_tablet_gr, screen_width_in_px, screen_height)
+        //create_text__tablet(container_gr, wrapperscreen_width_in_px, screen_height)
+        //buttons_tablet(container_gr, screen_height, screen_width_in_px)
+        //create_contact_section(contact_gr, screen_width_in_px)
 
-            headline__info(headline__container_gr, screen_width_in_px, screen_height)
-            technologies(technologies_canvas_gr, screen_width_in_px, 1800)
-            headline_animation_info(headline_animation__container_gr, screen_width_in_px, screen_height)
-            animations(animations_canvas_gr, screen_width_in_px, 3000)
-            video(video_canvas_gr, screen_width_in_px, screen_height)
-
-            create_contact_section(screen_width_in_px, screen_height)
-            //var white_background_gr = layout_gr.find("#white_background_gr")
-            //section_images__desktop(white_background_gr)
-            //buttons(container_gr, screen_height, screen_width_in_px)
-            //create_contact_section(contact_gr, screen_width_in_px)
-        }
     }
 
-    create_responsive();
+    else {
+        var web_development__layout_gr = web_development__create_background__desktop(container_gr, bar_gr, screen_width_in_px, screen_height)
+        var web_development__background_gr = web_development__layout_gr.find("#web_development__background_gr")
+        web_development__images__desktop(web_development__background_gr, screen_width_in_px, screen_height)
 
-    $(window).resize(function() {
-        $("#wrapper svg").remove();
-        $("#headline__info").remove();
-        $("#technologies").remove();
-        $("#video__info").remove();
-        $("#contact_wrapper").remove();
-        //container_gr.remove(); // IMPORTANT!! - remove everything previously drawnscreen_width_in_px, screen_height
-        //container_gr = container.nested();
+        web_development__quote_and_scroll__desktop(container_gr, screen_width_in_px, screen_height)
 
+        web_development__headline_animation_info(headline_animation__container_gr, screen_width_in_px, screen_height)
+        animations(web_development__animations_canvas_gr, screen_width_in_px, 3000, screen_height)
+        web_development__headline__info(headline__container_gr, screen_width_in_px, screen_height)
+        technologies(technologies_canvas_gr, screen_width_in_px, 1800)
+        web_development__video(video_canvas_gr, screen_width_in_px, screen_height)
 
-        //$('#wrapper').attr('height', $(window).height());
-        //$('#wrapper').attr('width', $(window).width());
-        //create_background__desktop(container_gr, screen_width_in_px, screen_height)
-        // create_text__desktop(container_gr, screen_width_in_px, screen_height)
-        // section_images__desktop(container_gr)
-
-        create_responsive();
-    });
+        create_contact_section(screen_width_in_px, screen_height)
+    }
 }
+
 //----------------------------------------------CREATE-LAYOUT-DESKTOP----------------------------------------------------------------
-function create_background__desktop(parent_gr, screen_width_in_px, screen_height){
+function web_development__create_background__desktop(parent_gr, bar_gr, screen_width_in_px, screen_height){
 
-    var layout_gr = parent_gr.nested()
+    var web_development__layout_gr = parent_gr.nested()
 
-    var background_gr = layout_gr.nested()
+    var web_development__background_gr = web_development__layout_gr.nested()
         .attr({
-            id: "background_gr",
+            id: "web_development__background_gr",
         })
 
-    var background_color = background_gr.rect(screen_width_in_px,screen_height)
+    var background_color = web_development__background_gr.rect(screen_width_in_px,screen_height)
         .fill('#759aa292')
         .attr({
             id:      "background_color",
@@ -186,7 +190,7 @@ function create_background__desktop(parent_gr, screen_width_in_px, screen_height
             
             // ANIMATE
             console.log(create_menu)
-            create_menu(parent_gr, screen_width_in_px, screen_height)
+            create_menu(parent_gr, bar_gr, screen_width_in_px, screen_height)
 
             menu_rect_clicked = true;
         }
@@ -195,18 +199,18 @@ function create_background__desktop(parent_gr, screen_width_in_px, screen_height
         else {
 
             // ANIMATE
-            create_menu(parent_gr, screen_width_in_px, screen_height)
+            create_menu(parent_gr, bar_gr, screen_width_in_px, screen_height)
 
             menu_rect_clicked = false;
         }
     })
 
-    return layout_gr
+    return web_development__layout_gr
 
 }
 
 //----------------------------------------------TEXT----------------------------------------------------------------
-function quote_and_scroll__desktop(parent_gr, screen_width_in_px, screen_height){
+function web_development__quote_and_scroll__desktop(parent_gr, screen_width_in_px, screen_height){
     var text_gr = parent_gr.nested()
     .attr({
         width: screen_width_in_px/2,
@@ -219,13 +223,13 @@ function quote_and_scroll__desktop(parent_gr, screen_width_in_px, screen_height)
         .font({
             opacity: 1.0,
             weight:  700,
-            fill:    '#1e3d59',
+            fill:    '#06424aff',
             family:  'Quicksand',
             size:    56
         })    
     web_title.attr({
         x: 0,                 //set web_title.x relative to image width
-        y: screen_height/3
+        y: screen_height/3+25
     })
     web_title.rotate(-90)
 
@@ -235,7 +239,7 @@ function quote_and_scroll__desktop(parent_gr, screen_width_in_px, screen_height)
         .font({
             opacity: 1.0,
             weight:  700,
-            fill:    '#1e3d59',
+            fill:    '#06424aff',
             family:  'Quicksand',
             size:    90
         })    
@@ -246,7 +250,8 @@ function quote_and_scroll__desktop(parent_gr, screen_width_in_px, screen_height)
 
     //-----------------QUOTES------------------------
 
-    var paragraph = text_gr.text(function(add){
+    var paragraph_gr = text_gr.nested()
+    var paragraph = paragraph_gr.text(function(add){
         add.tspan('Measuring programming progress by').newLine()
         add.tspan('lines of code is like measuring').newLine()
         add.tspan('aircraft building progress by weight.').newLine()
@@ -257,11 +262,11 @@ function quote_and_scroll__desktop(parent_gr, screen_width_in_px, screen_height)
         .font({
             opacity: 1.0,
             weight:  700,
-            fill:    '#1e3d59',
+            fill:    '#06424aff',
             family:  'Quicksand',
             size:    28
         })    
-    paragraph.attr({
+    paragraph_gr.attr({
         x: (screen_width_in_px/2)/8,
         y: screen_height/2
     })  
@@ -272,28 +277,30 @@ function quote_and_scroll__desktop(parent_gr, screen_width_in_px, screen_height)
         .font({
             opacity: 1.0,
             weight:  700,
-            fill:    '#1e3d59',
+            id:      "quotes_up",
+            fill:    '#06424aff',
             family:  'Quicksand',
             size:    70
         })    
     quotes_up.attr({
-        x: web_title.bbox().x+quotes_up.bbox().width,
-        y: paragraph.bbox().y+40
+        x: 50,
+        y: screen_height/2+40
     })
 
-    var quotes_down = text_gr.text(function(text_element){
+    var quotes_down = paragraph_gr.text(function(text_element){
         text_element.tspan('"')
     })
         .font({
             opacity: 1.0,
             weight:  700,
-            fill:    '#1e3d59',
+            id:      "quotes_down",
+            fill:    '#06424aff',
             family:  'Quicksand',
             size:    70
         })    
     quotes_down.attr({
-        x: paragraph.bbox().x+paragraph.bbox().width+10,
-        y: screen_height/2+80
+        x: paragraph.bbox().x+paragraph.bbox().width,
+        y: paragraph.bbox().y+50
     })
 
     var scroll_text = text_gr.text(function(text_element){
@@ -302,53 +309,29 @@ function quote_and_scroll__desktop(parent_gr, screen_width_in_px, screen_height)
         .font({
             opacity: 1.0,
             weight:  700,
-            fill:    '#ff6e40',
+            fill:    '#06424aff',
             family:  'Quicksand',
             size:    18
         })    
     scroll_text.attr({
         x: paragraph.bbox().width/2+scroll_text.bbox().width,
-        y: paragraph.bbox().y+paragraph.bbox().height+170
+        y: screen_height-150
     })
 
-    var scroll_arrow_gr = text_gr.nested()
-    var scroll_arrow = SVG(`<g
-        inkscape:label="Layer 1"
-        inkscape:groupmode="layer"
-        id="layer1"
-        transform="translate(-29.1042,-45.5041)">
-    <g
-        inkscape:label="#g2680"
-        style="fill:none;fill-opacity:1.5;stroke:#ff6e40;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-        transform="translate(1726.3821,-1064.1634)"
-        id="arrow">
-        <path
-            style="fill:none;fill-opacity:1.5;stroke:#ff6e40;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-            d="m -1693.5926,1109.6675 v 28.7261"
-            id="path2674-9"
-            inkscape:connector-curvature="0" />
-        <path
-            style="fill:#ff6e40;fill-opacity:1;stroke:none;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-            d="m -1697.2779,1138.4881 h 7.5595 l -3.9687,3.9688 z"
-            id="path2676-6"
-            inkscape:connector-curvature="0" />
-    </g>
-    </g>`)
+    var arrow_gr = text_gr.nested()
+    var scroll_arrow = arrow_gr.path('m 53.347282,72.845957 3.5908,3.9688 3.9687,-3.9688 z m 3.7797,-28.829789 c 0,9.613609 0,19.227511 0,28.841609')
+    scroll_arrow.stroke({ color: '#f06', width: 4, linecap: 'round', linejoin: 'round' })
 
-    scroll_arrow.attr({id: 'scroll_arrow'})
-    scroll_arrow_gr.attr({
-        id:     'scroll_arrow_gr',
-        width:  scroll_arrow.bbox().width,
-        height: scroll_arrow.bbox().height,
-        x:      275,
-        y:      325
-    })    
-    scroll_arrow_gr.scale(2.5)
-    scroll_arrow.addTo(scroll_arrow_gr)
+    arrow_gr.attr({
+            id:     'scroll_arrow',
+            x: screen_width_in_px/3,
+            y: screen_height/2
+        }) 
+    arrow_gr.scale(2)
 
 }
 //----------------------------------------------IMAGES-DESKTOP----------------------------------------------------------------
-function images__desktop(parent_gr, screen_width_in_px, screen_height){
+function web_development__images__desktop(parent_gr, screen_width_in_px, screen_height){
 
     var images_gr = parent_gr.nested()
     .attr({
@@ -372,7 +355,7 @@ function images__desktop(parent_gr, screen_width_in_px, screen_height){
                 'view_box_y': '0'
             },*/
             {
-                'img_url':   './media/111.png',
+                'img_url':   './../portfolio-app-media/media/111.png',
                 'width':     rect_width/2.25, // %
                 'position_x': screen_width_in_px/2-rect_width/2,
                 'position_y': 45,
@@ -380,7 +363,7 @@ function images__desktop(parent_gr, screen_width_in_px, screen_height){
                 'view_box_y': '0'
             },
             {
-                'img_url':   './media/112.png',
+                'img_url':   './../portfolio-app-media/media/112.png',
                 'width':     rect_width/2.1,
                 'position_x': screen_width_in_px/2-rect_width/1.75,
                 'position_y': rect_height+60,
@@ -389,7 +372,7 @@ function images__desktop(parent_gr, screen_width_in_px, screen_height){
             },
 
             {
-                'img_url':   './media/113.png',
+                'img_url':   './../portfolio-app-media/media/113.png',
                 'width':     rect_width/1.8,
                 'position_x': screen_width_in_px/2-rect_width/1.45,
                 'position_y': rect_height*2+75,
@@ -397,7 +380,7 @@ function images__desktop(parent_gr, screen_width_in_px, screen_height){
                 'view_box_y': '0'
             },
             {
-                'img_url':   './media/114.png',
+                'img_url':   './../portfolio-app-media/media/114.png',
                 'width':     rect_width/1.23,
                 'position_x': screen_width_in_px/2-rect_width/1.1,
                 'position_y': rect_height*3+100,
@@ -405,7 +388,7 @@ function images__desktop(parent_gr, screen_width_in_px, screen_height){
                 'view_box_y': '0'
             },
             {
-                'img_url':   './media/115.png',
+                'img_url':   './../portfolio-app-media/media/115.png',
                 'width':     rect_width/2.25,
                 'position_x': screen_width_in_px/2-rect_width/1.49,
                 'position_y': rect_height*4+115,
@@ -495,7 +478,8 @@ function images__desktop(parent_gr, screen_width_in_px, screen_height){
 
         var rect_width = rect_height;
         var rects_gr = images_gr.nested()
-        
+        var colors_map = get_colors();
+
         // A__RECT 
         var a_rect_gr = rects_gr.nested()
 
@@ -506,7 +490,7 @@ function images__desktop(parent_gr, screen_width_in_px, screen_height){
     
         var a_rect = a_rect_gr.rect(rect_width,a_rect_height)
         a_rect.attr({
-                fill: "#ffc13b",
+                fill: colors_map["web_development"]["main_color"],
                 x: a_rect_x-rect_width,
                 y: a_rect_y
             })
@@ -521,7 +505,7 @@ function images__desktop(parent_gr, screen_width_in_px, screen_height){
     
         var b_rect = b_rect_gr.rect(rect_width,b_rect_height)
         b_rect.attr({
-                fill: "#ffc13b",
+                fill: colors_map["web_development"]["main_color"],
                 x: b_rect_x-rect_width,
                 y: b_rect_y
             })
@@ -536,66 +520,20 @@ function images__desktop(parent_gr, screen_width_in_px, screen_height){
      
         var c_rect = c_rect_gr.rect(rect_width,c_rect_height)
             .attr({
-                fill: "#ffc13b",
+                fill: colors_map["web_development"]["main_color"],
                 x: c_rect_x+c_rect_width,
                 y: c_rect_y
             })
 
 }
 
-//-------------------------HEADLINE-INFO----------------------------------//
-function headline__info(parent_gr, screen_width_in_px, screen_height){
-
-    var headline_gr = parent_gr.nested()
- 
-    var yellow_rect = headline_gr.rect(screen_width_in_px/2-350,100)
-    .fill('#ff6f3c')
-    .attr({
-        id:      "yellow_rect",
-        opacity: 1.0,
-        'x':     0,
-        'y':     screen_height/4
-    })
- 
-    var my_title = headline_gr.text(function(text_element){
-         text_element.tspan('about')
-     })
-         .font({
-             opacity: 1.0,
-             weight:  700,
-             fill:    '#155263',
-             family:  'Quicksand',
-             size:    50
-         })    
-    my_title.attr({
-        x: yellow_rect.bbox().x+yellow_rect.bbox().width-25,
-        y: yellow_rect.bbox().y+my_title.bbox().height
-    })
-     my_title.rotate(-90)
- 
-     var work_title = headline_gr.text(function(text_element){
-         text_element.tspan('technologies')
-     })
-         .font({
-             opacity: 1.0,
-             weight:  700,
-             fill:    '#155263',
-             family:  'Quicksand',
-             size:    135
-         })    
-    work_title.attr({
-        x: yellow_rect.bbox().x+yellow_rect.bbox().width+my_title.bbox().height+25,
-        y: yellow_rect.bbox().y+yellow_rect.bbox().height-10
-    })
-}
-
 //-------------------------HEADLINE-ANIMATION-INFO----------------------------------//
-function headline_animation_info(parent_gr, screen_width_in_px, screen_height){
+function web_development__headline_animation_info(parent_gr, screen_width_in_px, screen_height){
 
     var headline_gr = parent_gr.nested()
  
     var yellow_rect = headline_gr.rect(screen_width_in_px/2-350,100)
-    .fill('#155263')
+    .fill('#187a84ff')
     .attr({
         id:      "yellow_rect",
         opacity: 1.0,
@@ -609,7 +547,7 @@ function headline_animation_info(parent_gr, screen_width_in_px, screen_height){
          .font({
              opacity: 1.0,
              weight:  700,
-             fill:    '#467f8cff',
+             fill:    '#f4b630ff',
              family:  'Quicksand',
              size:    70
          })    
@@ -625,7 +563,7 @@ function headline_animation_info(parent_gr, screen_width_in_px, screen_height){
          .font({
              opacity: 1.0,
              weight:  700,
-             fill:    '#467f8cff',
+             fill:    '#f4b630ff',
              family:  'Quicksand',
              size:    135
          })    
@@ -635,7 +573,54 @@ function headline_animation_info(parent_gr, screen_width_in_px, screen_height){
     })
 }
 
-function video(parent_gr, screen_width_in_px, screen_height){
+
+//-------------------------HEADLINE-INFO----------------------------------//
+function web_development__headline__info(parent_gr, screen_width_in_px, screen_height){
+
+    var headline_gr = parent_gr.nested()
+ 
+    var yellow_rect = headline_gr.rect(screen_width_in_px/2-350,100)
+    .fill('#f4976c')
+    .attr({
+        id:      "yellow_rect",
+        opacity: 1.0,
+        'x':     0,
+        'y':     screen_height/4
+    })
+ 
+    var my_title = headline_gr.text(function(text_element){
+         text_element.tspan('about')
+     })
+         .font({
+             opacity: 1.0,
+             weight:  700,
+             fill:    '#268c91ff',
+             family:  'Quicksand',
+             size:    50
+         })    
+    my_title.attr({
+        x: yellow_rect.bbox().x+yellow_rect.bbox().width-25,
+        y: yellow_rect.bbox().y+my_title.bbox().height
+    })
+     my_title.rotate(-90)
+ 
+     var work_title = headline_gr.text(function(text_element){
+         text_element.tspan('technologies')
+     })
+         .font({
+             opacity: 1.0,
+             weight:  700,
+             fill:    '#268c91ff',
+             family:  'Quicksand',
+             size:    135
+         })    
+    work_title.attr({
+        x: yellow_rect.bbox().x+yellow_rect.bbox().width+my_title.bbox().height+25,
+        y: yellow_rect.bbox().y+yellow_rect.bbox().height-10
+    })
+}
+
+function web_development__video(parent_gr, screen_width_in_px, screen_height){
 
         var video_gr   = parent_gr.nested()
         var video_gr_y = 100;
@@ -651,13 +636,13 @@ function video(parent_gr, screen_width_in_px, screen_height){
         $("#video__info").append(`
             <div id="video__container">
                 <video width="320" height="240" id='video__a' autoplay loop muted>
-                    <source src='./media/dev_video_kadar1.mp4' type='video/mp4'>
+                    <source src='./../portfolio-app-media/media/dev_video_kadar1.mp4' type='video/mp4'>
                 </video>
                 <video width="320" height="240" id='video__b' autoplay loop muted>
-                    <source src='./media/dev_video_kadar2.mp4' type='video/mp4'>
+                    <source src='./../portfolio-app-media/media/dev_video_kadar2.mp4' type='video/mp4'>
                 </video>
                 <video width="320" height="240" id='video__c' autoplay loop muted>
-                    <source src='./media/dev_video_kadar3.mp4' type='video/mp4'>
+                    <source src='./../portfolio-app-media/media/dev_video_kadar3.mp4' type='video/mp4'>
                 </video>
             </div>`);
     

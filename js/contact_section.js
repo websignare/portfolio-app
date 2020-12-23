@@ -4,6 +4,11 @@ function create_contact_section(screen_width_in_px,screen_height){
         <div id="contact_wrapper">
         </div>
     `);
+
+    var contact__bounding_rect = $("#contact_wrapper").get(0).getBoundingClientRect()
+    var contact__div_top_y  = contact__bounding_rect.top;
+    console.log(contact__bounding_rect.top, contact__bounding_rect.right, contact__bounding_rect.bottom, contact__bounding_rect.left);
+    
     var contact_height = screen_height;
     
     $("#contact_wrapper").css({                    
@@ -16,12 +21,12 @@ function create_contact_section(screen_width_in_px,screen_height){
     var contact_canvas = SVG().addTo("#contact_wrapper").size(screen_width_in_px, contact_height)
     var contact_gr     = contact_canvas.nested()   
 
-    contact_big_screens(contact_gr, screen_width_in_px, contact_height)
+    contact_big_screens(contact_gr, screen_width_in_px, contact_height, screen_height, contact__div_top_y)
     
     return contact_gr;
 }
 //-----------------------------------CONTACT---------------------------------------------------------------
-function contact_big_screens(contact_gr, screen_width_in_px, contact_height){
+function contact_big_screens(contact_gr, screen_width_in_px, contact_height, screen_height, contact__div_top_y){
     
     var layout_gr = contact_gr.nested() 
     .attr({
@@ -58,13 +63,8 @@ function contact_big_screens(contact_gr, screen_width_in_px, contact_height){
         y:  contact_height/2
     })
 
-    /*question_gr.attr({
-        width:  question.bbox().width,
-        height: question.bbox().height,
-        x:      screen_width_in_px/2-question.bbox().width-100,
-        y:      contact_height/2-question.bbox().height
-    })*/
     //-------------------------PARAGRAPH--------------------------
+
     var paragraph = question_gr.text(function(add) {
         add.tspan('Pop me an a e-mail at nevena_create@gmail.com')
     })
@@ -82,6 +82,7 @@ function contact_big_screens(contact_gr, screen_width_in_px, contact_height){
     })
 
     //-------------------------HASHTAG--------------------------
+    
     var hashtag = layout_gr.path("m -1246.5718,425.59012 0.3383,-2.81745 h -1.2753 v -1.36644 h 1.451 l 0.2603,-2.07567 h -1.7113 v -1.35992 h 1.8805 l 0.3448,-2.81746 h 1.3665 l -0.3644,2.81746 h 2.3229 l 0.3514,-2.81746 h 1.3599 l -0.3579,2.81746 h 1.3014 v 1.35992 h -1.4575 l -0.2733,2.07567 h 1.7308 v 1.36644 h -1.9 l -0.3384,2.81745 h -1.3534 l 0.3449,-2.81745 h -2.3229 l -0.3384,2.81745 z m 1.8674,-4.18389 h 2.3165 l 0.2732,-2.07567 h -2.3229 z")
 
     hashtag.fill('#fff').move(question.bbox().x-hashtag.bbox().width-40, question.bbox().y+hashtag.bbox().height)
@@ -366,6 +367,28 @@ function contact_big_screens(contact_gr, screen_width_in_px, contact_height){
         "submission_form_gr":        {x:submission_form_gr.x(),y:submission_form_gr.y()}
     }
 
+    // CONTACT__SCROLL_TRIGGER
+    /*var trigger_y_position__contact_canvas = contact__div_top_y + 300;
+    sc_trigger__create(trigger_y_position__contact_canvas,
+        "contact_canvas__trigger",
+        screen_height,
+        // activate_fn
+        function() {
+            animate_contact_desktop__activate(contact_info, 
+                initial_dekstop_coords, 
+                final_desktop_coords, 
+                screen_width_in_px, 
+                contact_height)
+
+        },
+        // deactivate
+        function() {
+            animate_contact_desktop__deactivate(contact_info, 
+                initial_dekstop_coords, 
+                final_desktop_coords, 
+                screen_width_in_px, 
+                contact_height)
+        });*/
 
     animate_contact_desktop__activate(contact_info, initial_dekstop_coords, final_desktop_coords, screen_width_in_px, contact_height)
     animate_contact_desktop__deactivate(contact_info, initial_dekstop_coords, final_desktop_coords, screen_width_in_px, contact_height)
@@ -389,7 +412,7 @@ function animate_submit_desktop__activate(submit_info) {
                 duration: 200
             })
 
-            console.log('submitedllllllllllllllllllllllllllllllllll')
+        console.log('submitedllllllllllllllllllllllllllllllllll')
         submit_text.attr({fill: "#bf5b5bff"})
             .attr({
                 x:   0,//submit_rect.bbox().width/2-submit_text.bbox().width/2,

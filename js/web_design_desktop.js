@@ -1,158 +1,174 @@
-$(document).ready(function(){
+/*$(document).ready(function(){
     main();
-})
+})*/
 
-function main() {
+function web_design__main() {
+    web_design__activate(bar_gr);
+    
+    $(window).resize(function() {
+        
+        web_design__deactivate();
+
+        web_design__activate(bar_gr);
+    });
+}
+
+// ACTIVATE
+function web_design__activate(bar_gr) {
+    document.title = "web design"
+    window.history.pushState({page: "web_design"},"", "#web_design");
+
     $("body").append(`
-        <div id="wrapper">
-        </div>
-        <div id="headline__info">
-        </div>
-        <div id="artist_portfolio__info">
-        </div>
-        <div id="suprematism__info">
-        </div>
-        <div id="deep_blue__info">
-        </div>
-        <div id="video__info">
+        <div id="web_design">
+            <div id="wrapper">
+            </div>
+            <div id="headline__info">
+            </div>
+            <div id="artist_portfolio__info">
+            </div>
+            <div id="suprematism__info">
+            </div>
+            <div id="deep_blue__info">
+            </div>
+            <div id="video__info">
+            </div>
         </div>
     `);
 
-    function create_responsive() {
+    web_design_create_responsive(bar_gr);
+    current_page = "web_design";
 
-        var screen_width_in_px  = window.innerWidth;
-        var screen_height = window.innerHeight;
+}
 
-        $("#wrapper").css({                    
-            "background-color": '#ffd097c3',
-            "position":         "relative",
-            "height":           screen_height,
-            "width":            screen_width_in_px
-        }); 
+// DEACTIVATE
+function web_design__deactivate() {
 
-        $("#headline__info").css({                    
-            "background-color": '#467f8cf3',
-            "position":         "relative",
-            "height":           screen_height/2,
-            "width":            screen_width_in_px
-        }); 
+    $("#web_design").remove();
+    $("#contact_wrapper").remove();
 
-        $("#artist_portfolio__info").css({                    
-            "background-color": '#467f8cf3',
-            "position":         "relative",
-            "height":           screen_height,
-            "width":            screen_width_in_px
-        }); 
+    /*remove_triggers("contact_canvas__trigger") // contact_canvas TRIGGER*/
 
-        $("#suprematism__info").css({                    
-            "background-color": '#467f8cf3',
-            "position":         "relative",
-            "height":           screen_height,
-            "width":            screen_width_in_px
-        }); 
+}
+    
+function web_design_create_responsive(bar_gr) {
 
-        $("#deep_blue__info").css({                    
-            "background-color": '#467f8cf3',
-            "position":         "relative",
-            "height":           screen_height,
-            "width":            screen_width_in_px
-        }); 
+    var screen_width_in_px  = window.innerWidth;
+    var screen_height = window.innerHeight;
 
-        $("#video__info").css({                    
-            "background-color": '#467f8cf3',
-            "position":         "relative",
-            "height":           screen_height,
-            "width":            screen_width_in_px
-        }); 
+    $("#web_design #wrapper").css({                    
+        "background-color": '#ffd097c3',
+        "position":         "relative",
+        "height":           screen_height,
+        "width":            screen_width_in_px
+    }); 
 
-        //----------SVG_CANVASES-----------//
-        var container       = SVG().addTo("#wrapper").size(screen_width_in_px, screen_height)
-        var container_gr    = container.nested()   
+    $("#web_design #headline__info").css({                    
+        "background-color": '#467f8cf3',
+        "position":         "relative",
+        "height":           screen_height/2,
+        "width":            screen_width_in_px
+    }); 
 
-        var headline_container     = SVG().addTo("#headline__info").size(screen_width_in_px, screen_height/2)
-        var headline__container_gr = headline_container.nested()
+    $("#web_design #artist_portfolio__info").css({                    
+        "background-color": '#467f8cf3',
+        "position":         "relative",
+        "height":           screen_height,
+        "width":            screen_width_in_px
+    }); 
 
-        var artist_portfolio__container    = SVG().addTo("#artist_portfolio__info").size(screen_width_in_px, screen_height)
-        var artist_portfolio__container_gr = artist_portfolio__container.nested()   
-      
-        var suprematism__container    = SVG().addTo("#suprematism__info").size(screen_width_in_px, screen_height)
-        var suprematism__container_gr = suprematism__container.nested()   
-       
-        var deep_blue__container     = SVG().addTo("#deep_blue__info").size(screen_width_in_px, screen_height)
-        var deep_blue__container_gr = deep_blue__container.nested()  
-        
-        var video__container    = SVG().addTo("#video__info").size(screen_width_in_px, screen_height)
-        var video__container_gr = video__container.nested()  
+    $("#web_design #suprematism__info").css({                    
+        "background-color": '#467f8cf3',
+        "position":         "relative",
+        "height":           screen_height,
+        "width":            screen_width_in_px
+    }); 
 
-        //------------------DEVICES--------------------------//
-        var screen_physical_width_cm = get_physical_screen_width(screen_width_in_px);
-        console.log(screen_physical_width_cm, '!!!SCREEN WIDTH')
+    $("#deep_blue__info").css({                    
+        "background-color": '#467f8cf3',
+        "position":         "relative",
+        "height":           screen_height,
+        "width":            screen_width_in_px
+    }); 
 
-        if (screen_physical_width_cm < 20.5) {
-            // MOBILE
-            //intro(container_gr, screen_width_in_px, screen_height)
-            nevena(container_gr, screen_width_in_px, screen_height)
-            //web_design(container_gr, screen_width_in_px, screen_height)
-            //web_development(container_gr, screen_width_in_px, screen_height)
-            //animation(container_gr, screen_width_in_px, screen_height)
-            //contact(container_gr, screen_width_in_px, screen_height)
-        }
-        else if (screen_physical_width_cm < 33.8) { // max width for tablet 2736px, max height 2048px
+    $("#web_design #video__info").css({                    
+        "background-color": '#467f8cf3',
+        "position":         "relative",
+        "height":           screen_height,
+        "width":            screen_width_in_px
+    }); 
 
-            // TABLET
-            //var layout_tablet_gr = create_background__tablet(container_gr, screen_width_in_px, screen_height)
-            //var background_white_tablet_gr = layout_tablet_gr.findOne('#background_white_tablet_gr')
-            //section_images__tablet(background_white_tablet_gr, screen_width_in_px, screen_height)
-            //create_text__tablet(container_gr, wrapperscreen_width_in_px, screen_height)
-            //buttons_tablet(container_gr, screen_height, screen_width_in_px)
-            //create_contact_section(contact_gr, screen_width_in_px)
+    //----------SVG_CANVASES-----------//
+    var container                      = SVG().addTo("#web_design #wrapper").size(screen_width_in_px, screen_height)
+    var container_gr                   = container.nested()   
 
-        }
+    var headline_container             = SVG().addTo("#web_design #headline__info").size(screen_width_in_px, screen_height/2)
+    var headline__container_gr         = headline_container.nested()
 
-        else {
-            var layout_gr = intro_section__desktop(container_gr, screen_width_in_px, screen_height)
-            var background_gr = layout_gr.find("#background_gr")
-            images__desktop(background_gr, screen_width_in_px, screen_height)
+    var artist_portfolio__container    = SVG().addTo("#web_design #artist_portfolio__info").size(screen_width_in_px, screen_height)
+    var artist_portfolio__container_gr = artist_portfolio__container.nested()   
+  
+    var suprematism__container         = SVG().addTo("#web_design #suprematism__info").size(screen_width_in_px, screen_height)
+    var suprematism__container_gr      = suprematism__container.nested()   
+   
+    var deep_blue__container           = SVG().addTo("#web_design #deep_blue__info").size(screen_width_in_px, screen_height)
+    var deep_blue__container_gr        = deep_blue__container.nested()  
+    
+    var video__container               = SVG().addTo("#web_design #video__info").size(screen_width_in_px, screen_height)
+    var video__container_gr            = video__container.nested()  
 
-            intro_section__quote_and_scroll___desktop(container_gr, screen_width_in_px, screen_height)
+    //------------------DEVICES--------------------------//
+    var screen_physical_width_cm = get_physical_screen_width(screen_width_in_px);
+    console.log(screen_physical_width_cm, '!!!SCREEN WIDTH')
 
-            headline__info(headline__container_gr, screen_width_in_px, screen_height)
-            artist_portfolio(artist_portfolio__container_gr, screen_width_in_px, screen_height)
-            suprematism(suprematism__container_gr, screen_width_in_px, screen_height)
-            deep_blue(deep_blue__container_gr, screen_width_in_px, screen_height)
-            video__section(video__container_gr, screen_width_in_px, screen_height)
+    if (screen_physical_width_cm < 20.5) {
+        // MOBILE
+        //intro(container_gr, screen_width_in_px, screen_height)
+        nevena(container_gr, screen_width_in_px, screen_height)
+        //web_design(container_gr, screen_width_in_px, screen_height)
+        //web_development(container_gr, screen_width_in_px, screen_height)
+        //animation(container_gr, screen_width_in_px, screen_height)
+        //contact(container_gr, screen_width_in_px, screen_height)
+    }
+    else if (screen_physical_width_cm < 33.8) { // max width for tablet 2736px, max height 2048px
 
-            create_contact_section(screen_width_in_px, screen_height)
-        }
+        // TABLET
+        //var layout_tablet_gr = create_background__tablet(container_gr, screen_width_in_px, screen_height)
+        //var background_white_tablet_gr = layout_tablet_gr.findOne('#background_white_tablet_gr')
+        //section_images__tablet(background_white_tablet_gr, screen_width_in_px, screen_height)
+        //create_text__tablet(container_gr, wrapperscreen_width_in_px, screen_height)
+        //buttons_tablet(container_gr, screen_height, screen_width_in_px)
+        //create_contact_section(contact_gr, screen_width_in_px)
+
     }
 
-    create_responsive();
+    else {
+        var web_design__layout_gr = web_design__intro_section__desktop(container_gr, bar_gr, screen_width_in_px, screen_height)
+        var web_design__background_gr = web_design__layout_gr.find("#web_design__background_gr")
+        web_design__images__desktop(web_design__background_gr, screen_width_in_px, screen_height)
 
-    $(window).resize(function() {
-        $("#wrapper").remove();
-        $("#headline__info").remove();
-        $("#artist_portfolio__info").remove();
-        $("#suprematism__info").remove();
-        $("#deep_blue__info").remove();
-        $("#video__info").remove();
-        $("#contact_wrapper").remove();
-        //container_gr.remove(); // IMPORTANT!! - remove everything previously drawn
-        //container_gr = container.nested();
+        web_design__quote_and_scroll___desktop(container_gr, screen_width_in_px, screen_height)
 
-        create_responsive();
-    });
+        web_design__headline__info(headline__container_gr, screen_width_in_px, screen_height)
+        artist_portfolio(artist_portfolio__container_gr, screen_width_in_px, screen_height)
+        suprematism(suprematism__container_gr, screen_width_in_px, screen_height)
+        deep_blue(deep_blue__container_gr, screen_width_in_px, screen_height)
+        video__section(video__container_gr, screen_width_in_px, screen_height)
+
+        create_contact_section(screen_width_in_px, screen_height)
+    }
 }
+
 //----------------------------------------------CREATE-LAYOUT-DESKTOP----------------------------------------------------------------
-function intro_section__desktop(parent_gr, screen_width_in_px, screen_height){
+function web_design__intro_section__desktop(parent_gr, bar_gr, screen_width_in_px, screen_height){
 
-    var layout_gr = parent_gr.nested().attr({id: 'layout_gr'})
+    var web_design__layout_gr = parent_gr.nested().attr({id: 'web_design__layout_gr'})
 
-    var background_gr = layout_gr.nested()
+    var web_design__background_gr = web_design__layout_gr.nested()
         .attr({
-            id: "background_gr",
+            id: "web_design__background_gr",
         })
 
-    var background = background_gr.rect(screen_width_in_px,screen_height)
+    var background = web_design__background_gr.rect(screen_width_in_px,screen_height)
         .fill('#ffd097c3')
         .attr({
             id:      "background",
@@ -162,7 +178,7 @@ function intro_section__desktop(parent_gr, screen_width_in_px, screen_height){
         })
     
     //CALL MENU FUNCTION
-    var menu_rect = layout_gr.rect(50,50)
+    var menu_rect = web_design__layout_gr.rect(50,50)
         .attr({
             fill: '#b42541e6',
             x: 100,
@@ -178,7 +194,7 @@ function intro_section__desktop(parent_gr, screen_width_in_px, screen_height){
             
             // ANIMATE
             console.log(create_menu)
-            create_menu(parent_gr, screen_width_in_px, screen_height)
+            create_menu(parent_gr, bar_gr, screen_width_in_px, screen_height)
 
             menu_rect_clicked = true;
         }
@@ -187,16 +203,17 @@ function intro_section__desktop(parent_gr, screen_width_in_px, screen_height){
         else {
 
             // ANIMATE
-            create_menu(parent_gr, screen_width_in_px, screen_height)
-
+            create_menu(parent_gr, bar_gr, screen_width_in_px, screen_height)
+            images__desktop
+            images__desktop
             menu_rect_clicked = false;
         }
     })
-    return layout_gr;
+    return web_design__layout_gr;
 }
 
 //----------------------------------------------TEXT----------------------------------------------------------------
-function intro_section__quote_and_scroll___desktop(parent_gr, screen_width_in_px, screen_height){
+function web_design__quote_and_scroll___desktop(parent_gr, screen_width_in_px, screen_height){
     var text_gr = parent_gr.nested()
 
     var headline_gr = text_gr.nested()
@@ -348,7 +365,7 @@ function intro_section__quote_and_scroll___desktop(parent_gr, screen_width_in_px
 }
 
 //----------------------------------------------IMAGES-DESKTOP----------------------------------------------------------------
-function images__desktop(parent_gr, screen_width_in_px, screen_height){
+function web_design__images__desktop(parent_gr, screen_width_in_px, screen_height){
 
     var images_gr = parent_gr.nested()
     .attr({
@@ -363,7 +380,7 @@ function images__desktop(parent_gr, screen_width_in_px, screen_height){
 
         'elements_data':[
             {
-                'img_url':   './media/0.png',
+                'img_url':   './../portfolio-app-media/media/0.png',
                 'height':     '370',
                 'position_x': 0,
                 'position_y': 175,
@@ -371,7 +388,7 @@ function images__desktop(parent_gr, screen_width_in_px, screen_height){
                 'view_box_y': '0'
             },
             {
-                'img_url':   './media/2.png',
+                'img_url':   './../portfolio-app-media/media/2.png',
                 'height':     '160',
                 'position_x': rect_width+15,
                 'position_y': 330,
@@ -380,7 +397,7 @@ function images__desktop(parent_gr, screen_width_in_px, screen_height){
             },
 
             {
-                'img_url':   './media/3.png',
+                'img_url':   './../portfolio-app-media/media/3.png',
                 'height':     '380',
                 'position_x': rect_width+15,
                 'position_y': 505,
@@ -388,7 +405,7 @@ function images__desktop(parent_gr, screen_width_in_px, screen_height){
                 'view_box_y': '500'
             },
             {
-                'img_url':   './media/4.png',
+                'img_url':   './../portfolio-app-media/media/4.png',
                 'height':     '560',
                 'position_x': rect_width*2+30,
                 'position_y': 65,
@@ -396,7 +413,7 @@ function images__desktop(parent_gr, screen_width_in_px, screen_height){
                 'view_box_y': '0'
             },
             {
-                'img_url':   './media/5.png',
+                'img_url':   './../portfolio-app-media/media/5.png',
                 'height':     '300',
                 'position_x': rect_width*3+45,
                 'position_y': 160,
@@ -404,7 +421,7 @@ function images__desktop(parent_gr, screen_width_in_px, screen_height){
                 'view_box_y': '0'
             },
             {
-                'img_url':   './media/6.png',
+                'img_url':   './../portfolio-app-media/media/6.png',
                 'height':     '325',
                 'position_x': rect_width*3+45,
                 'position_y': 475,
@@ -412,7 +429,7 @@ function images__desktop(parent_gr, screen_width_in_px, screen_height){
                 'view_box_y': '0'
             },
             {
-                'img_url':   './media/7.png',
+                'img_url':   './../portfolio-app-media/media/7.png',
                 'height':     '410',
                 'position_x': rect_width*4+60,
                 'position_y': 65,
@@ -461,7 +478,7 @@ function images__desktop(parent_gr, screen_width_in_px, screen_height){
     var view_box_y = images_data['elements_data'][0]['view_box_y'];
 
     //--------------------------------------------------------------------------------------
-    function create_image(parent_gr, image_url, rect_width, rect_height, x, y, view_box_x, view_box_y){
+    function web_design__create_image(parent_gr, image_url, rect_width, rect_height, x, y, view_box_x, view_box_y){
         
         //---------------------------
         // IMPORTANT!! - svg.js nested() function always returns an array with 1 element,
@@ -499,13 +516,13 @@ function images__desktop(parent_gr, screen_width_in_px, screen_height){
 
     //--------------------------------------------------------------------------------------
 
-    var image_gr_0 = create_image(images_gr, img_url_0, rect_width, height_0, position_x_0, position_y_0, view_box_x, view_box_y)
-    var image_gr_1 = create_image(images_gr, img_url_1, rect_width, height_1, position_x_1, position_y_1, view_box_x, view_box_y)
-                     create_image(images_gr, img_url_2, rect_width, height_2, position_x_2, position_y_2, view_box_x, view_box_y)
-    var image_gr_3 = create_image(images_gr, img_url_3, rect_width, height_3, position_x_3, position_y_3, view_box_x, view_box_y)
-    create_image(images_gr, img_url_4, rect_width, height_4, position_x_4, position_y_4, view_box_x, view_box_y)
-    create_image(images_gr, img_url_5, rect_width, height_5, position_x_5, position_y_5, view_box_x, view_box_y)
-    var image_gr_6 =create_image(images_gr, img_url_6, rect_width, height_6, position_x_6, position_y_6, view_box_x, view_box_y)
+    var image_gr_0 = web_design__create_image(images_gr, img_url_0, rect_width, height_0, position_x_0, position_y_0, view_box_x, view_box_y)
+    var image_gr_1 = web_design__create_image(images_gr, img_url_1, rect_width, height_1, position_x_1, position_y_1, view_box_x, view_box_y)
+                     web_design__create_image(images_gr, img_url_2, rect_width, height_2, position_x_2, position_y_2, view_box_x, view_box_y)
+    var image_gr_3 = web_design__create_image(images_gr, img_url_3, rect_width, height_3, position_x_3, position_y_3, view_box_x, view_box_y)
+    web_design__create_image(images_gr, img_url_4, rect_width, height_4, position_x_4, position_y_4, view_box_x, view_box_y)
+    web_design__create_image(images_gr, img_url_5, rect_width, height_5, position_x_5, position_y_5, view_box_x, view_box_y)
+    var image_gr_6 =web_design__create_image(images_gr, img_url_6, rect_width, height_6, position_x_6, position_y_6, view_box_x, view_box_y)
 
     //////////////---------------------------------------------------////////////
     var rect_height = (screen_width_in_px/2)/6;
@@ -569,7 +586,7 @@ function images__desktop(parent_gr, screen_width_in_px, screen_height){
 
 }
 
-function headline__info(parent_gr, screen_width_in_px, screen_height){
+function web_design__headline__info(parent_gr, screen_width_in_px, screen_height){
 
     var headline_gr = parent_gr.nested()
  
@@ -616,7 +633,7 @@ function headline__info(parent_gr, screen_width_in_px, screen_height){
 
 function artist_portfolio(parent_gr, screen_width_in_px, screen_height){
     var artist_portfolio__gr = parent_gr.nested().attr({id: 'artist_portfolio__gr'})
-
+    var artist_content       = artist_portfolio__gr.nested()
     var column_info_first = {
 
         "title": "elements",
@@ -626,16 +643,16 @@ function artist_portfolio(parent_gr, screen_width_in_px, screen_height){
                 //FIRST RECT
                 "name":"2019",
                 "date":"",    
-                "draw_fn": function(parent_gr, screen_width_in_px){
+                "draw_fn": function(artist_portfolio__gr){
                     var rect_height = 800
                     var rect_width  = 1500
 
-                    var left_top_gr    = parent_gr.nested()
+                    var left_top_gr    = artist_portfolio__gr.nested()
                     var left_top_rect  = left_top_gr.rect(rect_width/2,rect_height/3)
                     .attr({
-                        id: "left_top",
-                        fill: "#2a3d35ef",
-                        opacity: 0
+                        id:      "left_top",
+                        fill:    "#2a3d35ef",
+                        opacity: 0.0
                     })
                     var left_top_text  = left_top_gr.text("Type: Portfolio")
                         left_top_text.font({
@@ -651,34 +668,38 @@ function artist_portfolio(parent_gr, screen_width_in_px, screen_height){
                             y: left_top_gr.bbox().height/2-left_top_text.bbox().height
                         })
 
-                    var right__gr   = parent_gr.nested()
-                    var right_rect  = right__gr.rect(rect_width/2,rect_height).fill("#004bed").attr({id: "right_rect"})
+                    var right__gr   = artist_portfolio__gr.nested()
+                    var right_rect  = right__gr.rect(rect_width/2,rect_height)
                         .attr({
-                            x: rect_width/2,
+                            id:      "right_rect",
+                            x:       rect_width/2,
+                            fill:   '#2a3d35ef',
+                            opacity: 0.0
                         })
-
-                    var artist_image_url = './media/artist_0.png'
+                    var artist_image_url = './../portfolio-app-media/media/art_1.png'
                     fit_image_inside_rect(right__gr, artist_image_url, rect_width/2, rect_height, rect_width/2, 0, 0, 0)
     
-                    var bottom_left__gr = parent_gr.nested()
-                    var bottom_top_left = bottom_left__gr.rect(rect_width/4,rect_height/3).fill("#d45f00")
+                    var bottom_left__gr = artist_portfolio__gr.nested()
+                    var bottom_top_left = bottom_left__gr.rect(rect_width/4-10,rect_height/3).fill("#d45f00")
                         .attr({id: "bottom_top_left",
                                 x: 0,
-                                y: rect_height/3
+                                y: rect_height/3,
+                                opacity: 0.0
                         })
 
 
-                    var artist_1 = './media/artist_1.png'
-                    fit_image_inside_rect(bottom_left__gr, artist_1, rect_width/4, rect_height/3, 0, rect_height/3, 0, 0)
+                    var artist_1 = './../portfolio-app-media/media/artist_0.png'
+                    fit_image_inside_rect(bottom_left__gr, artist_1, rect_width/4-10, rect_height/3, 0, rect_height/3, 0, 0)
 
-                    var bottom_top_right = bottom_left__gr.rect(rect_width/4,rect_height/3).fill("#d95f40")
+                    var bottom_top_right = bottom_left__gr.rect(rect_width/4-10,rect_height/3).fill("#d95f40")
                         .attr({id: "bottom_top_right",
-                            x: rect_width/4,
-                            y: rect_height/3
+                            x: rect_width/4+10,
+                            y: rect_height/3,
+                            opacity: 0.0
                     })
 
-                    var artist_2 = './media/artist_2.png'
-                    fit_image_inside_rect(bottom_left__gr, artist_2, rect_width/4, rect_height/3, rect_width/4, rect_height/3, 0, 0)
+                    var artist_2 = './../portfolio-app-media/media/art_2.png'
+                    fit_image_inside_rect(bottom_left__gr, artist_2, rect_width/4-10, rect_height/3, rect_width/4, rect_height/3, 0, 0)
 
                     var bottom = bottom_left__gr.rect(rect_width/2,rect_height/3)
                         .attr({
@@ -709,11 +730,11 @@ function artist_portfolio(parent_gr, screen_width_in_px, screen_height){
                     }) 
 
                 },    
-                "activate_fn": function(parent_gr){
+                "activate_fn": function(artist_portfolio__gr){
                    
 
                 }, 
-                "deactivate_fn": function(parent_gr){
+                "deactivate_fn": function(artist_portfolio__gr){
 
                 },     
                 "width":"1500",           
@@ -933,13 +954,13 @@ function video__section(parent_gr, screen_width_in_px, screen_height){
     $("#video__info").append(`
         <div id="video__container">
             <video width="320" height="240" id='video__a' autoplay loop muted>
-                <source src='./media/design_mobile__small__kadar1.mp4' type='video/mp4'>
+                <source src='./../portfolio-app-media/media/design_mobile__small__kadar1.mp4' type='video/mp4'>
             </video>
             <video width="320" height="240" id='video__b' autoplay loop muted>
-                <source src='./media/design_mobile__small__kadar2.mp4' type='video/mp4'>
+                <source src='./../portfolio-app-media/media/design_mobile__small__kadar2.mp4' type='video/mp4'>
             </video>
             <video width="320" height="240" id='video__c' autoplay loop muted>
-                <source src='./media/design_mobile__small__kadar3.mp4' type='video/mp4'>
+                <source src='./../portfolio-app-media/media/design_mobile__small__kadar3.mp4' type='video/mp4'>
             </video>
         </div>`);
 

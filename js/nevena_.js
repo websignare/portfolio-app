@@ -2,92 +2,160 @@ $(document).ready(function(){
     main();
 })
 
+// IMPORTANT!! - this variable memorizes which page is the current page
+var current_page = "home_page"
+
 function main() {
+    
+
+    var screen_width_in_px = window.innerWidth;
+
+    // NAVIGATION_BAR
+    var bar_gr = nav_bar__create(screen_width_in_px);
+    
+    
+
+
+
+
+
+    hp__activate(bar_gr);
+
+    $(window).resize(function() {
+        
+        hp__deactivate();
+
+        hp__activate(bar_gr);
+    });
+}
+
+
+function hp__activate(bar_gr) {
+
+    document.title = "home page"
+    window.history.pushState({page: "home_page"},"", "#home_page");
+
+    // BROWSER_BACK_BUTTON
+    window.onpopstate = function(event) {
+        // alert("location: " + document.location + ", state: " + JSON.stringify(event.state));
+
+
+
+        var target_page_name = event.state.page;
+        console.log("88888888888888888888888888888888888888888")
+        console.log(target_page_name)
+
+
+        //-----------------------------
+        // RUN_PAGE_TRANSITION
+        run_page_transition(target_page_name, "1_plane_swipe_to_left", current_page, bar_gr,
+            // on_complete - called when the page_transition completes (X number of seconds in the future)
+            function() {
+
+                // IMPORTANT!! - change the value of the global variable "current_page" (update it)
+                //               to point to the new page name.
+                current_page = target_page_name;
+
+            });
+
+        //-----------------------------
+    };
+
     $("body").append(`
-        <div id="wrapper">
+        <div id="hp">
+            <div id="wrapper"></div>
         </div>
     `);
 
-    function create_responsive() {
+    hp__create_responsive(bar_gr);
+}
 
-        var screen_width_in_px  = window.innerWidth;
-        var screen_height = window.innerHeight;
+function hp__deactivate() {
 
-        $("#wrapper").css({                    
-            "background-color": '#D9D9D9',
-            "position":         "relative",
-            "height":           screen_height,
-            "width":            screen_width_in_px
-        }); 
+    $("body #hp").remove();
+    $("#hp #wrapper").remove();
+    $("#contact_wrapper").remove();
 
-        var container       = SVG().addTo("#wrapper").size(screen_width_in_px, screen_height)
-        var container_gr    = container.nested()   
+    /*remove_triggers("contact_canvas__trigger") // contact_canvas TRIGGER*/
+    
+    // $("#wrapper svg").remove();
+    // $("#contact_wrapper").remove();
+    
+    //container_gr.remove(); // IMPORTANT!! - remove everything previously drawnscreen_width_in_px, screen_height
+    //container_gr = container.nested();
 
-        var screen_physical_width_cm = get_physical_screen_width(screen_width_in_px);
-        console.log(screen_physical_width_cm, '!!!SCREEN WIDTH')
 
-        if (screen_physical_width_cm < 20.5) {
-            // MOBILE
-            intro(container_gr, screen_width_in_px, screen_height)
-            nevena(container_gr, screen_width_in_px, screen_height)
-            //web_design(container_gr, screen_width_in_px, screen_height)
-            //web_development(container_gr, screen_width_in_px, screen_height)
-            //animation(container_gr, screen_width_in_px, screen_height)
-            //contact(container_gr, screen_width_in_px, screen_height)
-        }
-        else if (screen_physical_width_cm < 33.8) { // max width for tablet 2736px, max height 2048px
+    //$('#wrapper').attr('height', $(window).height());
+    //$('#wrapper').attr('width', $(window).width());
+    // hp__create_background__desktop(container_gr, screen_width_in_px, screen_heightnevena_create_text__desktop(container_gr, screen_width_in_px, screen_height)
+    // section_images__desktop(container_gr)
 
-            // TABLET
-            var layout_tablet_gr = create_background__tablet(container_gr, screen_width_in_px, screen_height)
-            var background_white_tablet_gr = layout_tablet_gr.findOne('#background_white_tablet_gr')
-            section_images__tablet(background_white_tablet_gr, screen_width_in_px, screen_height)
-            create_text__tablet(container_gr, screen_width_in_px, screen_height)
-            buttons_tablet(container_gr, screen_height, screen_width_in_px)
-            create_contact_section(screen_width_in_px)
+}
 
-        }
 
-        else {
-            var layout_gr = create_background__desktop(container_gr, screen_width_in_px, screen_height)
-            create_text__desktop(container_gr, screen_width_in_px, screen_height)
-            var white_background_gr = layout_gr.find("#white_background_gr")
-            section_images__desktop(white_background_gr)
-            buttons(container_gr, screen_height, screen_width_in_px)
-            create_contact_section(screen_width_in_px, screen_height)
-        }
+
+function hp__create_responsive(bar_gr) {
+
+    var screen_width_in_px = window.innerWidth;
+    var screen_height      = window.innerHeight;
+
+    $("#hp #wrapper").css({                    
+        "background-color": '#D9D9D9',
+        "position":         "relative",
+        "height":           screen_height,
+        "width":            screen_width_in_px
+    }); 
+
+    var container    = SVG().addTo("#hp #wrapper").size(screen_width_in_px, screen_height)
+    var container_gr = container.nested()   
+
+    var screen_physical_width_cm = get_physical_screen_width(screen_width_in_px);
+    console.log(screen_physical_width_cm, '!!!SCREEN WIDTH')
+
+    if (screen_physical_width_cm < 20.5) {
+        // MOBILE
+        intro(container_gr, screen_width_in_px, screen_height)
+        nevena(container_gr, screen_width_in_px, screen_height)
+        web_design(container_gr, screen_width_in_px, screen_height)
+        web_development(container_gr, screen_width_in_px, screen_height)
+        animation(container_gr, screen_width_in_px, screen_height)
+        contact(container_gr, screen_width_in_px, screen_height)
+    }
+    else if (screen_physical_width_cm < 33.8) { // max width for tablet 2736px, max height 2048px
+
+        /*// TABLET
+        var layout_tablet_gr           = create_background__tablet(container_gr, screen_width_in_px, screen_height)
+        var background_white_tablet_gr = layout_tablet_gr.findOne('#background_white_tablet_gr')
+
+        section_images__tablet(background_white_tablet_gr, screen_width_in_px, screen_height)
+        create_text__tablet(container_gr, screen_width_in_px, screen_height)
+        buttons_tablet(container_gr, screen_height, screen_width_in_px)
+        create_contact_section(screen_width_in_px)*/
+
     }
 
-    create_responsive();
+    else {
+        var home_layout_gr           = hp__create_background__desktop(container_gr, screen_width_in_px, screen_height)
+        var white_background_gr = home_layout_gr.find("#white_background_gr")
 
-    $(window).resize(function() {
-        $("#wrapper svg").remove();
-        $("#contact_wrapper").remove();
-        //container_gr.remove(); // IMPORTANT!! - remove everything previously drawnscreen_width_in_px, screen_height
-        //container_gr = container.nested();
-
-
-        //$('#wrapper').attr('height', $(window).height());
-        //$('#wrapper').attr('width', $(window).width());
-        //create_background__desktop(container_gr, screen_width_in_px, screen_height)
-        // create_text__desktop(container_gr, screen_width_in_px, screen_height)
-        // section_images__desktop(container_gr)
-
-        create_responsive();
-    });
+        nevena_create_text__desktop(container_gr, screen_width_in_px, screen_height)
+        section_images__desktop(white_background_gr)
+        buttons(container_gr, bar_gr, screen_height, screen_width_in_px)
+        create_contact_section(screen_width_in_px, screen_height)
+    }
 }
+
 //----------------------------------------------CREATE-LAYOUT-DESKTOP----------------------------------------------------------------
-function create_background__desktop(parent_gr, screen_width_in_px, screen_height){
+function  hp__create_background__desktop(parent_gr, screen_width_in_px, screen_height){
 
-    var layout_gr = parent_gr.nested().attr({id: 'layout_gr'})
-    console.log("aaaaaaaaaaaa")
-    // console.log(filter_def)
+    var home_layout_gr = parent_gr.nested().attr({id: 'home_layout_gr'})
 
-    var orange_background_gr = layout_gr.nested()
+    var home_orange_background_gr = home_layout_gr.nested()
         .attr({
-            id: "orange_background_gr",
+            id: "home_orange_background_gr",
         })
 
-    var orange_background = orange_background_gr.rect(screen_width_in_px,screen_height)
+    var orange_background = home_orange_background_gr.rect(screen_width_in_px,screen_height)
         .fill('#1f241eff')
         .attr({
             id:      "orange_background",
@@ -96,7 +164,7 @@ function create_background__desktop(parent_gr, screen_width_in_px, screen_height
             'y':     0
         })
 
-    var white_background_gr = orange_background_gr.nested().attr({id :"white_background_gr"})
+    var white_background_gr = home_orange_background_gr.nested().attr({id :"white_background_gr"})
 
     var white_background = white_background_gr.rect(screen_width_in_px-100,screen_height-100)
     .fill('#D9D9D9')
@@ -106,13 +174,15 @@ function create_background__desktop(parent_gr, screen_width_in_px, screen_height
         'x':     50,
         'y':     50
     })
-    return layout_gr;
+    return home_layout_gr;
 
 }
 
 //----------------------------------------------TEXT----------------------------------------------------------------
-function create_text__desktop(parent_gr, screen_width_in_px, screen_height){
+function nevena_create_text__desktop(parent_gr, screen_width_in_px, screen_height) {
+
     var text_gr = parent_gr.nested()
+
     //-----------------PARENTHESES------------------------
     var parentheses_gr = text_gr.nested() 
 
@@ -172,92 +242,65 @@ function section_images__desktop(parent_gr){
 
         'elements_data':[
             {
+                'url':        '../portfolio-app-media/media/a0.png',
                 'height':     '17', // %
                 'position_y': 60,
-                'view_box_x': '-320',
-                'view_box_y': '-30'
+                'view_box_x': '0',
+                'view_box_y': '0'
             },
             {
+                'url':        '../portfolio-app-media/media/a1.png',
                 'height':     '40',
                 'position_y': 37,
-                'view_box_x': '-440',
-                'view_box_y': '-150'
+                'view_box_x': '0',
+                'view_box_y': '0'
             },
             {
+                'url':        '../portfolio-app-media/media/a2.png',
                 'height':     '69',
                 'position_y':25,
-                'view_box_x': '-550',
-                'view_box_y': '-150'
+                'view_box_x': '0',
+                'view_box_y': '0'
             },
             {
+                'url':        '../portfolio-app-media/media/a3.png',
                 'height':     '35',
-                'position_y': 25,
-                'view_box_x': '-660',
-                'view_box_y': '-140'
+                'position_y':  25,
+                'view_box_x': '0',
+                'view_box_y': '0'
             },
             {
+                'url':        '../portfolio-app-media/media/a4.png',
                 'height':     '40',
                 'position_y': 37,
-                'view_box_x': '-800',
-                'view_box_y': '-280'
-            },
-            /*{
-                'height':    '100',
-                'width':      rect_width,
-                'position_y': '500',
                 'view_box_x': '0',
                 'view_box_y': '0'
             },
             {
-                'height':    '100',
-                'width':      rect_width,
-                'position_y': '450',
-                'view_box_x': '0',
-                'view_box_y': '0'
-            },*/
-            {
+                'url':        '../portfolio-app-media/media/a5.png',
                 'height':     '30',
-                'position_y': 37,
-                'view_box_x': '-870',
-                'view_box_y': '-130'
+                'position_y':  37,
+                'view_box_x':  '0',
+                'view_box_y':  '0'
             },
             {
+                'url':        '../portfolio-app-media/media/a6.png',
                 'height':     '42',
                 'position_y': 25,
-                'view_box_x': '-980',
-                'view_box_y': '-160'
+                'view_box_x': '0',
+                'view_box_y': '0'
             },
             {
+                'url':        '../portfolio-app-media/media/a7.png',
                 'height':     '72',
                 'position_y': 15,
-                'view_box_x': '-1080',
-                'view_box_y': '-200'
+                'view_box_x': '0',
+                'view_box_y': '0'
             }
 
         ]
     }
 
-
-    /*a = {
-        a:[1,2,3],
-        b:{
-            c:{
-                d:[12,3,{g:1,d:2}],
-                b:{
-                    a:[1,2,3]
-                }
-            }
-        },
-        d:{
-            b:[{a:[1,2,3]}]
-        },
-        e:[{a:[{b:[1,2,{a:2,c:[1,2,{b:1}]}]}]}]
-    }
-
-    a['b']['c']['d'][2]['g']
-    a['b']['c']['b']['a'][2]
-    a['d']['b'][0]['a'][1]
-    a['e'][0]['a'][0]['b'][2]['c'][2]['b']*/
 
     var total_width               = images_gr_width
     var elements_number           = images_data['elements_data'].length
@@ -280,6 +323,7 @@ function section_images__desktop(parent_gr){
         var view_box_x = element_data['view_box_x'];
         var view_box_y = element_data['view_box_y'];
 
+        var url = images_data['elements_data'][i]['url']
 
         var element_position_y_px = images_gr_height*(element_data['position_y']*0.01)
         
@@ -292,8 +336,6 @@ function section_images__desktop(parent_gr){
     
         element_previous_x = element_x;
         
-        var ship_image_url = './media/ship.jpg'
-
         var image_element = images_gr.nested().size(element_width, elements_height_px)
         image_element.move(element_x, element_position_y_px)
         image_element.attr({"id": "image_element_"+i})
@@ -306,14 +348,13 @@ function section_images__desktop(parent_gr){
             })
 
         fit_image_inside_rect(image_element, 
-            ship_image_url, 
+            url, 
             element_width, 
             elements_height_px, 
             0, 
             0, 
             view_box_x, 
             view_box_y)
-            
     }
 
 
@@ -321,12 +362,11 @@ function section_images__desktop(parent_gr){
     // IMPORTANT!! - this function has to be called after all the image_elements
     //               are created, because it gets some of those elements
     //               and attaches text relative to them (so their position
-    //               has to be set beforehand).
-    create_text__desktop(images_gr)
+    //               has to be set beforehnevena_create_text__desktop(images_gr)
 
 }
 
-function buttons(parent_gr, screen_height, screen_width_in_px){
+function buttons(parent_gr, bar_gr, screen_height, screen_width_in_px){
 
     var buttons_gr = parent_gr.nested()
     var rect_height = 150;
@@ -403,10 +443,10 @@ function buttons(parent_gr, screen_height, screen_width_in_px){
     })
 
     //--------------------------CONTACT----------------------------------
-    var contact_gr = buttons_gr.nested()
+    var contact_gr          = buttons_gr.nested()
     var contact_base_image  = parent_gr.findOne("#image_element_2");
-    var contact_x                 = contact_base_image.x()
-    var contact_width             = contact_base_image.width()
+    var contact_x           = contact_base_image.x()
+    var contact_width       = contact_base_image.width()
 
     var contact_rect = contact_gr.rect(contact_width,rect_height)
         .fill('#F2622E')
@@ -473,6 +513,41 @@ function buttons(parent_gr, screen_height, screen_width_in_px){
         "y": design_base_image.y()-design_rect.bbox().height
     })
 
+    //////////////////////////////////////--PAGE TRANSITION ON BUTTON CLICKED--////////////////////////////////////////////
+    design_clicked = false;
+
+    design_gr.click(function() {
+    
+        // DESIGN CLICKED
+        if (design_clicked == false) {
+
+            //-----------------------------
+            // RUN_PAGE_TRANSITION
+            var target_page_name = "web_design";
+            run_page_transition(target_page_name, "1_plane_swipe_to_right", current_page, bar_gr,
+                // on_complete - called when the page_transition completes (X number of seconds in the future)
+                function() {
+
+                    // IMPORTANT!! - change the value of the global variable "current_page" (update it)
+                    //               to point to the new page name.
+                    current_page = target_page_name;
+
+                });
+
+            //-----------------------------
+
+            design_clicked = true;
+
+            nav_bar__reset(bar_gr)
+    
+        }
+        // DESIGN DEACTIVATED
+        else {
+        
+            design_clicked = false;
+        }
+    })
+
     //--------------------------DEVELOPMENT----------------------------------
     var development_gr                = buttons_gr.nested();
     var development_base_image_first  = parent_gr.findOne("#image_element_4");
@@ -480,9 +555,9 @@ function buttons(parent_gr, screen_height, screen_width_in_px){
     var development_x                 = development_base_image_first.x()
     var development_width             = development_base_image_first.width() + 20 + development_base_image_second.width()
 
-    console.log(development_x, 'xxxxxxxxxxxxxxxxxxx')
-    console.log(development_base_image_first.width(), '1111111111111111')
-    console.log(development_base_image_second.width(), '222222222222222')
+    // console.log(development_x, 'xxxxxxxxxxxxxxxxxxx')
+    // console.log(development_base_image_first.width(), '1111111111111111')
+    // console.log(development_base_image_second.width(), '222222222222222')
 
     var development_rect = development_gr.rect(development_width,rect_height)
         .fill('#BF1F1F')
@@ -512,6 +587,40 @@ function buttons(parent_gr, screen_height, screen_width_in_px){
         "x": development_x,
         "y": development_base_image_first.y()-development_rect.bbox().height
     })
+    //////////////////////////////////////--PAGE TRANSITION ON BUTTON CLICKED--////////////////////////////////////////////
+    development_clicked = false;
+    
+    development_gr.click(function() {
+    
+        // DEVELOPMENT CLICKED
+        if (development_clicked == false) {
+
+            //-----------------------------
+            // RUN_PAGE_TRANSITION
+            var target_page_name = "web_development";
+            run_page_transition(target_page_name, "4_plane_in_circle", current_page, bar_gr,
+                // on_complete - called when the page_transition completes (X number of seconds in the future)
+                function() {
+
+                    // IMPORTANT!! - change the value of the global variable "current_page" (update it)
+                    //               to point to the new page name.
+                    current_page = target_page_name;
+
+                });
+
+            //-----------------------------
+
+            development_clicked = true;
+            nav_bar__reset(bar_gr)
+
+    
+        }
+        // DEVELOPMENT DEACTIVATED
+        else {
+        
+            development_clicked = false;
+        }
+    })
 
     //--------------------------NEVENA----------------------------------
     var nevena_gr                = buttons_gr.nested();
@@ -531,6 +640,47 @@ function buttons(parent_gr, screen_height, screen_width_in_px){
             'y': 0  
         })
 
+    //////////////////////////////////////--PAGE TRANSITION ON BUTTON CLICKED--////////////////////////////////////////////
+    nevena_clicked = false;
+
+    nevena_gr.click(function() {
+    
+        // NEVENA CLICKED
+        if (nevena_clicked == false) {
+            
+
+            //-----------------------------
+            // RUN_PAGE_TRANSITION
+            var target_page_name = "about";
+            run_page_transition(target_page_name, "1_plane_scale", current_page, bar_gr,
+                // on_complete - called when the page_transition completes (X number of seconds in the future)
+                function() {
+
+                    // IMPORTANT!! - change the value of the global variable "current_page" (update it)
+                    //               to point to the new page name.
+                    current_page = target_page_name;
+
+                });
+
+            //-----------------------------
+            
+
+            console.log("open new window...")
+            // window.open("about_desktop.html")
+            nevena_clicked = true;
+    
+            nav_bar__reset(bar_gr)
+
+        }
+        // NEVENA DEACTIVATED
+        else {
+    
+            //animate_hashtag__deactivate(hashtag_info, contact_height, screen_width_in_px);
+    
+            nevena_clicked = false;
+        }
+    })
+    ////////////////////////////////////////////////////////////////////////////////////
     var nevena_title = nevena_gr.text(function(text_element){
         text_element.tspan('nevena')
     })
@@ -586,6 +736,41 @@ function buttons(parent_gr, screen_height, screen_width_in_px){
         id: "moodboard_gr",
         "x": mooodboard_x-moodboard_width-moodboard_rect.bbox().width/2,
         "y": moodboard_base_image.y()+moodboard_height-moodboard_rect.bbox().height
+    })
+
+    //////////////////////////////////////--PAGE TRANSITION ON BUTTON CLICKED--////////////////////////////////////////////
+    moodboard_clicked = false;
+
+    moodboard_gr.click(function() {
+    
+        // MOODBOARD CLICKED
+        if (moodboard_clicked == false) {
+
+            //-----------------------------
+            // RUN_PAGE_TRANSITION
+            var target_page_name = "moodboard";
+            run_page_transition(target_page_name, "2_plane_swipe_up_and_down", current_page, bar_gr,
+                // on_complete - called when the page_transition completes (X number of seconds in the future)
+                function() {
+
+                    // IMPORTANT!! - change the value of the global variable "current_page" (update it)
+                    //               to point to the new page name.
+                    current_page = target_page_name;
+
+                });
+
+            //-----------------------------
+
+            moodboard_clicked = true;
+
+            nav_bar__reset(bar_gr)
+    
+        }
+        // MOODBOARD DEACTIVATED
+        else {
+        
+            moodboard_clicked = false;
+        }
     })
 }
 
