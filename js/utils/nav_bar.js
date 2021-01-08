@@ -32,7 +32,7 @@ function nav_bar__create(screen_width) {
     // BACKGROUND
     bar_gr.rect(bar_width_int, bar_height_int)
         .fill('#1c5e6d')
-        .attr({opacity: 1.0})
+        .attr({opacity: 0.0})
 
 
 

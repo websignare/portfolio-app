@@ -1,17 +1,18 @@
 //-------------------------------WEB DESIGN----------------------------------------------------------------
 function web_design(parent_gr, screen_width_in_px, screen_height){
-    var layout_gr = parent_gr.nested() 
+    var web_design_layout_gr = parent_gr.nested() 
         .attr({
-            id: 'layout_gr'
+            id: 'web_design_layout_gr'
         })  
+        console.log(web_design_layout_gr,"weeeeeeeeeeeeeeb___________Design")
 
-    var background_rect = layout_gr.rect(screen_width_in_px,screen_height)
+    var background_rect = web_design_layout_gr.rect(screen_width_in_px,screen_height)
         .fill('#f08e94ff')
         .attr({
             id:      "pink",
             opacity: 1.0,
         })
-    var yellow_rect_shadow = layout_gr.rect(500,500)
+    var yellow_rect_shadow = web_design_layout_gr.rect(500,500)
         .fill("#c1656bff")
         .attr({
             id:      "yellow_rect_shadow",
@@ -19,7 +20,7 @@ function web_design(parent_gr, screen_width_in_px, screen_height){
             x:     -210,
             y:     -210
         })
-    var yellow_rect_gr = layout_gr.nested() 
+    var yellow_rect_gr = web_design_layout_gr.nested() 
         .attr({
             id: "yellow_rect_gr"
         })
@@ -52,7 +53,7 @@ function web_design(parent_gr, screen_width_in_px, screen_height){
         height: yellow_rect.bbox().height
     })
 
-    var design = layout_gr.text(function(text_element){
+    var design = web_design_layout_gr.text(function(text_element){
         text_element.tspan('Design')
     })
     .font({
@@ -68,7 +69,7 @@ function web_design(parent_gr, screen_width_in_px, screen_height){
         y:  yellow_rect.bbox().height+web.bbox().height/2+5
     })
 
-    var paragraph = layout_gr.text(function(add) {
+    var paragraph = web_design_layout_gr.text(function(add) {
         add.tspan('Lorem ipsum dolor sit amet ').newLine()
         add.tspan('consectetur')//.fill('#f06')
         add.tspan('.')
@@ -90,7 +91,7 @@ function web_design(parent_gr, screen_width_in_px, screen_height){
         y:  screen_height/2+paragraph.bbox().height
     })
 
-    apply_filter(layout_gr, "yellow_rect_shadow_filter", "yellow_rect_shadow")
+    apply_filter(web_design_layout_gr, "yellow_rect_shadow_filter", "yellow_rect_shadow")
 
     var web_design_info = {
         "yellow_rect_shadow": yellow_rect_shadow,

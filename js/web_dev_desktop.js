@@ -51,8 +51,8 @@ function web_development__deactivate() {
 
 function web_development__create_responsive(bar_gr) {
 
-    var screen_width_in_px  = window.innerWidth;
-    var screen_height       = window.innerHeight;
+    var screen_width_in_px = window.innerWidth;
+    var screen_height      = window.innerHeight;
 
     //-------STYLE-------
     $("#web_development #wrapper").css({                    
@@ -83,13 +83,13 @@ function web_development__create_responsive(bar_gr) {
     }); 
 
     $("#web_development #technologies").css({                    
-        "background-color": '#005767d7',
+        "background-color": '#012a31ff',
         "position":         "relative",
         "width":            screen_width_in_px
     });
 
     $("#web_development #video__info").css({                    
-        "background-color": '#073f48ff',
+        "background-color": '#012a31ff',
         "position":         "relative",
         "height":           screen_height,
         "width":            screen_width_in_px
@@ -119,9 +119,9 @@ function web_development__create_responsive(bar_gr) {
     if (screen_physical_width_cm < 20.5) {
         // MOBILE
         //intro(container_gr, screen_width_in_px, screen_height)
-        nevena(container_gr, screen_width_in_px, screen_height)
+        //nevena(container_gr, screen_width_in_px, screen_height)
         //web_design(container_gr, screen_width_in_px, screen_height)
-        //web_development(container_gr, screen_width_in_px, screen_height)
+        web_development(container_gr, screen_width_in_px, screen_height)
         //animation(container_gr, screen_width_in_px, screen_height)
         //contact(container_gr, screen_width_in_px, screen_height)
     }
@@ -580,7 +580,7 @@ function web_development__headline__info(parent_gr, screen_width_in_px, screen_h
     var headline_gr = parent_gr.nested()
  
     var yellow_rect = headline_gr.rect(screen_width_in_px/2-350,100)
-    .fill('#f4976c')
+    .fill('#268c91ff')
     .attr({
         id:      "yellow_rect",
         opacity: 1.0,
@@ -594,7 +594,7 @@ function web_development__headline__info(parent_gr, screen_width_in_px, screen_h
          .font({
              opacity: 1.0,
              weight:  700,
-             fill:    '#268c91ff',
+             fill:    '#f09430ff',
              family:  'Quicksand',
              size:    50
          })    
@@ -610,7 +610,7 @@ function web_development__headline__info(parent_gr, screen_width_in_px, screen_h
          .font({
              opacity: 1.0,
              weight:  700,
-             fill:    '#268c91ff',
+             fill:    '#f09430ff',
              family:  'Quicksand',
              size:    135
          })    

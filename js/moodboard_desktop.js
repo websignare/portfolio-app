@@ -69,7 +69,7 @@ function moodboard__create_responsive(bar_gr) {
     if (screen_physical_width_cm < 20.5) {
         // MOBILE
         //intro(container_gr, screen_width_in_px, screen_height)
-        nevena(container_gr, screen_width_in_px, screen_height)
+        //nevena(container_gr, screen_width_in_px, screen_height)
         //web_design(container_gr, screen_width_in_px, screen_height)
         //web_development(container_gr, screen_width_in_px, screen_height)
         //animation(container_gr, screen_width_in_px, screen_height)

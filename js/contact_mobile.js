@@ -1,20 +1,47 @@
 //-----------------------------------CONTACT---------------------------------------------------------------
-function contact(parent_gr, screen_width_in_px, screen_height){
+function create_mobile_contact_section(screen_width_in_px,screen_height){
+    $("body").append(`
+        <div id="contact_mobile_wrapper">
+        </div>
+    `);
+
+    var contact__bounding_rect = $("#contact_mobile_wrapper").get(0).getBoundingClientRect()
+    var contact__div_top_y  = contact__bounding_rect.top;
+    console.log(contact__bounding_rect.top, contact__bounding_rect.right, contact__bounding_rect.bottom, contact__bounding_rect.left);
     
-    var layout_gr = parent_gr.nested() 
+    var contact_height = screen_height;
+    
+    $("#contact_mobile_wrapper").css({                    
+        "background-color": '#fb836bff',
+        "position":         "relative",
+        "height":           contact_height,
+        "width":            screen_width_in_px
+    }); 
+
+    var contact_canvas = SVG().addTo("#contact_mobile_wrapper").size(screen_width_in_px, contact_height)
+    var contact_gr     = contact_canvas.nested()   
+
+    contact_mobile(contact_gr, screen_width_in_px, contact_height, screen_height, contact__div_top_y)
+    
+    return contact_gr;
+}
+
+function contact_mobile(contact_gr, screen_width_in_px, contact_height, screen_height, contact__div_top_y){
+    
+    var contact_layout_gr__mobile = contact_gr.nested() 
     .attr({
-        id: 'layout_gr'
+        id: 'contact_layout_gr__mobile'
     })  
 
-    var background_rect = layout_gr.rect(screen_width_in_px,screen_height)
-        .fill('#ffa86dff')
+    var background_mobile_rect = contact_layout_gr__mobile.rect(screen_width_in_px,screen_height)
+        .fill('#fb836bff')
         .attr({
-            id:      "orange",
+            id:      "background_mobile_rect",
             opacity: 1.0,
         })
 
     //-------------------------QUESTION--------------------------
-    var question_shadow_gr = layout_gr.nested()
+    var question_shadow_gr = contact_layout_gr__mobile.nested()
     var question_shadow = question_shadow_gr.rect(280,50)
         .fill('#ce7f4aff')
     question_shadow_gr.attr({
@@ -26,13 +53,13 @@ function contact(parent_gr, screen_width_in_px, screen_height){
         y:       screen_height/6-question_shadow.bbox().height/2-25
     })
 
-    var question_gr = layout_gr.nested() 
+    var question_gr = contact_layout_gr__mobile.nested() 
         .attr({
             id: "question_gr"
         })
 
     var question_rect = question_gr.rect(250,50)
-        .fill('#fb836bff')
+        .fill('#bf5b5bff')
     question_rect.attr({
         id:      "question_rect",
         opacity: 1.0
@@ -45,7 +72,7 @@ function contact(parent_gr, screen_width_in_px, screen_height){
             opacity: 1.0,
             weight:  600,
             fill:    '#fff',
-            family:  'Spartan',
+            family:  'Quicksand',
             size:    14
         })
     question.attr({
@@ -62,7 +89,7 @@ function contact(parent_gr, screen_width_in_px, screen_height){
     })
 
     //-------------------------HASHTAG--------------------------
-    var hashtag = layout_gr.path("m -1246.5718,425.59012 0.3383,-2.81745 h -1.2753 v -1.36644 h 1.451 l 0.2603,-2.07567 h -1.7113 v -1.35992 h 1.8805 l 0.3448,-2.81746 h 1.3665 l -0.3644,2.81746 h 2.3229 l 0.3514,-2.81746 h 1.3599 l -0.3579,2.81746 h 1.3014 v 1.35992 h -1.4575 l -0.2733,2.07567 h 1.7308 v 1.36644 h -1.9 l -0.3384,2.81745 h -1.3534 l 0.3449,-2.81745 h -2.3229 l -0.3384,2.81745 z m 1.8674,-4.18389 h 2.3165 l 0.2732,-2.07567 h -2.3229 z")
+    var hashtag = contact_layout_gr__mobile.path("m -1246.5718,425.59012 0.3383,-2.81745 h -1.2753 v -1.36644 h 1.451 l 0.2603,-2.07567 h -1.7113 v -1.35992 h 1.8805 l 0.3448,-2.81746 h 1.3665 l -0.3644,2.81746 h 2.3229 l 0.3514,-2.81746 h 1.3599 l -0.3579,2.81746 h 1.3014 v 1.35992 h -1.4575 l -0.2733,2.07567 h 1.7308 v 1.36644 h -1.9 l -0.3384,2.81745 h -1.3534 l 0.3449,-2.81745 h -2.3229 l -0.3384,2.81745 z m 1.8674,-4.18389 h 2.3165 l 0.2732,-2.07567 h -2.3229 z")
 
     hashtag.fill('#fff').move(screen_width_in_px-question_rect.bbox().width-hashtag.bbox().width-40, screen_height/6-question_rect.bbox().height/2-5)
     hashtag.scale(5)
@@ -90,7 +117,7 @@ function contact(parent_gr, screen_width_in_px, screen_height){
     })
 
     //-------------------------SUBMISSION FORM--------------------------
-    var submission_form_shadow_gr = layout_gr.nested()
+    var submission_form_shadow_gr = contact_layout_gr__mobile.nested()
 
     var submission_form_shadow = submission_form_shadow_gr.rect(330,360)
         .fill('#ce7f4aff')
@@ -104,7 +131,7 @@ function contact(parent_gr, screen_width_in_px, screen_height){
         y:       screen_height/2-90
     })
 
-    var submission_form_gr = layout_gr.nested()
+    var submission_form_gr = contact_layout_gr__mobile.nested()
         .attr({ id: "submission_form_gr"})
 
 //--------------------------------------------------------------
@@ -127,7 +154,7 @@ function contact(parent_gr, screen_width_in_px, screen_height){
         opacity: 0.8,
         weight:  400,
         fill:    '#fff',
-        family:  'Spartan',
+        family:  'Quicksand',
         size:    14
     })
     from_text.attr({
@@ -155,7 +182,7 @@ function contact(parent_gr, screen_width_in_px, screen_height){
         opacity: 0.8,
         weight:  400,
         fill:    '#fff',
-        family:  'Spartan',
+        family:  'Quicksand',
         size:    14
     })
    subject_text.attr({
@@ -183,7 +210,7 @@ function contact(parent_gr, screen_width_in_px, screen_height){
         opacity: 0.8,
         weight:  400,
         fill:    '#fff',
-        family:  'Spartan',
+        family:  'Quicksand',
         size:    14
     })
     message_text.attr({
@@ -197,7 +224,7 @@ function contact(parent_gr, screen_width_in_px, screen_height){
         .attr({ id: "submit_gr"})
 
     var submit_rect = submit_gr.rect(100,40)
-        .fill('#fb836bff')
+        .fill('#bf5b5bff')
     submit_rect.attr({
         id:      "submit_rect",
         opacity: 1.0,
@@ -212,7 +239,7 @@ function contact(parent_gr, screen_width_in_px, screen_height){
         opacity: 1.0,
         weight:  600,
         fill:    '#fff',
-        family:  'Spartan',
+        family:  'Quicksand',
         size:    14
     })
     submit_text.attr({
@@ -258,7 +285,7 @@ function contact(parent_gr, screen_width_in_px, screen_height){
     })
 
     //-------------------------PARAGRAPH--------------------------
-    var paragraph = layout_gr.text(function(add) {
+    var paragraph = contact_layout_gr__mobile.text(function(add) {
         add.tspan('Pop me an a e-mail').newLine().dx(20)
         add.tspan(' at').font({weight: 400})
         add.tspan('nevena_create@gmail.com').newLine()
@@ -267,7 +294,7 @@ function contact(parent_gr, screen_width_in_px, screen_height){
         opacity: 1.0,
         weight:  600,
         fill:    '#fff',
-        family:  'Spartan',
+        family:  'Quicksand',
         size:    15
     })
     paragraph.attr({
@@ -335,7 +362,7 @@ function contact(parent_gr, screen_width_in_px, screen_height){
         height:     message_global_height
     })
 
-    apply_filter(layout_gr, "apply_shadow_filter", "apply_shadow")
+    apply_filter(contact_layout_gr__mobile, "apply_shadow_filter", "apply_shadow")
 
     var contact_info = {
         "question_shadow_gr": question_shadow_gr,
@@ -383,7 +410,7 @@ function animate_submit__activate(submit_info) {
         submit_text.animate({
                 duration: 200
             })
-        submit_text.attr({fill: "#fb836bff"})
+        submit_text.attr({fill: "#bf5b5bff"})
             .attr({
                 x: submit_rect.bbox().width/2-submit_text.bbox().width/2,
                 y: 337
@@ -396,7 +423,7 @@ function animate_submit__deactivate(submit_info) {
     var submit_text = submit_info["submit_text"];
     var submit_rect = submit_info["submit_rect"];
 
-    submit_rect.fill("#fb836bff")
+    submit_rect.fill("#bf5b5bff")
     submit_text.text('SUBMIT')
     submit_text.animate({
         duration: 200,

@@ -146,7 +146,7 @@ function about__create_responsive(bar_gr) {
     if (screen_physical_width_cm < 20.5) {
         // MOBILE
         //intro(main_canvas__gr, screen_width_in_px, screen_height)
-        nevena(main_canvas__gr, screen_width_in_px, screen_height)
+        //nevena(main_canvas__gr, screen_width_in_px, screen_height)
         //web_design(main_canvas__gr, screen_width_in_px, screen_height)
         //web_development(main_canvas__gr, screen_width_in_px, screen_height)
         //animation(main_canvas__gr, screen_width_in_px, screen_height)
@@ -182,8 +182,6 @@ function about__create_responsive(bar_gr) {
         about_video__info(video_canvas__gr, screen_width_in_px, screen_height)
 
         create_contact_section(screen_width_in_px,screen_height)
-
-
 
         // HEADLINE__SCROLL_TRIGGER
         /*var trigger_y_position__headline_canvas = headline__div_bottom_y;

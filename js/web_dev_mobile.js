@@ -1,18 +1,18 @@
 
 //-------------------------------WEB DEVELOPMENT----------------------------------------------------------------
 function web_development(parent_gr, screen_width_in_px, screen_height){
-    var layout_gr = parent_gr.nested() 
+    var dev_layout_gr = parent_gr.nested() 
         .attr({
-            id: 'layout_gr'
+            id: 'dev_layout_gr'
         })  
 
-    var background_rect = layout_gr.rect(screen_width_in_px,screen_height)
+    var background_rect = dev_layout_gr.rect(screen_width_in_px,screen_height)
         .fill('#c3c599ff')
         .attr({
             id:      "pink",
             opacity: 1.0,
         })
-    var green_rect_shadow = layout_gr.rect(350,350)
+    var green_rect_shadow = dev_layout_gr.rect(350,350)
         .fill("#999b6fff")
     green_rect_shadow.attr({
             id:      "green_rect_shadow",
@@ -21,11 +21,11 @@ function web_development(parent_gr, screen_width_in_px, screen_height){
             y:  screen_height/2-50
         })
 
-    var green_rect_gr = layout_gr.nested() 
+    var green_rect_gr = dev_layout_gr.nested() 
         .attr({
             id: "green_rect_gr"
         })
-        var green_rect_gr = layout_gr.nested() 
+        var green_rect_gr = dev_layout_gr.nested() 
             .attr({
                 id: "green_rect_gr"
             })
@@ -60,7 +60,7 @@ function web_development(parent_gr, screen_width_in_px, screen_height){
         y:      screen_height/2
     })
 
-    var development = layout_gr.text(function(text_element){
+    var development = dev_layout_gr.text(function(text_element){
         text_element.tspan('Development')
     })
     .font({
@@ -76,7 +76,7 @@ function web_development(parent_gr, screen_width_in_px, screen_height){
         y:  screen_height/2+green_rect.bbox().height+development.bbox().height
     })
 
-    var paragraph = layout_gr.text(function(add) {
+    var paragraph = dev_layout_gr.text(function(add) {
         add.tspan('Lorem ipsum dolor sit amet ').newLine()
         add.tspan('consectetur')//.fill('#f06')
         add.tspan('.')
@@ -104,7 +104,7 @@ function web_development(parent_gr, screen_width_in_px, screen_height){
         x:  (screen_width_in_px-paragraph.bbox().width)/2,
         y:  screen_height/2-paragraph.bbox().height-paragraph.bbox().height/2
     })
-    apply_filter(layout_gr, "green_rect_shadow_filter", "green_rect_shadow")
+    apply_filter(dev_layout_gr, "green_rect_shadow_filter", "green_rect_shadow")
 
     var web_dev_info = {
         "green_rect_shadow": green_rect_shadow,

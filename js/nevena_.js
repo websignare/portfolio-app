@@ -13,12 +13,6 @@ function main() {
     // NAVIGATION_BAR
     var bar_gr = nav_bar__create(screen_width_in_px);
     
-    
-
-
-
-
-
     hp__activate(bar_gr);
 
     $(window).resize(function() {
@@ -38,7 +32,6 @@ function hp__activate(bar_gr) {
     // BROWSER_BACK_BUTTON
     window.onpopstate = function(event) {
         // alert("location: " + document.location + ", state: " + JSON.stringify(event.state));
-
 
 
         var target_page_name = event.state.page;
@@ -102,7 +95,6 @@ function hp__create_responsive(bar_gr) {
     $("#hp #wrapper").css({                    
         "background-color": '#D9D9D9',
         "position":         "relative",
-        "height":           screen_height,
         "width":            screen_width_in_px
     }); 
 
@@ -114,12 +106,12 @@ function hp__create_responsive(bar_gr) {
 
     if (screen_physical_width_cm < 20.5) {
         // MOBILE
-        intro(container_gr, screen_width_in_px, screen_height)
-        nevena(container_gr, screen_width_in_px, screen_height)
-        web_design(container_gr, screen_width_in_px, screen_height)
-        web_development(container_gr, screen_width_in_px, screen_height)
-        animation(container_gr, screen_width_in_px, screen_height)
-        contact(container_gr, screen_width_in_px, screen_height)
+        //hp__mobile__activate(bar_gr)        
+        //nevena(container_gr, screen_width_in_px, screen_height)
+        //web_design(container_gr, screen_width_in_px, screen_height)
+        //web_development(container_gr, screen_width_in_px, screen_height)        
+        //animation(container_gr, screen_width_in_px, screen_height)
+        //contact(container_gr, screen_width_in_px, screen_height)
     }
     else if (screen_physical_width_cm < 33.8) { // max width for tablet 2736px, max height 2048px
 
@@ -135,7 +127,7 @@ function hp__create_responsive(bar_gr) {
     }
 
     else {
-        var home_layout_gr           = hp__create_background__desktop(container_gr, screen_width_in_px, screen_height)
+        var home_layout_gr      = hp__create_background__desktop(container_gr, screen_width_in_px, screen_height)
         var white_background_gr = home_layout_gr.find("#white_background_gr")
 
         nevena_create_text__desktop(container_gr, screen_width_in_px, screen_height)
@@ -146,7 +138,7 @@ function hp__create_responsive(bar_gr) {
 }
 
 //----------------------------------------------CREATE-LAYOUT-DESKTOP----------------------------------------------------------------
-function  hp__create_background__desktop(parent_gr, screen_width_in_px, screen_height){
+function hp__create_background__desktop(parent_gr, screen_width_in_px, screen_height){
 
     var home_layout_gr = parent_gr.nested().attr({id: 'home_layout_gr'})
 
@@ -300,7 +292,6 @@ function section_images__desktop(parent_gr){
 
         ]
     }
-
 
     var total_width               = images_gr_width
     var elements_number           = images_data['elements_data'].length
@@ -737,7 +728,6 @@ function buttons(parent_gr, bar_gr, screen_height, screen_width_in_px){
         "x": mooodboard_x-moodboard_width-moodboard_rect.bbox().width/2,
         "y": moodboard_base_image.y()+moodboard_height-moodboard_rect.bbox().height
     })
-
     //////////////////////////////////////--PAGE TRANSITION ON BUTTON CLICKED--////////////////////////////////////////////
     moodboard_clicked = false;
 

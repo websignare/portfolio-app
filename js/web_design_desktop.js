@@ -63,35 +63,35 @@ function web_design_create_responsive(bar_gr) {
     }); 
 
     $("#web_design #headline__info").css({                    
-        "background-color": '#467f8cf3',
+        "background-color": '#4d849079',
         "position":         "relative",
         "height":           screen_height/2,
         "width":            screen_width_in_px
     }); 
 
     $("#web_design #artist_portfolio__info").css({                    
-        "background-color": '#467f8cf3',
+        "background-color": '#4d849079',
         "position":         "relative",
         "height":           screen_height,
         "width":            screen_width_in_px
     }); 
 
     $("#web_design #suprematism__info").css({                    
-        "background-color": '#467f8cf3',
+        "background-color": '#4d849079',
         "position":         "relative",
         "height":           screen_height,
         "width":            screen_width_in_px
     }); 
 
     $("#deep_blue__info").css({                    
-        "background-color": '#467f8cf3',
+        "background-color": '#4d849079',
         "position":         "relative",
         "height":           screen_height,
         "width":            screen_width_in_px
     }); 
 
     $("#web_design #video__info").css({                    
-        "background-color": '#467f8cf3',
+        "background-color": '#4d849079',
         "position":         "relative",
         "height":           screen_height,
         "width":            screen_width_in_px
@@ -605,7 +605,7 @@ function web_design__headline__info(parent_gr, screen_width_in_px, screen_height
           .font({
               opacity: 1.0,
               weight:  700,
-              fill:    '#2a3d35ef',
+              fill:    '#3b7a87f3',
               family:  'Quicksand',
               size:    60
           })    
@@ -621,7 +621,7 @@ function web_design__headline__info(parent_gr, screen_width_in_px, screen_height
           .font({
               opacity: 1.0,
               weight:  700,
-              fill:    '#2a3d35ef',
+              fill:    '#3b7a87f3',
               family:  'Quicksand',
               size:    200
           })    
@@ -648,17 +648,17 @@ function artist_portfolio(parent_gr, screen_width_in_px, screen_height){
                     var rect_width  = 1500
 
                     var left_top_gr    = artist_portfolio__gr.nested()
-                    var left_top_rect  = left_top_gr.rect(rect_width/2,rect_height/3)
+                    var left_top_rect  = left_top_gr.rect(rect_width/2-10,rect_height/3-10)
                     .attr({
                         id:      "left_top",
-                        fill:    "#2a3d35ef",
-                        opacity: 0.0
+                        fill:    "#b5b5b5ff",
+                        opacity: 1.0
                     })
                     var left_top_text  = left_top_gr.text("Type: Portfolio")
                         left_top_text.font({
                           family: 'Quicksand',
                           size:   42,
-                          fill:   '#2a3d35ef',
+                          fill:   '#1f2d38ff',
                           anchor: 'left',
                           weight: '700',
                           leading:'1.5em'
@@ -673,7 +673,7 @@ function artist_portfolio(parent_gr, screen_width_in_px, screen_height){
                         .attr({
                             id:      "right_rect",
                             x:       rect_width/2,
-                            fill:   '#2a3d35ef',
+                            fill:   '#b5b5b5ff',
                             opacity: 0.0
                         })
                     var artist_image_url = './../portfolio-app-media/media/art_1.png'
@@ -701,26 +701,26 @@ function artist_portfolio(parent_gr, screen_width_in_px, screen_height){
                     var artist_2 = './../portfolio-app-media/media/art_2.png'
                     fit_image_inside_rect(bottom_left__gr, artist_2, rect_width/4-10, rect_height/3, rect_width/4, rect_height/3, 0, 0)
 
-                    var bottom = bottom_left__gr.rect(rect_width/2,rect_height/3)
+                    var bottom = bottom_left__gr.rect(rect_width/2-10,rect_height/3-10)
                         .attr({
-                            opacity: 0,
+                            opacity: 1.0,
                             id:  "bottom",
-                            fill:"#f2d233", 
+                            fill:"#b5b5b5ff", 
                             x:   0,
-                            y:   rect_height-rect_height/3
+                            y:   rect_height-rect_height/3+10
                     })
 
                     var paragraph = bottom_left__gr.text(function(add){
                         add.tspan('Custom made masonry galleries that are').newLine()
                         add.tspan('responsive and contain my architectural models').newLine()
-                        add.tspan('that were hand-made in my free time,').newLine()
-                        add.tspan('and there are also images of my inspiration, aspiration...').newLine()
+                        add.tspan('that were hand-made in my free time, and').newLine()
+                        add.tspan('there are also images of my inspiration, aspiration...').newLine()
                 
                     })
                         .font({
                             opacity: 1.0,
-                            weight:  400,
-                            fill:    '#2a3d35ef',
+                            weight:  600,
+                            fill:    '#1f2d38ff',
                             family:  'Quicksand',
                             size:    26
                         })    
@@ -769,65 +769,103 @@ function suprematism(parent_gr, screen_width_in_px, screen_height){
                     var rect_height = 800
                     var rect_width  = 1500
 
-                    var bottom_right__gr = parent_gr.nested()
-                    var bottom_top_left = bottom_right__gr.rect(rect_width/4,rect_height/3).fill("#d45f00")
-                        .attr({id: "bottom_top_left",
-                                x: rect_width/2,
-                                y: rect_height/3
+                    var right_middle__gr = parent_gr.nested()
+                    right_middle__gr.attr({ 
+                        x: rect_width/2,
+                        y: rect_height/3
+                    }) 
+
+                    var middle_left = right_middle__gr.rect(rect_width/4-10,rect_height/3).fill("#d45f00")
+                        .attr({
+                            id: "middle_left",
+                            x: 10,
+                            y: 0
                         })
-                    var suprematism_image_url_2 = './media/suprematism_2.png'
-                    fit_image_inside_rect(bottom_right__gr, suprematism_image_url, rect_width/4, rect_height/3, rect_height/2, rect_height/3, 0, 0)
+                    var suprematism_image_url_2 = './../portfolio-app-media/media/sup_2.png'
+                    fit_image_inside_rect(right_middle__gr, suprematism_image_url_2, rect_width/4-10, rect_height/3, 10, 0, 0, 0)
 
-                    var bottom_top_right = bottom_right__gr.rect(rect_width/4,rect_height/3).fill("#d95f40")
-                        .attr({id: "bottom_top_right",
-                            x: rect_width-rect_width/4,
-                            y: rect_height/3
+                    var middle_right = right_middle__gr.rect(rect_width/4-10,rect_height/3).fill("#000")
+                        .attr({
+                            id: "middle_right",
+                            x: rect_width/4+10,
+                            y: 0
                     })
-                    var suprematism_image_url_4 = './media/suprematism_4.png'
-                    fit_image_inside_rect(bottom_right__gr, suprematism_image_url_4, rect_width/4, rect_height/3, rect_width-rect_width/4, rect_height/3, 0, 0)
+                    var suprematism_image_url_4 = './../portfolio-app-media/media/sup_1.png'
+                    fit_image_inside_rect(right_middle__gr, suprematism_image_url_4, rect_width/4-10, rect_height/3, rect_width/4+10, 0, 0, 0)
 
-                    var bottom = bottom_right__gr.rect(rect_width/2,rect_height/3).fill("#f2d233")
+                    //////////////////////////////////////////////////////////////////
+                    var bottom__gr = parent_gr.nested()
+                    bottom__gr.attr({ 
+                        x: rect_width/2,
+                        y: rect_height-rect_height/3
+                    }) 
+
+                    var bottom = bottom__gr.rect(rect_width/2-10,rect_height/3-10).fill("#fff")
                         .attr({id: "bottom",
-                            x: rect_width/2,
-                            y: rect_height-rect_height/3
+                            x: 10,
+                            y: 10,
+                            opacity: 1.0
                     })
-                    var suprematism_image_url_0 = './media/suprematism_0.png'
-                    fit_image_inside_rect(bottom_right__gr, suprematism_image_url_0, rect_width/2, rect_height/3, rect_width/2, rect_height-rect_height/3, 0, 0)
 
-                        
-                    var right_top_gr   = parent_gr.nested()
+                    var paragraph = bottom__gr.text(function(add){
+                        add.tspan('Custom made masonry galleries that are').newLine()
+                        add.tspan('responsive and contain my architectural models').newLine()
+                        add.tspan('that were hand-made in my free time, and').newLine()
+                        add.tspan('there are also images of my inspiration, aspiration...').newLine()
+                
+                    })
+                    .font({
+                        opacity: 1.0,
+                        weight:  600,
+                        fill:    '#7a0000ff',
+                        family:  'Quicksand',
+                        size:    26
+                    })    
+                    paragraph.attr({
+                        x: bottom__gr.bbox().width/2-paragraph.bbox().width/2,
+                        y: bottom__gr.bbox().height/2-paragraph.bbox().height/2
+                    }) 
+
+                    //var suprematism_image_url_0 = './media/suprematism_0.png'
+                    //fit_image_inside_rect(bottom__gr, suprematism_image_url_0, rect_width/2, rect_height/3, 0, 0, 0, 0)
+
+                    ////////////////////////////////////////////////////////////////////////                      
+                    var right_top_gr = parent_gr.nested()
                         .attr({
                             x: rect_width/2,
                             y: 0
                         })
-                    var right_top_rect = right_top_gr.rect(rect_width/2,rect_height/3).fill("#003b2d")
+                    var right_top_rect = right_top_gr.rect(rect_width/2-10,rect_height/3-10).fill("#fff")
                     .attr({id: "right_top",
-                        x: 0,
-                        y: 0
+                        x:       10,
+                        y:       0,
+                        opacity: 1.0
                     })
                     var right_top_text = right_top_gr.text("Type: Educational")
-                        right_top_text.font({
-                          family: 'Quicksand',
-                          size:   42,
-                          fill:   '#d45f00',
-                          anchor: 'right',
-                          weight: '700',
-                          leading:'1.5em'
-                        })
-                        .attr({
-                            x: 0,
-                            y: 0
-                        })
+                    right_top_text.font({
+                        family: 'Quicksand',
+                        size:    42,
+                        fill:   '#7a0000ff',
+                        anchor: 'right',
+                        weight: '700',
+                        leading:'1.5em'
+                    })
+                    .attr({
+                        x: right_top_rect.bbox().width/2-right_top_text.bbox().width/2,
+                        y: right_top_rect.bbox().height/2-right_top_text.bbox().height
+                    })
 
+                    ////////////////////////////////////////////////////////////////////////////////////
                     var left_rect_gr = parent_gr.nested()
                     
                     var left_rect = left_rect_gr.rect(rect_width/2, rect_height)
                     .attr({
-                        fill: "#d45f00"
+                        fill:    "#d45f00",
+                        opacity: 1.0
                     })
                     
-                    var suprematism_image_url = './media/suprematism_1.png'
-                    fit_image_inside_rect(left_rect_gr, suprematism_image_url, rect_width/2, rect_height, 0, 0, 0, 0)
+                   var suprematism_image_url = './../portfolio-app-media/media/suprematism_1.png'
+                   fit_image_inside_rect(left_rect_gr, suprematism_image_url, rect_width/2, rect_height, 0, 0, 0, 0)
 
                 },    
                 "activate_fn": function(parent_gr){
@@ -837,11 +875,11 @@ function suprematism(parent_gr, screen_width_in_px, screen_height){
                 "deactivate_fn": function(parent_gr){
 
                 },     
-                "width":"1500",           
-                "height":"800",                              //shadow height
-                "color": "#204c39",
+                "width":                "1500",           
+                "height":               "800",                              //shadow height
+                "color":                "#204c39",
                 "element_number_color": "#d90f0f",
-                "element_number": "2"
+                "element_number":       "2"
             }
         ]
     }
@@ -858,47 +896,25 @@ function deep_blue(parent_gr, screen_width_in_px, screen_height){
 
         "elements_data":[ 
             {
-                //THIRD RECT
-                "name":"second",
-                "date":"tag_2",    
-                "draw_fn": function(parent_gr, screen_width_in_px){
-                    //element_number
+                //FIRST RECT
+                "name":"2019",
+                "date":"",    
+                "draw_fn": function(deep_blue__gr){
                     var rect_height = 800
                     var rect_width  = 1500
 
-                    var bottom_left__gr = parent_gr.nested()
-                    var bottom_top_left = bottom_left__gr.rect(rect_width/4,rect_height/3).fill("#d45f00")
-                        .attr({id: "bottom_top_left",
-                                x: 0,
-                                y: rect_height/3
-                        })
-                    var deep_blue_3 = './media/deep_blue_3.png'
-                    fit_image_inside_rect(bottom_left__gr, deep_blue_3, rect_width/4, rect_height/3, 0, rect_height/3, 0, 0)
-   
-                    var bottom_top_right = bottom_left__gr.rect(rect_width/4,rect_height/3).fill("#d95f40")
-                        .attr({id: "bottom_top_right",
-                            x: rect_width/4,
-                            y: rect_height/3
+                    var left_top_gr    = deep_blue__gr.nested()
+                    var left_top_rect  = left_top_gr.rect(rect_width/2-10,rect_height/3-10)
+                    .attr({
+                        id:      "left_top",
+                        fill:    "#6f907fff",
+                        opacity: 1.0
                     })
-                    var deep_blue_1 = './media/deep_blue_1.png'
-                    fit_image_inside_rect(bottom_left__gr, deep_blue_1, rect_width/4, rect_height/3, rect_width/4, rect_height/3, 0, 0)
-   
-                    var bottom = bottom_left__gr.rect(rect_width/2,rect_height/3).fill("#f2d233")
-                        .attr({id: "bottom",
-                            x: 0,
-                            y: rect_height-rect_height/3
-                    })
-
-                    var deep_blue_2 = './media/deep_blue_2.png'
-                    fit_image_inside_rect(bottom_left__gr, deep_blue_2, rect_width/2, rect_height/3, 0, rect_height-rect_height/3, 0, 0)
-   
-                    var left_top_gr    = parent_gr.nested()
-                    var left_top_rect  = left_top_gr.rect(rect_width/2,rect_height/3).fill("#003b2d").attr({id: "left_top"})
                     var left_top_text  = left_top_gr.text("Type: Small bussines")
                         left_top_text.font({
                           family: 'Quicksand',
                           size:   42,
-                          fill:   '#d45f00',
+                          fill:   '#1f2d38ff',
                           anchor: 'left',
                           weight: '700',
                           leading:'1.5em'
@@ -908,30 +924,84 @@ function deep_blue(parent_gr, screen_width_in_px, screen_height){
                             y: left_top_gr.bbox().height/2-left_top_text.bbox().height
                         })
 
-                    var right__gr   = parent_gr.nested()
-                    var right_rect  = right__gr.rect(rect_width/2,rect_height).fill("#004bed").attr({id: "right_rect"})
+                    var right__gr   = deep_blue__gr.nested()
+                    var right_rect  = right__gr.rect(rect_width/2,rect_height)
                         .attr({
-                            x: rect_width/2,
-                        })  
-                    var deep_blue_0 = './media/deep_blue_0.png'
-                    fit_image_inside_rect(right__gr, deep_blue_0, rect_width/2, rect_height, rect_width/2, 0, 0, 0)
-   
-                    
-                    },    
-                "activate_fn": function(parent_gr){
+                            id:      "right_rect",
+                            x:       rect_width/2,
+                            fill:   '#2a3d35ef',
+                            opacity: 0.0
+                        })
+                    var url__a = './../portfolio-app-media/media/deep_blue_0.png'
+                    fit_image_inside_rect(right__gr, url__a, rect_width/2, rect_height, rect_width/2, 0, 0, 0)
+    
+                    var bottom_left__gr = deep_blue__gr.nested()
+                    var bottom_top_left = bottom_left__gr.rect(rect_width/4-10,rect_height/3).fill("#d45f00")
+                        .attr({id: "bottom_top_left",
+                                x: 0,
+                                y: rect_height/3,
+                                opacity: 0.0
+                        })
+
+
+                    var url__b = './../portfolio-app-media/media/deep_blue_2.png'
+                    fit_image_inside_rect(bottom_left__gr, url__b, rect_width/4-10, rect_height/3, 0, rect_height/3, 0, 0)
+
+                    var bottom_top_right = bottom_left__gr.rect(rect_width/4-10,rect_height/3).fill("#d95f40")
+                        .attr({id: "bottom_top_right",
+                            x: rect_width/4+10,
+                            y: rect_height/3,
+                            opacity: 0.0
+                    })
+
+                    var url__c = './../portfolio-app-media/media/deep_blue_1.png'
+                    fit_image_inside_rect(bottom_left__gr, url__c, rect_width/4-10, rect_height/3, rect_width/4, rect_height/3, 0, 0)
+
+                    var bottom = bottom_left__gr.rect(rect_width/2-10,rect_height/3-10)
+                        .attr({
+                            opacity: 1.0,
+                            id:  "bottom",
+                            fill:"#6f907fff", 
+                            x:   0,
+                            y:   rect_height-rect_height/3+10
+                    })
+
+                    var paragraph = bottom_left__gr.text(function(add){
+                        add.tspan('Custom made masonry galleries that are').newLine()
+                        add.tspan('responsive and contain my architectural models').newLine()
+                        add.tspan('that were hand-made in my free time, and').newLine()
+                        add.tspan('there are also images of my inspiration, aspiration...').newLine()
                 
+                    })
+                        .font({
+                            opacity: 1.0,
+                            weight:  600,
+                            fill:    '#1f2d38ff',
+                            family:  'Quicksand',
+                            size:    26
+                        })    
+                    paragraph.attr({
+                        x: bottom.bbox().width/2-paragraph.bbox().width/2,
+                        y: rect_height-rect_height/3+50
+                    }) 
+
+                },    
+                "activate_fn": function(deep_blue__gr){
+                   
 
                 }, 
-                "deactivate_fn": function(parent_gr){
+                "deactivate_fn": function(deep_blue__gr){
 
                 },     
                 "width":"1500",           
                 "height":"800",                              //shadow height
                 "color": "#204c39",
                 "element_number_color": "#d90f0f",
-                "element_number": "2"
+                "element_number": "1"
             }
+
         ]
+
     }
 
     create_info_column(deep_blue__gr, screen_height, screen_width_in_px, 150, 100, column_info_third);
