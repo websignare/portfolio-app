@@ -29,7 +29,7 @@ function web_design__mobile__activate(bar_gr) {
         <div id="web_design__mobile">
             <div id="headline__info">
             </div>
-            <div id="artist_portfolio__info">
+            <div id="artist_portfolio__mobile__info">
             </div>
             <div id="suprematism__info">
             </div>
@@ -58,7 +58,7 @@ function web_design__mobile__create_responsive(bar_gr) {
 
     //-------STYLE-------
     $("#web_design__mobile").css({                    
-        "background-color": '#fcd8acfe',
+        "background-color": '#fcd8acd6',
         "position":         "relative",
         "width":             screen_width_in_px
     }); 
@@ -70,7 +70,7 @@ function web_design__mobile__create_responsive(bar_gr) {
         
     }); 
 
-    $("#web_design__mobile #artist_portfolio__info").css({                    
+    $("#web_design__mobile #artist_portfolio__mobile__info").css({                    
         "position":         "relative",
         "height":           screen_height,
         "width":            screen_width_in_px
@@ -98,8 +98,8 @@ function web_design__mobile__create_responsive(bar_gr) {
     var headline_container            = SVG().addTo("#web_design__mobile #headline__info").size(screen_width_in_px, screen_height)
     var mobile_headline__container_gr = headline_container.nested()
 
-    var artist_portfolio__container           = SVG().addTo("#web_design__mobile #artist_portfolio__info").size(screen_width_in_px, screen_height)
-    var mobile_artist_portfolio__container_gr = artist_portfolio__container.nested()   
+    var artist_portfolio__mobile__container           = SVG().addTo("#web_design__mobile #artist_portfolio__mobile__info").size(screen_width_in_px, screen_height)
+    var mobile_artist_portfolio__mobile__container_gr = artist_portfolio__mobile__container.nested()   
   
     var suprematism__container           = SVG().addTo("#web_design__mobile #suprematism__info").size(screen_width_in_px, screen_height)
     var mobile_suprematism__container_gr = suprematism__container.nested()   
@@ -114,10 +114,10 @@ function web_design__mobile__create_responsive(bar_gr) {
     console.log(screen_physical_width_cm, '!!!SCREEN WIDTH')
 
     web_design_mobile_headline__info(mobile_headline__container_gr, bar_gr, screen_width_in_px, screen_height)
-    /*web_design_mobile_artist_portfolio(mobile_artist_portfolio__container_gr, screen_width_in_px, screen_height)
-    web_design_mobile_suprematism(mobile_suprematism__container_gr, screen_width_in_px, screen_height)
-    web_design_mobile_deep_blue(mobile_deep_blue__container_gr, screen_width_in_px, screen_height)
-    web_design_mobile_video__section(mobile_video__container_gr, screen_width_in_px, screen_height)*/
+    artist_portfolio__mobile(mobile_artist_portfolio__mobile__container_gr, screen_width_in_px, screen_height)
+    suprematism__mobile(mobile_suprematism__container_gr, screen_width_in_px, screen_height)
+    deep_blue__mobile(mobile_deep_blue__container_gr, screen_width_in_px, screen_height)
+    web_design_video__mobile(mobile_video__container_gr, screen_width_in_px, screen_height)
 
     create_mobile_contact_section(screen_width_in_px,screen_height)
 }
@@ -157,10 +157,10 @@ function web_design_mobile_headline__info(parent_gr, bar_gr, screen_width_in_px,
         x: 32,
         y: 15
     })
-    var menu_rect         = menu_rect_gr.rect(50,50).attr({ opacity: 0.0, color: '#d4a46cff'})
-    var menu_line_top     = menu_rect_gr.line(3, 20, 40, 20).stroke({ width: 5, color: '#d4a46cff', linecap: 'round' })
-    var menu_line_midddle = menu_rect_gr.line(3, 35, 40, 35).stroke({ width: 5, color: '#d4a46cff', linecap: 'round' })
-    var menu_line_bottom  = menu_rect_gr.line(3, 50, 40, 50).stroke({ width: 5, color: '#d4a46cff', linecap: 'round' })
+    var menu_rect         = menu_rect_gr.rect(50,50).attr({ opacity: 0.0, color: '#fdc296ff'})
+    var menu_line_top     = menu_rect_gr.line(3, 20, 40, 20).stroke({ width: 5, color: '#fdc296ff', linecap: 'round' })
+    var menu_line_midddle = menu_rect_gr.line(3, 35, 40, 35).stroke({ width: 5, color: '#fdc296ff', linecap: 'round' })
+    var menu_line_bottom  = menu_rect_gr.line(3, 50, 40, 50).stroke({ width: 5, color: '#fdc296ff', linecap: 'round' })
 
 
     var menu_rect_clicked = false;
@@ -195,7 +195,7 @@ function web_design_mobile_headline__info(parent_gr, bar_gr, screen_width_in_px,
 
     var pink_rect__gr = web_design__headline__gr.nested()
     var pink_rect = pink_rect__gr.rect(105,90)
-        .fill('#4f838dff')
+        .fill('#bb364bff')
     pink_rect.attr({
         id:      "pink_rect",
         opacity: 1.0,
@@ -208,7 +208,7 @@ function web_design_mobile_headline__info(parent_gr, bar_gr, screen_width_in_px,
     web_design_me_path__gr.attr({
         id:    "web_design_me_path__gr",
     })
-    web_design_me_path.fill('#bb364bff')
+    web_design_me_path.fill('#651b40ff')
     web_design_me_path.move(pink_rect.bbox().x+pink_rect.bbox().width+85,pink_rect.bbox().y+pink_rect.bbox().height/2-10)
     web_design_me_path.scale(2.7)
     web_design_me_path.attr({id: 'web_design_me_path'})
@@ -251,7 +251,7 @@ function web_design_mobile_headline__info(parent_gr, bar_gr, screen_width_in_px,
         .font({
             opacity: 1.0,
             weight:  700,
-            fill:    '#bb364bff',
+            fill:    '#5c4062ff',
             family:  'Quicksand',
             size:    20,
         }) 
@@ -288,5 +288,379 @@ function web_design_mobile_headline__info(parent_gr, bar_gr, screen_width_in_px,
         x: rect_width/2-paragraph__d.bbox().width/2,
         y: 90
     }) 
+
+}
+
+function artist_portfolio__mobile(parent_gr, screen_width_in_px, screen_height){
+    var artist_portfolio__mobile__gr = parent_gr.nested().attr({id: 'artist_portfolio__mobile__gr'})
+    var column_info_first = {
+
+        "title": "elements",
+
+        "elements_data":[ 
+            {
+                //FIRST RECT
+
+                "draw_fn": function(artist_portfolio__mobile__gr){
+                    var rect_height = screen_height/1.1
+                    var rect_width  = screen_width_in_px
+
+                    var top_gr    = artist_portfolio__mobile__gr.nested()
+                    var top_rect  = top_gr.rect(rect_width,rect_height/6)
+                    .attr({
+                        id:      "top",
+                        fill:    "#fff",
+                        opacity: 0.6
+                    })
+                    var left_top_text  = top_gr.text(function(add){
+                        add.tspan("type: Portfolio").newLine().dx("20")
+                        add.tspan('link: www.artist_portfolio.com').newLine().dx("20")
+                    })
+                        left_top_text.font({
+                          family: 'Quicksand',
+                          size:   18,
+                          fill:   '#1f2d38ff',
+                          anchor: 'left',
+                          weight: '700',
+                          leading:'1.5em'
+                        })
+                        .attr({
+                            x: top_gr.bbox().width/2-left_top_text.bbox().width/2,
+                            y: top_gr.bbox().height/2-left_top_text.bbox().height/2-10
+                        })
+
+                    var middle__gr   = artist_portfolio__mobile__gr.nested()
+                    var middle_rect  = middle__gr.rect(rect_width/2,rect_height/1.63)
+                        .attr({
+                            id:      "middle_rect",
+                            x:       0,
+                            fill:   '#fff',
+                            opacity: 0.0
+                        })
+                    var artist_image_url = './../portfolio-app-media/media/art_1.png'
+                    fit_image_inside_rect(middle__gr, artist_image_url, screen_width_in_px, rect_height/1.63, 0, rect_height/6, 0, 0)
+    
+                    //paragraph on bottom
+                    var bottom__gr = artist_portfolio__mobile__gr.nested()
+
+                    var bottom = bottom__gr.rect(rect_width,rect_height/4.5)
+                        .attr({
+                            opacity: 0.6,
+                            id:      "bottom",
+                            fill:    "#fff", 
+                            x:       0,
+                            y:       rect_height-rect_height/4.5
+                    })
+
+                    var paragraph = bottom__gr.text(function(add){
+                        add.tspan('Custom made masonry galleries that are').newLine().dx("20")
+                        add.tspan('responsive and contain my architectural ').newLine().dx("20")
+                        add.tspan('models that were hand-made in my free time,').newLine()
+                        add.tspan('and there are also images of my inspiration, ').newLine()
+                        add.tspan('aspiration...').newLine().dx("120")
+                
+                    })
+                        .font({
+                            opacity: 1.0,
+                            weight:  500,
+                            fill:    '#1f2d38ff',
+                            family:  'Quicksand',
+                            size:    16
+                        })    
+                    paragraph.attr({
+                        x: bottom.bbox().width/2-paragraph.bbox().width/2,
+                        y: rect_height-rect_height/4.5+5
+                    }) 
+
+                },    
+                "activate_fn": function(artist_portfolio__mobile__gr){
+                   
+
+                }, 
+                "deactivate_fn": function(artist_portfolio__mobile__gr){
+
+                },     
+                "width": screen_width_in_px,           
+                "height":screen_height/1.1,                              //shadow height
+                "color": "#204c39",
+                "element_number_color": "#651b40ff",
+                "element_number": "1"
+            }
+
+        ]
+
+    }
+    
+    create_info_column__mobile(artist_portfolio__mobile__gr, screen_height, screen_width_in_px, 0, 70, column_info_first);
+
+}
+
+
+function suprematism__mobile(parent_gr, screen_width_in_px, screen_height){
+    var suprematism__gr = parent_gr.nested().attr({id: 'suprematism__gr'})
+
+    var column_info_second = {
+
+        "title": "elements",
+
+        "elements_data":[ 
+            {
+                //FIRST RECT
+                "draw_fn": function(suprematism__gr){
+                    var rect_height = screen_height/1.1
+                    var rect_width  = screen_width_in_px
+
+                    var top_gr   = suprematism__gr.nested()
+                    var top_rect = top_gr.rect(rect_width,rect_height/6)
+                    .attr({
+                        id:      "top",
+                        fill:    "#fff",
+                        opacity: 1.0
+                    })
+                    var left_top_text  = top_gr.text(function(add){
+                        add.tspan("type: Suprematism").newLine().dx("15")
+                        add.tspan('link:').dx("15").newLine()
+                        add.tspan('www.suprematism.com').dx("15")
+                    })
+                        left_top_text.font({
+                          family: 'Quicksand',
+                          size:   18,
+                          fill:   '#033692ff',
+                          anchor: 'left',
+                          weight: '700',
+                          leading:'1.5em'
+                        })
+                        .attr({
+                            x: top_gr.bbox().width/2-left_top_text.bbox().width/2,
+                            y: top_gr.bbox().height/2-left_top_text.bbox().height/2-10
+                        })
+
+                    var middle__gr   = suprematism__gr.nested()
+                    var middle_rect  = middle__gr.rect(rect_width,rect_height/1.63)
+                        .attr({
+                            id:      "middle_rect",
+                            x:       0,
+                            fill:   '#b5b5b5ff',
+                            opacity: 0.0
+                        })
+                    var suprematism_image = './../portfolio-app-media/media/sup_3.png'
+                    fit_image_inside_rect(middle__gr, suprematism_image, screen_width_in_px, rect_height/1.63, 0, rect_height/6, 0, 0)
+
+                    //paragraph on bottom
+                    var bottom__gr = suprematism__gr.nested()
+
+                    var bottom = bottom__gr.rect(rect_width,rect_height/4.5)
+                        .attr({
+                            opacity: 1.0,
+                            id:      "bottom",
+                            fill:    "#fff", 
+                            x:       0,
+                            y:       rect_height-rect_height/4.5
+                    })
+
+                    var paragraph = bottom__gr.text(function(add){
+                        add.tspan('Custom made masonry galleries that are').newLine().dx("20")
+                        add.tspan('responsive and contain my architectural ').newLine().dx("20")
+                        add.tspan('models that were hand-made in my free time,').newLine()
+                        add.tspan('and there are also images of my inspiration, ').newLine()
+                        add.tspan('aspiration...').newLine().dx("120")
+                
+                    })
+                        .font({
+                            opacity: 1.0,
+                            weight:  500,
+                            fill:    '#931415ff',
+                            family:  'Quicksand',
+                            size:    16
+                        })    
+                    paragraph.attr({
+                        x: bottom.bbox().width/2-paragraph.bbox().width/2,
+                        y: rect_height-rect_height/4.5+5
+                    }) 
+
+                },    
+                "activate_fn": function(suprematism__gr){
+                   
+
+                }, 
+                "deactivate_fn": function(suprematism__gr){
+
+                },     
+                "width":                screen_width_in_px,           
+                "height":               screen_height/1.1,
+                "color":                "#204c39",
+                "element_number_color": "#651b40ff",
+                "element_number":       "2"
+            }
+
+        ]
+
+    }
+
+    create_info_column__mobile(suprematism__gr, screen_height, screen_width_in_px, 0, 70, column_info_second);
+}
+
+function deep_blue__mobile(parent_gr, screen_width_in_px, screen_height){
+    var deep_blue__gr = parent_gr.nested().attr({id: 'deep_blue__gr'})
+    
+    var column_info_deep_blue = {
+
+        "title": "elements",
+
+        "elements_data":[ 
+            {
+                //FIRST RECT
+ 
+                "draw_fn": function(deep_blue__gr){
+                    var rect_height = screen_height/1.1
+                    var rect_width  = screen_width_in_px
+
+                    var top_gr   = deep_blue__gr.nested()
+                    var top_rect = top_gr.rect(rect_width,rect_height/6)
+                    .attr({
+                        id:      "top",
+                        fill:    "#fff",
+                        opacity: 0.6
+                    })
+                    var left_top_text  = top_gr.text(function(add){
+                        add.tspan("type: Deep Blue").newLine().dx("15")
+                        add.tspan('link:').dx("15").newLine()
+                        add.tspan('www.deep_blue.com').dx("15")
+                    })
+                        left_top_text.font({
+                          family: 'Quicksand',
+                          size:   18,
+                          fill:   '#45655bff',
+                          anchor: 'left',
+                          weight: '700',
+                          leading:'1.5em'
+                        })
+                        .attr({
+                            x: top_gr.bbox().width/2-left_top_text.bbox().width/2,
+                            y: top_gr.bbox().height/2-left_top_text.bbox().height/2-10
+                        })
+
+                    var middle__gr   = deep_blue__gr.nested()
+                    var middle_rect  = middle__gr.rect(rect_width,rect_height/1.63)
+                        .attr({
+                            id:      "middle_rect",
+                            x:       0,
+                            fill:   '#b5b5b5ff',
+                            opacity: 0.0
+                        })
+                    var deep_blue_img = './../portfolio-app-media/media/deep_blue_0.png'
+                    fit_image_inside_rect(middle__gr, deep_blue_img, screen_width_in_px, rect_height/1.63, 0, rect_height/6, 0, 0)
+        
+                    //paragraph on bottom
+                    var bottom__gr = deep_blue__gr.nested()
+
+                    var bottom = bottom__gr.rect(rect_width,rect_height/4.5)
+                        .attr({
+                            opacity: 0.6,
+                            id:      "bottom",
+                            fill:    "#fff", 
+                            x:       0,
+                            y:       rect_height-rect_height/4.5
+                    })
+
+                    var paragraph = bottom__gr.text(function(add){
+                        add.tspan('Custom made masonry galleries that are').newLine().dx("20")
+                        add.tspan('responsive and contain my architectural ').newLine().dx("20")
+                        add.tspan('models that were hand-made in my free time,').newLine()
+                        add.tspan('and there are also images of my inspiration, ').newLine()
+                        add.tspan('aspiration...').newLine().dx("120")
+                
+                    })
+                        .font({
+                            opacity: 1.0,
+                            weight:  500,
+                            fill:    '#042b27ff',
+                            family:  'Quicksand',
+                            size:    16
+                        })    
+                    paragraph.attr({
+                        x: bottom.bbox().width/2-paragraph.bbox().width/2,
+                        y: rect_height-rect_height/4.5+5
+                    }) 
+
+                },    
+                "activate_fn": function(deep_blue__gr){
+                }, 
+                "deactivate_fn": function(deep_blue__gr){
+
+                },     
+                "width":                screen_width_in_px,           
+                "height":               screen_height/1.1,
+                "color":                "#204c39",
+                "element_number_color": "#651b40ff",
+                "element_number":       "3"
+            }
+
+        ]
+
+    }
+    
+    create_info_column__mobile(deep_blue__gr, screen_height, screen_width_in_px, 0, 70, column_info_deep_blue);
+}
+
+function web_design_video__mobile(parent_gr, screen_width_in_px, screen_height){
+
+    var video_gr = parent_gr.nested()
+    .attr({
+        height: screen_height
+    })
+
+    var video_global_height = 200
+    var video_gr_y = video_gr.bbox().y;
+
+    var video_global_x = video_gr.x()
+    var video_global_y = video_gr_y
+
+    $("#web_design__mobile #video__info").append(`
+        <div id="video_mobile__container">
+            <video width="320" height="240" id='video__a' autoplay loop muted>
+                <source src='./../portfolio-app-media/media/web_design_mobile_top.mp4' type='video/mp4'>
+            </video>
+            <video width="320" height="240" id='video__b' autoplay loop muted>
+                <source src='./../portfolio-app-media/media/web_design_mobile_middle.mp4' type='video/mp4'>
+            </video>
+            <video width="320" height="240" id='video__c' autoplay loop muted>
+                <source src='./../portfolio-app-media/media/web_design_mobile_bottom.mp4' type='video/mp4'>
+            </video>
+        </div>`);
+
+    $("#web_design__mobile #video__info").find("#video_mobile__container").css({
+        opacity: 0.4
+    });
+
+    $("#web_design__mobile #video__info").find("#video__a").css({
+        position:   "absolute",
+        background: "none",
+        border:     "none",
+        left:       video_global_x,
+        top:        video_global_y+50,
+        width:      screen_width_in_px,
+        height:     video_global_height
+    })
+
+    $("#web_design__mobile #video__info").find("#video__b").css({
+        position:   "absolute",
+        background: "none",
+        border:     "none",
+        left:       video_global_x,
+        top:        video_global_y+200,
+        width:      screen_width_in_px,
+        height:     video_global_height
+    })
+
+    $("#web_design__mobile #video__info").find("#video__c").css({
+        position:   "absolute",
+        background: "none",
+        border:     "none",
+        left:       video_global_x,
+        top:        video_global_y+350,
+        width:      screen_width_in_px,
+        height:     video_global_height
+    })
 
 }

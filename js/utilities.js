@@ -78,16 +78,17 @@ function apply_filter(p_parent_gr, p_filter_node_id, p_target_node_id) {
 }
 
 //------------------------------------------------------------------------------------
-function create_play_button(sketch_name, parent_gr, x, y, screen_width_in_px, screen_height){
+function create_play_button(sketch_name, parent_gr, button_size, x, y, screen_width_in_px, screen_height){
 
    var play_button_gr = parent_gr.nested()
 
-   var play_button = play_button_gr.polygon('0,0 0,300 300,150').fill('#fff').stroke({ width: 1 })
+   var play_button = play_button_gr.polygon(button_size).fill('#fff').stroke({ width: 1 })
    play_button_gr.attr({
        "opacity": 0.7,
        "x":       x,
        "y":       y
     })
+    console.log(button_size, 'dfffddfss')
 
     /*play_button.mouseover(function() {               //when hovered over button it changes color
         play_button.fill({ color: "#fff" })
@@ -105,7 +106,7 @@ function create_play_button(sketch_name, parent_gr, x, y, screen_width_in_px, sc
             play_button_clicked = true;
 
             open_sketch__p5(sketch_name, screen_width_in_px, screen_height)
-            open_sketch__svg(sketch_name, screen_width_in_px, screen_height) 
+            //open_sketch__svg(sketch_name, screen_width_in_px, screen_height) 
             $("body").css({                    
                 "overflow-y": "hidden"
             }); 
@@ -122,8 +123,16 @@ function create_play_button(sketch_name, parent_gr, x, y, screen_width_in_px, sc
 
 //------------------------------------------------------------------------------------
 function open_sketch__p5(sketch_name, screen_width_in_px, screen_height) {
+    var screen_physical_width_cm = get_physical_screen_width(screen_width_in_px);
 
-    var offset       = 200;
+    var offset;
+
+    if (screen_physical_width_cm < 20.5){
+        offset = 50
+    }else{
+        offset = 200
+    }
+
     var canvasWidth  = screen_width_in_px-2*offset
     var canvasHeight = screen_height-2*offset
     var canvas_id    = "canvas__"+sketch_name
@@ -198,12 +207,13 @@ function open_sketch__p5(sketch_name, screen_width_in_px, screen_height) {
 }
 
 
+
 //------------------------------------------------------------------------------------
-function open_sketch__svg(sketch_name, screen_width_in_px, screen_height) {
+/*function open_sketch__svg(sketch_name, screen_width_in_px, screen_height) {
 
 
 
-}
+}*/
 //------------------------------------------------------------------------------------
 function run_page_transition(target_page_name, transition_type, current_page_name, bar_gr, on_complete_fun) {
 
@@ -410,3 +420,34 @@ function run_page_transition(target_page_name, transition_type, current_page_nam
         }
         return transitions_for_pages_map[page_name]
 }*/
+
+function pulsating_circle(parent_gr, animation_time, screen_width, screen_height){
+    var circle_button_gr = parent_gr.nested()
+
+    var circle_button = circle_button_gr.ellipse(30).fill("#efd6b0ff").attr({cx: screen_width/2, cy: screen_height/2}).opacity(0.5)
+    var stroke_button = circle_button_gr.ellipse(34).attr({cx: screen_width/2, cy: screen_height/2}).fill("none").stroke({ color: '#efd6b0ff', width: 4}).opacity(0.5)
+    circle_button_gr.attr({
+        id:     "circle_button__gr",
+        width:  screen_width,
+        height: screen_height,
+        x: 0,
+        y: 0
+    })
+    var circle_button__runner = circle_button.animate({
+        duration: animation_time,
+    }).attr({
+        rx: "50",
+        ry: "50",
+        opacity: 0.0
+    })
+    circle_button__runner.loop()
+
+    var stroke_button__runner = stroke_button.animate({
+        duration: animation_time,
+    }).attr({
+        rx: "70",
+        ry: "70",
+        opacity: 0.0
+    })
+    stroke_button__runner.loop()
+}

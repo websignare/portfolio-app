@@ -671,7 +671,7 @@ function masonry(screen_width_in_px, screen_height){
     }); 
 
 
-    var masonry_container    = SVG().addTo("#food_masonry_section").size(screen_width_in_px, screen_height)
+    var masonry_container    = SVG().addTo("#food_masonry_section")
     var masonry_container_gr = masonry_container.nested()
     masonry_container_gr.attr({
         x: 100
@@ -738,7 +738,7 @@ function masonry(screen_width_in_px, screen_height){
         "width":            screen_width_in_px,
     }); 
 
-    var blog_masonry_container    = SVG().addTo("#blog_masonry_section").size(screen_width_in_px, screen_height)
+    var blog_masonry_container    = SVG().addTo("#blog_masonry_section")
     var blog_masonry_container_gr = blog_masonry_container.nested()
     blog_masonry_container_gr.attr({
         x: 100

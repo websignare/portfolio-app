@@ -23,7 +23,7 @@ function animations(parent_gr, screen_width_in_px, height, screen_height) {
         y:     50
     })
     fit_image_inside_rect(animation_a_gr, image_url_a, rect_width, rect_height, 0, 0, 0, 0)
-    create_play_button("rect_follows_cursor", animation_a_gr, animation_a_gr.bbox().width/4, animation_a_gr.bbox().height/4, screen_width_in_px, screen_height)
+    create_play_button("rect_follows_cursor", animation_a_gr, '0,0 0,300 300,150',animation_a_gr.bbox().width/4, animation_a_gr.bbox().height/4, screen_width_in_px, screen_height)
     
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -40,7 +40,7 @@ function animations(parent_gr, screen_width_in_px, height, screen_height) {
         y:     50
     })
     fit_image_inside_rect(animation_b_gr, image_url_b, rect_width, rect_height, 0, 0, 0, 0)
-    create_play_button("flying_rect", animation_b_gr, animation_b_gr.bbox().width/4, animation_b_gr.bbox().height/4, screen_width_in_px, screen_height)
+    create_play_button("flying_rect", animation_b_gr, '0,0 0,300 300,150', animation_b_gr.bbox().width/4, animation_b_gr.bbox().height/4, screen_width_in_px, screen_height)
     
 
 /////////////////////////////////////////////////////////////////////////////////////
@@ -59,7 +59,7 @@ function animations(parent_gr, screen_width_in_px, height, screen_height) {
     })
 
     fit_image_inside_rect(animation_c_gr, image_url_c, rect_width, rect_height, 0, 0, 0, 0)
-    create_play_button("three_rects_connected", animation_c_gr, animation_c_gr.bbox().width/4, animation_c_gr.bbox().height/4, screen_width_in_px, screen_height)
+    create_play_button("three_rects_connected", animation_c_gr, '0,0 0,300 300,150', animation_c_gr.bbox().width/4, animation_c_gr.bbox().height/4, screen_width_in_px, screen_height)
 /////////////////////////////////////////////////////////////////////////////////////
     var animation_d_gr = animation_gr.nested()
 
@@ -76,7 +76,7 @@ function animations(parent_gr, screen_width_in_px, height, screen_height) {
     })
 
     fit_image_inside_rect(animation_d_gr, image_url_d, rect_width, rect_height, 0, 0, 0, -5)
-    create_play_button("rect_on_x", animation_d_gr, animation_d_gr.bbox().width/4, animation_d_gr.bbox().height/4, screen_width_in_px, screen_height)
+    create_play_button("rect_on_x", animation_d_gr, '0,0 0,300 300,150', animation_d_gr.bbox().width/4, animation_d_gr.bbox().height/4, screen_width_in_px, screen_height)
 
 /////////////////////////////////////////////////////////////////////////////////////
     var animation_e_gr = animation_gr.nested()
@@ -94,7 +94,7 @@ function animations(parent_gr, screen_width_in_px, height, screen_height) {
     })
 
     fit_image_inside_rect(animation_e_gr, image_url_e, rect_width, rect_height, 0, 0, 0, 0)
-    create_play_button("points_on_edges", animation_e_gr, animation_e_gr.bbox().width/4, animation_e_gr.bbox().height/4, screen_width_in_px, screen_height)
+    create_play_button("points_on_edges", animation_e_gr, '0,0 0,300 300,150', animation_e_gr.bbox().width/4, animation_e_gr.bbox().height/4, screen_width_in_px, screen_height)
 
 /////////////////////////////////////////////////////////////////////////////////////
     var animation_f_gr = animation_gr.nested()
@@ -112,7 +112,7 @@ function animations(parent_gr, screen_width_in_px, height, screen_height) {
     })
 
     fit_image_inside_rect(animation_f_gr, image_url_f, rect_width, rect_height, 0, 0, 0, 0)
-    create_play_button("", animation_f_gr, animation_f_gr.bbox().width/4, animation_f_gr.bbox().height/4, screen_width_in_px, screen_height)
+    create_play_button("", animation_f_gr, '0,0 0,300 300,150', animation_f_gr.bbox().width/4, animation_f_gr.bbox().height/4, screen_width_in_px, screen_height)
 
 /////////////////////////////////////////////////////////////////////////////////////
     var animation_g_gr = animation_gr.nested()
@@ -130,7 +130,7 @@ function animations(parent_gr, screen_width_in_px, height, screen_height) {
     })
     
     fit_image_inside_rect(animation_g_gr, image_url_g, rect_width, rect_height, 0, 0, 0, 0)
-    create_play_button("", animation_g_gr, animation_g_gr.bbox().width/4, animation_g_gr.bbox().height/4, screen_width_in_px, screen_height)
+    create_play_button("", animation_g_gr, '0,0 0,300 300,150', animation_g_gr.bbox().width/4, animation_g_gr.bbox().height/4, screen_width_in_px, screen_height)
 
 /////////////////////////////////////////////////////////////////////////////////////
     var animation_h_gr = animation_gr.nested()
@@ -148,6 +148,6 @@ function animations(parent_gr, screen_width_in_px, height, screen_height) {
     })
 
     fit_image_inside_rect(animation_h_gr, image_url_h, rect_width, rect_height, 0, 0, 0, 0)
-    create_play_button("", animation_h_gr, animation_h_gr.bbox().width/4, animation_h_gr.bbox().height/4, screen_width_in_px, screen_height)
+    create_play_button("", animation_h_gr, '0,0 0,300 300,150', animation_h_gr.bbox().width/4, animation_h_gr.bbox().height/4, screen_width_in_px, screen_height)
 
 }

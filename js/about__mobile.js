@@ -56,7 +56,7 @@ function about__mobile__create_responsive(bar_gr) {
 
     //-------STYLE-------
     $("#about__mobile").css({                    
-        "background-color": '#516051ff',
+        "background-color": '#730202',
         "position":         "relative",
         "width":             screen_width_in_px
     }); 
@@ -90,7 +90,8 @@ function about__mobile__create_responsive(bar_gr) {
         
     }); 
 
-    $("#about__mobile #video__info").css({     
+    $("#about__mobile #video__info").css({   
+        "background-color": '#262626', 
         "position": "relative",
         "height":    screen_height,
         "width":     screen_width_in_px,
@@ -163,10 +164,10 @@ function about_intro_mobile__info(parent_gr, bar_gr, screen_width_in_px, screen_
         x: 32,
         y: 15
     })
-    var menu_rect         = menu_rect_gr.rect(50,50).attr({ opacity: 0.0, color: '#839b8bff'})
-    var menu_line_top     = menu_rect_gr.line(3, 20, 40, 20).stroke({ width: 5, color: '#839b8bff', linecap: 'round' })
-    var menu_line_midddle = menu_rect_gr.line(3, 35, 40, 35).stroke({ width: 5, color: '#839b8bff', linecap: 'round' })
-    var menu_line_bottom  = menu_rect_gr.line(3, 50, 40, 50).stroke({ width: 5, color: '#839b8bff', linecap: 'round' })
+    var menu_rect         = menu_rect_gr.rect(50,50).attr({ opacity: 0.0, color: '#F28705'})
+    var menu_line_top     = menu_rect_gr.line(3, 20, 40, 20).stroke({ width: 5, color: '#F28705', linecap: 'round' })
+    var menu_line_midddle = menu_rect_gr.line(3, 35, 40, 35).stroke({ width: 5, color: '#F28705', linecap: 'round' })
+    var menu_line_bottom  = menu_rect_gr.line(3, 50, 40, 50).stroke({ width: 5, color: '#F28705', linecap: 'round' })
 
 
     var menu_rect_clicked = false;
@@ -202,7 +203,7 @@ function about_intro_mobile__info(parent_gr, bar_gr, screen_width_in_px, screen_
 
     var green_rect__gr = about__headline__gr.nested()
     var green_rect = green_rect__gr.rect(105,90)
-        .fill('#2b3f36ff')
+        .fill('#262626')
     green_rect.attr({
         id:      "green_rect",
         opacity: 1.0,
@@ -217,7 +218,7 @@ function about_intro_mobile__info(parent_gr, bar_gr, screen_width_in_px, screen_
     about_me_path__gr.attr({
         id:    "about_me_path__gr",
     })
-    about_me_path.fill('#d9d26cff')
+    about_me_path.fill('#F28705')
     about_me_path.move(green_rect.bbox().x+green_rect.bbox().width+115,green_rect.bbox().y+about_me_path.bbox().height/2-10)
     about_me_path.rotate(-90)
     about_me_path.scale(4)
@@ -233,13 +234,13 @@ function about_intro_mobile__info(parent_gr, bar_gr, screen_width_in_px, screen_
     var rect_width  = screen_width_in_px;
     var rect_height = screen_height/1.1;
 
-    var light__url    = "./../portfolio-app-media/media/light__mobile.png"
+    var light__url    = "./../portfolio-app-media/media/moodboard_background.jpg"
     
-    about_create__image(background_img__gr, light__url, rect_width, rect_height, 0, green_rect.bbox().y+green_rect.bbox().height+25, 0.7, 0, 0)
+    about_create__image(background_img__gr, light__url, rect_width, rect_height, 0, green_rect.bbox().y+green_rect.bbox().height+25, 0.9, 0, 0)
 
     var paragraphs = background_img__gr.nested()
     .attr({
-        y: background_img__gr.bbox().height/2+20
+        y: 120
     })
     var paragraph__a = paragraphs.text('My  name is Nevena. I am Junior')
         .font({
@@ -258,7 +259,7 @@ function about_intro_mobile__info(parent_gr, bar_gr, screen_width_in_px, screen_
         .font({
             opacity: 1.0,
             weight:  700,
-            fill:    '#2a3d35ef',
+            fill:    '#F28705',
             family:  'Quicksand',
             size:    20,
         }) 
@@ -293,7 +294,7 @@ function about_history_mobile__info(parent_gr, screen_width_in_px, screen_height
 
     var bist__url     = "./../portfolio-app-media/media/bist.png"
 
-    about_create__image(background_img__gr, bist__url, rect_width, rect_height, 0, 0, 0.6, 0, 0)
+    about_create__image(background_img__gr, bist__url, rect_width, rect_height, 0, 0, 0.7, 0, 0)
 
     var paragraph_gr = background_img__gr.nested()
     var paragraph__a = paragraph_gr.text('After graduating as a sculptor on Faculty')
@@ -390,7 +391,7 @@ function about_process_mobile__info(parent_gr, screen_width_in_px, screen_height
 
     var stickers__url = "./../portfolio-app-media/media/stickeers.jpg"
 
-    about_create__image(background_img__gr, stickers__url, rect_width, rect_height, 0, 0, 0.4, 0, 0)
+    about_create__image(background_img__gr, stickers__url, rect_width, rect_height, 0, 0, 0.7, 0, 0)
 
     var paragraph_gr = background_img__gr.nested()
     var paragraph__a = paragraph_gr.text('I find my passion in creating and coding')
@@ -492,7 +493,7 @@ function about_video__mobile__info(parent_gr, screen_width_in_px, screen_height)
         </div>`);
 
     $("#about__mobile #video__info").find("#video_mobile__container").css({
-        opacity: 0.4
+        opacity: 0.7
     });
 
     $("#about__mobile #video__info").find("#video__a").css({
