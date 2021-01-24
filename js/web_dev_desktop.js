@@ -43,6 +43,7 @@ function web_development__deactivate() {
 
     $("#web_development").remove();
     $("#sketch_p5").remove();
+    $("#technologies__mobile__info").remove();
     $("#contact_wrapper").remove();
 
     /*remove_triggers("contact_canvas__trigger") // contact_canvas TRIGGER*/
@@ -56,34 +57,34 @@ function web_development__create_responsive(bar_gr) {
 
     //-------STYLE-------
     $("#web_development #wrapper").css({                    
-        "background-color": '#41939688',
+        "background-color": '#d9d9d9ff',
         "position":         "relative",
         "height":           screen_height,
         "width":            screen_width_in_px
     }); 
 
     $("#web_development #web_development__headline_animation_info").css({                    
-        "background-color": '#073f48ff',
+        "background-color": '#812f3eff',
         "position":         "relative",
         "height":           screen_height/2,
         "width":            screen_width_in_px
     }); 
 
     $("#web_development #web_development__animations").css({                    
-        "background-color": '#073f48ff',
+        "background-color": '#812f3eff',
         "position":         "relative",
         "width":            screen_width_in_px
     });
 
     $("#web_development #web_development__headline__info").css({                    
-        "background-color": '#005767d7',
+        "background-color": '#4f7779ff',
         "position":         "relative",
         "height":           screen_height/2,
         "width":            screen_width_in_px
     }); 
 
     $("#web_development #technologies").css({                    
-        "background-color": '#012a31ff',
+        "background-color": '#4f7779ff',
         "position":         "relative",
         "width":            screen_width_in_px
     });
@@ -101,13 +102,13 @@ function web_development__create_responsive(bar_gr) {
     var headline_animation__container    = SVG().addTo("#web_development #web_development__headline_animation_info").size(screen_width_in_px, screen_height/2)
     var headline_animation__container_gr = headline_animation__container.nested()
 
-    var web_development__animations_canvas     = SVG().addTo("#web_development #web_development__animations").size(screen_width_in_px, 3000)
+    var web_development__animations_canvas    = SVG().addTo("#web_development #web_development__animations").size(screen_width_in_px, 3000)
     var web_development__animations_canvas_gr = web_development__animations_canvas.nested()
 
     var headline_container     = SVG().addTo("#web_development #web_development__headline__info").size(screen_width_in_px, screen_height/2)
     var headline__container_gr = headline_container.nested()
 
-    var technologies_canvas    = SVG().addTo("#web_development #technologies").size(screen_width_in_px, 1800)
+    var technologies_canvas    = SVG().addTo("#web_development #technologies").size(screen_width_in_px, 3000)
     var technologies_canvas_gr = technologies_canvas.nested()
 
     var video_canvas    = SVG().addTo("#web_development #video__info").size(screen_width_in_px, screen_height)
@@ -147,7 +148,8 @@ function web_development__create_responsive(bar_gr) {
         web_development__headline_animation_info(headline_animation__container_gr, screen_width_in_px, screen_height)
         animations(web_development__animations_canvas_gr, screen_width_in_px, 3000, screen_height)
         web_development__headline__info(headline__container_gr, screen_width_in_px, screen_height)
-        technologies(technologies_canvas_gr, screen_width_in_px, 1800)
+        //technologies(technologies_canvas_gr, screen_width_in_px, 1800)
+        technology_components(screen_width_in_px, 3000, screen_height)
         web_development__video(video_canvas_gr, screen_width_in_px, screen_height)
 
         create_contact_section(screen_width_in_px, screen_height)
@@ -174,12 +176,15 @@ function web_development__create_background__desktop(parent_gr, bar_gr, screen_w
         })
 
     //CALL MENU FUNCTION
-    var menu_rect = parent_gr.rect(50,50)
+    var menu_rect_gr = parent_gr.nested()
     .attr({
-        fill: '#ff6e40',
         x: 100,
         y: 100
     })
+    var menu_rect         = menu_rect_gr.rect(50,50).attr({ opacity: 0.0, color: '#812f3eff'})
+    var menu_line_top     = menu_rect_gr.line(3, 20, 40, 20).stroke({ width: 5, color: '#812f3eff', linecap: 'round' })
+    var menu_line_midddle = menu_rect_gr.line(3, 35, 40, 35).stroke({ width: 5, color: '#812f3eff', linecap: 'round' })
+    var menu_line_bottom  = menu_rect_gr.line(3, 50, 40, 50).stroke({ width: 5, color: '#812f3eff', linecap: 'round' })
 
     var menu_rect_clicked = false;
 
@@ -223,7 +228,7 @@ function web_development__quote_and_scroll__desktop(parent_gr, screen_width_in_p
         .font({
             opacity: 1.0,
             weight:  700,
-            fill:    '#06424aff',
+            fill:    '#812f3eff',
             family:  'Quicksand',
             size:    56
         })    
@@ -239,7 +244,7 @@ function web_development__quote_and_scroll__desktop(parent_gr, screen_width_in_p
         .font({
             opacity: 1.0,
             weight:  700,
-            fill:    '#06424aff',
+            fill:    '#812f3eff',
             family:  'Quicksand',
             size:    90
         })    
@@ -262,7 +267,7 @@ function web_development__quote_and_scroll__desktop(parent_gr, screen_width_in_p
         .font({
             opacity: 1.0,
             weight:  700,
-            fill:    '#06424aff',
+            fill:    '#4f7779ff',
             family:  'Quicksand',
             size:    28
         })    
@@ -278,7 +283,7 @@ function web_development__quote_and_scroll__desktop(parent_gr, screen_width_in_p
             opacity: 1.0,
             weight:  700,
             id:      "quotes_up",
-            fill:    '#06424aff',
+            fill:    '#4f7779ff',
             family:  'Quicksand',
             size:    70
         })    
@@ -294,7 +299,7 @@ function web_development__quote_and_scroll__desktop(parent_gr, screen_width_in_p
             opacity: 1.0,
             weight:  700,
             id:      "quotes_down",
-            fill:    '#06424aff',
+            fill:    '#4f7779ff',
             family:  'Quicksand',
             size:    70
         })    
@@ -309,7 +314,7 @@ function web_development__quote_and_scroll__desktop(parent_gr, screen_width_in_p
         .font({
             opacity: 1.0,
             weight:  700,
-            fill:    '#06424aff',
+            fill:    '#4f7779ff',
             family:  'Quicksand',
             size:    18
         })    
@@ -355,7 +360,7 @@ function web_development__images__desktop(parent_gr, screen_width_in_px, screen_
                 'view_box_y': '0'
             },*/
             {
-                'img_url':   './../portfolio-app-media/media/111.png',
+                'img_url':   './../portfolio-app-media/media/d_1.png',
                 'width':     rect_width/2.25, // %
                 'position_x': screen_width_in_px/2-rect_width/2,
                 'position_y': 45,
@@ -363,7 +368,7 @@ function web_development__images__desktop(parent_gr, screen_width_in_px, screen_
                 'view_box_y': '0'
             },
             {
-                'img_url':   './../portfolio-app-media/media/112.png',
+                'img_url':   './../portfolio-app-media/media/d_2.png',
                 'width':     rect_width/2.1,
                 'position_x': screen_width_in_px/2-rect_width/1.75,
                 'position_y': rect_height+60,
@@ -372,7 +377,7 @@ function web_development__images__desktop(parent_gr, screen_width_in_px, screen_
             },
 
             {
-                'img_url':   './../portfolio-app-media/media/113.png',
+                'img_url':   './../portfolio-app-media/media/d_3.png',
                 'width':     rect_width/1.8,
                 'position_x': screen_width_in_px/2-rect_width/1.45,
                 'position_y': rect_height*2+75,
@@ -380,7 +385,7 @@ function web_development__images__desktop(parent_gr, screen_width_in_px, screen_
                 'view_box_y': '0'
             },
             {
-                'img_url':   './../portfolio-app-media/media/114.png',
+                'img_url':   './../portfolio-app-media/media/d_4.png',
                 'width':     rect_width/1.23,
                 'position_x': screen_width_in_px/2-rect_width/1.1,
                 'position_y': rect_height*3+100,
@@ -388,7 +393,7 @@ function web_development__images__desktop(parent_gr, screen_width_in_px, screen_
                 'view_box_y': '0'
             },
             {
-                'img_url':   './../portfolio-app-media/media/115.png',
+                'img_url':   './../portfolio-app-media/media/d_5.png',
                 'width':     rect_width/2.25,
                 'position_x': screen_width_in_px/2-rect_width/1.49,
                 'position_y': rect_height*4+115,
@@ -533,7 +538,7 @@ function web_development__headline_animation_info(parent_gr, screen_width_in_px,
     var headline_gr = parent_gr.nested()
  
     var yellow_rect = headline_gr.rect(screen_width_in_px/2-350,100)
-    .fill('#187a84ff')
+    .fill('#4f7779ff')
     .attr({
         id:      "yellow_rect",
         opacity: 1.0,
@@ -547,7 +552,7 @@ function web_development__headline_animation_info(parent_gr, screen_width_in_px,
          .font({
              opacity: 1.0,
              weight:  700,
-             fill:    '#f4b630ff',
+             fill:    '#d9d9d9ff',
              family:  'Quicksand',
              size:    70
          })    
@@ -563,7 +568,7 @@ function web_development__headline_animation_info(parent_gr, screen_width_in_px,
          .font({
              opacity: 1.0,
              weight:  700,
-             fill:    '#f4b630ff',
+             fill:    '#d9d9d9ff',
              family:  'Quicksand',
              size:    135
          })    
@@ -573,14 +578,13 @@ function web_development__headline_animation_info(parent_gr, screen_width_in_px,
     })
 }
 
-
 //-------------------------HEADLINE-INFO----------------------------------//
 function web_development__headline__info(parent_gr, screen_width_in_px, screen_height){
 
     var headline_gr = parent_gr.nested()
  
     var yellow_rect = headline_gr.rect(screen_width_in_px/2-350,100)
-    .fill('#268c91ff')
+    .fill('#812f3eff')
     .attr({
         id:      "yellow_rect",
         opacity: 1.0,
@@ -594,7 +598,7 @@ function web_development__headline__info(parent_gr, screen_width_in_px, screen_h
          .font({
              opacity: 1.0,
              weight:  700,
-             fill:    '#f09430ff',
+             fill:    '#d9d9d9ff',
              family:  'Quicksand',
              size:    50
          })    
@@ -610,7 +614,7 @@ function web_development__headline__info(parent_gr, screen_width_in_px, screen_h
          .font({
              opacity: 1.0,
              weight:  700,
-             fill:    '#f09430ff',
+             fill:    '#d9d9d9ff',
              family:  'Quicksand',
              size:    135
          })    

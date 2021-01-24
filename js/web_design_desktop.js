@@ -56,42 +56,42 @@ function web_design_create_responsive(bar_gr) {
     var screen_height = window.innerHeight;
 
     $("#web_design #wrapper").css({                    
-        "background-color": '#ffd097c3',
+        "background-color": '#d8d8d8ff',
         "position":         "relative",
         "height":           screen_height,
         "width":            screen_width_in_px
     }); 
 
     $("#web_design #headline__info").css({                    
-        "background-color": '#4d849079',
+        "background-color": '#df7f6cff',
         "position":         "relative",
         "height":           screen_height/2,
         "width":            screen_width_in_px
     }); 
 
     $("#web_design #artist_portfolio__info").css({                    
-        "background-color": '#4d849079',
+        "background-color": '#df7f6cff',
         "position":         "relative",
         "height":           screen_height,
         "width":            screen_width_in_px
     }); 
 
     $("#web_design #suprematism__info").css({                    
-        "background-color": '#4d849079',
+        "background-color": '#df7f6cff',
         "position":         "relative",
         "height":           screen_height,
         "width":            screen_width_in_px
     }); 
 
     $("#deep_blue__info").css({                    
-        "background-color": '#4d849079',
+        "background-color": '#df7f6cff',
         "position":         "relative",
         "height":           screen_height,
         "width":            screen_width_in_px
     }); 
 
     $("#web_design #video__info").css({                    
-        "background-color": '#4d849079',
+        "background-color": '#d8d8d8ff',
         "position":         "relative",
         "height":           screen_height,
         "width":            screen_width_in_px
@@ -178,12 +178,17 @@ function web_design__intro_section__desktop(parent_gr, bar_gr, screen_width_in_p
         })
     
     //CALL MENU FUNCTION
-    var menu_rect = web_design__layout_gr.rect(50,50)
-        .attr({
-            fill: '#b42541e6',
-            x: 100,
-            y: 100
-        })
+
+    var menu_rect_gr = parent_gr.nested()
+    .attr({
+        x: 100,
+        y: 100
+    })
+    var menu_rect         = menu_rect_gr.rect(50,50).attr({ opacity: 0.0, color: '#5c3e6aff'})
+    var menu_line_top     = menu_rect_gr.line(3, 20, 40, 20).stroke({ width: 5, color: '#5c3e6aff', linecap: 'round' })
+    var menu_line_midddle = menu_rect_gr.line(3, 35, 40, 35).stroke({ width: 5, color: '#5c3e6aff', linecap: 'round' })
+    var menu_line_bottom  = menu_rect_gr.line(3, 50, 40, 50).stroke({ width: 5, color: '#5c3e6aff', linecap: 'round' })
+
 
     var menu_rect_clicked = false;
 
@@ -223,7 +228,7 @@ function web_design__quote_and_scroll___desktop(parent_gr, screen_width_in_px, s
         .font({
             opacity: 1.0,
             weight:  700,
-            fill:    '#467f8cf3',
+            fill:    '#5c3e6aff',
             family:  'Quicksand',
             size:    54
         })    
@@ -239,7 +244,7 @@ function web_design__quote_and_scroll___desktop(parent_gr, screen_width_in_px, s
         .font({
             opacity: 1.0,
             weight:  700,
-            fill:    '#467f8cf3',
+            fill:    '#5c3e6aff',
             family:  'Quicksand',
             size:    140
         })    
@@ -257,7 +262,7 @@ function web_design__quote_and_scroll___desktop(parent_gr, screen_width_in_px, s
         .font({
             opacity: 1.0,
             weight:  700,
-            fill:    '#467f8cf3',
+            fill:    '#6f5570c4',
             family:  'Quicksand',
             size:    60
         })    
@@ -272,7 +277,7 @@ function web_design__quote_and_scroll___desktop(parent_gr, screen_width_in_px, s
         .font({
             opacity: 1.0,
             weight:  700,
-            fill:    '#467f8cf3',
+            fill:    '#6f5570c4',
             family:  'Quicksand',
             size:    60
         })    
@@ -290,8 +295,8 @@ function web_design__quote_and_scroll___desktop(parent_gr, screen_width_in_px, s
         })
         .font({
             opacity: 1.0,
-            weight:  400,
-            fill:    '#467f8cf3',
+            weight:  700,
+            fill:    '#6f5570c4',
             family:  'Quicksand',
             size:    26
         })    
@@ -307,7 +312,7 @@ function web_design__quote_and_scroll___desktop(parent_gr, screen_width_in_px, s
         .font({
             opacity: 1.0,
             weight:  400,
-            fill:    '#467f8cf3',
+            fill:    '#6f5570c4',
             family:  'Quicksand',
             size:    18
         })    
@@ -326,7 +331,7 @@ function web_design__quote_and_scroll___desktop(parent_gr, screen_width_in_px, s
         <path
             id="vertical_line"
             style="
-                stroke:            #467f8cf3;
+                stroke:            #6f5570c4;
                 fill-opacity:      1;
                 stroke-width:      0.5;
                 stroke-linecap:    butt;
@@ -337,7 +342,7 @@ function web_design__quote_and_scroll___desktop(parent_gr, screen_width_in_px, s
             d="m -1693.5926,1109.6675 v 28.7261"/>
         <path
             style="
-                fill:            #467f8cf3;
+                fill:            #6f5570c4;
                 stroke-width:      0.5;
                 stroke-linecap:    butt;
                 stroke-linejoin:   miter;
@@ -537,7 +542,7 @@ function web_design__images__desktop(parent_gr, screen_width_in_px, screen_heigh
 
     var a_rect = a_rect_gr.rect(a_rect_width,rect_height)
     a_rect.attr({
-            fill: "#b42541e6",
+            fill: "#df7f6cff",
             x: a_rect_x,
             y: a_rect_y+a_rect_height
         })
@@ -551,7 +556,7 @@ function web_design__images__desktop(parent_gr, screen_width_in_px, screen_heigh
 
     var b_rect = b_rect_gr.rect(b_rect_width,rect_height)
     b_rect.attr({
-            fill: "#b42541e6",
+            fill: "#df7f6cff",
             x: b_rect_x,
             y: b_rect_y-rect_height
         })
@@ -565,7 +570,7 @@ function web_design__images__desktop(parent_gr, screen_width_in_px, screen_heigh
  
     var c_rect = c_rect_gr.rect(c_rect_width,rect_height)
         .attr({
-            fill: "#b42541e6",
+            fill: "#df7f6cff",
             x: c_rect_x,
             y: c_rect_y+c_rect_height
         })
@@ -579,7 +584,7 @@ function web_design__images__desktop(parent_gr, screen_width_in_px, screen_heigh
 
     var d_rect = d_rect_gr.rect(d_rect_width,rect_height)
         .attr({
-            fill: "#b42541e6",
+            fill: "#df7f6cff",
             x: d_rect_x,
             y: d_rect_y+d_rect_height
         })
@@ -591,7 +596,7 @@ function web_design__headline__info(parent_gr, screen_width_in_px, screen_height
     var headline_gr = parent_gr.nested()
  
      var pink_rect = headline_gr.rect(screen_width_in_px/2-350,100)
-        .fill('#b42541e6')
+        .fill('#b83b24ff')
         .attr({
             id:      "pink_rect",
             opacity: 1.0,
@@ -605,7 +610,7 @@ function web_design__headline__info(parent_gr, screen_width_in_px, screen_height
           .font({
               opacity: 1.0,
               weight:  700,
-              fill:    '#3b7a87f3',
+              fill:    '#d8d8d8ff',
               family:  'Quicksand',
               size:    60
           })    
@@ -621,7 +626,7 @@ function web_design__headline__info(parent_gr, screen_width_in_px, screen_height
           .font({
               opacity: 1.0,
               weight:  700,
-              fill:    '#3b7a87f3',
+              fill:    '#d8d8d8ff',
               family:  'Quicksand',
               size:    200
           })    
@@ -1004,7 +1009,7 @@ function deep_blue(parent_gr, screen_width_in_px, screen_height){
 
     }
 
-    create_info_column(deep_blue__gr, screen_height, screen_width_in_px, 150, 100, column_info_third);
+    create_info_column(deep_blue__gr, screen_height, screen_width_in_px, 150, 0, column_info_third);
 }
 
 function video__section(parent_gr, screen_width_in_px, screen_height){

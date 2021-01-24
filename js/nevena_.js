@@ -69,6 +69,7 @@ function hp__deactivate() {
     $("#hp #wrapper").remove();
     $("#contact_wrapper").remove();
 
+
     /*remove_triggers("contact_canvas__trigger") // contact_canvas TRIGGER*/
     
     // $("#wrapper svg").remove();

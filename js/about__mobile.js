@@ -56,7 +56,7 @@ function about__mobile__create_responsive(bar_gr) {
 
     //-------STYLE-------
     $("#about__mobile").css({                    
-        "background-color": '#730202',
+        "background-color": '#d8d8d8ff',
         "position":         "relative",
         "width":             screen_width_in_px
     }); 
@@ -164,10 +164,10 @@ function about_intro_mobile__info(parent_gr, bar_gr, screen_width_in_px, screen_
         x: 32,
         y: 15
     })
-    var menu_rect         = menu_rect_gr.rect(50,50).attr({ opacity: 0.0, color: '#F28705'})
-    var menu_line_top     = menu_rect_gr.line(3, 20, 40, 20).stroke({ width: 5, color: '#F28705', linecap: 'round' })
-    var menu_line_midddle = menu_rect_gr.line(3, 35, 40, 35).stroke({ width: 5, color: '#F28705', linecap: 'round' })
-    var menu_line_bottom  = menu_rect_gr.line(3, 50, 40, 50).stroke({ width: 5, color: '#F28705', linecap: 'round' })
+    var menu_rect         = menu_rect_gr.rect(50,50).attr({ opacity: 0.0, color: '#262626'})
+    var menu_line_top     = menu_rect_gr.line(3, 20, 40, 20).stroke({ width: 5, color: '#262626', linecap: 'round' })
+    var menu_line_midddle = menu_rect_gr.line(3, 35, 40, 35).stroke({ width: 5, color: '#262626', linecap: 'round' })
+    var menu_line_bottom  = menu_rect_gr.line(3, 50, 40, 50).stroke({ width: 5, color: '#262626', linecap: 'round' })
 
 
     var menu_rect_clicked = false;
@@ -203,7 +203,7 @@ function about_intro_mobile__info(parent_gr, bar_gr, screen_width_in_px, screen_
 
     var green_rect__gr = about__headline__gr.nested()
     var green_rect = green_rect__gr.rect(105,90)
-        .fill('#262626')
+        .fill('#f28705ff')
     green_rect.attr({
         id:      "green_rect",
         opacity: 1.0,
@@ -218,7 +218,7 @@ function about_intro_mobile__info(parent_gr, bar_gr, screen_width_in_px, screen_
     about_me_path__gr.attr({
         id:    "about_me_path__gr",
     })
-    about_me_path.fill('#F28705')
+    about_me_path.fill('#262626')
     about_me_path.move(green_rect.bbox().x+green_rect.bbox().width+115,green_rect.bbox().y+about_me_path.bbox().height/2-10)
     about_me_path.rotate(-90)
     about_me_path.scale(4)
@@ -259,7 +259,7 @@ function about_intro_mobile__info(parent_gr, bar_gr, screen_width_in_px, screen_
         .font({
             opacity: 1.0,
             weight:  700,
-            fill:    '#F28705',
+            fill:    '#f28705ff',
             family:  'Quicksand',
             size:    20,
         }) 

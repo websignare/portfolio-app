@@ -54,7 +54,7 @@ function moodboard__mobile__create_responsive(bar_gr) {
 
     //-------STYLE-------
     $("#moodboard__mobile").css({                    
-        "background-color": '#AC3323',
+        "background-color": '#d8d8d8ff',
         "position":         "relative",
         "width":             screen_width_in_px
     }); 
@@ -142,10 +142,10 @@ function moodboard_headline__mobile(parent_gr, bar_gr, screen_width_in_px, scree
         x: 32,
         y: 15
     })
-    var menu_rect         = menu_rect_gr.rect(50,50).attr({ opacity: 0.0, color: '#F2780C'})
-    var menu_line_top     = menu_rect_gr.line(3, 20, 40, 20).stroke({ width: 5, color: '#F2780C', linecap: 'round' })
-    var menu_line_midddle = menu_rect_gr.line(3, 35, 40, 35).stroke({ width: 5, color: '#F2780C', linecap: 'round' })
-    var menu_line_bottom  = menu_rect_gr.line(3, 50, 40, 50).stroke({ width: 5, color: '#F2780C', linecap: 'round' })
+    var menu_rect         = menu_rect_gr.rect(50,50).attr({ opacity: 0.0, color: '#ac3323ff'})
+    var menu_line_top     = menu_rect_gr.line(3, 20, 40, 20).stroke({ width: 5, color: '#ac3323ff', linecap: 'round' })
+    var menu_line_midddle = menu_rect_gr.line(3, 35, 40, 35).stroke({ width: 5, color: '#ac3323ff', linecap: 'round' })
+    var menu_line_bottom  = menu_rect_gr.line(3, 50, 40, 50).stroke({ width: 5, color: '#ac3323ff', linecap: 'round' })
 
 
     var menu_rect_clicked = false;
@@ -181,7 +181,7 @@ function moodboard_headline__mobile(parent_gr, bar_gr, screen_width_in_px, scree
 
     var purple_rect__gr = moodboard__headline__gr.nested()
     var purple_rect = purple_rect__gr.rect(105,90)
-        .fill('#9C8B71')
+        .fill('#e8670efd')
     purple_rect.attr({
         id:      "purple_rect",
         opacity: 1.0,
@@ -196,7 +196,7 @@ function moodboard_headline__mobile(parent_gr, bar_gr, screen_width_in_px, scree
     moodboard_me_path__gr.attr({
         id:    "moodboard_me_path__gr",
     })
-    moodboard_me_path.fill('#F2780C')
+    moodboard_me_path.fill('#ac3323ff')
     moodboard_me_path.move(purple_rect.bbox().width+130,purple_rect.bbox().y+purple_rect.bbox().height/2-moodboard_me_path.bbox().height/2)
     moodboard_me_path.scale(7.8)
     moodboard_me_path.attr({id: 'moodboard_me_path'})

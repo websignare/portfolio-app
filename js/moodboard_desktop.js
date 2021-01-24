@@ -24,6 +24,8 @@ function moodboard__activate(bar_gr){
             </div>
             <div id="headline__info">
             </div>
+            <div id="masonry_container">
+            </div>
         </div>
     `);
 
@@ -43,14 +45,14 @@ function moodboard__create_responsive(bar_gr) {
     var screen_height       = window.innerHeight;
 
     $("#moodboard #wrapper").css({                    
-        "background-color": '#759aa292',
+        "background-color": '#d8d8d8ff',
         "position":         "relative",
         "height":           screen_height,
         "width":            screen_width_in_px
     }); 
 
     $("#moodboard #headline__info").css({                    
-        "background-color": '#fff',
+        "background-color": '#AC3323',
         "position":         "relative",
         "height":           screen_height/2,
         "width":            screen_width_in_px,
@@ -121,12 +123,16 @@ function moodboard__intro_section__desktop(parent_gr, bar_gr, screen_width_in_px
         })
 
     //CALL MENU FUNCTION
-    var menu_rect = parent_gr.rect(50,50)
+    var menu_rect_gr = parent_gr.nested()
     .attr({
-        fill: '#b42541e6',
         x: 100,
         y: 100
     })
+    var menu_rect         = menu_rect_gr.rect(50,50).attr({ opacity: 0.0, color: '#da2b13ff'})
+    var menu_line_top     = menu_rect_gr.line(3, 20, 40, 20).stroke({ width: 5, color: '#da2b13ff', linecap: 'round' })
+    var menu_line_midddle = menu_rect_gr.line(3, 35, 40, 35).stroke({ width: 5, color: '#da2b13ff', linecap: 'round' })
+    var menu_line_bottom  = menu_rect_gr.line(3, 50, 40, 50).stroke({ width: 5, color: '#da2b13ff', linecap: 'round' })
+
 
     var menu_rect_clicked = false;
 
@@ -165,7 +171,7 @@ function moodboard__quote_and_scroll__desktop(parent_gr, screen_width_in_px, scr
         .font({
             opacity: 1.0,
             weight:  700,
-            fill:    '#846693ff',
+            fill:    '#AC3323',
             family:  'Quicksand',
             size:    125
         })    
@@ -178,18 +184,20 @@ function moodboard__quote_and_scroll__desktop(parent_gr, screen_width_in_px, scr
         add.tspan('Custom made masonry galleries that are').newLine()
         add.tspan('responsive and contain my architectural models').newLine()
         add.tspan('that were hand-made in my free time,').newLine()
-        add.tspan('and there are also images of my inspiration, aspiration...').newLine()
+        add.tspan('and there are also images of my inspiration,').newLine()
+        add.tspan('aspiration...').newLine()
+
 
     })
         .font({
             opacity: 1.0,
-            weight:  400,
-            fill:    '#846693ff',
+            weight:  700,
+            fill:    '#924b2896',
             family:  'Quicksand',
             size:    26
         })    
     paragraph.attr({
-        x: 180,
+        x: 200,
         y: screen_height/2
     })  
 
@@ -199,7 +207,7 @@ function moodboard__quote_and_scroll__desktop(parent_gr, screen_width_in_px, scr
         .font({
             opacity: 1.0,
             weight:  400,
-            fill:    '#846693ff',
+            fill:    '#924b2896',
             family:  'Quicksand',
             size:    18
         })    
@@ -234,7 +242,7 @@ function moodboard__quote_and_scroll__desktop(parent_gr, screen_width_in_px, scr
 
     scroll_arrow.attr({id: 'scroll_arrow'})
     scroll_arrow_gr.attr({
-        fill: '#846693ff',
+        fill: '#924b2896',
         id:     'scroll_arrow_gr',
         width:  scroll_arrow.bbox().width,
         height: scroll_arrow.bbox().height,
@@ -269,7 +277,7 @@ function moodboard__images__desktop(parent_gr, screen_width_in_px, screen_height
 
         'elements_data':[
             {
-                'img_url':   './../portfolio-app-media/media/rubic.png',
+                'img_url':   './../portfolio-app-media/media/m_1.png',
                 'width':     '340',
                 'position_x': 250,
                 'position_y': 20,
@@ -277,7 +285,7 @@ function moodboard__images__desktop(parent_gr, screen_width_in_px, screen_height
                 'view_box_y': '0'
             },
             {
-                'img_url':   './../portfolio-app-media/media/rubic.png',
+                'img_url':   './../portfolio-app-media/media/m_2.png',
                 'width':     '400', 
                 'position_x': 355,
                 'position_y': 200,
@@ -285,7 +293,7 @@ function moodboard__images__desktop(parent_gr, screen_width_in_px, screen_height
                 'view_box_y': '0'
             },
             {
-                'img_url':   './../portfolio-app-media/media/rubic.png',
+                'img_url':   './../portfolio-app-media/media/m_3.png',
                 'width':     '660',
                 'position_x': 210,
                 'position_y': 380,
@@ -294,7 +302,7 @@ function moodboard__images__desktop(parent_gr, screen_width_in_px, screen_height
             },
 
             {
-                'img_url':   './../portfolio-app-media/media/rubic.png',
+                'img_url':   './../portfolio-app-media/media/m_4.png',
                 'width':     '550',
                 'position_x': 210,
                 'position_y': 560,
@@ -310,7 +318,7 @@ function moodboard__images__desktop(parent_gr, screen_width_in_px, screen_height
                 'view_box_y': '0'
             },*/
             {
-                'img_url':   './../portfolio-app-media/media/rubic.png',
+                'img_url':   './../portfolio-app-media/media/m_5.png',
                 'width':     '400',
                 'position_x': 195,
                 'position_y': 740,
@@ -446,7 +454,7 @@ function moodboard__headline__info(parent_gr, screen_width_in_px, screen_height)
     var headline_gr = parent_gr.nested()
 
     var pink_rect = headline_gr.rect(screen_width_in_px/2-350,100)
-    .fill('#b42541e6')
+    .fill('#924b2896')
     .attr({
         id:      "pink_rect",
         opacity: 1.0,
@@ -460,7 +468,7 @@ function moodboard__headline__info(parent_gr, screen_width_in_px, screen_height)
         .font({
             opacity: 1.0,
             weight:  700,
-            fill:    '#482d4bff',
+            fill:    '#d8d8d8ff',
             family:  'Quicksand',
             size:    34
         })    
@@ -476,7 +484,7 @@ function moodboard__headline__info(parent_gr, screen_width_in_px, screen_height)
         .font({
             opacity: 1.0,
             weight:  700,
-            fill:    '#482d4bff',
+            fill:    '#d8d8d8ff',
             family:  'Quicksand',
             size:    160
         })    
@@ -487,253 +495,130 @@ function moodboard__headline__info(parent_gr, screen_width_in_px, screen_height)
 }
 
 function masonry(screen_width_in_px, screen_height){
-    //------------------FOOD MASONRY-------------------------//
-    $("#moodboard").append(`
-        <div id="food_masonry_section">
-
-            <div id="masonry_food">
-
-                <div class="item">
-                <img src="./../portfolio-app-media/masonry/blog_media/food_1.png">
-                    <div class="item__body">
-                        <div class="relative">
-                            <a class="item__link" target="_blank" href="https://www.google.com/search?q=concrete+design&tbm=isch&ved=2ahUKEwiB3JrXgJztAhUI_4UKHW8XAooQ2-cCegQIABAA&oq=concrete+design&gs_lcp=CgNpbWcQAzICCAAyAggAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADICCABQpyJYqydg8ihoAHAAeACAAYYBiAGjBZIBAzAuNpgBAKABAaoBC2d3cy13aXotaW1nwAEB&sclient=img&ei=EGu9X4GUB4j-lwTvrojQCA&bih=969&biw=1920&client=ubuntu" ></a>
-                            <h1 class="item__title">Eggs, bacon & spinach</h1>
-                            <p class="item__author">Breakfast</p>
-                        </div>
-                        <div class="mt-auto" >
-                            <span class="item__tag">#see recipe</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item">
-                    <img src="./../portfolio-app-media/masonry/blog_media/food_2.png">
-                        <div class="item__body">
-                        <div class="relative">
-                            <a class="item__link" target="_blank" href="https://www.google.com/search?q=airplane+wings&tbm=isch&ved=2ahUKEwi8oaXl_5vtAhVF5IUKHfK0AlIQ2-cCegQIABAA&oq=airplane+&gs_lcp=CgNpbWcQARgAMgQIABBDMgQIABBDMgIIADICCAAyBAgAEEMyAggAMgQIABBDMgIIADICCAAyAggAUJEgWNU0YPM_aABwAHgAgAGJAYgBzQiSAQMwLjmYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=IWq9X_yMDcXIlwTy6YqQBQ&bih=969&biw=1920&client=ubuntu" ></a>
-                            <h1 class="item__title">Buda bowl</h1>
-                            <p class="item__author">Lunch</p>
-                        </div>
-                        <div class="mt-auto" >
-                            <span class="item__tag">#see recipe</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item">
-                <img src="./../portfolio-app-media/masonry/blog_media/food_3.png">
-                    <div class="item__body">
-                        <div class="relative">
-                            <a class="item__link" target="_blank" href="https://www.google.com/search?q=architecture+maquette&tbm=isch&ved=2ahUKEwjy8OSNgZztAhXa44UKHdb_B2IQ2-cCegQIABAA&oq=architecture+maqu&gs_lcp=CgNpbWcQARgAMgIIADICCAAyBggAEAUQHjIGCAAQCBAeMgYIABAIEB4yBggAEAgQHjIGCAAQCBAeMgYIABAIEB4yBggAEAgQHjIECAAQHjoECAAQQ1CsDlivKWCSNWgAcAB4AIAB8gKIAe0SkgEIMS4xMy4yLjGYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=gmu9X_KnI9rHlwTW_5-QBg&bih=969&biw=1920&client=ubuntu" ></a>
-                            <h1 class="item__title">Veggie tortila</h1>
-                            <p class="item__author">Lunch/Dinner</p>
-                        </div>
-                        <div class="mt-auto" >
-                            <span class="item__tag">#see recipe</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item">
-                <img src="./../portfolio-app-media/masonry/blog_media/food_4.png">
-                    <div class="item__body">
-                        <div class="relative">
-                            <a class="item__link" target="_blank" href="https://www.google.com/search?q=architecture+maquette&tbm=isch&ved=2ahUKEwjy8OSNgZztAhXa44UKHdb_B2IQ2-cCegQIABAA&oq=architecture+maqu&gs_lcp=CgNpbWcQARgAMgIIADICCAAyBggAEAUQHjIGCAAQCBAeMgYIABAIEB4yBggAEAgQHjIGCAAQCBAeMgYIABAIEB4yBggAEAgQHjIECAAQHjoECAAQQ1CsDlivKWCSNWgAcAB4AIAB8gKIAe0SkgEIMS4xMy4yLjGYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=gmu9X_KnI9rHlwTW_5-QBg&bih=969&biw=1920&client=ubuntu" ></a>
-                            <h1 class="item__title">Fruit sandwiches</h1>
-                            <p class="item__author">Breakfast/Snack</p>
-                        </div>
-                        <div class="mt-auto" >
-                            <span class="item__tag">#see recipe</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item">
-                <img src="./../portfolio-app-media/masonry/blog_media/food_5.png">
-                    <div class="item__body">
-                        <div class="relative">
-                            <a class="item__link" target="_blank" href="https://www.google.com/search?q=wooden+structure&tbm=isch&ved=2ahUKEwi_7sDq_5vtAhVX-4UKHY55DlgQ2-cCegQIABAA&oq=wooden+stru&gs_lcp=CgNpbWcQARgAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADoECAAQQ1CB6QNYn5YEYKmlBGgCcAB4AIABf4gB5wuSAQQwLjEzmAEAoAEBqgELZ3dzLXdpei1pbWfAAQE&sclient=img&ei=LGq9X7-oCdf2lwSO87nABQ&bih=969&biw=1920&client=ubuntu" ></a>
-                            <h1 class="item__title">Green smoothie</h1>
-                            <p class="item__author">Snack</p>
-                        </div>
-                        <div class="mt-auto" >
-                            <span class="item__tag">#see recipe</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item">
-                <img src="./../portfolio-app-media/masonry/blog_media/food_6.png">
-                    <div class="item__body">
-                        <div class="relative">
-                            <a class="item__link" target="_blank" href="https://www.google.com/search?q=antennas&tbm=isch&ved=2ahUKEwit-7qSgZztAhVHZRoKHapQCJUQ2-cCegQIABAA&oq=antennas&gs_lcp=CgNpbWcQAzICCAAyAggAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADICCAA6BAgAEENQ4OECWND0AmCw9gJoAHAAeACAAY8BiAGvB5IBAzAuOJgBAKABAaoBC2d3cy13aXotaW1nwAEB&sclient=img&ei=jGu9X62FF8fKaaqhoagJ&bih=969&biw=1920&client=ubuntu" ></a>
-                            <h1 class="item__title">Salad with eggwhites</h1>
-                            <p class="item__author">Breakfast</p>
-                        </div>
-                        <div class="mt-auto" >
-                            <span class="item__tag">#see recipe</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item">
-                <img src="./../portfolio-app-media/masonry/blog_media/food_7.png">
-                    <div class="item__body">
-                        <div class="relative">
-                            <a class="item__link" target="_blank" href="https://www.google.com/search?q=concrete+design&tbm=isch&ved=2ahUKEwiB3JrXgJztAhUI_4UKHW8XAooQ2-cCegQIABAA&oq=concrete+design&gs_lcp=CgNpbWcQAzICCAAyAggAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADICCABQpyJYqydg8ihoAHAAeACAAYYBiAGjBZIBAzAuNpgBAKABAaoBC2d3cy13aXotaW1nwAEB&sclient=img&ei=EGu9X4GUB4j-lwTvrojQCA&bih=969&biw=1920&client=ubuntu" ></a>
-                            <h1 class="item__title">Fruit wafles</h1>
-                            <p class="item__author">Breakfast</p>
-                        </div>
-                        <div class="mt-auto" >
-                            <span class="item__tag">#see recipe</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item">
-                    <img src="./../portfolio-app-media/masonry/blog_media/food_8.png">
-                    <div class="item__body">
-                        <div class="relative">
-                            <a class="item__link" target="_blank" href="https://www.google.com/search?q=concrete+design&tbm=isch&ved=2ahUKEwiB3JrXgJztAhUI_4UKHW8XAooQ2-cCegQIABAA&oq=concrete+design&gs_lcp=CgNpbWcQAzICCAAyAggAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADICCABQpyJYqydg8ihoAHAAeACAAYYBiAGjBZIBAzAuNpgBAKABAaoBC2d3cy13aXotaW1nwAEB&sclient=img&ei=EGu9X4GUB4j-lwTvrojQCA&bih=969&biw=1920&client=ubuntu" ></a>
-                            <h1 class="item__title">Poached egg sandwiches</h1>
-                            <p class="item__author">Breakfast</p>
-                        </div>
-                        <div class="mt-auto" >
-                            <span class="item__tag">#see recipe</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item">
-                    <img src="./../portfolio-app-media/masonry/blog_media/food_9.png">
-                    <div class="item__body">
-                        <div class="relative">
-                            <a class="item__link" target="_blank" href="https://www.google.com/search?q=architecture+maquette&tbm=isch&ved=2ahUKEwjy8OSNgZztAhXa44UKHdb_B2IQ2-cCegQIABAA&oq=architecture+maqu&gs_lcp=CgNpbWcQARgAMgIIADICCAAyBggAEAUQHjIGCAAQCBAeMgYIABAIEB4yBggAEAgQHjIGCAAQCBAeMgYIABAIEB4yBggAEAgQHjIECAAQHjoECAAQQ1CsDlivKWCSNWgAcAB4AIAB8gKIAe0SkgEIMS4xMy4yLjGYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=gmu9X_KnI9rHlwTW_5-QBg&bih=969&biw=1920&client=ubuntu" ></a>
-                            <h1 class="item__title">Red veggies pottage</h1>
-                            <p class="item__author">Lunch/Dinner</p>
-                        </div>
-                        <div class="mt-auto" >
-                            <span class="item__tag">#see recipe</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item">
-                    <img src="./../portfolio-app-media/masonry/blog_media/food_10.png">
-                    <div class="item__body">
-                        <div class="relative">
-                            <a class="item__link" target="_blank" href="https://www.google.com/search?q=wooden+structure&tbm=isch&ved=2ahUKEwi_7sDq_5vtAhVX-4UKHY55DlgQ2-cCegQIABAA&oq=wooden+stru&gs_lcp=CgNpbWcQARgAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADoECAAQQ1CB6QNYn5YEYKmlBGgCcAB4AIABf4gB5wuSAQQwLjEzmAEAoAEBqgELZ3dzLXdpei1pbWfAAQE&sclient=img&ei=LGq9X7-oCdf2lwSO87nABQ&bih=969&biw=1920&client=ubuntu" ></a>
-                            <h1 class="item__title">Ice smoothies</h1>
-                            <p class="item__author">Snack</p>
-                        </div>
-                        <div class="mt-auto" >
-                            <span class="item__tag">#see recipe</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item">
-                    <img src="./../portfolio-app-media/masonry/blog_media/food_11.png">
-                    <div class="item__body">
-                        <div class="relative">
-                            <a class="item__link" target="_blank" href="https://www.google.com/search?q=wooden+structure&tbm=isch&ved=2ahUKEwi_7sDq_5vtAhVX-4UKHY55DlgQ2-cCegQIABAA&oq=wooden+stru&gs_lcp=CgNpbWcQARgAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADoECAAQQ1CB6QNYn5YEYKmlBGgCcAB4AIABf4gB5wuSAQQwLjEzmAEAoAEBqgELZ3dzLXdpei1pbWfAAQE&sclient=img&ei=LGq9X7-oCdf2lwSO87nABQ&bih=969&biw=1920&client=ubuntu" ></a>
-                            <h1 class="item__title">Ham sandwiche with dried paprika</h1>
-                            <p class="item__author">Breakfast</p>
-                        </div>
-                        <div class="mt-auto" >
-                            <span class="item__tag">#see recipe</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item">
-                    <img src="./../portfolio-app-media/masonry/blog_media/food_12.png">
-                    <div class="item__body">
-                        <div class="relative">
-                            <a class="item__link" target="_blank" href="https://www.google.com/search?q=wooden+structure&tbm=isch&ved=2ahUKEwi_7sDq_5vtAhVX-4UKHY55DlgQ2-cCegQIABAA&oq=wooden+stru&gs_lcp=CgNpbWcQARgAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADICCAAyAggAMgIIADoECAAQQ1CB6QNYn5YEYKmlBGgCcAB4AIABf4gB5wuSAQQwLjEzmAEAoAEBqgELZ3dzLXdpei1pbWfAAQE&sclient=img&ei=LGq9X7-oCdf2lwSO87nABQ&bih=969&biw=1920&client=ubuntu" ></a>
-                            <h1 class="item__title">Fried Cauliflower salad</h1>
-                            <p class="item__author">Lunch</p>
-                        </div>
-                        <div class="mt-auto" >
-                            <span class="item__tag">#see recipe</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `)
-
-    $("#food_masonry_section").css({                    
-        "background-color": '#fff',
-        "position":         "relative",
-        "width":            screen_width_in_px,
-    }); 
-
-
-    var masonry_container    = SVG().addTo("#food_masonry_section")
-    var masonry_container_gr = masonry_container.nested()
-    masonry_container_gr.attr({
-        x: 100
-    })
-
-    $('#masonry_food').masonry({
-        // options
-        itemSelector: '.item',
-        columnWidth: 24, 
-        percentPosition: true
-    });
-
-    $('.item img').on('load', ()=>{
-		$('#masonry_food').masonry();
-    });
-
 
     //------------------BLOG MASONRY-------------------------//
-    $("#moodboard").append(`
+    $("#moodboard #masonry_container").append(`
         <div id="blog_masonry_section">
 
-            <h1>Nourishing body & mind</h1>
-            <p>Self-care essentials</p>
-                <div id="masonry_blog">
-                    <div class="blog_item">
-                        #shoes
-                        <img src="./../portfolio-app-media/masonry/blog_media/self_care_6.png">
-                    </div>
-                    <div class="blog_item">
-                        #bamboo_shampoo
-                        <img src="./../portfolio-app-media/masonry/blog_media/self_care_2.png">
-                    </div>
-                    <div class="blog_item">
-                        #plant
-                        <img src="./../portfolio-app-media/masonry/blog_media/self_care_3.png">
-                    </div>
-                    <div class="blog_item">
-                        #t-shirts
-                        <img src="./../portfolio-app-media/masonry/blog_media/self_care_5.png">
-                    </div>
-                    <div class="blog_item">
-                        #scrubs
-                        <img src="./../portfolio-app-media/masonry/blog_media/self_care_4.png">
-                    </div>
-                    <div class="blog_item">
-                        #women_smiling
-                        <img src="./../portfolio-app-media/masonry/blog_media/self_care_8.png">
-                    </div>
-                    <div class="blog_item">
-                        #vitality_shot
-                        <img src="./../portfolio-app-media/masonry/blog_media/self_care_7.png">
-                    </div>
-                    <div class="blog_item">
-                        #perfume
-                        <img src="./../portfolio-app-media/masonry/blog_media/self_care_1.png">    
-                    </div>
+        <h1>Inspiring art</h1>
+        <p>Typography, illustrations & installations</p>
+            <div id="masonry_blog">
+                <div class="blog_item">
+                    #Paula Scher
+                    <img src="./../portfolio-app-media/masonry/blog_media/paula_10.png">
                 </div>
-        </div>
+                <div class="blog_item">
+                    #Paula Scher
+                    <img src="./../portfolio-app-media/masonry/blog_media/paula_3.png">
+                </div>
+                <div class="blog_item">
+                    #Paula Scher
+                    <img src="./../portfolio-app-media/masonry/blog_media/paula_5.png">
+                </div>
+                <div class="blog_item">
+                    #Paula Scher
+                    <img src="./../portfolio-app-media/masonry/blog_media/paula_6.png">
+                </div>
+                <div class="blog_item">
+                    #Paula Scher
+                    <img src="./../portfolio-app-media/masonry/blog_media/paula_8.png">
+                </div>
+                <div class="blog_item">
+                    #Paula Scher
+                    <img src="./../portfolio-app-media/masonry/blog_media/paula_1.png">
+                </div>
+                <div class="blog_item">
+                    #Paula Scher
+                    <img src="./../portfolio-app-media/masonry/blog_media/paula_11.png">    
+                </div>
+                <div class="blog_item">
+                    #Paula Scher
+                    <img src="./../portfolio-app-media/masonry/blog_media/paula_12.png">    
+                </div>
+                <div class="blog_item">
+                    #Paula Scher
+                    <img src="./../portfolio-app-media/masonry/blog_media/paula_13.png">    
+                </div>
+                <div class="blog_item">
+                    #Paula Scher
+                    <img src="./../portfolio-app-media/masonry/blog_media/paula_14.png">    
+                </div>
+                <div class="blog_item">
+                    #Paula Scher
+                    <img src="./../portfolio-app-media/masonry/blog_media/paula_15.png">    
+                </div>
+
+
+                <div class="blog_item">
+                    #christoph niemann
+                    <img src="./../portfolio-app-media/masonry/blog_media/n_1.png">
+                </div>
+                <div class="blog_item">
+                    #christoph niemann
+                    <img src="./../portfolio-app-media/masonry/blog_media/n_2.png">
+                </div>
+                <div class="blog_item">
+                    #christoph niemann
+                    <img src="./../portfolio-app-media/masonry/blog_media/n_3.png">
+                </div>
+                <div class="blog_item">
+                    #christoph niemann
+                    <img src="./../portfolio-app-media/masonry/blog_media/n5.png">
+                </div>
+                <div class="blog_item">
+                    #christoph niemann
+                    <img src="./../portfolio-app-media/masonry/blog_media/n6.png">
+                </div>
+                <div class="blog_item">
+                    #christoph niemann
+                    <img src="./../portfolio-app-media/masonry/blog_media/n7.png">
+                </div>
+                <div class="blog_item">
+                    #christoph niemann
+                    <img src="./../portfolio-app-media/masonry/blog_media/n8.png">
+                </div>
+                <div class="blog_item">
+                    #christoph niemann
+                    <img src="./../portfolio-app-media/masonry/blog_media/n9.png">    
+                </div>
+                <div class="blog_item">
+                    #christoph niemann
+                    <img src="./../portfolio-app-media/masonry/blog_media/n10.png">    
+                </div>                    
+                <div class="blog_item">
+                    #christoph niemann
+                    <img src="./../portfolio-app-media/masonry/blog_media/n11.png">    
+                </div>                    
+                <div class="blog_item">
+                    #christoph niemann
+                    <img src="./../portfolio-app-media/masonry/blog_media/n12.png">    
+                </div>
+                <div class="blog_item">
+                    #Olafur Eliasson
+                    <img src="./../portfolio-app-media/masonry/blog_media/oe.png">    
+                </div>
+                <div class="blog_item">
+                    #Olafur Eliasson
+                    <img src="./../portfolio-app-media/masonry/blog_media/oe1.png">    
+                </div>
+                <div class="blog_item">
+                    #Olafur Eliasson
+                    <img src="./../portfolio-app-media/masonry/blog_media/oe2.png">    
+                </div>
+                <div class="blog_item">
+                    #Olafur Eliasson
+                    <img src="./../portfolio-app-media/masonry/blog_media/oe3.png">    
+                </div>
+                <div class="blog_item">
+                    #Olafur Eliasson
+                    <img src="./../portfolio-app-media/masonry/blog_media/oe4.png">    
+                </div>
+            </div>
+    </div>
     `)
 
     $("#blog_masonry_section").css({                    
-        "background-color": '#fff',
+        "background-color": '#AC3323',
         "position":         "relative",
         "width":            screen_width_in_px,
     }); 
@@ -775,7 +660,7 @@ function moodboard__video(screen_width_in_px, screen_height){
     </div>`);
 
     $("#video__info").css({                    
-        "background-color": '#4a6696c9',
+        "background-color": '#732424',
         "position":         "relative",
         "height":           screen_height,
         "width":            screen_width_in_px

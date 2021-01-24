@@ -2,19 +2,19 @@ function get_colors() {
 
     var colors_map = {
         "home_page": {
-            "main_color": "#BF1F1F"
+            "main_color": "#c12d2dff"
         },
         "about": {
-            "main_color": "#d9d26cff"
+            "main_color": "#f28705ff"
         },
         "web_design": {
-            "main_color": "#b42541e6"
+            "main_color": "#df7f6cff"
         },
         "web_development": {
-            "main_color": "#ffc13b"
+            "main_color": "#812f3eff"
         },
         "moodboard": {
-            "main_color": "#2d0092ff"
+            "main_color": "#d15e37ff"
         },
     }
 

@@ -61,7 +61,7 @@ function about__create_responsive(bar_gr) {
     var screen_height      = window.innerHeight;
 
     $("#about #wrapper").css({                    
-        "background-color": '#ebf2edff',
+        "background-color": '#d8d8d8ff',
         "position":         "relative",
         "height":           screen_height,
         "width":            screen_width_in_px
@@ -69,9 +69,9 @@ function about__create_responsive(bar_gr) {
 
 
     $("#about #headline__info").css({                    
-        "background-color": '#3c5c53ff',
+        "background-color": '#4c4c48ff',
         "position":         "relative",
-        "height":           screen_height/2,
+        "height":           screen_height/2.5,
         "width":            screen_width_in_px,
         
     }); 
@@ -85,7 +85,7 @@ function about__create_responsive(bar_gr) {
     console.log(bounding_rect.top, bounding_rect.right, bounding_rect.bottom, bounding_rect.left);
 
     $("#about #intro__info").css({                    
-        "background-color": '#3c5c53ff',
+        "background-color": '#4c4c48ff',
         "position":         "relative",
         "height":           screen_height,
         "width":            screen_width_in_px,
@@ -96,7 +96,7 @@ function about__create_responsive(bar_gr) {
     var intro__div_bottom_y  = intro__bounding_rect.bottom;
 
     $("#about #history__info").css({                    
-        "background-color": '#3c5c53ff',
+        "background-color": '#4c4c48ff',
         "position":         "relative",
         "height":           screen_height,
         "width":            screen_width_in_px,
@@ -104,7 +104,7 @@ function about__create_responsive(bar_gr) {
     }); 
 
     $("#about #process__info").css({                    
-        "background-color": '#3c5c53ff',
+        "background-color": '#4c4c48ff',
         "position":         "relative",
         "height":           screen_height,
         "width":            screen_width_in_px,
@@ -112,7 +112,7 @@ function about__create_responsive(bar_gr) {
     }); 
 
     $("#about #video__info").css({                    
-        "background-color": '#3c5c53ff',
+        "background-color": '#262626ff',
         "position":         "relative",
         "height":           screen_height,
         "width":            screen_width_in_px,
@@ -254,12 +254,16 @@ function about__create_background__desktop(parent_gr, bar_gr, screen_width_in_px
         })
 
     //CALL MENU FUNCTION
-    var menu_rect = about_layout_gr.rect(50,50)
+    var menu_rect_gr = parent_gr.nested()
     .attr({
-        fill: '#dad372ff',
-        x: 170,
+        x: 100,
         y: 100
     })
+    var menu_rect         = menu_rect_gr.rect(50,50).attr({ opacity: 0.0, color: '#f18b0fff'})
+    var menu_line_top     = menu_rect_gr.line(3, 20, 40, 20).stroke({ width: 5, color: '#f18b0fff', linecap: 'round' })
+    var menu_line_midddle = menu_rect_gr.line(3, 35, 40, 35).stroke({ width: 5, color: '#f18b0fff', linecap: 'round' })
+    var menu_line_bottom  = menu_rect_gr.line(3, 50, 40, 50).stroke({ width: 5, color: '#f18b0fff', linecap: 'round' })
+
 
     var menu_rect_clicked = false;
 
@@ -301,7 +305,7 @@ function about__quote_and_scroll__desktop(parent_gr, screen_width_in_px, screen_
             .font({
                 opacity: 1.0,
                 weight:  700,
-                fill:    '#3c5c53ff',
+                fill:    '#6b1427ff',
                 family:  'Quicksand',
                 size:    60
             })    
@@ -322,8 +326,8 @@ function about__quote_and_scroll__desktop(parent_gr, screen_width_in_px, screen_
         })
             .font({
                 opacity: 1.0,
-                weight:  400,
-                fill:    '#3c5c53ff',
+                weight:  700,
+                fill:    '#6b1427ff',
                 family:  'Quicksand',
                 size:    34
             })    
@@ -338,7 +342,7 @@ function about__quote_and_scroll__desktop(parent_gr, screen_width_in_px, screen_
             .font({
                 opacity: 1.0,
                 weight:  700,
-                fill:    '#3c5c53ff',
+                fill:    '#6b1427ff',
                 family:  'Quicksand',
                 size:    60
             })    
@@ -354,7 +358,7 @@ function about__quote_and_scroll__desktop(parent_gr, screen_width_in_px, screen_
             .font({
                 opacity: 1.0,
                 weight:  400,
-                fill:    '#3c5c53ff',
+                fill:    '#6b1427ff',
                 family:  'Quicksand',
                 size:    18
             })   
@@ -369,7 +373,7 @@ function about__quote_and_scroll__desktop(parent_gr, screen_width_in_px, screen_
 
         var arrow_gr = text_gr.nested()
         var scroll_arrow = arrow_gr.path('m 53.347282,72.845957 3.5908,3.9688 3.9687,-3.9688 z m 3.7797,-28.829789 c 0,9.613609 0,19.227511 0,28.841609')
-        scroll_arrow.stroke({ color: '#f06', width: 4, linecap: 'round', linejoin: 'round' })
+        scroll_arrow.stroke({ color: '#262626ff', width: 4, linecap: 'round', linejoin: 'round' })
         /*var scroll_arrow_gr = scroll_gr.nested()
         var scroll_arrow = SVG(`<g
         inkscape:label="Layer 1"
@@ -423,7 +427,7 @@ function about__images__desktop(parent_gr, screen_width_in_px, screen_height){
 
         'elements_data':[
             {
-                'img_url':   './../portfolio-app-media/media/00.png',
+                'img_url':   './../portfolio-app-media/media/a_1.png',
                 'height':     '350',
                 'position_x': 0,
                 'position_y': 0,
@@ -431,7 +435,7 @@ function about__images__desktop(parent_gr, screen_width_in_px, screen_height){
                 'view_box_y': '0'
             },
             {
-                'img_url':   './../portfolio-app-media/media/01.png',
+                'img_url':   './../portfolio-app-media/media/a_2.png',
                 'height':     '350', // %
                 'position_x': rect_width+15,
                 'position_y': 0,
@@ -439,7 +443,7 @@ function about__images__desktop(parent_gr, screen_width_in_px, screen_height){
                 'view_box_y': '0'
             },
             {
-                'img_url':   './../portfolio-app-media/media/02.png',
+                'img_url':   './../portfolio-app-media/media/a_3.png',
                 'height':     '650',
                 'position_x': rect_width*2+30,
                 'position_y': 190,
@@ -448,7 +452,7 @@ function about__images__desktop(parent_gr, screen_width_in_px, screen_height){
             },
 
             {
-                'img_url':   './../portfolio-app-media/media/03.png',
+                'img_url':   './../portfolio-app-media/media/a_4.png',
                 'height':     '160',
                 'position_x': rect_width*3+45,
                 'position_y': 190,
@@ -456,7 +460,7 @@ function about__images__desktop(parent_gr, screen_width_in_px, screen_height){
                 'view_box_y': '0'
             },
             {
-                'img_url':   './../portfolio-app-media/media/04.png',
+                'img_url':   './../portfolio-app-media/media/a_5.png',
                 'height':     '350',
                 'position_x': rect_width*3+45,
                 'position_y': 525,
@@ -464,7 +468,7 @@ function about__images__desktop(parent_gr, screen_width_in_px, screen_height){
                 'view_box_y': '0'
             },
             {
-                'img_url':   './../portfolio-app-media/media/05.png',
+                'img_url':   './../portfolio-app-media/media/a_6.png',
                 'height':     '650',
                 'position_x': rect_width*4+60,
                 'position_y': 190,
@@ -472,7 +476,7 @@ function about__images__desktop(parent_gr, screen_width_in_px, screen_height){
                 'view_box_y': '0'
             },
             {
-                'img_url':   './../portfolio-app-media/media/06.png',
+                'img_url':   './../portfolio-app-media/media/a_7.png',
                 'height':     '160',
                 'position_x': rect_width*5+75,
                 'position_y': 363,
@@ -480,7 +484,7 @@ function about__images__desktop(parent_gr, screen_width_in_px, screen_height){
                 'view_box_y': '0'
             },
             {
-                'img_url':   './../portfolio-app-media/media/07.png',
+                'img_url':   './../portfolio-app-media/media/a_8.png',
                 'height':     '350',
                 'position_x': rect_width*5+75,
                 'position_y': 535,
@@ -577,7 +581,7 @@ function about__images__desktop(parent_gr, screen_width_in_px, screen_height){
 
     var a_rect = a_rect_gr.rect(a_rect_width,rect_height)
     a_rect.attr({
-            fill: "#d9d26cff",
+            fill: "#f18b0fff",
             x: a_rect_x,
             y: a_rect_y-rect_height
         })
@@ -590,7 +594,7 @@ function about__images__desktop(parent_gr, screen_width_in_px, screen_height){
 
     var b_rect = b_rect_gr.rect(b_rect_width,rect_height)
     b_rect.attr({
-            fill: "#d9d26cff",
+            fill: "#f18b0fff",
             x: b_rect_x,
             y: b_rect_y-rect_height
         })
@@ -603,7 +607,7 @@ function about__images__desktop(parent_gr, screen_width_in_px, screen_height){
  
     var c_rect = c_rect_gr.rect(c_rect_width,rect_height)
         .attr({
-            fill: "#d9d26cff",
+            fill: "#f18b0fff",
             x: c_rect_x,
             y: c_rect_y-rect_height-13
         })
@@ -613,7 +617,7 @@ function about__headline___info(parent_gr, screen_width_in_px, screen_height){
     var headline_gr = parent_gr.nested()
 
     var yellow_rect = headline_gr.rect(screen_width_in_px/2-350,100)
-        .fill('#d9d26cff')
+        .fill('#f18b0fff')
     yellow_rect.attr({
         id:      "yellow_rect",
         opacity: 1.0,
@@ -627,7 +631,7 @@ function about__headline___info(parent_gr, screen_width_in_px, screen_height){
          .font({
              opacity: 1.0,
              weight:  700,
-             fill:    '#2a3d35ef',
+             fill:    '#d8d8d8ff',
              family:  'Quicksand',
              size:    56
          })    
@@ -643,7 +647,7 @@ function about__headline___info(parent_gr, screen_width_in_px, screen_height){
         .font({
              opacity: 1.0,
              weight:  700,
-             fill:    '#2a3d35ef',
+             fill:    '#d8d8d8ff',
              family:  'Quicksand',
              size:    360
         })    
@@ -730,7 +734,7 @@ function history__info(parent_gr, screen_width_in_px, screen_height){
     .font({
         opacity: 1.0,
         weight:  700,
-        fill:    '#b4bebbff',
+        fill:    '#cc7c1bff',
         family:  'Quicksand',
         size:    32
     })    

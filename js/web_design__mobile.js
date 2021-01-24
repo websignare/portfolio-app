@@ -58,7 +58,7 @@ function web_design__mobile__create_responsive(bar_gr) {
 
     //-------STYLE-------
     $("#web_design__mobile").css({                    
-        "background-color": '#fcd8acd6',
+        "background-color": '#d8d8d8ff',
         "position":         "relative",
         "width":             screen_width_in_px
     }); 
@@ -157,10 +157,10 @@ function web_design_mobile_headline__info(parent_gr, bar_gr, screen_width_in_px,
         x: 32,
         y: 15
     })
-    var menu_rect         = menu_rect_gr.rect(50,50).attr({ opacity: 0.0, color: '#fdc296ff'})
-    var menu_line_top     = menu_rect_gr.line(3, 20, 40, 20).stroke({ width: 5, color: '#fdc296ff', linecap: 'round' })
-    var menu_line_midddle = menu_rect_gr.line(3, 35, 40, 35).stroke({ width: 5, color: '#fdc296ff', linecap: 'round' })
-    var menu_line_bottom  = menu_rect_gr.line(3, 50, 40, 50).stroke({ width: 5, color: '#fdc296ff', linecap: 'round' })
+    var menu_rect         = menu_rect_gr.rect(50,50).attr({ opacity: 0.0, color: '#df7f6cff'})
+    var menu_line_top     = menu_rect_gr.line(3, 20, 40, 20).stroke({ width: 5, color: '#df7f6cff', linecap: 'round' })
+    var menu_line_midddle = menu_rect_gr.line(3, 35, 40, 35).stroke({ width: 5, color: '#df7f6cff', linecap: 'round' })
+    var menu_line_bottom  = menu_rect_gr.line(3, 50, 40, 50).stroke({ width: 5, color: '#df7f6cff', linecap: 'round' })
 
 
     var menu_rect_clicked = false;
@@ -195,7 +195,7 @@ function web_design_mobile_headline__info(parent_gr, bar_gr, screen_width_in_px,
 
     var pink_rect__gr = web_design__headline__gr.nested()
     var pink_rect = pink_rect__gr.rect(105,90)
-        .fill('#bb364bff')
+        .fill('#d37367ff')
     pink_rect.attr({
         id:      "pink_rect",
         opacity: 1.0,
@@ -208,9 +208,9 @@ function web_design_mobile_headline__info(parent_gr, bar_gr, screen_width_in_px,
     web_design_me_path__gr.attr({
         id:    "web_design_me_path__gr",
     })
-    web_design_me_path.fill('#651b40ff')
-    web_design_me_path.move(pink_rect.bbox().x+pink_rect.bbox().width+85,pink_rect.bbox().y+pink_rect.bbox().height/2-10)
-    web_design_me_path.scale(2.7)
+    web_design_me_path.fill('#df7f6cff')
+    web_design_me_path.move(pink_rect.bbox().x+pink_rect.bbox().width+75,pink_rect.bbox().y+pink_rect.bbox().height/2-10)
+    web_design_me_path.scale(2.4)
     web_design_me_path.attr({id: 'web_design_me_path'})
 
     //////////////////////////////////////////////////////////////////////////////////
@@ -225,9 +225,9 @@ function web_design_mobile_headline__info(parent_gr, bar_gr, screen_width_in_px,
 
     console.log(rect_height, "visina!!!!!!!!")
 
-    var background_img = "./../portfolio-app-media/media/design__mobile__img.png"
+    var background_img = "./../portfolio-app-media/media/design2_image.png"
     
-    web_design_create__image(wd_background_img__gr, background_img, rect_width, rect_height, 0, 0, 0.6, 0, 0)
+    web_design_create__image(wd_background_img__gr, background_img, rect_width, rect_height, 0, 0, 0.8, 0, 0)
 
     var paragraphs = wd_background_img__gr.nested()
     paragraphs.attr({
@@ -630,7 +630,7 @@ function web_design_video__mobile(parent_gr, screen_width_in_px, screen_height){
         </div>`);
 
     $("#web_design__mobile #video__info").find("#video_mobile__container").css({
-        opacity: 0.4
+        opacity: 0.6
     });
 
     $("#web_design__mobile #video__info").find("#video__a").css({

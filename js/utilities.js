@@ -424,8 +424,8 @@ function run_page_transition(target_page_name, transition_type, current_page_nam
 function pulsating_circle(parent_gr, animation_time, screen_width, screen_height){
     var circle_button_gr = parent_gr.nested()
 
-    var circle_button = circle_button_gr.ellipse(30).fill("#efd6b0ff").attr({cx: screen_width/2, cy: screen_height/2}).opacity(0.5)
-    var stroke_button = circle_button_gr.ellipse(34).attr({cx: screen_width/2, cy: screen_height/2}).fill("none").stroke({ color: '#efd6b0ff', width: 4}).opacity(0.5)
+    var circle_button = circle_button_gr.ellipse(30).fill("#B12F2B").attr({cx: screen_width/2, cy: screen_height/2}).opacity(0.5)
+    var stroke_button = circle_button_gr.ellipse(34).attr({cx: screen_width/2, cy: screen_height/2}).fill("none").stroke({ color: '#B12F2B', width: 4}).opacity(0.5)
     circle_button_gr.attr({
         id:     "circle_button__gr",
         width:  screen_width,
