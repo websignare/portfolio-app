@@ -164,7 +164,6 @@ function about__tablet_create_responsive(bar_gr) {
         console.log(about_background_tablet__gr)
 
         about__images__tablet(about_background_tablet__gr, screen_width_in_px, screen_height)
-        about__quote_and_scroll__tablet(main_canvas_tablet__gr, screen_width_in_px, screen_height)
 
         about__headline_tablet__info(headline_canvas__gr, screen_width_in_px, screen_height)
         about_intro_tablet__info(intro_canvas__gr, screen_width_in_px, screen_height)
@@ -289,104 +288,6 @@ function about__create_background__tablet(parent_gr, bar_gr, screen_width_in_px,
 
 }
 
-//----------------------------------------------TEXT----------------------------------------------------------------
-function about__quote_and_scroll__tablet(parent_gr, screen_width_in_px, screen_height)
-{
-    var text_gr = parent_gr.nested()
-
-        //-----------------QUOTES------------------------
-        /*var quotes_up = text_gr.text(function(text_element){
-            text_element.tspan('"')
-        })
-            .font({
-                opacity: 1.0,
-                weight:  700,
-                fill:    '#6b1427ff',
-                family:  'Quicksand',
-                size:    50
-            })    
-        quotes_up.attr({
-            x: 0,
-            y: 0
-        })
-
-        var paragraph = text_gr.text(function(add){
-            add.tspan('Imagination is the beginning of creation.').newLine()
-            add.tspan('').newLine()
-            add.tspan('You imagine what you desire,').newLine()
-            add.tspan('you will what you imagine,').newLine()
-            add.tspan('and at last, ').newLine() 
-            add.tspan('you create what you will.').newLine()
-            add.tspan('').newLine() 
-            add.tspan('-George Bernand Shaw').newLine().dx(180).font({size:'18'})
-        })
-            .font({
-                opacity: 1.0,
-                weight:  700,
-                fill:    '#6b1427ff',
-                family:  'Quicksand',
-                size:    22
-            })    
-        paragraph.attr({
-            x: 30,
-            y: 0
-        })  
-
-        var quotes_down = text_gr.text(function(text_element){
-            text_element.tspan('"')
-        })
-            .font({
-                opacity: 1.0,
-                weight:  700,
-                fill:    '#6b1427ff',
-                family:  'Quicksand',
-                size:    50
-            })    
-        quotes_down.attr({
-            x: 0,
-            y: 0
-        })
-
-        var scroll_gr = text_gr.nested()
-        var scroll_text = scroll_gr.text(function(text_element){
-            text_element.tspan('Scroll & read a little about me')
-        })
-            .font({
-                opacity: 1.0,
-                weight:  400,
-                fill:    '#6b1427ff',
-                family:  'Quicksand',
-                size:    18
-            })   
-        scroll_text.attr({
-            x: 0,
-            y: 0
-        }) 
-        scroll_gr.attr({
-            x: paragraph.bbox().x,
-            y: paragraph.bbox().y+paragraph.bbox().height+105
-        })
-
-        var arrow_gr = text_gr.nested()
-        var scroll_arrow = arrow_gr.path('m 53.347282,72.845957 3.5908,3.9688 3.9687,-3.9688 z m 3.7797,-28.829789 c 0,9.613609 0,19.227511 0,28.841609')
-        scroll_arrow.stroke({ color: '#262626ff', width: 4, linecap: 'round', linejoin: 'round' })
-
-        arrow_gr.attr({
-            id:     'scroll_arrow',
-            x: 0,
-            y: 0
-        }) 
-        arrow_gr.scale(1)
-
-        text_gr.attr({
-            x:     50,
-            y:     screen_height/2,
-            id:    "text_gr",
-            width: text_gr.bbox().width,
-            height: text_gr.bbox().height,
-        })*/
-}
-
 //----------------------------------------------IMAGES-DESKTOP----------------------------------------------------------------
 function about__images__tablet(parent_gr, screen_width_in_px, screen_height){
 
@@ -404,7 +305,7 @@ function about__images__tablet(parent_gr, screen_width_in_px, screen_height){
         'elements_data':[
 
             {
-                'img_url':   './../portfolio-app-media/media/a_2.png',
+                'img_url':   './../portfolio-app-media/media/aa1.png',
                 'height':     '350', // %
                 'position_x': rect_width+15,
                 'position_y': 0,
@@ -412,7 +313,7 @@ function about__images__tablet(parent_gr, screen_width_in_px, screen_height){
                 'view_box_y': '0'
             },
             {
-                'img_url':   './../portfolio-app-media/media/a_3.png',
+                'img_url':   './../portfolio-app-media/media/aa2.png',
                 'height':     '650',
                 'position_x': rect_width*2+30,
                 'position_y': 190,
@@ -421,7 +322,7 @@ function about__images__tablet(parent_gr, screen_width_in_px, screen_height){
             },
 
             {
-                'img_url':   './../portfolio-app-media/media/a_4.png',
+                'img_url':   './../portfolio-app-media/media/aa3.png',
                 'height':     '155',
                 'position_x': rect_width*3+45,
                 'position_y': 235,
@@ -429,7 +330,7 @@ function about__images__tablet(parent_gr, screen_width_in_px, screen_height){
                 'view_box_y': '0'
             },
             {
-                'img_url':   './../portfolio-app-media/media/a_5.png',
+                'img_url':   './../portfolio-app-media/media/aa4.png',
                 'height':     '350',
                 'position_x': rect_width*3+45,
                 'position_y': 525,
@@ -437,15 +338,15 @@ function about__images__tablet(parent_gr, screen_width_in_px, screen_height){
                 'view_box_y': '0'
             },
             {
-                'img_url':   './../portfolio-app-media/media/a_6.png',
-                'height':     '160',
+                'img_url':   './../portfolio-app-media/media/aa5.png',
+                'height':     '155',
                 'position_x': rect_width*4.52,
-                'position_y': 350,
+                'position_y': 235,
                 'view_box_x': '0',
                 'view_box_y': '0'
             },
             {
-                'img_url':   './../portfolio-app-media/media/a_8.png',
+                'img_url':   './../portfolio-app-media/media/aa6.png',
                 'height':     '350',
                 'position_x': rect_width*4.52,
                 'position_y': 525,
@@ -516,8 +417,8 @@ function about__images__tablet(parent_gr, screen_width_in_px, screen_height){
     }
                      about_create_tablet__image(images_gr, img_url_0, rect_width, height_0, position_x_0, position_y_0, view_box_x, view_box_y)
     var image_gr_1 = about_create_tablet__image(images_gr, img_url_1, rect_width, height_1, position_x_1, position_y_1, view_box_x, view_box_y)
-                     about_create_tablet__image(images_gr, img_url_2, rect_width, height_2, position_x_2, position_y_2, view_box_x, view_box_y)
-    var image_gr_3 = about_create_tablet__image(images_gr, img_url_3, rect_width, height_3, position_x_3, position_y_3, view_box_x, view_box_y)
+    var image_gr_3 = about_create_tablet__image(images_gr, img_url_2, rect_width, height_2, position_x_2, position_y_2, view_box_x, view_box_y)
+                     about_create_tablet__image(images_gr, img_url_3, rect_width, height_3, position_x_3, position_y_3, view_box_x, view_box_y)
     var image_gr_5 = about_create_tablet__image(images_gr, img_url_4, rect_width, height_4, position_x_4, position_y_4, view_box_x, view_box_y)
                      about_create_tablet__image(images_gr, img_url_5, rect_width, height_5, position_x_5, position_y_5, view_box_x, view_box_y)
     //var image_gr_5 = about_create_tablet__image(images_gr, img_url_5, rect_width, height_5, position_x_5, position_y_5, view_box_x, view_box_y)
@@ -548,7 +449,7 @@ function about__images__tablet(parent_gr, screen_width_in_px, screen_height){
     b_rect.attr({
             fill: "#f18b0fff",
             x: b_rect_x,
-            y: b_rect_y-rect_height
+            y: b_rect_y+image_gr_3.height()
         })
 
     // C__RECT 
@@ -561,8 +462,77 @@ function about__images__tablet(parent_gr, screen_width_in_px, screen_height){
         .attr({
             fill: "#f18b0fff",
             x: c_rect_x,
-            y: c_rect_y-rect_height
+            y: c_rect_y+image_gr_5.height()
         })
+
+    /////////////////////////////////////////////////////////////////////
+    var text_gr = parent_gr.nested()
+
+    //-----------------QUOTES------------------------
+
+    var paragraph = text_gr.text(function(add){
+        add.tspan('Imagination is the beginning of creation.').newLine()
+        add.tspan('').newLine()
+        add.tspan('You imagine what you desire,').newLine()
+        add.tspan('you will what you imagine,').newLine()
+        add.tspan('and at last, ').newLine() 
+        add.tspan('you create what you will.').newLine()
+        add.tspan('').newLine() 
+        add.tspan('- George Bernand Shaw').newLine().dx(180).font({size:'18'})
+    })
+        .font({
+            opacity: 1.0,
+            weight:  700,
+            fill:    '#6b1427ff',
+            family:  'Quicksand',
+            size:    20
+        })    
+    paragraph.attr({
+        x: 50,
+        y: 0
+    })  
+
+
+
+    /*var scroll_text = scroll_gr.text(function(text_element){
+        text_element.tspan('Scroll & read a little about me')
+    })
+        .font({
+            id: "#scroll_text",
+            opacity: 1.0,
+            weight:  500,
+            fill:    '#6b1427ff',
+            family:  'Quicksand',
+            size:    16
+        })   
+    scroll_text.attr({
+        x: 0,
+        y: 60
+    }) */
+    var scroll_gr = text_gr.nested()
+
+    scroll_gr.attr({
+        id: "#scroll_gr",
+    })
+
+    var arrow_gr = scroll_gr.nested()
+    var scroll_arrow = arrow_gr.path('m 53.347282,72.845957 3.5908,3.9688 3.9687,-3.9688 z m 3.7797,-28.829789 c 0,9.613609 0,19.227511 0,28.841609')
+    scroll_arrow.stroke({ color: '#6b1427ff', width: 4, linecap: 'round', linejoin: 'round' })
+
+    arrow_gr.attr({
+        id:     'scroll_arrow',
+        x:      50,
+        y:      85
+    }) 
+    arrow_gr.scale(3.5)
+
+    text_gr.attr({
+        x: 50,
+        y: screen_height/2.1,
+        id: "text_gr",
+        height: screen_height/2,
+        width: screen_width_in_px/2
+    })
 }
 
 function about__headline_tablet__info(parent_gr, screen_width_in_px, screen_height){
@@ -644,7 +614,7 @@ function about_intro_tablet__info(parent_gr, screen_width_in_px, screen_height){
 
     var paragraph__a = images_gr.text(function(add){
             add.tspan('My  name is Nevena. I am Junior').dx('50')
-            add.tspan('UI | UX web designer & developer').fill('#2a3d35ef').font('size','42').dx('-20').newLine()
+            add.tspan('UI | UX web designer & developer').fill('#2a3d35ef').font('size','38').dx('-20').newLine()
             add.tspan('currently based in Belgrade, Serbia.').dx('0').newLine()
         })
         .font({
@@ -652,11 +622,11 @@ function about_intro_tablet__info(parent_gr, screen_width_in_px, screen_height){
             weight:  700,
             fill:    '#ebf2edff',
             family:  'Quicksand',
-            size:    36
+            size:    32
         })    
     paragraph__a.attr({
         id: 'paragraph__a',
-        x: 240,
+        x: screen_width_in_px/2-paragraph__a.bbox().width/2,
         y: screen_height/2-paragraph__a.bbox().height/2
     }) 
 
@@ -686,12 +656,12 @@ function history_tablet__info(parent_gr, screen_width_in_px, screen_height){
     .font({
         opacity: 1.0,
         weight:  700,
-        fill:    '#cc7c1bff',
+        fill:    '#fff',
         family:  'Quicksand',
-        size:    32
+        size:    26
     })    
     paragraph_gr.attr({
-        x: screen_width_in_px/2,
+        x: screen_width_in_px-paragraph_gr.bbox().width-20,
         y: screen_height/2-paragraph__b.bbox().height/2
     })
     paragraph__b.attr({
@@ -726,11 +696,11 @@ function process_tablet__info(parent_gr, screen_width_in_px, screen_height){
         weight:  700,
         fill:    '#ebf2edff',
         family:  'Quicksand',
-        size:    36
+        size:    30
     })    
     paragraph__c.attr({
         id: 'paragraph__c',
-        x: 240,
+        x: screen_width_in_px/2-paragraph__c.bbox().width/2,
         y: screen_height/2-paragraph__c.bbox().height/2
     }) 
 
