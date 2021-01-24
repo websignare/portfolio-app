@@ -269,7 +269,7 @@ function web_development__quote_and_scroll__desktop(parent_gr, screen_width_in_p
             weight:  700,
             fill:    '#4f7779ff',
             family:  'Quicksand',
-            size:    28
+            size:    26
         })    
     paragraph_gr.attr({
         x: (screen_width_in_px/2)/8,
@@ -360,7 +360,7 @@ function web_development__images__desktop(parent_gr, screen_width_in_px, screen_
                 'view_box_y': '0'
             },*/
             {
-                'img_url':   './../portfolio-app-media/media/d_1.png',
+                'img_url':   './../portfolio-app-media/media/dd_1.png',
                 'width':     rect_width/2.25, // %
                 'position_x': screen_width_in_px/2-rect_width/2,
                 'position_y': 45,

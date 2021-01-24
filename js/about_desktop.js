@@ -322,14 +322,14 @@ function about__quote_and_scroll__desktop(parent_gr, screen_width_in_px, screen_
             add.tspan('and at last, ').newLine() 
             add.tspan('you create what you will.').newLine()
             add.tspan('').newLine() 
-            add.tspan('-George Bernand Shaw').newLine().dx(310).font({size:'28'})
+            add.tspan('-George Bernand Shaw').newLine().dx(310).font({size:'24'})
         })
             .font({
                 opacity: 1.0,
                 weight:  700,
                 fill:    '#6b1427ff',
                 family:  'Quicksand',
-                size:    34
+                size:    26
             })    
         paragraph.attr({
             x: 240,
