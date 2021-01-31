@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Triggers</title>
+    <link rel="icon" 
+      type="image/png" 
+      href="./../portfolio-app-media/media/icon.png">
+      
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;700&display=swap" rel="stylesheet"> 
+
+    <script src="./libs/svg_3.0.16.js"></script>
+    <script src="./libs/jquery-3.5.1.js"></script>
+
+    <script src="./js/utils/scroll_triggers.js"></script>
+    
+    <script>
+        $(document).ready(function(){
+            main()
+        })
+
+        var screen_height = window.innerHeight;
+        
+        function main(){
+            sc_trigger__create("1000",
+                "first_trigger",
+                screen_height,
+                // activate_fn
+                function() {
+                    $("#a").css({
+                        "background-color": "green"
+                    })
+                },
+                // deactivate
+                function() {
+                    $("#a").css({
+                        "background-color": "red"
+                    })
+                });
+
+                sc_trigger__create("2000",
+                "second_trigger",
+                screen_height,
+                // activate_fn
+                function() {
+                    $("#b").css({
+                        "background-color": "green"
+                    })
+                },
+                // deactivate
+                function() {
+                    $("#b").css({
+                        "background-color": "red"
+                    })
+                });
+        }
+    </script>
+
+</head>
+<body>
+
+    <div id="a" style="background-color: green; width: 40px; height: 50px; position: fixed; top: 200px">
+
+    </div>
+    
+    
+    <div id="b" style="background-color: green; width: 40px; height: 50px; position: fixed; top: 400px">
+
+    </div>
+
+
+
+
+</body>
+</html>

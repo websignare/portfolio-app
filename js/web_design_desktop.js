@@ -46,7 +46,8 @@ function web_design__deactivate() {
     $("#web_design").remove();
     $("#contact_wrapper").remove();
 
-    /*remove_triggers("contact_canvas__trigger") // contact_canvas TRIGGER*/
+    remove_triggers("artist_canvas__trigger") // contact_canvas TRIGGER*/
+    remove_triggers("suprematism_canvas__trigger")
 
 }
     
@@ -75,6 +76,11 @@ function web_design_create_responsive(bar_gr) {
         "height":           screen_height,
         "width":            screen_width_in_px
     }); 
+    var bounding_rect         = $("#web_design #artist_portfolio__info").get(0).getBoundingClientRect()
+    var artist__div_bottom_y = bounding_rect.bottom;
+    console.log(bounding_rect.top, bounding_rect.right, bounding_rect.bottom, bounding_rect.left);
+
+
 
     $("#web_design #suprematism__info").css({                    
         "background-color": '#df7f6cff',
@@ -82,6 +88,11 @@ function web_design_create_responsive(bar_gr) {
         "height":           screen_height,
         "width":            screen_width_in_px
     }); 
+
+    var bounding_rect         = $("#web_design #suprematism__info").get(0).getBoundingClientRect()
+    var suprematism__div_bottom_y = bounding_rect.bottom;
+    console.log(bounding_rect.top, bounding_rect.right, bounding_rect.bottom, bounding_rect.left);
+
 
     $("#deep_blue__info").css({                    
         "background-color": '#df7f6cff',
@@ -105,11 +116,13 @@ function web_design_create_responsive(bar_gr) {
     var headline__container_gr         = headline_container.nested()
 
     var artist_portfolio__container    = SVG().addTo("#web_design #artist_portfolio__info").size(screen_width_in_px, screen_height)
-    var artist_portfolio__container_gr = artist_portfolio__container.nested()   
+    var artist_portfolio__container_gr = artist_portfolio__container.nested()
+    artist_portfolio__container_gr.attr({opacity: 1.0})   
   
     var suprematism__container         = SVG().addTo("#web_design #suprematism__info").size(screen_width_in_px, screen_height)
     var suprematism__container_gr      = suprematism__container.nested()   
-   
+    suprematism__container_gr.attr({opacity: 1.0})   
+
     var deep_blue__container           = SVG().addTo("#web_design #deep_blue__info").size(screen_width_in_px, screen_height)
     var deep_blue__container_gr        = deep_blue__container.nested()  
     
@@ -156,7 +169,58 @@ function web_design_create_responsive(bar_gr) {
 
         create_contact_section(screen_width_in_px, screen_height)
     }
+    // INTRO__SCROLL_TRIGGER
+    var trigger_y_position__artist_canvas = artist__div_bottom_y;
+    sc_trigger__create(trigger_y_position__artist_canvas,
+        "artist_canvas__trigger",
+        "yellow",
+        screen_height,
+        // activate_fn
+        function() {
+            artist_portfolio__container_gr.animate({
+                    duration: 400,
+                    // delay:    400, 
+                    ease: '<' 
+                })
+                .attr({opacity: 1.0})
+        },
+        // deactivate
+        function() {
+            artist_portfolio__container_gr.animate({
+                duration: 200,
+                delay:    400, 
+                ease: '<' 
+            })
+            .attr({opacity: 0.1})
+        });
+
+    // INTRO__SCROLL_TRIGGER
+    var trigger_y_position__suprematism_canvas = suprematism__div_bottom_y;
+    sc_trigger__create(trigger_y_position__suprematism_canvas,
+        "suprematism_canvas__trigger",
+        "blue",
+        screen_height,
+        // activate_fn
+        function() {
+            suprematism__container_gr.animate({
+                    duration: 400,
+                    // delay:    400, 
+                    ease: '<' 
+                })
+                .attr({opacity: 1.0})
+        },
+        // deactivate
+        function() {
+            suprematism__container_gr.animate({
+                duration: 200,
+                delay:    400, 
+                ease: '<' 
+            })
+            .attr({opacity: 0.1})
+        });
+    
 }
+
 
 //----------------------------------------------CREATE-LAYOUT-DESKTOP----------------------------------------------------------------
 function web_design__intro_section__desktop(parent_gr, bar_gr, screen_width_in_px, screen_height){

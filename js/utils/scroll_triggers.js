@@ -4,17 +4,14 @@ function sc_trigger__create(trigger_y_position, name, screen_height, activate_fn
 
     console.log("SCROLL_TRIGGER CREATE")
 
-
-
-
-    $("body").append("<div id='"+name+"'></div>");
+    $("body").append("<div id='"+name+"'>"+name+"</div>");
     $("body").find("#"+name).css({
         position: "absolute",
         right:    "0px",
         top:      trigger_y_position+"px",
         width:    "200px",
-        height:   "2px",
-        "background-color": "blue",
+        height:   "26px",
+        "background-color": "yellow",
         "z-index": 20
 
     })
@@ -51,6 +48,6 @@ function sc_trigger__create(trigger_y_position, name, screen_height, activate_fn
 
 
 function remove_triggers(name){
-    var remove_trigger = $("body").find("#"+name)
-    $("#"+name).remove();
+    var target_trigger = $("body").find("#"+name)
+    $(target_trigger).remove();
 }

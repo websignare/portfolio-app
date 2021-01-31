@@ -49,10 +49,10 @@ function about__deactivate() {
     $("#hp #wrapper").remove();
     $("#contact_wrapper").remove();
     
-    /* REMOVE/CLEANUP TRIGGERS (for this page)
-    remove_triggers("headline_canvas__trigger")
+    //REMOVE/CLEANUP TRIGGERS (for this page)
     remove_triggers("intro_canvas__trigger")
-    remove_triggers("contact_canvas__trigger") // contact_canvas TRIGGER*/
+    remove_triggers("history_canvas__trigger")
+    //remove_triggers("contact_canvas__trigger") // contact_canvas TRIGGER*/
 }
 
 function about__create_responsive(bar_gr) {
@@ -67,14 +67,6 @@ function about__create_responsive(bar_gr) {
         "width":            screen_width_in_px
     }); 
 
-
-    /*console.log("dddddddddddddddddddddddddddddddddddddddddd")
-    console.log("dddddddddddddddddddddddddddddddddddddddddd")
-    console.log("dddddddddddddddddddddddddddddddddddddddddd")
-    var bounding_rect          = $("#about #headline__info").get(0).getBoundingClientRect()
-    var headline__div_bottom_y = bounding_rect.bottom;
-    console.log(bounding_rect.top, bounding_rect.right, bounding_rect.bottom, bounding_rect.left);*/
-
     $("#about #intro__info").css({                    
         "background-color": '#262626fe',
         "position":         "relative",
@@ -83,8 +75,9 @@ function about__create_responsive(bar_gr) {
         
     }); 
 
-    var intro__bounding_rect = $("#about #intro__info").get(0).getBoundingClientRect()
-    var intro__div_bottom_y  = intro__bounding_rect.bottom;
+    var bounding_rect          = $("#about #intro__info").get(0).getBoundingClientRect()
+    var intro__div_bottom_y = bounding_rect.bottom;
+    console.log(bounding_rect.top, bounding_rect.right, bounding_rect.bottom, bounding_rect.left);
 
     $("#about #history__info").css({                    
         "background-color": '#262626fe',
@@ -93,6 +86,11 @@ function about__create_responsive(bar_gr) {
         "width":            screen_width_in_px,
         
     }); 
+
+    var bounding_rect          = $("#about #history__info").get(0).getBoundingClientRect()
+    var history__div_bottom_y = bounding_rect.bottom;
+    console.log(bounding_rect.top, bounding_rect.right, bounding_rect.bottom, bounding_rect.left);
+
 
     $("#about #process__info").css({                    
         "background-color": '#262626fe',
@@ -114,7 +112,6 @@ function about__create_responsive(bar_gr) {
     var main_canvas     = SVG().addTo("#about #about_wrapper").size(screen_width_in_px, screen_height)
     var main_canvas__gr = main_canvas.nested()   
  
-    //headline_canvas__gr.attr({opacity: 1.0})
 
     var intro_canvas     = SVG().addTo("#about #intro__info").size(screen_width_in_px, screen_height)
     var intro_canvas__gr = intro_canvas.nested()   
@@ -122,6 +119,7 @@ function about__create_responsive(bar_gr) {
 
     var history_canvas     = SVG().addTo("#about #history__info").size(screen_width_in_px, screen_height)
     var history_canvas__gr = history_canvas.nested()   
+    history_canvas__gr.attr({opacity: 1.0})
 
     var process_canvas     = SVG().addTo("#about #process__info").size(screen_width_in_px, screen_height)
     var process_canvas__gr = process_canvas.nested()   
@@ -171,14 +169,15 @@ function about__create_responsive(bar_gr) {
 
         create_contact_section(screen_width_in_px,screen_height)
 
-        // HEADLINE__SCROLL_TRIGGER
-        /*var trigger_y_position__headline_canvas = headline__div_bottom_y;
-        sc_trigger__create(trigger_y_position__headline_canvas,
-            "headline_canvas__trigger",
+        // INTRO__SCROLL_TRIGGER
+        var trigger_y_position__intro_canvas = intro__div_bottom_y;
+        sc_trigger__create(trigger_y_position__intro_canvas,
+            "intro_canvas__trigger",
+            "yellow",
             screen_height,
             // activate_fn
             function() {
-                headline_canvas__gr.animate({
+                intro_canvas__gr.animate({
                         duration: 400,
                         // delay:    400, 
                         ease: '<' 
@@ -187,7 +186,7 @@ function about__create_responsive(bar_gr) {
             },
             // deactivate
             function() {
-                headline_canvas__gr.animate({
+                intro_canvas__gr.animate({
                     duration: 200,
                     delay:    400, 
                     ease: '<' 
@@ -196,13 +195,13 @@ function about__create_responsive(bar_gr) {
             });
 
         // INTRO__SCROLL_TRIGGER
-        var trigger_y_position__intro_canvas = intro__div_bottom_y;
-        sc_trigger__create(trigger_y_position__intro_canvas,
-            "intro_canvas__trigger",
+        var trigger_y_position__history_canvas = history__div_bottom_y;
+        sc_trigger__create(trigger_y_position__history_canvas,
+            "history_canvas__trigger",
             screen_height,
             // activate_fn
             function() {
-                intro_canvas__gr.animate({
+                history_canvas__gr.animate({
                         duration: 400,
                         // delay:    400, 
                         ease: '<' 
@@ -211,13 +210,13 @@ function about__create_responsive(bar_gr) {
             },
             // deactivate
             function() {
-                intro_canvas__gr.animate({
+                history_canvas__gr.animate({
                     duration: 200,
                     delay:    400, 
                     ease: '<' 
                 })
                 .attr({opacity: 0.1})
-            });*/
+            });
         
     }
 }
