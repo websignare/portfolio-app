@@ -5,16 +5,16 @@ function get_colors() {
             "main_color": "#c12d2dff"
         },
         "about": {
-            "main_color": "#f28705ff"
+            "main_color": "#db7310ff"
         },
         "web_design": {
-            "main_color": "#df7f6cff"
+            "main_color": "#533065ff"
         },
         "web_development": {
-            "main_color": "#812f3eff"
+            "main_color": "#8a2337ff"
         },
         "moodboard": {
-            "main_color": "#d15e37ff"
+            "main_color": "#cb3f00ff"
         },
     }
 

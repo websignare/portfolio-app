@@ -586,8 +586,8 @@ function create_element(parent_gr, column_info, element_data, element_y, screen_
   
     //OVERLAY_element
     var overlay_gr = parent_gr.nested().move(0, element_y).size(screen_width, screen_height).attr({id: "overlay"})
-    var overlay    = overlay_gr.rect(element_width, element_height).fill("#123b6e").opacity(0.7).attr({id: "overlay_rect"})
-    pulsating_circle(overlay_gr, 2000, screen_width, screen_height)
+    var overlay    = overlay_gr.rect(element_width, element_height).fill("#533065ff").opacity(0.7).attr({id: "overlay_rect"})
+    pulsating_circle(overlay_gr, 2000, screen_width/2+200, screen_height/2+200)
 
     var element_activated = false;
 

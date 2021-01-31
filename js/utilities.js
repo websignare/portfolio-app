@@ -266,8 +266,8 @@ function run_page_transition(target_page_name, transition_type, current_page_nam
 
         case "2_plane_swipe_to_center":
 
-            var full_screen_rect_up    = transitions_container_gr.rect(screen_width, 0).fill('#972323ff').attr({opacity: 1.0})
-            var full_screen_rect_down  = transitions_container_gr.rect(screen_width, 0).fill('#972323ff').attr({opacity: 1.0, y: screen_height})
+            var full_screen_rect_up    = transitions_container_gr.rect(screen_width, 0).fill('#bf1f1fff').attr({opacity: 1.0})
+            var full_screen_rect_down  = transitions_container_gr.rect(screen_width, 0).fill('#bf1f1fff').attr({opacity: 1.0, y: screen_height})
             var transition_info = {
                 "full_screen_rect_up":   full_screen_rect_up,
                 "full_screen_rect_down": full_screen_rect_down
@@ -282,10 +282,10 @@ function run_page_transition(target_page_name, transition_type, current_page_nam
 
         case "4_plane_in_circle":
             
-            var swipe_right_rect = transitions_container_gr.rect(0, screen_height/2+5).fill('#1c5e6d').attr({opacity: 1.0, x: 0})
-            var swipe_down_rect  = transitions_container_gr.rect(screen_width/2, 0).fill('#190033').attr({opacity: 1.0, x: screen_width/2, y:0})
-            var swipe_left_rect  = transitions_container_gr.rect(0, screen_height/2).fill('#8b0c57').attr({opacity: 1.0, x: screen_width, y: screen_height/2})
-            var swipe_up_rect    = transitions_container_gr.rect(screen_width/2, 0).fill('#164372').attr({opacity: 1.0, x: 0, y: screen_height})
+            var swipe_right_rect = transitions_container_gr.rect(0, screen_height/2+5).fill('#7e2c3cff').attr({opacity: 1.0, x: 0})
+            var swipe_down_rect  = transitions_container_gr.rect(screen_width/2, 0).fill('#7e2c3cff').attr({opacity: 1.0, x: screen_width/2, y:0})
+            var swipe_left_rect  = transitions_container_gr.rect(0, screen_height/2).fill('#7e2c3cff').attr({opacity: 1.0, x: screen_width, y: screen_height/2})
+            var swipe_up_rect    = transitions_container_gr.rect(screen_width/2, 0).fill('#7e2c3cff').attr({opacity: 1.0, x: 0, y: screen_height})
             var transition_info = {
                 "swipe_right_rect": swipe_right_rect,
                 "swipe_down_rect":  swipe_down_rect,
@@ -302,7 +302,7 @@ function run_page_transition(target_page_name, transition_type, current_page_nam
 
         case "1_plane_swipe_to_right":
 
-            var full_screen_rect = transitions_container_gr.rect(0, screen_height).fill('#164372').attr({opacity: 1.0})
+            var full_screen_rect = transitions_container_gr.rect(0, screen_height).fill('#533065ff').attr({opacity: 1.0})
             var transition_info  = {
                 "full_screen_rect": full_screen_rect
             }
@@ -316,7 +316,7 @@ function run_page_transition(target_page_name, transition_type, current_page_nam
 
         case "1_plane_scale":
 
-            var full_screen_rect_scale = transitions_container_gr.rect(0, 0).fill('#190033').attr({opacity: 1.0, x: screen_width/2, y: screen_height/2})
+            var full_screen_rect_scale = transitions_container_gr.rect(0, 0).fill('#db7310ff').attr({opacity: 1.0, x: screen_width/2, y: screen_height/2})
             var transition_info = {
                 "full_screen_rect_scale": full_screen_rect_scale,
             }
@@ -330,8 +330,8 @@ function run_page_transition(target_page_name, transition_type, current_page_nam
         
         case "2_plane_swipe_up_and_down":
 
-            var full_screen_rect_up    = transitions_container_gr.rect(screen_width/2, 0).fill('#1c5e6d').attr({opacity: 1.0})
-            var full_screen_rect_down  = transitions_container_gr.rect(screen_width/2, 0).fill('#1c5e6d').attr({opacity: 1.0, y: screen_height, x: screen_width/2})
+            var full_screen_rect_up    = transitions_container_gr.rect(screen_width/2, 0).fill('#ae3600ff').attr({opacity: 1.0})
+            var full_screen_rect_down  = transitions_container_gr.rect(screen_width/2, 0).fill('#cb3f00ff').attr({opacity: 1.0, y: screen_height, x: screen_width/2})
 
             var transition_info = {
                 "transitions_container_gr": transitions_container_gr,
@@ -424,8 +424,8 @@ function run_page_transition(target_page_name, transition_type, current_page_nam
 function pulsating_circle(parent_gr, animation_time, screen_width, screen_height){
     var circle_button_gr = parent_gr.nested()
 
-    var circle_button = circle_button_gr.ellipse(30).fill("#B12F2B").attr({cx: screen_width/2, cy: screen_height/2}).opacity(0.5)
-    var stroke_button = circle_button_gr.ellipse(34).attr({cx: screen_width/2, cy: screen_height/2}).fill("none").stroke({ color: '#B12F2B', width: 4}).opacity(0.5)
+    var circle_button = circle_button_gr.ellipse(30).fill("#B12F2B").attr({cx: screen_width/2, cy: screen_height/2}).opacity(0.9)
+    var stroke_button = circle_button_gr.ellipse(34).attr({cx: screen_width/2, cy: screen_height/2}).fill("none").stroke({ color: '#B12F2B', width: 4}).opacity(0.9)
     circle_button_gr.attr({
         id:     "circle_button__gr",
         width:  screen_width,

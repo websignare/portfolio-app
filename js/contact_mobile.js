@@ -281,7 +281,7 @@ function contact_mobile(contact_gr, screen_width_in_px, contact_height, screen_h
         width:  submission_form_gr.bbox().width,
         height: submission_form_gr.bbox().height,
         x:      screen_width_in_px/2-submission_form_gr.bbox().width/2,
-        y:      screen_height/2-80
+        y:      screen_height/2-110
     })
 
     //-------------------------PARAGRAPH--------------------------
@@ -300,7 +300,7 @@ function contact_mobile(contact_gr, screen_width_in_px, contact_height, screen_h
     paragraph.attr({
         id: "paragraph",
         x:  screen_width_in_px/2-paragraph.bbox().width/2,
-        y:  screen_height/2-submission_form_gr.bbox().height/2+40//-paragraph.bbox().height
+        y:  screen_height/2-submission_form_gr.bbox().height/2-+5//-paragraph.bbox().height
     })
 
 

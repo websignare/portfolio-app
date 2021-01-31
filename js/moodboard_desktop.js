@@ -93,12 +93,12 @@ function moodboard__create_responsive(bar_gr) {
         var moodboard__layout_gr = moodboard__intro_section__desktop(container_gr, bar_gr, screen_width_in_px, screen_height)
         var moodboard__background_gr = moodboard__layout_gr.find("#moodboard__background_gr")
         moodboard__images__desktop(moodboard__background_gr, screen_width_in_px, screen_height)
+        moodboard_text__desktop(container_gr, screen_width_in_px, screen_height)
 
         moodboard__headline__info(headline_canvas__gr, screen_width_in_px, screen_height)
         masonry(screen_width_in_px, screen_height)
         moodboard__video(screen_width_in_px, screen_height)
 
-        moodboard__quote_and_scroll__desktop(container_gr, screen_width_in_px, screen_height)
         create_contact_section(screen_width_in_px, screen_height)
     }
 }
@@ -128,10 +128,10 @@ function moodboard__intro_section__desktop(parent_gr, bar_gr, screen_width_in_px
         x: 100,
         y: 100
     })
-    var menu_rect         = menu_rect_gr.rect(50,50).attr({ opacity: 0.0, color: '#da2b13ff'})
-    var menu_line_top     = menu_rect_gr.line(3, 20, 40, 20).stroke({ width: 5, color: '#da2b13ff', linecap: 'round' })
-    var menu_line_midddle = menu_rect_gr.line(3, 35, 40, 35).stroke({ width: 5, color: '#da2b13ff', linecap: 'round' })
-    var menu_line_bottom  = menu_rect_gr.line(3, 50, 40, 50).stroke({ width: 5, color: '#da2b13ff', linecap: 'round' })
+    var menu_rect         = menu_rect_gr.rect(50,50).attr({ opacity: 0.0, color: '#d0633dff'})
+    var menu_line_top     = menu_rect_gr.line(3, 20, 40, 20).stroke({ width: 5, color: '#d0633dff', linecap: 'round' })
+    var menu_line_midddle = menu_rect_gr.line(3, 35, 40, 35).stroke({ width: 5, color: '#d0633dff', linecap: 'round' })
+    var menu_line_bottom  = menu_rect_gr.line(3, 50, 40, 50).stroke({ width: 5, color: '#d0633dff', linecap: 'round' })
 
 
     var menu_rect_clicked = false;
@@ -157,108 +157,24 @@ function moodboard__intro_section__desktop(parent_gr, bar_gr, screen_width_in_px
             menu_rect_clicked = false;
         }
     })
+    
+    //---------------------------SYMBOL----------------------------------
+    var square_brackets_symbol_gr = moodboard__background_gr.nested() 
+
+    var square_brackets_symbol = square_brackets_symbol_gr.path("m 935.81176,-1112.7249 q 4.05889,-2.3434 8.13386,-1.0881 4.15668,0.9503 6.5001,5.0093 l 88.60378,153.46619 q 2.3434,4.05893 1.0881,8.13391 -0.9504,4.15665 -5.0093,6.50005 l -40.78258,23.54585 q -4.05897,2.34345 -8.32715,1.19975 -3.96338,-1.06198 -6.30681,-5.12091 -2.23183,-3.86564 -1.28142,-8.0223 1.2552,-4.07492 5.31418,-6.41837 l 28.79908,-16.62715 -0.074,2.10422 -80.34596,-139.16334 3.65848,0.9803 -30.15206,17.4083 q -4.05897,2.3434 -8.21556,1.393 -4.07497,-1.2552 -6.41839,-5.3142 -2.23184,-3.8656 -1.16984,-7.829 1.14361,-4.2682 5.20258,-6.6116 z m -8.39006,234.2058 q -4.05897,2.34345 -8.32723,1.1998 -3.9633,-1.06203 -6.30672,-5.12096 l -88.60377,-153.46624 q -2.34343,-4.0589 -1.28152,-8.0222 1.1437,-4.2683 5.20268,-6.6117 l 40.78252,-23.5458 q 4.05897,-2.3435 8.13394,-1.0882 4.15659,0.9504 6.50001,5.0093 2.23184,3.8657 1.08822,8.1339 -1.06199,3.9633 -5.12096,6.3068 l -28.79907,16.6271 0.0737,-2.1042 80.34599,139.16336 -3.65849,-0.98029 30.15206,-17.4083 q 4.05897,-2.34345 8.02235,-1.28148 4.26818,1.14371 6.61161,5.20264 2.23183,3.86564 0.97663,7.94057 -0.95041,4.15665 -5.00939,6.5001 z")
+    square_brackets_symbol_gr.css( "position", "fixed")
+
+    square_brackets_symbol.fill('#cdcdcdff')
+    square_brackets_symbol.move(screen_width_in_px/2-square_brackets_symbol.bbox().width-100,screen_height/2-square_brackets_symbol.bbox().height/2+15)
+    //square_brackets_symbol.rotate(180)
+    square_brackets_symbol.scale(5.5)
+    square_brackets_symbol.attr({id: 'square_brackets_symbol'})
+
+    square_brackets_symbol_gr.attr({
+        id: "square_brackets_symbol_gr"
+    })
 
     return moodboard__layout_gr;
-}
-
-//----------------------------------------------TEXT----------------------------------------------------------------
-function moodboard__quote_and_scroll__desktop(parent_gr, screen_width_in_px, screen_height){
-    var text_gr = parent_gr.nested()
-
-    var moodboard_title = text_gr.text(function(text_element){
-        text_element.tspan('moodboard')
-    })
-        .font({
-            opacity: 1.0,
-            weight:  700,
-            fill:    '#AC3323',
-            family:  'Quicksand',
-            size:    125
-        })    
-    moodboard_title.attr({
-        x: 160,
-        y: screen_height/2-moodboard_title.bbox().height/2
-    })
-
-    var paragraph = text_gr.text(function(add){
-        add.tspan('Custom made masonry galleries that are').newLine()
-        add.tspan('responsive and contain my architectural models').newLine()
-        add.tspan('that were hand-made in my free time,').newLine()
-        add.tspan('and there are also images of my inspiration,').newLine()
-        add.tspan('aspiration...').newLine()
-
-
-    })
-        .font({
-            opacity: 1.0,
-            weight:  700,
-            fill:    '#924b2896',
-            family:  'Quicksand',
-            size:    26
-        })    
-    paragraph.attr({
-        x: 200,
-        y: screen_height/2
-    })  
-
-    var scroll_text = text_gr.text(function(text_element){
-        text_element.tspan('Scroll through my work')
-    })
-        .font({
-            opacity: 1.0,
-            weight:  400,
-            fill:    '#924b2896',
-            family:  'Quicksand',
-            size:    18
-        })    
-    scroll_text.attr({
-        x: paragraph.bbox().x,
-        y: paragraph.bbox().y+paragraph.bbox().height+100
-    })
-
-    var scroll_arrow_gr = text_gr.nested()
-    var scroll_arrow = SVG(`<g
-        inkscape:label="Layer 1"
-        inkscape:groupmode="layer"
-        id="layer1"
-        transform="translate(-29.1042,-45.5041)">
-            <g
-                inkscape:label="#g2680"
-                style="fill:none;fill-opacity:1;stroke:#2a3b2a;stroke-width:0.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-                transform="translate(1726.3821,-1064.1634)"
-                id="arrow">
-                <path
-                    style="fill:none;fill-opacity:1;stroke:#2a3b2a;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-                    d="m -1693.5926,1109.6675 v 28.7261"
-                    id="path2674-9"
-                    inkscape:connector-curvature="0" />
-                <path
-                    style="fill:#2a3d35;fill-opacity:1;stroke:none;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-                    d="m -1697.2779,1138.4881 h 7.5595 l -3.9687,3.9688 z"
-                    id="path2676-6"
-                    inkscape:connector-curvature="0" />
-            </g>
-        </g>`)
-
-    scroll_arrow.attr({id: 'scroll_arrow'})
-    scroll_arrow_gr.attr({
-        fill: '#924b2896',
-        id:     'scroll_arrow_gr',
-        width:  scroll_arrow.bbox().width,
-        height: scroll_arrow.bbox().height,
-        x:      60,
-        y:      300
-    })    
-    scroll_arrow_gr.scale(2.5)
-    scroll_arrow.addTo(scroll_arrow_gr)
-
-    /*var scroll_arrow = scroll_arrow_gr.path("m -1692.5609,1103.5441 -0.095,32.7894 3.9687,-3.9688 h -7.5595 l 3.5908,3.9688")
-
-    scroll_arrow.fill('#3c5c53ff').move(scroll_text.bbox().x-scroll_arrow.bbox().width-10,paragraph.bbox().y+paragraph.bbox().height+100)
-    //parentheses.rotate(180)
-    scroll_arrow.scale(3.8)
-    scroll_arrow.attr({id: 'scroll_arrow'})*/
-
 }
 
 //----------------------------------------------IMAGES-DESKTOP----------------------------------------------------------------
@@ -266,62 +182,53 @@ function moodboard__images__desktop(parent_gr, screen_width_in_px, screen_height
 
     var images_gr = parent_gr.nested()
     .attr({
-        width: screen_width_in_px/2,
+        width: screen_width_in_px,
         height: screen_height,
-        x: screen_width_in_px/2-100
     })
 
-    var rect_height = 160;
+    var rect_height = screen_height/6.6;
     var images_data = {
         'title': 'images',
 
         'elements_data':[
             {
                 'img_url':   './../portfolio-app-media/media/m_1.png',
-                'width':     '340',
-                'position_x': 250,
-                'position_y': 20,
+                'width':     '220',
+                'position_x': screen_width_in_px/2+115,
+                'position_y': 60,
                 'view_box_x': '0',
                 'view_box_y': '0'
             },
             {
                 'img_url':   './../portfolio-app-media/media/m_2.png',
-                'width':     '400', 
-                'position_x': 355,
-                'position_y': 200,
+                'width':     '250', 
+                'position_x': screen_width_in_px/2+195,
+                'position_y': rect_height+75,
                 'view_box_x': '0',
                 'view_box_y': '0'
             },
             {
                 'img_url':   './../portfolio-app-media/media/m_3.png',
-                'width':     '660',
-                'position_x': 210,
-                'position_y': 380,
+                'width':     '590',
+                'position_x': screen_width_in_px/2-50,
+                'position_y': rect_height*2+90,
                 'view_box_x': '0',
                 'view_box_y': '0'
             },
 
             {
                 'img_url':   './../portfolio-app-media/media/m_4.png',
-                'width':     '550',
-                'position_x': 210,
-                'position_y': 560,
+                'width':     '295',
+                'position_x': screen_width_in_px/2+165,
+                'position_y': rect_height*3+105,
                 'view_box_x': '0',
                 'view_box_y': '0'
             },
-            /*{
-                'img_url':   './../portfolio-app-media/media/mosaic2.jpg',
-                'width':     '850',
-                'position_x': 100,
-                'position_y': 590,
-                'view_box_x': '0',
-                'view_box_y': '0'
-            },*/
             {
                 'img_url':   './../portfolio-app-media/media/m_5.png',
-                'width':     '400',
-                'position_x': 195,
-                'position_y': 740,
+                'width':     '380',
+                'position_x': screen_width_in_px/2+5,
+                'position_y': rect_height*4+120,
                 'view_box_x': '0',
                 'view_box_y': '0'
             }
@@ -400,10 +307,10 @@ function moodboard__images__desktop(parent_gr, screen_width_in_px, screen_height
         var a_rect_x  = image_gr_0.x()
         var a_rect_y  = image_gr_0.y()    
     
-        var a_rect = a_rect_gr.rect(rect_width,a_rect_height)
+        var a_rect = a_rect_gr.rect(rect_width+screen_width_in_px,a_rect_height)
         a_rect.attr({
-                fill: colors_map["moodboard"]["main_color"],
-                x: a_rect_x,
+                fill: "#f57714fe",
+                x: a_rect_x+a_rect_width,
                 y: a_rect_y
             })
     
@@ -416,8 +323,8 @@ function moodboard__images__desktop(parent_gr, screen_width_in_px, screen_height
     
         var b_rect = b_rect_gr.rect(rect_width,b_rect_height)
         b_rect.attr({
-                fill: colors_map["moodboard"]["main_color"],
-                x: b_rect_x,
+                fill: "#f57714fe",
+                x: b_rect_x-rect_width,
                 y: b_rect_y
             })
     
@@ -428,11 +335,11 @@ function moodboard__images__desktop(parent_gr, screen_width_in_px, screen_height
         var c_rect_x      = image_gr_3.x()
         var c_rect_y      = image_gr_3.y()
      
-        var c_rect = c_rect_gr.rect(rect_width,c_rect_height)
+        var c_rect = c_rect_gr.rect(rect_width,c_rect_height+1)
             .attr({
-                fill: colors_map["moodboard"]["main_color"],
-                x: c_rect_x,
-                y: c_rect_y
+                fill: "#f57714fe",
+                x: c_rect_x+c_rect_width,
+                y: c_rect_y-1
             })
     
         // D__RECT 
@@ -442,12 +349,50 @@ function moodboard__images__desktop(parent_gr, screen_width_in_px, screen_height
         var d_rect_x      = image_gr_5.x()
         var d_rect_y      = image_gr_5.y()
     
-        var d_rect = d_rect_gr.rect(rect_width,d_rect_height)
+        var d_rect = d_rect_gr.rect(rect_width+screen_width_in_px,d_rect_height)
             .attr({
-                fill: colors_map["moodboard"]["main_color"],
-                x: d_rect_x,
+                fill: "#f57714fe",
+                x: d_rect_x-screen_width_in_px,
                 y: d_rect_y
             })
+}
+
+//----------------------------------------------TEXT----------------------------------------------------------------
+function moodboard_text__desktop(parent_gr, screen_width_in_px, screen_height){
+    var text_gr = parent_gr.nested()
+
+    //---------------------MOODBOARD-TITLE--------------------
+    var moodboard_path__gr = text_gr.nested()
+    var moodboard_path = moodboard_path__gr.path("m 1220.3147,-986.30847 q 0.5074,0 0.8391,0.33173 0.3317,0.33172 0.3317,0.85857 v 12.05904 q 0,0.50734 -0.3317,0.85857 -0.3317,0.33172 -0.8391,0.33172 -0.5073,0 -0.839,-0.33172 -0.3318,-0.35123 -0.3318,-0.85857 v -0.95614 l 0.4293,0.17562 q 0,0.25367 -0.2732,0.62442 -0.2731,0.35123 -0.7414,0.70247 -0.4684,0.35123 -1.1123,0.6049 -0.6244,0.23415 -1.3659,0.23415 -1.3464,0 -2.4391,-0.68295 -1.0928,-0.70247 -1.7367,-1.91228 -0.6244,-1.22932 -0.6244,-2.80987 0,-1.60007 0.6244,-2.80987 0.6439,-1.22932 1.7172,-1.91228 1.0732,-0.70247 2.3805,-0.70247 0.8391,0 1.5416,0.25367 0.7024,0.25367 1.2098,0.64393 0.5268,0.39026 0.8,0.80003 0.2927,0.39026 0.2927,0.66345 l -0.7025,0.25367 v -5.22949 q 0,-0.50734 0.3318,-0.83906 0.3317,-0.35124 0.839,-0.35124 z m -3.9416,12.48833 q 0.8586,0 1.5025,-0.42928 0.6439,-0.42929 0.9952,-1.17078 0.3707,-0.7415 0.3707,-1.65861 0,-0.93662 -0.3707,-1.67812 -0.3513,-0.74149 -0.9952,-1.17078 -0.6439,-0.42929 -1.5025,-0.42929 -0.8391,0 -1.483,0.42929 -0.6439,0.42929 -1.0147,1.17078 -0.3512,0.7415 -0.3512,1.67812 0,0.91711 0.3512,1.65861 0.3708,0.74149 1.0147,1.17078 0.6439,0.42928 1.483,0.42928 z m -11.3782,1.9513 q -0.5074,0 -0.8391,-0.33172 -0.3317,-0.35123 -0.3317,-0.85857 v -8.05887 q 0,-0.50734 0.3317,-0.83906 0.3317,-0.35124 0.8391,-0.35124 0.5073,0 0.839,0.35124 0.3318,0.33172 0.3318,0.83906 v 1.83422 l -0.1366,-1.30737 q 0.2146,-0.46831 0.5463,-0.81955 0.3513,-0.37075 0.7805,-0.6049 0.4293,-0.25367 0.9172,-0.37075 0.4878,-0.11708 0.9756,-0.11708 0.5854,0 0.9757,0.33172 0.4097,0.33172 0.4097,0.78052 0,0.64393 -0.3317,0.93663 -0.3317,0.27318 -0.722,0.27318 -0.3707,0 -0.6829,-0.13659 -0.2927,-0.13659 -0.683,-0.13659 -0.3512,0 -0.722,0.17562 -0.3512,0.1561 -0.6634,0.50733 -0.2927,0.35124 -0.4878,0.87809 -0.1756,0.50734 -0.1756,1.20981 v 4.62458 q 0,0.50734 -0.3318,0.85857 -0.3317,0.33172 -0.839,0.33172 z m -4.8792,-10.63459 q 0.5073,0 0.8391,0.33172 0.3317,0.33172 0.3317,0.85858 v 8.254 q 0,0.50734 -0.3317,0.85857 -0.3318,0.33172 -0.8391,0.33172 -0.5073,0 -0.8391,-0.33172 -0.3317,-0.35123 -0.3317,-0.85857 v -0.95614 l 0.4293,0.17562 q 0,0.25367 -0.2732,0.62442 -0.2732,0.35123 -0.7415,0.70247 -0.4683,0.35123 -1.1122,0.6049 -0.6244,0.23415 -1.3659,0.23415 -1.3464,0 -2.4391,-0.68295 -1.0928,-0.70247 -1.7367,-1.91228 -0.6244,-1.22932 -0.6244,-2.80987 0,-1.60007 0.6244,-2.80987 0.6439,-1.22932 1.7171,-1.91228 1.0733,-0.70247 2.3806,-0.70247 0.8391,0 1.5416,0.25367 0.7024,0.25367 1.2098,0.64393 0.5268,0.39026 0.8,0.80003 0.2927,0.39026 0.2927,0.66345 l -0.7025,0.25367 v -1.42445 q 0,-0.50734 0.3317,-0.83906 0.3318,-0.35124 0.8391,-0.35124 z m -3.9416,8.68329 q 0.8585,0 1.5025,-0.42928 0.6439,-0.42929 0.9951,-1.17078 0.3708,-0.7415 0.3708,-1.65861 0,-0.93662 -0.3708,-1.67812 -0.3512,-0.74149 -0.9951,-1.17078 -0.644,-0.42929 -1.5025,-0.42929 -0.8391,0 -1.483,0.42929 -0.6439,0.42929 -1.0147,1.17078 -0.3512,0.7415 -0.3512,1.67812 0,0.91711 0.3512,1.65861 0.3708,0.74149 1.0147,1.17078 0.6439,0.42928 1.483,0.42928 z m -6.4448,-3.25867 q 0,1.60007 -0.722,2.82939 -0.7025,1.2098 -1.9123,1.89276 -1.1903,0.68295 -2.6732,0.68295 -1.483,0 -2.6928,-0.68295 -1.1903,-0.68296 -1.9123,-1.89276 -0.7025,-1.22932 -0.7025,-2.82939 0,-1.60007 0.7025,-2.80987 0.722,-1.22932 1.9123,-1.91228 1.2098,-0.70247 2.6928,-0.70247 1.4829,0 2.6732,0.70247 1.2098,0.68296 1.9123,1.91228 0.722,1.2098 0.722,2.80987 z m -2.3416,0 q 0,-0.99516 -0.4097,-1.71715 -0.3903,-0.74149 -1.0733,-1.15126 -0.6634,-0.40978 -1.4829,-0.40978 -0.8196,0 -1.5025,0.40978 -0.6635,0.40977 -1.0733,1.15126 -0.3902,0.72199 -0.3902,1.71715 0,0.97565 0.3902,1.71715 0.4098,0.72198 1.0733,1.13175 0.6829,0.40977 1.5025,0.40977 0.8195,0 1.4829,-0.40977 0.683,-0.40977 1.0733,-1.13175 0.4097,-0.7415 0.4097,-1.71715 z m -14.4405,-5.42462 q 1.3659,0 2.4391,0.70247 1.0927,0.68296 1.7172,1.89276 0.6439,1.20981 0.6439,2.80988 0,1.60006 -0.6439,2.82938 -0.6245,1.20981 -1.6977,1.91228 -1.0537,0.68295 -2.3806,0.68295 -0.7805,0 -1.4634,-0.25366 -0.683,-0.25367 -1.2098,-0.64393 -0.5074,-0.39026 -0.8001,-0.78052 -0.2732,-0.40978 -0.2732,-0.68296 l 0.6049,-0.25367 v 1.42445 q 0,0.50734 -0.3317,0.85857 -0.3317,0.33172 -0.839,0.33172 -0.5074,0 -0.8391,-0.33172 -0.3317,-0.33172 -0.3317,-0.85857 v -12.25417 q 0,-0.50734 0.3317,-0.83906 0.3317,-0.35124 0.8391,-0.35124 0.5073,0 0.839,0.35124 0.3317,0.33172 0.3317,0.83906 v 4.9563 l -0.3317,-0.17561 q 0,-0.25367 0.2732,-0.60491 0.2732,-0.37074 0.7415,-0.72198 0.4683,-0.37075 1.0732,-0.6049 0.6244,-0.23416 1.3074,-0.23416 z m -0.2927,2.14643 q -0.8586,0 -1.5025,0.42929 -0.6439,0.42929 -1.0147,1.17078 -0.3512,0.72198 -0.3512,1.65861 0,0.91711 0.3512,1.67812 0.3708,0.74149 1.0147,1.17078 0.6439,0.42928 1.5025,0.42928 0.8586,0 1.483,-0.42928 0.6439,-0.42929 0.9951,-1.17078 0.3708,-0.76101 0.3708,-1.67812 0,-0.93663 -0.3708,-1.65861 -0.3512,-0.74149 -0.9951,-1.17078 -0.6244,-0.42929 -1.483,-0.42929 z m -8.8208,-5.95147 q 0.5073,0 0.8391,0.33173 0.3317,0.33172 0.3317,0.85857 v 12.05904 q 0,0.50734 -0.3317,0.85857 -0.3318,0.33172 -0.8391,0.33172 -0.5073,0 -0.8391,-0.33172 -0.3317,-0.35123 -0.3317,-0.85857 v -0.95614 l 0.4293,0.17562 q 0,0.25367 -0.2732,0.62442 -0.2732,0.35123 -0.7415,0.70247 -0.4683,0.35123 -1.1122,0.6049 -0.6244,0.23415 -1.3659,0.23415 -1.3464,0 -2.4392,-0.68295 -1.0927,-0.70247 -1.7366,-1.91228 -0.6244,-1.22932 -0.6244,-2.80987 0,-1.60007 0.6244,-2.80987 0.6439,-1.22932 1.7171,-1.91228 1.0733,-0.70247 2.3806,-0.70247 0.8391,0 1.5416,0.25367 0.7024,0.25367 1.2098,0.64393 0.5268,0.39026 0.8,0.80003 0.2927,0.39026 0.2927,0.66345 l -0.7025,0.25367 v -5.22949 q 0,-0.50734 0.3317,-0.83906 0.3318,-0.35124 0.8391,-0.35124 z m -3.9416,12.48833 q 0.8585,0 1.5025,-0.42928 0.6439,-0.42929 0.9951,-1.17078 0.3708,-0.7415 0.3708,-1.65861 0,-0.93662 -0.3708,-1.67812 -0.3512,-0.74149 -0.9951,-1.17078 -0.644,-0.42929 -1.5025,-0.42929 -0.8391,0 -1.483,0.42929 -0.6439,0.42929 -1.0147,1.17078 -0.3512,0.7415 -0.3512,1.67812 0,0.91711 0.3512,1.65861 0.3708,0.74149 1.0147,1.17078 0.6439,0.42928 1.483,0.42928 z m -6.4448,-3.25867 q 0,1.60007 -0.722,2.82939 -0.7025,1.2098 -1.9123,1.89276 -1.1903,0.68295 -2.6733,0.68295 -1.4829,0 -2.6928,-0.68295 -1.1902,-0.68296 -1.9122,-1.89276 -0.7025,-1.22932 -0.7025,-2.82939 0,-1.60007 0.7025,-2.80987 0.722,-1.22932 1.9122,-1.91228 1.2099,-0.70247 2.6928,-0.70247 1.483,0 2.6733,0.70247 1.2098,0.68296 1.9123,1.91228 0.722,1.2098 0.722,2.80987 z m -2.3416,0 q 0,-0.99516 -0.4097,-1.71715 -0.3903,-0.74149 -1.0733,-1.15126 -0.6634,-0.40978 -1.483,-0.40978 -0.8195,0 -1.5025,0.40978 -0.6634,0.40977 -1.0732,1.15126 -0.3902,0.72199 -0.3902,1.71715 0,0.97565 0.3902,1.71715 0.4098,0.72198 1.0732,1.13175 0.683,0.40977 1.5025,0.40977 0.8196,0 1.483,-0.40977 0.683,-0.40977 1.0733,-1.13175 0.4097,-0.7415 0.4097,-1.71715 z m -9.6254,0 q 0,1.60007 -0.722,2.82939 -0.7024,1.2098 -1.9122,1.89276 -1.1903,0.68295 -2.6733,0.68295 -1.483,0 -2.6928,-0.68295 -1.1903,-0.68296 -1.9123,-1.89276 -0.7025,-1.22932 -0.7025,-2.82939 0,-1.60007 0.7025,-2.80987 0.722,-1.22932 1.9123,-1.91228 1.2098,-0.70247 2.6928,-0.70247 1.483,0 2.6733,0.70247 1.2098,0.68296 1.9122,1.91228 0.722,1.2098 0.722,2.80987 z m -2.3415,0 q 0,-0.99516 -0.4098,-1.71715 -0.3903,-0.74149 -1.0732,-1.15126 -0.6635,-0.40978 -1.483,-0.40978 -0.8196,0 -1.5025,0.40978 -0.6635,0.40977 -1.0732,1.15126 -0.3903,0.72199 -0.3903,1.71715 0,0.97565 0.3903,1.71715 0.4097,0.72198 1.0732,1.13175 0.6829,0.40977 1.5025,0.40977 0.8195,0 1.483,-0.40977 0.6829,-0.40977 1.0732,-1.13175 0.4098,-0.7415 0.4098,-1.71715 z m -20.1936,-5.42462 q 1.5611,0 2.3026,0.76101 0.7415,0.74149 0.9756,1.93179 l -0.3317,-0.17562 0.1561,-0.31221 q 0.2342,-0.4488 0.722,-0.95614 0.4878,-0.52685 1.1708,-0.87808 0.7024,-0.37075 1.561,-0.37075 1.4049,0 2.1269,0.60491 0.7415,0.6049 1.0147,1.61958 0.2732,0.99516 0.2732,2.22448 v 4.99533 q 0,0.50734 -0.3317,0.85857 -0.3318,0.33172 -0.8391,0.33172 -0.5073,0 -0.8391,-0.33172 -0.3317,-0.35123 -0.3317,-0.85857 v -4.99533 q 0,-0.64393 -0.1561,-1.15127 -0.1561,-0.52685 -0.5659,-0.83906 -0.4097,-0.31221 -1.1707,-0.31221 -0.7415,0 -1.2684,0.31221 -0.5268,0.31221 -0.8,0.83906 -0.2537,0.50734 -0.2537,1.15127 v 4.99533 q 0,0.50734 -0.3317,0.85857 -0.3317,0.33172 -0.8391,0.33172 -0.5073,0 -0.839,-0.33172 -0.3318,-0.35123 -0.3318,-0.85857 v -4.99533 q 0,-0.64393 -0.1561,-1.15127 -0.1561,-0.52685 -0.5658,-0.83906 -0.4098,-0.31221 -1.1708,-0.31221 -0.7415,0 -1.2684,0.31221 -0.5268,0.31221 -0.8,0.83906 -0.2537,0.50734 -0.2537,1.15127 v 4.99533 q 0,0.50734 -0.3317,0.85857 -0.3317,0.33172 -0.839,0.33172 -0.5074,0 -0.8391,-0.33172 -0.3317,-0.35123 -0.3317,-0.85857 v -8.05887 q 0,-0.50734 0.3317,-0.83906 0.3317,-0.35124 0.8391,-0.35124 0.5073,0 0.839,0.35124 0.3317,0.33172 0.3317,0.83906 v 0.83906 l -0.2927,-0.0585 q 0.1757,-0.33172 0.4879,-0.70247 0.3122,-0.39026 0.761,-0.72198 0.4488,-0.33172 0.9951,-0.52685 0.5464,-0.21465 1.1903,-0.21465 z")
+    moodboard_path__gr.attr({
+        id:    "moodboard_path__gr",
+    })
+    moodboard_path.fill('#ac3323ff')
+    moodboard_path.move(screen_width_in_px/2-moodboard_path.bbox().width-240,screen_height/2-moodboard_path.bbox().height-150)
+    //moodboard_path.rotate(-90)
+    moodboard_path.scale(5.75)
+    moodboard_path.attr({id: 'moodboard_path'})
+
+    //-----------------QUOTES------------------------
+    var paragraph = text_gr.text(function(add){
+        add.tspan('Creativity is inventing, experimenting, ').newLine()
+        add.tspan('growing, taking risk, breaking rules, ').newLine()
+        add.tspan('making mistakes and having fun.').newLine() 
+        add.tspan('').newLine()
+        add.tspan('-Mary Lou Cook').newLine().dx(270).font({size:'19'})
+    })
+        .font({
+            opacity: 1.0,
+            weight:  600,
+            fill:    '#863845ff',
+            family:  'Quicksand',
+            size:    23
+        })    
+    paragraph.attr({
+        x: screen_width_in_px/2-paragraph.bbox().width-180,
+        y: screen_height/2-105
+    })   
+
 }
 
 function moodboard__headline__info(parent_gr, screen_width_in_px, screen_height){

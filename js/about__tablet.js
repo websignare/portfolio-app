@@ -2,7 +2,9 @@ $(document).ready(function(){
     about_tablet__main();
 })
 
-function about_tablet__main(screen_width_in_px) {
+function about_tablet__main() {
+    var screen_width_in_px = window.innerWidth;
+
     var bar_gr = nav_bar__create(screen_width_in_px);
 
     about_tablet__activate(bar_gr);
@@ -69,15 +71,6 @@ function about__tablet_create_responsive(bar_gr) {
     }); 
 
 
-    $("#about_tablet #headline__info").css({                    
-        "background-color": '#4c4c48ff',
-        "position":         "relative",
-        "height":           screen_height/2.5,
-        "width":            screen_width_in_px,
-        
-    }); 
-
-
     console.log("dddddddddddddddddddddddddddddddddddddddddd")
     console.log("dddddddddddddddddddddddddddddddddddddddddd")
     console.log("dddddddddddddddddddddddddddddddddddddddddd")
@@ -124,9 +117,7 @@ function about__tablet_create_responsive(bar_gr) {
     var main_canvas__tablet     = SVG().addTo("#about_tablet #wrapper").size(screen_width_in_px, screen_height)
     var main_canvas_tablet__gr = main_canvas__tablet.nested()   
 
-    var headline_canvas     = SVG().addTo("#about_tablet #headline__info").size(screen_width_in_px, screen_height/2)
-    var headline_canvas__gr = headline_canvas.nested()   
-    headline_canvas__gr.attr({opacity: 1.0})
+   // headline_canvas__gr.attr({opacity: 1.0})
 
     var intro_canvas     = SVG().addTo("#about_tablet #intro__info").size(screen_width_in_px, screen_height)
     var intro_canvas__gr = intro_canvas.nested()   
@@ -164,8 +155,6 @@ function about__tablet_create_responsive(bar_gr) {
         console.log(about_background_tablet__gr)
 
         about__images__tablet(about_background_tablet__gr, screen_width_in_px, screen_height)
-
-        about__headline_tablet__info(headline_canvas__gr, screen_width_in_px, screen_height)
         about_intro_tablet__info(intro_canvas__gr, screen_width_in_px, screen_height)
         history_tablet__info(history_canvas__gr, screen_width_in_px, screen_height)
         process_tablet__info(process_canvas__gr, screen_width_in_px, screen_height)
@@ -229,65 +218,6 @@ function about__tablet_create_responsive(bar_gr) {
     }
 }
 
-//----------------------------------------------CREATE-LAYOUT-DESKTOP----------------------------------------------------------------
-function about__create_background__tablet(parent_gr, bar_gr, screen_width_in_px, screen_height){
-
-    var about_tablet__layout_gr = parent_gr.nested().attr({id: 'about_tablet__layout_gr'})
-
-    var about_background_tablet__gr = about_tablet__layout_gr.nested()
-        .attr({
-            id: "about_background_tablet__gr",
-        })
-
-    var background_rect = about_background_tablet__gr.rect(screen_width_in_px,screen_height)
-        .fill('#ebf2edff')
-        .attr({
-            id:      "background_rect",
-            opacity: 0.0,
-            'x':     0,
-            'y':     0
-        })
-
-    //CALL MENU FUNCTION
-    var menu_rect_gr = parent_gr.nested()
-    .attr({
-        x: 100,
-        y: 100
-    })
-    var menu_rect         = menu_rect_gr.rect(50,50).attr({ opacity: 0.0, color: '#f18b0fff'})
-    var menu_line_top     = menu_rect_gr.line(3, 20, 40, 20).stroke({ width: 5, color: '#f18b0fff', linecap: 'round' })
-    var menu_line_midddle = menu_rect_gr.line(3, 35, 40, 35).stroke({ width: 5, color: '#f18b0fff', linecap: 'round' })
-    var menu_line_bottom  = menu_rect_gr.line(3, 50, 40, 50).stroke({ width: 5, color: '#f18b0fff', linecap: 'round' })
-
-
-    var menu_rect_clicked = false;
-
-    menu_rect.click(function() {
-        
-        // ACTIVATE BOX_1
-        if (menu_rect_clicked == false) {
-            
-            // ANIMATE
-            console.log(create_menu)
-            create_menu(parent_gr, bar_gr, screen_width_in_px, screen_height)
-
-            menu_rect_clicked = true;
-        }
-
-        // DEACTIVATE
-        else {
-
-            // ANIMATE
-            create_menu(parent_gr, bar_gr, screen_width_in_px, screen_height)
-
-            menu_rect_clicked = false;
-        }
-    })
-
-    return about_tablet__layout_gr;
-
-}
-
 //----------------------------------------------IMAGES-DESKTOP----------------------------------------------------------------
 function about__images__tablet(parent_gr, screen_width_in_px, screen_height){
 
@@ -333,14 +263,14 @@ function about__images__tablet(parent_gr, screen_width_in_px, screen_height){
                 'img_url':   './../portfolio-app-media/media/aa4.png',
                 'height':     '350',
                 'position_x': rect_width*3+45,
-                'position_y': 525,
+                'position_y': 405,
                 'view_box_x': '0',
                 'view_box_y': '0'
             },
             {
                 'img_url':   './../portfolio-app-media/media/aa5.png',
                 'height':     '155',
-                'position_x': rect_width*4.52,
+                'position_x': rect_width*4+60,
                 'position_y': 235,
                 'view_box_x': '0',
                 'view_box_y': '0'
@@ -348,8 +278,8 @@ function about__images__tablet(parent_gr, screen_width_in_px, screen_height){
             {
                 'img_url':   './../portfolio-app-media/media/aa6.png',
                 'height':     '350',
-                'position_x': rect_width*4.52,
-                'position_y': 525,
+                'position_x': rect_width*4+60,
+                'position_y': 405,
                 'view_box_x': '0',
                 'view_box_y': '0'
             }
@@ -431,153 +361,157 @@ function about__images__tablet(parent_gr, screen_width_in_px, screen_height){
     var a_rect_x      = image_gr_1.x()
     var a_rect_y      = image_gr_1.y()
     var a_rect_width  = image_gr_1.width()
+    var a_rect_height = image_gr_1.height()
 
-    var a_rect = a_rect_gr.rect(a_rect_width,rect_height)
+    var a_rect = a_rect_gr.rect(a_rect_width+1,rect_height+screen_height)
     a_rect.attr({
             fill: "#f18b0fff",
-            x: a_rect_x,
-            y: a_rect_y-rect_height
+            x: a_rect_x-1,
+            y: a_rect_height+rect_height
         })
 
     // B__RECT 
     var b_rect_gr     = rects_gr.nested()
     var b_rect_width  = image_gr_3.width()
+    var b_rect_height = image_gr_3.height()
     var b_rect_x      = image_gr_3.x()
     var b_rect_y      = image_gr_3.y()
 
-    var b_rect = b_rect_gr.rect(b_rect_width,rect_height)
+    var b_rect = b_rect_gr.rect(b_rect_width,rect_height+screen_height)
     b_rect.attr({
             fill: "#f18b0fff",
             x: b_rect_x,
-            y: b_rect_y+image_gr_3.height()
+            y: b_rect_y-rect_height-screen_height
         })
 
     // C__RECT 
     var c_rect_gr = rects_gr.nested()
+    var c_rect_height = image_gr_5.height()
     var c_rect_width  = image_gr_5.width()
     var c_rect_x      = image_gr_5.x()
     var c_rect_y      = image_gr_5.y()
  
-    var c_rect = c_rect_gr.rect(c_rect_width,rect_height)
+    var c_rect = c_rect_gr.rect(c_rect_width,rect_height+screen_height)
         .attr({
             fill: "#f18b0fff",
             x: c_rect_x,
-            y: c_rect_y+image_gr_5.height()
+            y: c_rect_y-rect_height-screen_height
         })
-
-    /////////////////////////////////////////////////////////////////////
-    var text_gr = parent_gr.nested()
-
-    //-----------------QUOTES------------------------
-
-    var paragraph = text_gr.text(function(add){
-        add.tspan('Imagination is the beginning of creation.').newLine()
-        add.tspan('').newLine()
-        add.tspan('You imagine what you desire,').newLine()
-        add.tspan('you will what you imagine,').newLine()
-        add.tspan('and at last, ').newLine() 
-        add.tspan('you create what you will.').newLine()
-        add.tspan('').newLine() 
-        add.tspan('- George Bernand Shaw').newLine().dx(180).font({size:'18'})
-    })
-        .font({
-            opacity: 1.0,
-            weight:  700,
-            fill:    '#6b1427ff',
-            family:  'Quicksand',
-            size:    20
-        })    
-    paragraph.attr({
-        x: 50,
-        y: 0
-    })  
-
-
-
-    /*var scroll_text = scroll_gr.text(function(text_element){
-        text_element.tspan('Scroll & read a little about me')
-    })
-        .font({
-            id: "#scroll_text",
-            opacity: 1.0,
-            weight:  500,
-            fill:    '#6b1427ff',
-            family:  'Quicksand',
-            size:    16
-        })   
-    scroll_text.attr({
-        x: 0,
-        y: 60
-    }) */
-    var scroll_gr = text_gr.nested()
-
-    scroll_gr.attr({
-        id: "#scroll_gr",
-    })
-
-    var arrow_gr = scroll_gr.nested()
-    var scroll_arrow = arrow_gr.path('m 53.347282,72.845957 3.5908,3.9688 3.9687,-3.9688 z m 3.7797,-28.829789 c 0,9.613609 0,19.227511 0,28.841609')
-    scroll_arrow.stroke({ color: '#6b1427ff', width: 4, linecap: 'round', linejoin: 'round' })
-
-    arrow_gr.attr({
-        id:     'scroll_arrow',
-        x:      50,
-        y:      85
-    }) 
-    arrow_gr.scale(3.5)
-
-    text_gr.attr({
-        x: 50,
-        y: screen_height/2.1,
-        id: "text_gr",
-        height: screen_height/2,
-        width: screen_width_in_px/2
-    })
 }
 
-function about__headline_tablet__info(parent_gr, screen_width_in_px, screen_height){
-    var headline_gr = parent_gr.nested()
+//----------------------------------------------CREATE-LAYOUT-DESKTOP----------------------------------------------------------------
+function about__create_background__tablet(parent_gr, bar_gr, screen_width_in_px, screen_height){
 
-    var yellow_rect = headline_gr.rect(screen_width_in_px/2-350,100)
-        .fill('#f18b0fff')
-    yellow_rect.attr({
-        id:      "yellow_rect",
-        opacity: 1.0,
-        'x':     0,
-        'y':     screen_height/4-yellow_rect.bbox().height/2
-    })
- 
-    var about_title = headline_gr.text(function(text_element){
-         text_element.tspan('ABOUT')
-     })
-         .font({
-             opacity: 1.0,
-             weight:  700,
-             fill:    '#d8d8d8ff',
-             family:  'Quicksand',
-             size:    56
-         })    
-     about_title.attr({
-         x: yellow_rect.bbox().x+yellow_rect.bbox().width-45,
-         y: yellow_rect.bbox().y+about_title.bbox().height
-     })
-     about_title.rotate(90)
- 
-     var me_title = headline_gr.text(function(text_element){
-            text_element.tspan('me')
+    var about_tablet__layout_gr = parent_gr.nested().attr({id: 'about_tablet__layout_gr'})
+
+    var about_background_tablet__gr = about_tablet__layout_gr.nested()
+        .attr({
+            id: "about_background_tablet__gr",
         })
-        .font({
-             opacity: 1.0,
-             weight:  700,
-             fill:    '#d8d8d8ff',
-             family:  'Quicksand',
-             size:    360
-        })    
-     me_title.attr({
-         x: yellow_rect.bbox().x+yellow_rect.bbox().width+about_title.bbox().height+5,
-         y: yellow_rect.bbox().y+yellow_rect.bbox().height+about_title.bbox().height-25
-     })
+
+    var background_rect = about_background_tablet__gr.rect(screen_width_in_px,screen_height)
+        .fill('#ebf2edff')
+        .attr({
+            id:      "background_rect",
+            opacity: 0.0,
+            'x':     0,
+            'y':     0
+        })
+
+    //---------------------------SYMBOL----------------------------------
+    var hashtag_symbol_gr = about_background_tablet__gr.nested()   
+
+    var hashtag_symbol = hashtag_symbol_gr.path("m -833.94527,-1714.4575 c -3.5569,-0.9531 -6.26175,-2.921 -8.11454,-5.9038 -1.65675,-3.0959 -2.00857,-6.4223 -1.05546,-9.9792 0.91158,-3.4023 2.81738,-5.8752 5.71717,-7.4187 3.05454,-1.502 6.36026,-1.7766 9.91716,-0.8235 l 110.65102,29.6488 c 3.5569,0.9531 6.16372,2.9777 7.82047,6.0736 1.85279,2.9827 2.30264,6.2525 1.3496,9.8095 -0.91165,3.4022 -2.89471,5.8544 -5.94925,7.3564 -2.89986,1.5436 -6.12825,1.8388 -9.68515,0.8857 z m 69.32744,58.6052 c -4.17551,-1.1188 -7.02946,-3.4581 -8.56185,-7.018 -1.49101,-3.7146 -1.26973,-7.6333 0.66377,-11.7563 l 60.10182,-130.586 c 1.29269,-2.9687 3.24949,-5.0136 5.8704,-6.1346 2.66237,-1.2756 5.54003,-1.4991 8.633,-0.6703 4.02083,1.0774 6.77676,3.4734 8.2677,7.1879 1.53245,3.5599 1.33187,7.4013 -0.60163,11.5243 l -60.10182,130.5861 c -1.25131,2.814 -3.20811,4.8588 -5.8704,6.1345 -2.5077,1.317 -5.30803,1.5612 -8.40099,0.7324 z m -43.46482,-120.7938 c -3.5569,-0.9531 -6.26175,-2.921 -8.11455,-5.9038 -1.65674,-3.0959 -2.00856,-6.4223 -1.05552,-9.9793 0.91165,-3.4022 2.81744,-5.8751 5.71724,-7.4187 3.05454,-1.502 6.36026,-1.7765 9.91716,-0.8234 l 110.41901,29.5867 c 3.5569,0.953 6.16373,2.9775 7.82047,6.0735 1.8528,2.9827 2.30271,6.2526 1.34961,9.8095 -0.91166,3.4023 -2.89472,5.8544 -5.94918,7.3565 -2.89987,1.5435 -6.12826,1.8387 -9.68523,0.8857 z m -19.3998,103.9493 c -4.02084,-1.0774 -6.79752,-3.396 -8.32991,-6.9559 -1.33634,-3.6731 -1.11506,-7.5919 0.66384,-11.7562 l 60.10182,-130.5861 c 1.29268,-2.9687 3.24948,-5.0135 5.8704,-6.1345 2.6623,-1.2757 5.46263,-1.5198 8.40099,-0.7325 4.17551,1.1188 7.0087,3.5355 8.4997,7.25 1.53239,3.5599 1.33187,7.4013 -0.60162,11.5243 l -36.51091,79.3289 -23.59091,51.2572 c -1.25131,2.814 -3.20811,4.8588 -5.87041,6.1345 -2.66236,1.2756 -5.54003,1.4991 -8.63299,0.6703 z")
+    hashtag_symbol_gr.css( "position", "fixed")
+
+    hashtag_symbol.fill('#cdcdcdff')
+    hashtag_symbol.move(screen_width_in_px/7.15+hashtag_symbol.bbox().width/2,screen_height/2+hashtag_symbol.bbox().height+75)
+    //hashtag_symbol.rotate(180)
+    hashtag_symbol.scale(5.3)
+    hashtag_symbol.attr({id: 'hashtag_symbol'})
+
+    hashtag_symbol_gr.attr({
+        id: "hashtag_symbol_gr"
+    })
+
+    //CALL MENU FUNCTION
+    var menu_rect_gr = parent_gr.nested()
+    .attr({
+        x: 100,
+        y: 100
+    })
+    var menu_rect         = menu_rect_gr.rect(50,50).attr({ opacity: 0.0, color: '#262626ff'})
+    var menu_line_top     = menu_rect_gr.line(3, 20, 40, 20).stroke({ width: 5, color: '#262626ff', linecap: 'round' })
+    var menu_line_midddle = menu_rect_gr.line(3, 35, 40, 35).stroke({ width: 5, color: '#262626ff', linecap: 'round' })
+    var menu_line_bottom  = menu_rect_gr.line(3, 50, 40, 50).stroke({ width: 5, color: '#262626ff', linecap: 'round' })
+
+
+    var menu_rect_clicked = false;
+
+    menu_rect.click(function() {
+        
+        // ACTIVATE BOX_1
+        if (menu_rect_clicked == false) {
+            
+            // ANIMATE
+            console.log(create_menu)
+            create_menu(parent_gr, bar_gr, screen_width_in_px, screen_height)
+
+            menu_rect_clicked = true;
+        }
+
+        // DEACTIVATE
+        else {
+
+            // ANIMATE
+            create_menu(parent_gr, bar_gr, screen_width_in_px, screen_height)
+
+            menu_rect_clicked = false;
+        }
+    })
+
+        /////////////////////////////////////////////////////////////////////
+        var text_gr = about_background_tablet__gr.nested().attr({id: "text_gr"})
+
+        //---------------------ABOUT-TITLE--------------------
+        var about_me_path__gr = text_gr.nested()
+        var about_me_path = about_me_path__gr.path("m 1058.9639,-1839.4459 q -4.344,0 -7.5637,-1.7887 -3.1686,-1.8398 -4.9063,-4.9573 -1.6865,-3.1175 -1.6865,-7.0527 0,-4.5996 1.8399,-7.8193 1.8909,-3.2708 4.9062,-5.0084 3.0153,-1.7377 6.3883,-1.7377 2.6064,0 4.9062,1.0733 2.3509,1.0732 4.1396,2.9642 1.7888,1.8398 2.8109,4.2929 1.0732,2.4531 1.0732,5.2129 -0.051,1.2265 -0.971,1.9931 -0.9199,0.7666 -2.1465,0.7666 h -19.5226 l -1.5332,-5.1106 h 18.756 l -1.1243,1.0221 v -1.3799 q -0.1022,-1.4821 -1.0732,-2.6575 -0.92,-1.1755 -2.3509,-1.8399 -1.3799,-0.7154 -2.9642,-0.7154 -1.5332,0 -2.862,0.4088 -1.3287,0.4089 -2.2998,1.3799 -0.971,0.971 -1.5332,2.6064 -0.5621,1.6354 -0.5621,4.1396 0,2.7598 1.1243,4.7018 1.1755,1.891 2.9642,2.9131 1.8398,0.971 3.8841,0.971 1.8909,0 3.0153,-0.3066 1.1243,-0.3067 1.7887,-0.7155 0.7155,-0.46 1.2776,-0.7666 0.92,-0.46 1.7377,-0.46 1.1243,0 1.8398,0.7666 0.7666,0.7666 0.7666,1.7888 0,1.3798 -1.431,2.5042 -1.3288,1.1243 -3.7308,1.9931 -2.402,0.8177 -4.9573,0.8177 z m -48.022,-28.3641 q 4.0886,0 6.0306,1.9932 1.9421,1.942 2.5553,5.0595 l -0.8688,-0.4599 0.4089,-0.8177 q 0.6132,-1.1755 1.8909,-2.5042 1.2777,-1.3799 3.0664,-2.2998 1.8398,-0.9711 4.0885,-0.9711 3.6797,0 5.5706,1.5843 1.9421,1.5843 2.6575,4.2419 0.7155,2.6064 0.7155,5.8261 v 13.0833 q 0,1.3287 -0.8688,2.2487 -0.8688,0.8688 -2.1976,0.8688 -1.3287,0 -2.1975,-0.8688 -0.8688,-0.92 -0.8688,-2.2487 v -13.0833 q 0,-1.6865 -0.4089,-3.0153 -0.4088,-1.3798 -1.4821,-2.1975 -1.0732,-0.8177 -3.0664,-0.8177 -1.942,0 -3.3219,0.8177 -1.3799,0.8177 -2.0953,2.1975 -0.6644,1.3288 -0.6644,3.0153 v 13.0833 q 0,1.3287 -0.8688,2.2487 -0.8688,0.8688 -2.1976,0.8688 -1.3288,0 -2.1976,-0.8688 -0.8688,-0.92 -0.8688,-2.2487 v -13.0833 q 0,-1.6865 -0.4089,-3.0153 -0.4088,-1.3798 -1.482,-2.1975 -1.0733,-0.8177 -3.0664,-0.8177 -1.9421,0 -3.322,0.8177 -1.3798,0.8177 -2.0953,2.1975 -0.6644,1.3288 -0.6644,3.0153 v 13.0833 q 0,1.3287 -0.8688,2.2487 -0.8688,0.8688 -2.19758,0.8688 -1.32877,0 -2.19758,-0.8688 -0.86881,-0.92 -0.86881,-2.2487 v -21.107 q 0,-1.3288 0.86881,-2.1976 0.86881,-0.9199 2.19758,-0.9199 1.32878,0 2.19758,0.9199 0.8688,0.8688 0.8688,2.1976 v 2.1976 l -0.7666,-0.1533 q 0.46,-0.8688 1.2777,-1.8399 0.8177,-1.0221 1.9931,-1.8909 1.1755,-0.8688 2.6064,-1.3799 1.431,-0.5622 3.1175,-0.5622 z m -25.95567,3.1645 v -2.3418 q 0,-0.2371 0.1581,-0.3952 0.1581,-0.1581 0.39525,-0.1581 0.22725,0 0.38535,0.1581 0.14822,0.1581 0.14822,0.3952 v 2.3418 q 0,0.2372 -0.1581,0.3953 -0.15809,0.1581 -0.39524,0.1581 -0.22726,0 -0.37548,-0.1581 -0.1581,-0.1581 -0.1581,-0.3953 z m -1.23513,-1.0572 q 0,-0.2569 0.17786,-0.415 0.16798,-0.168 0.42488,-0.168 h 4.39707 q 0.13833,0 0.22726,-0.049 0.0889,-0.059 0.12846,-0.1482 0.0395,-0.099 0.0395,-0.2075 0,-0.1186 -0.0395,-0.2174 -0.0494,-0.099 -0.0494,-0.2273 0,-0.1383 0.12845,-0.247 0.12846,-0.1186 0.35572,-0.1186 0.27666,0 0.45453,0.3063 0.17785,0.2965 0.17785,0.6423 0,0.2075 -0.0297,0.4644 -0.0395,0.247 -0.16798,0.4743 -0.13834,0.2174 -0.41501,0.3656 -0.27667,0.1482 -0.76084,0.1482 h -4.44647 q -0.2569,0 -0.42489,-0.168 -0.17785,-0.1778 -0.17785,-0.4347 z m 1.13633,3.0027 q 0,-0.2569 0.17785,-0.4249 0.16798,-0.1679 0.42488,-0.1679 h 2.50979 q 1.04739,0 1.66002,0.5829 0.61262,0.583 0.61262,1.6798 0,1.0968 -0.61262,1.6798 -0.61263,0.5731 -1.66002,0.5731 h -2.50979 q -0.2569,0 -0.42488,-0.168 -0.17785,-0.168 -0.17785,-0.4249 0,-0.2569 0.17785,-0.4248 0.16798,-0.168 0.42488,-0.168 h 2.50979 q 0.60275,0 0.89918,-0.2668 0.28655,-0.2668 0.28655,-0.8004 0,-0.5434 -0.28655,-0.8102 -0.29643,-0.2668 -0.89918,-0.2668 h -2.50979 q -0.2569,0 -0.42488,-0.168 -0.17785,-0.168 -0.17785,-0.4249 z m 2.64812,4.9038 q 0.81024,0 1.43274,0.3656 0.61263,0.3557 0.95847,0.9683 0.34583,0.6028 0.34583,1.3537 0,0.751 -0.34583,1.3636 -0.34584,0.6028 -0.95847,0.9684 -0.6225,0.3557 -1.43274,0.3557 -0.81025,0 -1.42287,-0.3557 -0.62252,-0.3656 -0.96835,-0.9684 -0.35572,-0.6126 -0.35572,-1.3636 0,-0.7509 0.35572,-1.3537 0.34583,-0.6126 0.96835,-0.9683 0.61262,-0.3656 1.42287,-0.3656 z m 0,1.1857 q -0.50394,0 -0.86954,0.2075 -0.37548,0.1977 -0.58298,0.5435 -0.2075,0.3359 -0.2075,0.7509 0,0.4151 0.2075,0.7609 0.2075,0.3359 0.58298,0.5434 0.3656,0.1977 0.86954,0.1977 0.49405,0 0.86952,-0.1977 0.3656,-0.2075 0.5731,-0.5434 0.20751,-0.3458 0.20751,-0.7609 0,-0.415 -0.20751,-0.7509 -0.2075,-0.3458 -0.5731,-0.5435 -0.37547,-0.2075 -0.86952,-0.2075 z m -2.74694,7.3125 q 0,-0.6917 0.35572,-1.2352 0.34583,-0.5533 0.95846,-0.8695 0.61263,-0.3261 1.42288,-0.3261 0.81024,0 1.43275,0.3261 0.61262,0.3162 0.96834,0.8597 0.34583,0.5335 0.34583,1.2054 0,0.3953 -0.12845,0.7411 -0.12845,0.3459 -0.32608,0.6126 -0.19762,0.257 -0.39524,0.4052 -0.2075,0.1383 -0.34583,0.1383 l -0.12845,-0.3063 h 0.72131 q 0.25691,0 0.43476,0.168 0.16798,0.1679 0.16798,0.4249 0,0.2569 -0.16798,0.4248 -0.16797,0.168 -0.43476,0.168 h -6.2053 q -0.25691,0 -0.42488,-0.168 -0.17786,-0.1679 -0.17786,-0.4248 0,-0.257 0.17786,-0.4249 0.16797,-0.168 0.42488,-0.168 h 2.50978 l -0.0889,0.168 q -0.12845,0 -0.30631,-0.1384 -0.18774,-0.1383 -0.3656,-0.3754 -0.18774,-0.2372 -0.30632,-0.5435 -0.11857,-0.3162 -0.11857,-0.662 z m 1.08692,0.1482 q 0,0.4347 0.21738,0.7608 0.21739,0.3261 0.59286,0.5138 0.3656,0.1779 0.8399,0.1779 0.4644,0 0.84976,-0.1779 0.37548,-0.1877 0.59286,-0.5138 0.21739,-0.3261 0.21739,-0.7608 0,-0.4348 -0.21739,-0.751 -0.21738,-0.3261 -0.59286,-0.5039 -0.38536,-0.1877 -0.84976,-0.1877 -0.4743,0 -0.8399,0.1877 -0.37547,0.1778 -0.59286,0.5039 -0.21738,0.3162 -0.21738,0.751 z m -1.08692,4.4667 q 0,-0.2569 0.16798,-0.4249 0.16798,-0.168 0.43477,-0.168 h 4.17968 q 0.2569,0 0.43477,0.168 0.16797,0.168 0.16797,0.4249 0,0.2569 -0.16797,0.4249 -0.17787,0.1679 -0.43477,0.1679 h -0.48417 l 0.0889,-0.2173 q 0.12846,0 0.3162,0.1383 0.17786,0.1383 0.35572,0.3755 0.17786,0.2371 0.30631,0.5632 0.11857,0.3162 0.11857,0.6917 0,0.6818 -0.34583,1.2351 -0.35572,0.5533 -0.96834,0.8794 -0.62251,0.3162 -1.42287,0.3162 -0.81025,0 -1.42287,-0.3162 -0.62252,-0.3261 -0.96835,-0.8695 -0.35572,-0.5435 -0.35572,-1.2055 0,-0.4249 0.12845,-0.7806 0.12846,-0.3557 0.32608,-0.6126 0.19762,-0.2668 0.40512,-0.4052 0.19762,-0.1482 0.33596,-0.1482 l 0.12846,0.3557 h -0.72132 q -0.25691,0 -0.42489,-0.1679 -0.17786,-0.168 -0.17786,-0.4249 z m 4.39707,1.996 q 0,-0.4348 -0.21739,-0.7609 -0.21738,-0.3261 -0.59286,-0.5039 -0.37548,-0.1878 -0.83988,-0.1878 -0.4743,0 -0.84978,0.1878 -0.37547,0.1778 -0.59286,0.5039 -0.21738,0.3261 -0.21738,0.7609 0,0.4248 0.21738,0.7509 0.21739,0.3261 0.59286,0.5138 0.37548,0.1779 0.84978,0.1779 0.4644,0 0.83988,-0.1779 0.37548,-0.1877 0.59286,-0.5138 0.21739,-0.3261 0.21739,-0.7509 z")
+        about_me_path__gr.attr({
+            id:    "about_me_path__gr",
+        })
+        about_me_path.fill('#262626ff')
+        about_me_path.move(screen_width_in_px/2-about_me_path.bbox().width-120,screen_height/2-55)
+        //about_me_path.rotate(-90)
+        about_me_path.scale(4.35)
+        about_me_path.attr({id: 'about_me_path'})
+    
+        var paragraph = text_gr.text(function(add){
+            add.tspan('Imagination is the beginning of creation.').newLine()
+            add.tspan('You imagine what you desire,').newLine()
+            add.tspan('you will what you imagine,').newLine()
+            add.tspan('and at last, ').newLine() 
+            add.tspan('you create what you will.').newLine()
+            add.tspan('').newLine()
+            add.tspan('-George Bernand Shaw').newLine().dx(200).font({size:'15'})
+        })
+            .font({
+                opacity: 1.0,
+                weight:  600,
+                fill:    '#262626ff',
+                family:  'Quicksand',
+                size:    19
+            })    
+        paragraph.attr({
+            x: screen_width_in_px/2-paragraph.bbox().width+25,
+            y: screen_height/2+paragraph.bbox().height/2-45
+        }) 
+
+    
+        
+    return about_tablet__layout_gr;
+
 }
+
 
 function about_create_tablet__image(parent_gr, image_url, rect_width, rect_height, x, y, opacity, view_box_x, view_box_y){
     var image_gr = parent_gr.nested()

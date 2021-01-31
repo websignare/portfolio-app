@@ -19,8 +19,6 @@ function hp__mobile__main() {
 
     });
 
-
-    console.log("4444444444444444444444444444")
 }
 
 function hp__mobile__activate(bar_gr) {

@@ -519,14 +519,14 @@ function scale_rect(parent_gr, transition_elements_gr, bar_gr, screen_width, scr
     var rect_width  = 100;
     var rect_height = 100;
 
-    var full_screen_rect_scale = transition_elements_gr.rect(0, 0).fill('#190033').attr({opacity: 1.0, x: screen_width/2, y: screen_height/2})
+    var full_screen_rect_scale = transition_elements_gr.rect(0, 0).fill('#f18b0fff').attr({opacity: 1.0, x: screen_width/2, y: screen_height/2})
 
     var scale_rect_info = {
         "full_screen_rect_scale": full_screen_rect_scale,
     }
 
     var rect_gr = parent_gr.nested().size(100, 100).move(screen_width/2+rect_width, screen_height/2)
-    var rect    = rect_gr.rect(rect_width,rect_height).fill('#400080').attr({opacity: 1.0})
+    var rect    = rect_gr.rect(rect_width,rect_height).fill('#f18b0fff').attr({opacity: 1.0})
 
     var rect_clicked = false;
 
