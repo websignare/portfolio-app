@@ -74,9 +74,10 @@ function about__create_responsive(bar_gr) {
         "width":            screen_width_in_px,
         
     }); 
+    var current_scroll_y = window.scrollY;
 
-    var bounding_rect          = $("#about #intro__info").get(0).getBoundingClientRect()
-    var intro__div_bottom_y = bounding_rect.bottom;
+    var bounding_rect       = $("#about #intro__info").get(0).getBoundingClientRect()
+    var intro__div_bottom_y = current_scroll_y+bounding_rect.bottom;
     console.log(bounding_rect.top, bounding_rect.right, bounding_rect.bottom, bounding_rect.left);
 
     $("#about #history__info").css({                    
@@ -86,9 +87,12 @@ function about__create_responsive(bar_gr) {
         "width":            screen_width_in_px,
         
     }); 
-
-    var bounding_rect          = $("#about #history__info").get(0).getBoundingClientRect()
-    var history__div_bottom_y = bounding_rect.bottom;
+    //getBoundingClientRect() gives local coordinates of VIEWPORT not global coordinates!
+    //current_scroll_y gives y position of the viewport in Global coordinates!
+    //therefor to get he global coordinates of "history_div" we have to add LOCAL coordinates
+    //in the viewport to the Global coordinates of the viewport itself
+    var bounding_rect         = $("#about #history__info").get(0).getBoundingClientRect()
+    var history__div_bottom_y = current_scroll_y+bounding_rect.bottom;
     console.log(bounding_rect.top, bounding_rect.right, bounding_rect.bottom, bounding_rect.left);
 
 
@@ -173,7 +177,6 @@ function about__create_responsive(bar_gr) {
         var trigger_y_position__intro_canvas = intro__div_bottom_y;
         sc_trigger__create(trigger_y_position__intro_canvas,
             "intro_canvas__trigger",
-            "yellow",
             screen_height,
             // activate_fn
             function() {
@@ -563,7 +566,7 @@ function about_create__image(parent_gr, image_url, rect_width, rect_height, x, y
 
 function about_intro__info(parent_gr, screen_width_in_px, screen_height){
 
-    var images_gr = parent_gr.nested() 
+    var images_gr = parent_gr.nested().attr({id:"intro__info"}) 
 
     var rect_width  = screen_width_in_px;
     var rect_height = screen_height/2;

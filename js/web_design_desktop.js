@@ -76,8 +76,10 @@ function web_design_create_responsive(bar_gr) {
         "height":           screen_height,
         "width":            screen_width_in_px
     }); 
-    var bounding_rect         = $("#web_design #artist_portfolio__info").get(0).getBoundingClientRect()
-    var artist__div_bottom_y = bounding_rect.bottom;
+    var current_scroll_y = window.scrollY;
+
+    var bounding_rect        = $("#web_design #artist_portfolio__info").get(0).getBoundingClientRect()
+    var artist__div_bottom_y = current_scroll_y+bounding_rect.bottom;
     console.log(bounding_rect.top, bounding_rect.right, bounding_rect.bottom, bounding_rect.left);
 
 
@@ -90,7 +92,7 @@ function web_design_create_responsive(bar_gr) {
     }); 
 
     var bounding_rect         = $("#web_design #suprematism__info").get(0).getBoundingClientRect()
-    var suprematism__div_bottom_y = bounding_rect.bottom;
+    var suprematism__div_bottom_y = current_scroll_y+bounding_rect.bottom;
     console.log(bounding_rect.top, bounding_rect.right, bounding_rect.bottom, bounding_rect.left);
 
 
@@ -173,7 +175,6 @@ function web_design_create_responsive(bar_gr) {
     var trigger_y_position__artist_canvas = artist__div_bottom_y;
     sc_trigger__create(trigger_y_position__artist_canvas,
         "artist_canvas__trigger",
-        "yellow",
         screen_height,
         // activate_fn
         function() {
@@ -198,7 +199,6 @@ function web_design_create_responsive(bar_gr) {
     var trigger_y_position__suprematism_canvas = suprematism__div_bottom_y;
     sc_trigger__create(trigger_y_position__suprematism_canvas,
         "suprematism_canvas__trigger",
-        "blue",
         screen_height,
         // activate_fn
         function() {

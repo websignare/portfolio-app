@@ -96,6 +96,7 @@ function hp__create_responsive(bar_gr) {
     $("#hp #wrapper").css({                    
         "background-color": '#D9D9D9',
         "position":         "relative",
+       // "top":              current_scroll_y+"px",
         "width":            screen_width_in_px
     }); 
 

@@ -1,4 +1,7 @@
 
+//
+
+
 
 function sc_trigger__create(trigger_y_position, name, screen_height, activate_fn, deactivate_fn) {
 
