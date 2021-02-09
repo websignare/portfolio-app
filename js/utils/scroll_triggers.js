@@ -7,13 +7,13 @@ function sc_trigger__create(trigger_y_position, name, screen_height, activate_fn
 
     console.log("SCROLL_TRIGGER CREATE")
 
-    $("body").append("<div id='"+name+"'>"+name+"</div>");
+    $("body").append("<div id='"+name+"'></div>"); // place between divs div<!--"+name+"--> if you want letters on triggers
     $("body").find("#"+name).css({
         position: "absolute",
         right:    "0px",
         top:      trigger_y_position+"px",
-        width:    "200px",
-        height:   "26px",
+        width:    "10px",
+        height:   "2px",
         "background-color": "yellow",
         "z-index": 20
 

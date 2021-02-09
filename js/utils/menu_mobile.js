@@ -12,8 +12,9 @@ function create_mobile_menu(parent_gr, bar_gr, screen_width_in_px, screen_height
     })
 
     //-----------------TEXT------------------------
+    var menu_text_gr = menu_background_gr.nested()
 
-    var home_title__gr = menu_background_gr.nested()
+    var home_title__gr = menu_text_gr.nested()
     var home_title     = home_title__gr.text(function(text_element){
         text_element.tspan('home')
     })
@@ -72,7 +73,7 @@ function create_mobile_menu(parent_gr, bar_gr, screen_width_in_px, screen_height
 
     ///////////////////////////////////////////////////////////////////////////////////////
 
-    var about_title__gr = menu_background_gr.nested()
+    var about_title__gr = menu_text_gr.nested()
     var about_title     = about_title__gr.text(function(text_element){
         text_element.tspan('about')
     })
@@ -131,7 +132,7 @@ function create_mobile_menu(parent_gr, bar_gr, screen_width_in_px, screen_height
     
     ///////////////////////////////////////////////////////////////////////////////////////
 
-    var design_title__gr = menu_background_gr.nested()
+    var design_title__gr = menu_text_gr.nested()
     var design_title     = design_title__gr.text(function(text_element){
         text_element.tspan('web design')
     })
@@ -184,7 +185,7 @@ function create_mobile_menu(parent_gr, bar_gr, screen_width_in_px, screen_height
     })
     ///////////////////////////////////////////////////////////////////////////////////////
 
-    var development_title__gr = menu_background_gr.nested()
+    var development_title__gr = menu_text_gr.nested()
     var development_title     = development_title__gr.text(function(text_element){
         text_element.tspan('web develop')
     })
@@ -238,7 +239,7 @@ function create_mobile_menu(parent_gr, bar_gr, screen_width_in_px, screen_height
 
     ///////////////////////////////////////////////////////////////////////////////////////
 
-    var moodboard_title__gr = menu_background_gr.nested()
+    var moodboard_title__gr = menu_text_gr.nested()
     var moodboard_title     = moodboard_title__gr.text(function(text_element){
         text_element.tspan('moodboard')
     })
@@ -291,7 +292,7 @@ function create_mobile_menu(parent_gr, bar_gr, screen_width_in_px, screen_height
 
     ///////////////////////////////////////////////////////////////////////////////////////
 
-    var contact_title__gr = menu_background_gr.nested()
+    var contact_title__gr = menu_text_gr.nested()
     var contact_title     = contact_title__gr.text(function(text_element){
         text_element.tspan('contact')
     })
@@ -307,6 +308,9 @@ function create_mobile_menu(parent_gr, bar_gr, screen_width_in_px, screen_height
         y: moodboard_title.bbox().y+moodboard_title.bbox().height+65
     })
 
+    menu_text_gr.attr({
+        y: 70
+    })
     //-----------------BUTTONS HOVER-MOUSEOVER------------------------
 
     menu.mouseover(function() {                     //when hovered over background titles color return to its origin

@@ -21,7 +21,8 @@ function web_design__mobile__main() {
 }
 
 function web_design__mobile__activate(bar_gr) {
-
+    var screen_width_in_px = window.innerWidth;
+    var screen_height      = window.innerHeight;
     //document.title = "web_design__mobile"
     //window.history.pushState({page: "web_design__mobile"},"", "#web_design__mobile");
 
@@ -40,7 +41,8 @@ function web_design__mobile__activate(bar_gr) {
         </div>
     `);
 
-    web_design__mobile__create_responsive(bar_gr);
+    var design__mobile_info = web_design__mobile__create_responsive(bar_gr);
+    web_design_top__animate(design__mobile_info, screen_width_in_px, screen_height)
     //current_page = "web_design__mobile"
 }
     
@@ -48,6 +50,9 @@ function web_design__mobile__deactivate(bar_gr) {
 
     $("#web_design__mobile").remove();
     $("#contact_mobile_wrapper").remove();
+    remove_triggers("artist_div__trigger")
+    remove_triggers("suprematism_div__trigger")
+    remove_triggers("deep_blue__trigger")
 
 }
 
@@ -76,17 +81,31 @@ function web_design__mobile__create_responsive(bar_gr) {
         "width":            screen_width_in_px
     }); 
 
+    var current_scroll_y = window.scrollY;
+
+    var bounding_rect       = $("#web_design__mobile #artist_portfolio__mobile__info").get(0).getBoundingClientRect()
+    var artist__div_bottom_y = current_scroll_y+(bounding_rect.bottom-250);
+    console.log(bounding_rect.top, bounding_rect.right, bounding_rect.bottom, bounding_rect.left);
+
     $("#web_design__mobile #suprematism__info").css({                    
         "position":         "relative",
         "height":           screen_height,
         "width":            screen_width_in_px
     }); 
 
+    var bounding_rect       = $("#web_design__mobile #suprematism__info").get(0).getBoundingClientRect()
+    var suprematism__div_bottom_y = current_scroll_y+(bounding_rect.bottom-250);
+    console.log(bounding_rect.top, bounding_rect.right, bounding_rect.bottom, bounding_rect.left);
+
     $("#web_design__mobile #deep_blue__info").css({                    
         "position":         "relative",
         "height":           screen_height,
         "width":            screen_width_in_px
     }); 
+
+    var bounding_rect       = $("#web_design__mobile #deep_blue__info").get(0).getBoundingClientRect()
+    var deep_blue__div_bottom_y = current_scroll_y+(bounding_rect.bottom-250);
+    console.log(bounding_rect.top, bounding_rect.right, bounding_rect.bottom, bounding_rect.left);
 
     $("#web_design__mobile #video__info").css({                    
         "position":         "relative",
@@ -100,26 +119,103 @@ function web_design__mobile__create_responsive(bar_gr) {
 
     var artist_portfolio__mobile__container           = SVG().addTo("#web_design__mobile #artist_portfolio__mobile__info").size(screen_width_in_px, screen_height)
     var mobile_artist_portfolio__mobile__container_gr = artist_portfolio__mobile__container.nested()   
-  
+    mobile_artist_portfolio__mobile__container_gr.attr({y: -30,opacity: 0.5})
+
     var suprematism__container           = SVG().addTo("#web_design__mobile #suprematism__info").size(screen_width_in_px, screen_height)
     var mobile_suprematism__container_gr = suprematism__container.nested()   
-   
+    mobile_suprematism__container_gr.attr({y: 0,opacity: 0.5})
+
     var deep_blue__container           = SVG().addTo("#web_design__mobile #deep_blue__info").size(screen_width_in_px, screen_height)
     var mobile_deep_blue__container_gr = deep_blue__container.nested()  
-    
+    mobile_suprematism__container_gr.attr({y: -30,opacity: 0.5})
+
     var video__container           = SVG().addTo("#web_design__mobile #video__info").size(screen_width_in_px, screen_height)
     var mobile_video__container_gr = video__container.nested()   
 
     var screen_physical_width_cm = get_physical_screen_width(screen_width_in_px);
     console.log(screen_physical_width_cm, '!!!SCREEN WIDTH')
 
-    web_design_intro__info(mobile_headline__container_gr, bar_gr, screen_width_in_px, screen_height)
+    var design__mobile_info = web_design_intro__info(mobile_headline__container_gr, bar_gr, screen_width_in_px, screen_height)
     artist_portfolio__mobile(mobile_artist_portfolio__mobile__container_gr, screen_width_in_px, screen_height)
     suprematism__mobile(mobile_suprematism__container_gr, screen_width_in_px, screen_height)
     deep_blue__mobile(mobile_deep_blue__container_gr, screen_width_in_px, screen_height)
     web_design_video__mobile(mobile_video__container_gr, screen_width_in_px, screen_height)
 
     create_mobile_contact_section(screen_width_in_px,screen_height)
+
+    // ARTIST__SCROLL_TRIGGER
+    var trigger_y_position__artist_canvas = artist__div_bottom_y;
+    sc_trigger__create(trigger_y_position__artist_canvas,
+        "artist_div__trigger",
+        screen_height,
+        // activate_fn
+        function() {
+            mobile_artist_portfolio__mobile__container_gr.animate({
+                    duration: 600,
+                    delay:    300, 
+                    ease: '<' 
+                })
+                .attr({y:0, opacity: 1.0})
+        },
+        // deactivate
+        function() {
+            mobile_artist_portfolio__mobile__container_gr.animate({
+                duration: 600,
+                delay:    300, 
+                ease: '<' 
+            })
+            .attr({y: -30, opacity: 0.5})
+        });
+
+    // SUPREMATISM__SCROLL_TRIGGER
+    var trigger_y_position__suprematism_canvas = suprematism__div_bottom_y;
+    sc_trigger__create(trigger_y_position__suprematism_canvas,
+        "suprematism_div__trigger",
+        screen_height,
+        // activate_fn
+        function() {
+            mobile_suprematism__container_gr.animate({
+                    duration: 600,
+                    delay:    300, 
+                    ease: '<' 
+                })
+                .attr({y: 0,opacity: 1.0})
+        },
+        // deactivate
+        function() {
+            mobile_suprematism__container_gr.animate({
+                duration: 600,
+                delay:    300, 
+                ease: '<' 
+            })
+            .attr({y: -30, opacity: 0.5})
+        });
+
+    // DEEP_BLUE__SCROLL_TRIGGER
+    var trigger_y_position__deep_blue_canvas = deep_blue__div_bottom_y;
+    sc_trigger__create(trigger_y_position__deep_blue_canvas,
+        "deep_blue__trigger",
+        screen_height,
+        // activate_fn
+        function() {
+            mobile_deep_blue__container_gr.animate({
+                    duration: 600,
+                    delay:    300, 
+                    ease: '<' 
+                })
+                .attr({y: 0,opacity: 1.0})
+        },
+        // deactivate
+        function() {
+            mobile_deep_blue__container_gr.animate({
+                duration: 200,
+                //delay:    400, 
+                ease: '<' 
+            })
+            .attr({y: -30, opacity: 0.5})
+        });
+
+    return design__mobile_info;
 }
 
 function web_design_create__image(parent_gr, image_url, rect_width, rect_height, x, y, opacity, view_box_x, view_box_y){
@@ -172,7 +268,10 @@ function web_design_intro__info(parent_gr, bar_gr, screen_width_in_px, screen_he
     comment_symbol.move(comment_symbol.bbox().width/2-15,screen_height/2-comment_symbol.bbox().height+15)
     //comment_symbol.rotate(180)
     comment_symbol.scale(2.3)
-    comment_symbol.attr({id: 'comment_symbol'})
+    comment_symbol.attr({
+        id: 'comment_symbol',
+        opacity: 0.0
+    })
 
     comment_symbol_gr.attr({
         id: "comment_symbol_gr"
@@ -218,7 +317,7 @@ function web_design_intro__info(parent_gr, bar_gr, screen_width_in_px, screen_he
         height: rect_height,
         width:  rect_width,
         y:      screen_height/2-80,
-        x:      screen_width_in_px-background_img__gr.bbox().width
+        x:      screen_width_in_px+background_img__gr.bbox().width
     })
 
 
@@ -229,11 +328,22 @@ function web_design_intro__info(parent_gr, bar_gr, screen_width_in_px, screen_he
         id:    "wdesign_path__gr",
     })
     wdesign_path.fill('#533065ff')
-    wdesign_path.move(screen_width_in_px/2-wdesign_path.bbox().width/2,screen_height/4.5-10)
+    wdesign_path.move(screen_width_in_px+wdesign_path.bbox().width,screen_height/4.5)
     //wdesign_path.rotate(-90)
     wdesign_path.scale(2.6)
-    wdesign_path.attr({id: 'wdesign_path'})
+    wdesign_path.attr({
+        id:     'wdesign_path',
+        opacity: 0.8
+    })
 
+    var design__mobile_info = {
+        "wdesign_path":       wdesign_path,
+        "comment_symbol":     comment_symbol,
+        "background_img__gr": background_img__gr,
+        "menu_rect_gr":       menu_rect_gr
+    }
+
+    return design__mobile_info;
 }
 
 function artist_portfolio__mobile(parent_gr, screen_width_in_px, screen_height){
@@ -247,53 +357,55 @@ function artist_portfolio__mobile(parent_gr, screen_width_in_px, screen_height){
                 //FIRST RECT
 
                 "draw_fn": function(artist_portfolio__mobile__gr){
-                    var rect_height = screen_height/1.1
-                    var rect_width  = screen_width_in_px
+                    var rect_height = screen_height/1.15
+                    var rect_width  = screen_width_in_px-40
 
                     var top_gr    = artist_portfolio__mobile__gr.nested()
                     var top_rect  = top_gr.rect(rect_width,rect_height/6)
                     .attr({
                         id:      "top",
                         fill:    "#fff",
-                        opacity: 0.6
+                        opacity: 1.0,
+                        x:20
                     })
                     var left_top_text  = top_gr.text(function(add){
-                        add.tspan("type: Portfolio").newLine().dx("20")
-                        add.tspan('link: www.artist_portfolio.com').newLine().dx("20")
+                        add.tspan("Type: Portfolio").newLine().dx("20")
+                        add.tspan('Link: www.artist_portfolio.com').newLine().dx("20")
                     })
                         left_top_text.font({
                           family: 'Quicksand',
-                          size:   18,
-                          fill:   '#1f2d38ff',
+                          size:   16,
+                          fill:   '#000',
                           anchor: 'left',
                           weight: '700',
                           leading:'1.5em'
                         })
                         .attr({
                             x: top_gr.bbox().width/2-left_top_text.bbox().width/2,
-                            y: top_gr.bbox().height/2-left_top_text.bbox().height/2-10
+                            y: top_gr.bbox().height/2-left_top_text.bbox().height/2+5
                         })
 
                     var middle__gr   = artist_portfolio__mobile__gr.nested()
-                    var middle_rect  = middle__gr.rect(rect_width/2,rect_height/1.63)
+                    var middle_rect  = middle__gr.rect(rect_width,rect_height/1.63)
                         .attr({
                             id:      "middle_rect",
-                            x:       0,
+                            x:       20,
+                            y: top_rect.bbox().height,
                             fill:   '#fff',
-                            opacity: 0.0
+                            opacity: 1.0
                         })
                     var artist_image_url = './../portfolio-app-media/media/art_1.png'
-                    fit_image_inside_rect(middle__gr, artist_image_url, screen_width_in_px, rect_height/1.63, 0, rect_height/6, 0, 0)
+                    fit_image_inside_rect(middle__gr, artist_image_url, screen_width_in_px-60, rect_height/1.63, 30, rect_height/6, 0, 0)
     
                     //paragraph on bottom
                     var bottom__gr = artist_portfolio__mobile__gr.nested()
 
                     var bottom = bottom__gr.rect(rect_width,rect_height/4.5)
                         .attr({
-                            opacity: 0.6,
+                            opacity: 1.0,
                             id:      "bottom",
                             fill:    "#fff", 
-                            x:       0,
+                            x:       20,
                             y:       rect_height-rect_height/4.5
                     })
 
@@ -308,13 +420,13 @@ function artist_portfolio__mobile(parent_gr, screen_width_in_px, screen_height){
                         .font({
                             opacity: 1.0,
                             weight:  500,
-                            fill:    '#1f2d38ff',
+                            fill:    '#000',
                             family:  'Quicksand',
-                            size:    16
+                            size:    14
                         })    
                     paragraph.attr({
-                        x: bottom.bbox().width/2-paragraph.bbox().width/2,
-                        y: rect_height-rect_height/4.5+5
+                        x: bottom.bbox().width-paragraph.bbox().width+10,
+                        y: rect_height-rect_height/5
                     }) 
 
                 },    
@@ -325,8 +437,8 @@ function artist_portfolio__mobile(parent_gr, screen_width_in_px, screen_height){
                 "deactivate_fn": function(artist_portfolio__mobile__gr){
 
                 },     
-                "width": screen_width_in_px,           
-                "height":screen_height/1.1,                              //shadow height
+                "width": screen_width_in_px-40,           
+                "height":screen_height/1.15,                              //shadow height
                 "color": "#204c39",
                 "element_number_color": "#651b40ff",
                 "element_number": "1"
@@ -352,44 +464,46 @@ function suprematism__mobile(parent_gr, screen_width_in_px, screen_height){
             {
                 //FIRST RECT
                 "draw_fn": function(suprematism__gr){
-                    var rect_height = screen_height/1.1
-                    var rect_width  = screen_width_in_px
+                    var rect_height = screen_height/1.15
+                    var rect_width  = screen_width_in_px-40
 
                     var top_gr   = suprematism__gr.nested()
                     var top_rect = top_gr.rect(rect_width,rect_height/6)
                     .attr({
                         id:      "top",
                         fill:    "#fff",
-                        opacity: 1.0
+                        opacity: 1.0,
+                        x: 20
                     })
                     var left_top_text  = top_gr.text(function(add){
-                        add.tspan("type: Suprematism").newLine().dx("15")
-                        add.tspan('link:').dx("15").newLine()
+                        add.tspan("Type: Suprematism").newLine().dx("15")
+                        add.tspan('Link:').dx("15").newLine()
                         add.tspan('www.suprematism.com').dx("15")
                     })
                         left_top_text.font({
                           family: 'Quicksand',
-                          size:   18,
-                          fill:   '#033692ff',
+                          size:   16,
+                          fill:   '#000',
                           anchor: 'left',
                           weight: '700',
                           leading:'1.5em'
                         })
                         .attr({
                             x: top_gr.bbox().width/2-left_top_text.bbox().width/2,
-                            y: top_gr.bbox().height/2-left_top_text.bbox().height/2-10
+                            y: top_gr.bbox().height/2-left_top_text.bbox().height/2+5
                         })
 
                     var middle__gr   = suprematism__gr.nested()
                     var middle_rect  = middle__gr.rect(rect_width,rect_height/1.63)
                         .attr({
                             id:      "middle_rect",
-                            x:       0,
-                            fill:   '#b5b5b5ff',
-                            opacity: 0.0
+                            x:       20,
+                            y: top_rect.bbox().height,
+                            fill:   '#fff',
+                            opacity: 1.0
                         })
                     var suprematism_image = './../portfolio-app-media/media/sup_3.png'
-                    fit_image_inside_rect(middle__gr, suprematism_image, screen_width_in_px, rect_height/1.63, 0, rect_height/6, 0, 0)
+                    fit_image_inside_rect(middle__gr, suprematism_image, screen_width_in_px-60, rect_height/1.63, 30, rect_height/6, 0, 0)
 
                     //paragraph on bottom
                     var bottom__gr = suprematism__gr.nested()
@@ -399,7 +513,7 @@ function suprematism__mobile(parent_gr, screen_width_in_px, screen_height){
                             opacity: 1.0,
                             id:      "bottom",
                             fill:    "#fff", 
-                            x:       0,
+                            x:       20,
                             y:       rect_height-rect_height/4.5
                     })
 
@@ -414,13 +528,13 @@ function suprematism__mobile(parent_gr, screen_width_in_px, screen_height){
                         .font({
                             opacity: 1.0,
                             weight:  500,
-                            fill:    '#931415ff',
+                            fill:    '#000',
                             family:  'Quicksand',
-                            size:    16
+                            size:    14
                         })    
                     paragraph.attr({
-                        x: bottom.bbox().width/2-paragraph.bbox().width/2,
-                        y: rect_height-rect_height/4.5+5
+                        x: bottom.bbox().width-paragraph.bbox().width+10,
+                        y: rect_height-rect_height/5
                     }) 
 
                 },    
@@ -431,8 +545,8 @@ function suprematism__mobile(parent_gr, screen_width_in_px, screen_height){
                 "deactivate_fn": function(suprematism__gr){
 
                 },     
-                "width":                screen_width_in_px,           
-                "height":               screen_height/1.1,
+                "width": screen_width_in_px-40,           
+                "height":screen_height/1.15,    
                 "color":                "#204c39",
                 "element_number_color": "#651b40ff",
                 "element_number":       "2"
@@ -457,54 +571,56 @@ function deep_blue__mobile(parent_gr, screen_width_in_px, screen_height){
                 //FIRST RECT
  
                 "draw_fn": function(deep_blue__gr){
-                    var rect_height = screen_height/1.1
-                    var rect_width  = screen_width_in_px
+                    var rect_height = screen_height/1.15
+                    var rect_width  = screen_width_in_px-40
 
                     var top_gr   = deep_blue__gr.nested()
                     var top_rect = top_gr.rect(rect_width,rect_height/6)
                     .attr({
                         id:      "top",
                         fill:    "#fff",
-                        opacity: 0.6
+                        opacity: 1.0,
+                        x: 20
                     })
                     var left_top_text  = top_gr.text(function(add){
-                        add.tspan("type: Deep Blue").newLine().dx("15")
-                        add.tspan('link:').dx("15").newLine()
+                        add.tspan("Type: Deep Blue").newLine().dx("15")
+                        add.tspan('Link:').dx("15").newLine()
                         add.tspan('www.deep_blue.com').dx("15")
                     })
                         left_top_text.font({
                           family: 'Quicksand',
-                          size:   18,
-                          fill:   '#45655bff',
+                          size:   16,
+                          fill:   '#000',
                           anchor: 'left',
                           weight: '700',
                           leading:'1.5em'
                         })
                         .attr({
                             x: top_gr.bbox().width/2-left_top_text.bbox().width/2,
-                            y: top_gr.bbox().height/2-left_top_text.bbox().height/2-10
+                            y: top_gr.bbox().height/2-left_top_text.bbox().height/2+5
                         })
 
                     var middle__gr   = deep_blue__gr.nested()
                     var middle_rect  = middle__gr.rect(rect_width,rect_height/1.63)
                         .attr({
                             id:      "middle_rect",
-                            x:       0,
-                            fill:   '#b5b5b5ff',
-                            opacity: 0.0
+                            x:       20,
+                            y: top_rect.bbox().height,
+                            fill:   '#fff',
+                            opacity: 1.0
                         })
                     var deep_blue_img = './../portfolio-app-media/media/deep_blue_0.png'
-                    fit_image_inside_rect(middle__gr, deep_blue_img, screen_width_in_px, rect_height/1.63, 0, rect_height/6, 0, 0)
+                    fit_image_inside_rect(middle__gr, deep_blue_img, screen_width_in_px-60, rect_height/1.63, 30, rect_height/6, 0, 0)
         
                     //paragraph on bottom
                     var bottom__gr = deep_blue__gr.nested()
 
                     var bottom = bottom__gr.rect(rect_width,rect_height/4.5)
                         .attr({
-                            opacity: 0.6,
+                            opacity: 1.0,
                             id:      "bottom",
                             fill:    "#fff", 
-                            x:       0,
+                            x:       20,
                             y:       rect_height-rect_height/4.5
                     })
 
@@ -519,13 +635,13 @@ function deep_blue__mobile(parent_gr, screen_width_in_px, screen_height){
                         .font({
                             opacity: 1.0,
                             weight:  500,
-                            fill:    '#042b27ff',
+                            fill:    '#000',
                             family:  'Quicksand',
-                            size:    16
+                            size:    14
                         })    
                     paragraph.attr({
-                        x: bottom.bbox().width/2-paragraph.bbox().width/2,
-                        y: rect_height-rect_height/4.5+5
+                        x: bottom.bbox().width-paragraph.bbox().width+10,
+                        y: rect_height-rect_height/5
                     }) 
 
                 },    
@@ -534,8 +650,8 @@ function deep_blue__mobile(parent_gr, screen_width_in_px, screen_height){
                 "deactivate_fn": function(deep_blue__gr){
 
                 },     
-                "width":                screen_width_in_px,           
-                "height":               screen_height/1.1,
+                "width": screen_width_in_px-40,           
+                "height":screen_height/1.15,    
                 "color":                "#204c39",
                 "element_number_color": "#651b40ff",
                 "element_number":       "3"
@@ -606,6 +722,36 @@ function web_design_video__mobile(parent_gr, screen_width_in_px, screen_height){
         top:        video_global_y+350,
         width:      screen_width_in_px,
         height:     video_global_height
+    })
+
+}
+
+function web_design_top__animate(design__mobile_info, screen_width_in_px, screen_height){
+    var wdesign_path       = design__mobile_info["wdesign_path"];
+    var comment_symbol     = design__mobile_info["comment_symbol"];
+    var background_img__gr = design__mobile_info["background_img__gr"];
+    var menu_rect_gr       = design__mobile_info["menu_rect_gr"];
+
+    comment_symbol.animate({
+        duration: 600,
+    }).attr({
+        opacity: 1.0
+    })
+    wdesign_path.animate({
+        delay: 200,
+        duration: 1000,
+        ease: '<'
+    }).move(screen_width_in_px/2+wdesign_path.bbox().width+43,screen_height/4.5)
+    .attr({
+        opacity: 1.0
+    })
+    background_img__gr.animate({
+        delay: 800,
+        duration: 800,
+        ease: '>'
+    }).attr({
+        y: screen_height/2-80,
+        x: screen_width_in_px-background_img__gr.bbox().width
     })
 
 }

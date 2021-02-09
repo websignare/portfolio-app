@@ -244,7 +244,7 @@ function web_design_text__tablet(parent_gr, screen_width_in_px, screen_height){
         id:    "wdesign_path__gr",
     })
     wdesign_path.fill('#533065ff')
-    wdesign_path.move(screen_width_in_px/2-wdesign_path.bbox().width-200,screen_height/2-wdesign_path.bbox().height-100)
+    wdesign_path.move(screen_width_in_px/2-wdesign_path.bbox().width-150,screen_height/2-wdesign_path.bbox().height-100)
     //wdesign_path.rotate(-90)
     wdesign_path.scale(2.95)
     wdesign_path.attr({id: 'wdesign_path'})
@@ -266,7 +266,7 @@ function web_design_text__tablet(parent_gr, screen_width_in_px, screen_height){
             size:    19
         })    
     paragraph.attr({
-        x: screen_width_in_px/2-paragraph.bbox().width-70,
+        x: screen_width_in_px/2-paragraph.bbox().width-30,
         y: screen_height/2-paragraph.bbox().height/2
     })  
 }
@@ -278,7 +278,7 @@ function web_design__images__tablet(parent_gr, screen_width_in_px, screen_height
     .attr({
         width: screen_width_in_px/2+150,
         height: screen_height,
-        x: screen_width_in_px/2-50
+        x: screen_width_in_px/2
     })
 
     var rect_width = (screen_width_in_px/2)/4.5;

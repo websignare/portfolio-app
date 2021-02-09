@@ -1,11 +1,11 @@
 //-------------------------ANIMATIONS----------------------------------/
 
-function animations_mobile(parent_gr, screen_width_in_px, height, screen_height) {
+function animations_mobile(parent_gr, screen_width_in_px, screen_height) {
 
     
 
-    var rect_width  = screen_width_in_px;
-    var rect_height = screen_height/2;
+    var rect_width  = screen_width_in_px-40;
+    var rect_height = screen_height/2-40;
 
     var animation_gr = parent_gr.nested()
 
@@ -36,7 +36,7 @@ function animations_mobile(parent_gr, screen_width_in_px, height, screen_height)
     image_url_b = "../portfolio-app-media/media/p_2_croped.png"
     animation_b_gr.attr({
         x:     screen_width_in_px/2-animation_b.bbox().width/2,
-        y:     animation_a_gr.bbox().height+100
+        y:     animation_a_gr.bbox().height+75
     })
     fit_image_inside_rect(animation_b_gr, image_url_b, rect_width, rect_height, 0, 0, 0, 0)
     create_play_button("flying_rect", animation_b_gr, '0,0 0,150 150,75', animation_b_gr.bbox().width/4, animation_b_gr.bbox().height/4, screen_width_in_px, screen_height)
@@ -54,7 +54,7 @@ function animations_mobile(parent_gr, screen_width_in_px, height, screen_height)
     image_url_c = "../portfolio-app-media/media/p_3_croped.png"
     animation_c_gr.attr({
         x:     screen_width_in_px/2-animation_c.bbox().width/2,
-        y:     animation_a_gr.bbox().height+animation_b_gr.bbox().height+150
+        y:     animation_a_gr.bbox().height+animation_b_gr.bbox().height+100
     })
 
     fit_image_inside_rect(animation_c_gr, image_url_c, rect_width, rect_height, 0, 0, 0, 0)
@@ -71,7 +71,7 @@ function animations_mobile(parent_gr, screen_width_in_px, height, screen_height)
     image_url_d = "../portfolio-app-media/media/p_4_croped.png"
     animation_d_gr.attr({
         x:     screen_width_in_px/2-animation_d.bbox().width/2,
-        y:     animation_a_gr.bbox().height+animation_b_gr.bbox().height+animation_c_gr.bbox().height+200
+        y:     animation_a_gr.bbox().height+animation_b_gr.bbox().height+animation_c_gr.bbox().height+125
     })
 
     fit_image_inside_rect(animation_d_gr, image_url_d, rect_width, rect_height, 0, 0, 0, -5)
@@ -89,7 +89,7 @@ function animations_mobile(parent_gr, screen_width_in_px, height, screen_height)
     image_url_e = "../portfolio-app-media/media/p_5_croped.png"
     animation_e_gr.attr({
         x:     screen_width_in_px/2-animation_e.bbox().width/2,
-        y:     animation_a_gr.bbox().height+animation_b_gr.bbox().height+animation_c_gr.bbox().height+animation_d_gr.bbox().height+250
+        y:     animation_a_gr.bbox().height+animation_b_gr.bbox().height+animation_c_gr.bbox().height+animation_d_gr.bbox().height+150
     })
 
     fit_image_inside_rect(animation_e_gr, image_url_e, rect_width, rect_height, 0, 0, 0, 0)
@@ -107,7 +107,7 @@ function animations_mobile(parent_gr, screen_width_in_px, height, screen_height)
     image_url_f = "../portfolio-app-media/media/svg_1_croped.png"
     animation_f_gr.attr({
         x:     screen_width_in_px/2-animation_f.bbox().width/2,
-        y:     animation_a_gr.bbox().height+animation_b_gr.bbox().height+animation_c_gr.bbox().height+animation_d_gr.bbox().height+animation_e_gr.bbox().height+300
+        y:     animation_a_gr.bbox().height+animation_b_gr.bbox().height+animation_c_gr.bbox().height+animation_d_gr.bbox().height+animation_e_gr.bbox().height+175
     })
 
     fit_image_inside_rect(animation_f_gr, image_url_f, rect_width, rect_height, 0, 0, 0, 0)
@@ -125,7 +125,7 @@ function animations_mobile(parent_gr, screen_width_in_px, height, screen_height)
     image_url_g = "../portfolio-app-media/media/svg_2_croped.png"
     animation_g_gr.attr({
         x: screen_width_in_px/2-animation_g.bbox().width/2,
-        y: animation_a_gr.bbox().height+animation_b_gr.bbox().height+animation_c_gr.bbox().height+animation_d_gr.bbox().height+animation_e_gr.bbox().height+animation_f_gr.bbox().height+350
+        y: animation_a_gr.bbox().height+animation_b_gr.bbox().height+animation_c_gr.bbox().height+animation_d_gr.bbox().height+animation_e_gr.bbox().height+animation_f_gr.bbox().height+200
     })
     
     fit_image_inside_rect(animation_g_gr, image_url_g, rect_width, rect_height, 0, 0, 0, 0)
@@ -143,7 +143,7 @@ function animations_mobile(parent_gr, screen_width_in_px, height, screen_height)
     image_url_h = "../portfolio-app-media/media/svg_3_croped.png"
     animation_h_gr.attr({
         x: screen_width_in_px/2-animation_h.bbox().width/2,
-        y: animation_a_gr.bbox().height+animation_b_gr.bbox().height+animation_c_gr.bbox().height+animation_d_gr.bbox().height+animation_e_gr.bbox().height+animation_f_gr.bbox().height+animation_g_gr.bbox().height+400
+        y: animation_a_gr.bbox().height+animation_b_gr.bbox().height+animation_c_gr.bbox().height+animation_d_gr.bbox().height+animation_e_gr.bbox().height+animation_f_gr.bbox().height+animation_g_gr.bbox().height+225
     })
 
     fit_image_inside_rect(animation_h_gr, image_url_h, rect_width, rect_height, 0, 0, 0, 0)

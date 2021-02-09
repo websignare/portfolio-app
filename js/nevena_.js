@@ -26,6 +26,9 @@ function main() {
 
 function hp__activate(bar_gr) {
 
+    var screen_width_in_px = window.innerWidth;
+    var screen_height      = window.innerHeight;
+
     document.title = "home page"
     window.history.pushState({page: "home_page"},"", "#home_page");
 
@@ -60,7 +63,9 @@ function hp__activate(bar_gr) {
         </div>
     `);
 
-    hp__create_responsive(bar_gr);
+    hp__buttons__desktop_info = hp__create_responsive(bar_gr);
+
+    hp_top__animate(hp__buttons__desktop_info, screen_width_in_px, screen_height)
 }
 
 function hp__deactivate() {
@@ -134,9 +139,14 @@ function hp__create_responsive(bar_gr) {
 
         nevena_create_text__desktop(container_gr, screen_width_in_px, screen_height)
         section_images__desktop(white_background_gr)
-        buttons(container_gr, bar_gr, screen_height, screen_width_in_px)
+        hp__buttons__desktop_info = buttons(container_gr, bar_gr, screen_height, screen_width_in_px)
         create_contact_section(screen_width_in_px, screen_height)
+
+        return hp__buttons__desktop_info
+
     }
+
+
 }
 
 //----------------------------------------------CREATE-LAYOUT-DESKTOP----------------------------------------------------------------
@@ -314,7 +324,7 @@ function section_images__desktop(parent_gr){
         var elements_height_px         = images_gr_height*(elements_height_percentage*0.01)   // 0.01 is to bring range 0-100% into range 0-1.0
 
         var view_box_x = element_data['view_box_x'];
-        var view_box_y = element_data['view_box_y'];
+        var view_box_y = (element_data['view_box_y'-20]);
 
         var url = images_data['elements_data'][i]['url']
 
@@ -350,7 +360,17 @@ function section_images__desktop(parent_gr){
             view_box_y)
     }
 
+    //-----------------OBJECTS-------------------
 
+    var hp_images__desktop__info = {
+        "view_box_y":         (element_data['view_box_y']),
+        /*"element_x":             element_x,
+        "element_position_y_px": element_position_y_px*/
+
+    }
+
+
+    return hp_images__desktop__info
 
     // IMPORTANT!! - this function has to be called after all the image_elements
     //               are created, because it gets some of those elements
@@ -362,6 +382,11 @@ function section_images__desktop(parent_gr){
 function buttons(parent_gr, bar_gr, screen_height, screen_width_in_px){
 
     var buttons_gr = parent_gr.nested()
+    var buttons    = buttons_gr.rect(screen_width_in_px,screen_height)
+    .attr({
+        opacity: 0.0,
+        id:     "buttons"
+    })
     var rect_height = 150;
     //--------------------------UI----------------------------------
     var ui_gr         = buttons_gr.nested()
@@ -393,9 +418,10 @@ function buttons(parent_gr, bar_gr, screen_height, screen_width_in_px){
     })
 
     ui_gr.attr({
-        id: "ui_gr",
-        "x": ui_x,
-        "y": ui_base_image.y()-ui_rect.bbox().height
+        opacity: 1.0,
+        id:      "ui_gr",
+        "x":     ui_x-500,
+        "y":     ui_base_image.y()-ui_rect.bbox().height
     })
 
     //--------------------------UX----------------------------------
@@ -430,9 +456,10 @@ function buttons(parent_gr, bar_gr, screen_height, screen_width_in_px){
     })
 
     ux_gr.attr({
-        id: "ux_gr",
-        "x": ux_x,
-        "y": ux_base_image_first.y()+ux_height
+        opacity: 1.0, 
+        id:      "ux_gr",
+        "x":     ux_x-500,
+        "y":     ux_base_image_first.y()+ux_height
     })
 
     //--------------------------CONTACT----------------------------------
@@ -466,9 +493,10 @@ function buttons(parent_gr, bar_gr, screen_height, screen_width_in_px){
     })
 
     contact_gr.attr({
-        id: "contact_gr",
-        "x": contact_x,
-        "y": contact_base_image.y()-contact_rect.bbox().height
+        opacity: 1.0,
+        id:     "contact_gr",
+        "x":     contact_x,
+        "y":    contact_base_image.y()-contact_rect.bbox().height-500
     })
 
     //--------------------------DESIGN----------------------------------
@@ -501,9 +529,10 @@ function buttons(parent_gr, bar_gr, screen_height, screen_width_in_px){
     })
 
     design_gr.attr({
-        id: "design_gr",
-        "x": design_x,
-        "y": design_base_image.y()-design_rect.bbox().height
+        opacity: 1.0,
+        id:     "design_gr",
+        "x":     design_x,
+        "y":     design_base_image.y()-design_rect.bbox().height-500
     })
 
     //////////////////////////////////////--PAGE TRANSITION ON BUTTON CLICKED--////////////////////////////////////////////
@@ -576,9 +605,10 @@ function buttons(parent_gr, bar_gr, screen_height, screen_width_in_px){
     })
 
     development_gr.attr({
-        id: "development_gr",
-        "x": development_x,
-        "y": development_base_image_first.y()-development_rect.bbox().height
+        opacity: 1.0,
+        id:     "development_gr",
+        "x":     development_x,
+        "y":     development_base_image_first.y()-development_rect.bbox().height-500
     })
     //////////////////////////////////////--PAGE TRANSITION ON BUTTON CLICKED--////////////////////////////////////////////
     development_clicked = false;
@@ -677,23 +707,23 @@ function buttons(parent_gr, bar_gr, screen_height, screen_width_in_px){
     var nevena_title = nevena_gr.text(function(text_element){
         text_element.tspan('nevena')
     })
-        .font({
-            opacity: 1.0,
-            weight:  700,
-            fill:    '#BF1F1F',
-            family:  'Quicksand',
-            size:    85
-        })    
-        nevena_title.attr({
+    .font({
+        opacity: 1.0,
+        weight:  500,
+        fill:    '#BF1F1F',
+        family:  'Quicksand',
+        size:    65
+    })    
+    nevena_title.attr({
         x: nevena_rect.bbox().width/2-nevena_title.bbox().width/2,
         y: nevena_rect.bbox().height/2+nevena_title.bbox().height/2-5
     })
     nevena_title.css({ width: '100%'})
 
     nevena_gr.attr({
-        id: "nevena_gr",
-        "x": nevena_x,
-        "y": nevena_base_image_first.y()+nevena_height-nevena_title.bbox().height/2
+        id:     "nevena_gr",
+        "x":     nevena_x,
+        "y":     nevena_base_image_first.y()+nevena_height-nevena_title.bbox().height/2+600
     })
     //--------------------------ANIMATION----------------------------------
     var moodboard_gr          = buttons_gr.nested()
@@ -726,9 +756,11 @@ function buttons(parent_gr, bar_gr, screen_height, screen_width_in_px){
     })
 
     moodboard_gr.attr({
-        id: "moodboard_gr",
-        "x": mooodboard_x-moodboard_width-moodboard_rect.bbox().width/2,
-        "y": moodboard_base_image.y()+moodboard_height-moodboard_rect.bbox().height
+        opacity: 1.0,
+        id:     "moodboard_gr",
+        width:   moodboard_rect.bbox().width,
+        x: mooodboard_x-moodboard_width-moodboard_rect.bbox().width/2,
+        "y":     moodboard_base_image.y()+moodboard_height+500
     })
     //////////////////////////////////////--PAGE TRANSITION ON BUTTON CLICKED--////////////////////////////////////////////
     moodboard_clicked = false;
@@ -764,5 +796,164 @@ function buttons(parent_gr, bar_gr, screen_height, screen_width_in_px){
             moodboard_clicked = false;
         }
     })
+    //-----------------BUTTONS HOVER-MOUSEOVER------------------------
+
+    buttons.mouseover(function() {                     //when hovered over background titles color return to its origin
+        nevena_title.fill({ color: '#BF1F1F' })
+        moodboard_title.fill({ color: '#fff' })
+        development_title.fill({ color: '#fff' })
+        design_title.fill({ color: '#fff' })
+        contact_title.fill({ color: '#BF1F1F' })
+
+    })
+
+    nevena_title.mouseover(function() {               //when hovered over title it changes color
+        nevena_title.fill({ color: '#720e0eff' })
+    })
+    design_title.mouseover(function() {
+        design_title.fill({ color: '#720e0eff' })
+    })
+    moodboard_title.mouseover(function() {
+        moodboard_title.fill({ color: '#720e0eff' })
+    })
+    development_title.mouseover(function() {
+        development_title.fill({ color: '#720e0eff' })
+    })
+    contact_title.mouseover(function() {
+        contact_title.fill({ color: '#720e0eff' })
+    })
+    
+     //-----------------OBJECTS-------------------
+
+     var hp__buttons__desktop_info = {
+        "ui_gr":                        ui_gr,
+        "ui_x":                     ui_x,
+        "ux_gr":                        ux_gr,
+        "ux_x":                         ux_x,
+        "contact_gr":                   contact_gr,
+        "contact_base_image":           contact_base_image,
+        "contact_rect":                 contact_rect,
+        "nevena_gr":                    nevena_gr,
+        "nevena_title":                 nevena_title,
+        "nevena_base_image_first":                 nevena_base_image_first,
+        "nevena_height":                 nevena_height,
+        "design_gr":                    design_gr,
+        "design_rect":                  design_rect,
+        "design_base_image":            design_base_image,
+        "development_gr":               development_gr,
+        "development_base_image_first": development_base_image_first,
+        "development_rect":             development_rect,
+        "moodboard_gr":                 moodboard_gr,
+        "moodboard_height":             moodboard_height,
+        "moodboard_rect":               moodboard_rect,
+        "moodboard_base_image":         moodboard_base_image
+
+    }
+
+    return hp__buttons__desktop_info
+}
+
+function hp_top__animate(hp__buttons__desktop_info , screen_width_in_px, screen_height){
+    var ui_gr              = hp__buttons__desktop_info["ui_gr"];
+    var ui_x               = hp__buttons__desktop_info["ui_x"];
+    var ux_gr              = hp__buttons__desktop_info["ux_gr"];
+    var ux_x               = hp__buttons__desktop_info["ux_x"];
+    var contact_gr         = hp__buttons__desktop_info["contact_gr"];
+    var contact_base_image = hp__buttons__desktop_info["contact_base_image"];
+    var contact_rect       = hp__buttons__desktop_info["contact_rect"];
+    var nevena_gr          = hp__buttons__desktop_info["nevena_gr"];
+    var nevena_title       = hp__buttons__desktop_info["nevena_title"];
+    var nevena_base_image_first       = hp__buttons__desktop_info["nevena_base_image_first"];
+    var nevena_height       = hp__buttons__desktop_info["nevena_height"];
+    var design_gr          = hp__buttons__desktop_info["design_gr"];
+    var design_base_image  = hp__buttons__desktop_info["design_base_image"];
+    var design_rect        = hp__buttons__desktop_info["design_rect"];
+    var development_gr     = hp__buttons__desktop_info["development_gr"];
+    var development_rect   = hp__buttons__desktop_info["development_rect"];
+    var development_base_image_first  = hp__buttons__desktop_info["development_base_image_first"];
+    var moodboard_gr       = hp__buttons__desktop_info["moodboard_gr"];
+    var moodboard_base_image = hp__buttons__desktop_info["moodboard_base_image"];
+    var moodboard_height     = hp__buttons__desktop_info["moodboard_height"];
+    var moodboard_rect       = hp__buttons__desktop_info["moodboard_rect"];
+
+    /*ui_gr.animate({
+        duration: 1000,
+    }).attr({
+        opacity: 0.6,
+        //"y": ui_base_image.y()-ui_rect.bbox().height
+    })
+    ux_gr.animate({
+        duration: 1000,
+    }).attr({
+        opacity: 0.6,
+        //"y": ui_base_image.y()-ui_rect.bbox().height
+    })*/
+    design_gr.animate({
+        duration: 500,
+    }).ease('>')
+    .attr({
+        opacity: 1.0,
+        y: design_base_image.y()-design_rect.bbox().height
+    })
+    development_gr.animate({
+        duration: 500,
+        delay: 250,
+    })
+    .ease('>')
+    .attr({
+        opacity: 1.0,
+        y: development_base_image_first.y()-development_rect.bbox().height
+    })
+    moodboard_gr.animate({
+        delay: 650,
+        duration: 500,
+    })
+    .ease('>')
+    .attr({
+        opacity: 1.0,
+        "y": moodboard_base_image.y()+moodboard_height-moodboard_rect.bbox().height
+    })
+    contact_gr.animate({
+        delay: 350,
+        duration: 500,
+    })
+    .ease('>')
+    .attr({
+        opacity: 1.0,
+        y: contact_base_image.y()-contact_rect.bbox().height
+    })
+    nevena_gr.animate({
+        delay:    450,
+        duration: 500,
+    }).ease('>')
+    .attr({
+        y:nevena_base_image_first.y()+nevena_height-nevena_title.bbox().height/2
+    })
+
+    nevena_title.animate({
+        delay: 450,
+        duration: 500,
+    }).font({"size": "85", "weight": "700", "opacity": "1.0"})
+    .ease('>')
+    .attr({
+        x: 15,
+    })
+
+    ui_gr.animate({
+        duration: 600,
+    }).ease('>')
+    .attr({
+        opacity: 1.0,
+        x: ui_x,
+    })
+    ux_gr.animate({
+        delay: 350,
+        duration: 600,
+    }).ease('>')
+    .attr({
+        opacity: 1.0,
+        "x":     ux_x,
+    })
+        
 }
 

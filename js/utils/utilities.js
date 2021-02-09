@@ -129,13 +129,16 @@ function open_sketch__p5(sketch_name, screen_width_in_px, screen_height) {
     var offset;
 
     if (screen_physical_width_cm < 20.5){
-        offset = 50
+        offset = 40
+        var canvasWidth  = screen_width_in_px-2*offset
+        var canvasHeight = screen_height-2*offset-30
     }else{
         offset = 200
+        var canvasWidth  = screen_width_in_px-2*offset
+        var canvasHeight = screen_height-2*offset
     }
 
-    var canvasWidth  = screen_width_in_px-2*offset
-    var canvasHeight = screen_height-2*offset
+
     var canvas_id    = "canvas__"+sketch_name
 
     $("body").append(`
@@ -425,8 +428,8 @@ function run_page_transition(target_page_name, transition_type, current_page_nam
 function pulsating_circle(parent_gr, animation_time, screen_width, screen_height){
     var circle_button_gr = parent_gr.nested()
 
-    var circle_button = circle_button_gr.ellipse(30).fill("#B12F2B").attr({cx: screen_width/2, cy: screen_height/2}).opacity(0.9)
-    var stroke_button = circle_button_gr.ellipse(34).attr({cx: screen_width/2, cy: screen_height/2}).fill("none").stroke({ color: '#B12F2B', width: 4}).opacity(0.9)
+    var circle_button = circle_button_gr.ellipse(30).fill("#B12F2B").attr({cx: screen_width/2-15, cy: screen_height/2}).opacity(0.95)
+    var stroke_button = circle_button_gr.ellipse(34).attr({cx: screen_width/2-15, cy: screen_height/2}).fill("none").stroke({ color: '#B12F2B', width: 4}).opacity(0.95)
     circle_button_gr.attr({
         id:     "circle_button__gr",
         width:  screen_width,

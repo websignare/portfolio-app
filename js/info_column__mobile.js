@@ -63,8 +63,8 @@ function create_element_mobile(parent_gr, column_info__mobile, element_data, ele
     var element_number       = element_data["element_number"];
 
     //SHADOW_rect
-    var shadow_gr         = parent_gr.nested().move(0, element_y).size(screen_width, screen_height/0.8).attr({id: "element_shadow__mobile"})
-    var background_shadow = shadow_gr.rect(element_width,element_height+100).fill("#ffd096ff").move(5,5).attr({id: "element_shadow_rect"})
+    var shadow_gr         = parent_gr.nested().move(20, element_y).size(screen_width, screen_height/0.8).attr({id: "element_shadow__mobile"})
+    var background_shadow = shadow_gr.rect(element_width+50,element_height+50).fill("gray").move(5,5).attr({id: "element_shadow_rect"})
 
     apply_filter__mobile(shadow_gr);
 
@@ -93,31 +93,31 @@ function create_element_mobile(parent_gr, column_info__mobile, element_data, ele
     element_name_rect.attr({"x": 150-element_name_text.length()})*/
 
     //NUMBER_element_rect
-    var element_number_gr   = parent_gr.nested().move(0, element_y)
+    var element_number_gr   = parent_gr.nested().move(15, element_y)
         element_number_gr.attr({opacity:  0.0})
     var element_number_rect = element_number_gr.rect(50,50).fill("none")
     var element_number_text = element_number_gr.text(element_number).attr({opacity: 0.0})
         .move(element_number_rect.bbox().width/2-10,-8)
         .font({
             opacity: 1.0,
-            fill:    '#651b40ff',
+            fill:    '#B12F2B',
             family:  'Quicksand',
             weight:  '500',
             size:    40
         });
 
     //CANCEL_rect
-    var cancel_gr = parent_gr.nested().move(element_width-50, element_y)
+    var cancel_gr = parent_gr.nested().move(element_width-30, element_y)
     .attr({
         opacity: 0.0
     })
     var element_cancel_rect = cancel_gr.rect(50,50).fill("#fff").attr({opacity: 0.1})
 
-    var line_top            = cancel_gr.line(10, 10, 40, 40).stroke({color: '#651b40ff', width: 4, linecap: 'round', })
-    var line_bottom         = cancel_gr.line(40, 10, 10, 40).stroke({color: '#651b40ff', width: 4, linecap: 'round', })
+    var line_top            = cancel_gr.line(10, 10, 40, 40).stroke({color: '#B12F2B', width: 4, linecap: 'round', })
+    var line_bottom         = cancel_gr.line(40, 10, 10, 40).stroke({color: '#B12F2B', width: 4, linecap: 'round', })
   
     //OVERLAY_element
-    var overlay_gr = parent_gr.nested().move(0, element_y).size(screen_width, screen_height/1.1).attr({id: "overlay"})
+    var overlay_gr = parent_gr.nested().move(20, element_y).size(screen_width, screen_height/1.1).attr({id: "overlay"})
     var overlay    = overlay_gr.rect(element_width, element_height).fill("#371124ff").opacity(0.7).attr({id: "overlay_rect"})
     
     pulsating_circle(overlay_gr, 2000, screen_width, screen_height)

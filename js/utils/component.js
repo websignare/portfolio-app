@@ -4,12 +4,7 @@
 })*/
 
 //----------------------------------------------------------------------
-function technology_components(screen_width_in_px, height,screen_height){
-
-    $("body").append(`
-        <div id="technologies__mobile__info">
-        </div>
-    `);
+function technology_components(screen_width_in_px,screen_height){
 
     var data_html = {
         "icon_path": function(){
@@ -457,7 +452,9 @@ function draw_ui_element(name,
         <div id = "container_`+name+`">  
         </div>`);
 
-    $("#technologies__mobile__info").append(container);
+    //
+    //
+    $("body").find("#tech_components").append(container);
 
     $(container).css({                    
         "background-color": color,

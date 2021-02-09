@@ -27,8 +27,8 @@ function web_development__activate(bar_gr) {
 
             <div id="web_development__headline__info">
             </div>
-            <div id="technologies">
-            </div>
+
+            <div id="tech_components"></div>
 
             <div id="video__info">
             </div>
@@ -59,19 +59,19 @@ function web_development__create_responsive(bar_gr) {
     $("#web_development #wrapper").css({                    
         "background-color": '#d9d9d9ff',
         "position":         "relative",
-        "height":           screen_height,
+        "height":           screen_height+500,
         "width":            screen_width_in_px
     }); 
 
     $("#web_development #web_development__headline_animation_info").css({                    
-        "background-color": '#812f3eff',
+        "background-color": '#d9d9d9ff',
         "position":         "relative",
         "height":           screen_height/2,
         "width":            screen_width_in_px
     }); 
 
     $("#web_development #web_development__animations").css({                    
-        "background-color": '#812f3eff',
+        "background-color": '#d9d9d9ff',
         "position":         "relative",
         "width":            screen_width_in_px
     });
@@ -83,12 +83,6 @@ function web_development__create_responsive(bar_gr) {
         "width":            screen_width_in_px
     }); 
 
-    $("#web_development #technologies").css({                    
-        "background-color": '#4f7779ff',
-        "position":         "relative",
-        "width":            screen_width_in_px
-    });
-
     $("#web_development #video__info").css({                    
         "background-color": '#012a31ff',
         "position":         "relative",
@@ -96,7 +90,7 @@ function web_development__create_responsive(bar_gr) {
         "width":            screen_width_in_px
     }); 
 
-    var container       = SVG().addTo("#web_development #wrapper").size(screen_width_in_px, screen_height)
+    var container       = SVG().addTo("#web_development #wrapper").size(screen_width_in_px, screen_height+500)
     var container_gr    = container.nested()   
 
     var headline_animation__container    = SVG().addTo("#web_development #web_development__headline_animation_info").size(screen_width_in_px, screen_height/2)
@@ -107,9 +101,6 @@ function web_development__create_responsive(bar_gr) {
 
     var headline_container     = SVG().addTo("#web_development #web_development__headline__info").size(screen_width_in_px, screen_height/2)
     var headline__container_gr = headline_container.nested()
-
-    var technologies_canvas    = SVG().addTo("#web_development #technologies").size(screen_width_in_px, 3000)
-    var technologies_canvas_gr = technologies_canvas.nested()
 
     var video_canvas    = SVG().addTo("#web_development #video__info").size(screen_width_in_px, screen_height)
     var video_canvas_gr = video_canvas.nested()
@@ -139,7 +130,7 @@ function web_development__create_responsive(bar_gr) {
     }
 
     else {
-        var web_development__layout_gr = web_development__create_background__desktop(container_gr, bar_gr, screen_width_in_px, screen_height)
+        var web_development__layout_gr = web_development__create_background__desktop(container_gr, bar_gr, screen_width_in_px, screen_height+500)
         var web_development__background_gr = web_development__layout_gr.find("#web_development__background_gr")
         web_development__images__desktop(web_development__background_gr, screen_width_in_px, screen_height)
 
@@ -148,8 +139,7 @@ function web_development__create_responsive(bar_gr) {
         web_development__headline_animation_info(headline_animation__container_gr, screen_width_in_px, screen_height)
         animations(web_development__animations_canvas_gr, screen_width_in_px, 3000, screen_height)
         web_development__headline__info(headline__container_gr, screen_width_in_px, screen_height)
-        //technologies(technologies_canvas_gr, screen_width_in_px, 1800)
-        technology_components(screen_width_in_px, 3000, screen_height)
+        technology_components(screen_width_in_px, screen_height)
         web_development__video(video_canvas_gr, screen_width_in_px, screen_height)
 
         create_contact_section(screen_width_in_px, screen_height)
@@ -450,45 +440,68 @@ function web_development__headline_animation_info(parent_gr, screen_width_in_px,
 
     var headline_gr = parent_gr.nested()
  
-    var yellow_rect = headline_gr.rect(screen_width_in_px/2-350,100)
-    .fill('#4f7779ff')
-    .attr({
+    var yellow_rect = headline_gr.rect(screen_width_in_px,screen_height/20)
+    .fill('#863845ff')
+    yellow_rect.attr({
         id:      "yellow_rect",
         opacity: 1.0,
         'x':     0,
-        'y':     screen_height/4
+        'y':    headline_gr.bbox().height-yellow_rect.bbox().height-20
     })
- 
-    var my_title = headline_gr.text(function(text_element){
-         text_element.tspan('art')
-     })
-         .font({
-             opacity: 1.0,
-             weight:  700,
-             fill:    '#d9d9d9ff',
-             family:  'Quicksand',
-             size:    70
-         })    
-    my_title.attr({
-        x: yellow_rect.bbox().x+yellow_rect.bbox().width,
-        y: yellow_rect.bbox().y+my_title.bbox().height-10
+
+    var work_title = headline_gr.text(function(add){
+        add.tspan('P').font({weight: '500', size:'190'})
+        add.tspan('rocedural art')
     })
-     my_title.rotate(-90)
- 
-     var work_title = headline_gr.text(function(text_element){
-         text_element.tspan('procedural')
-     })
-         .font({
-             opacity: 1.0,
-             weight:  700,
-             fill:    '#d9d9d9ff',
-             family:  'Quicksand',
-             size:    135
-         })    
+        .font({
+            opacity: 1.0,
+            weight:  700,
+            fill:    '#863845ff',
+            family:  'Quicksand',
+            size:    130
+        })    
     work_title.attr({
-        x: yellow_rect.bbox().x+yellow_rect.bbox().width+my_title.bbox().height+25,
-        y: yellow_rect.bbox().y+yellow_rect.bbox().height-25
+        x: screen_width_in_px/2-work_title.bbox().width/2,
+        y: headline_gr.bbox().height/2+work_title.bbox().height+100
     })
+
+    var paragraph = headline_gr.text(function(add){
+        add.tspan('Creativity is inventing, experimenting, ').newLine()
+        add.tspan('growing, taking risk, breaking rules, ').newLine()
+        add.tspan('making mistakes and having fun.').newLine()         
+        add.tspan('Creativity is inventing, experimenting, ').newLine()
+        add.tspan('growing, taking risk, breaking rules, ').newLine()
+        add.tspan('making mistakes and having fun.').newLine() 
+
+    })
+        .font({
+            opacity: 1.0,
+            weight:  600,
+            fill:    '#863845ff',
+            family:  'Quicksand',
+            size:    23
+        })    
+    paragraph.attr({
+        x: work_title.bbox().width/2+paragraph.bbox().width,
+        y: work_title.bbox().y-paragraph.bbox().height+50
+    })  
+
+     /*
+    var my_title = headline_gr.text(function(text_element){
+        text_element.tspan('art')
+    })
+        .font({
+            opacity: 1.0,
+            weight:  700,
+            fill:    '#cdcdcdff',
+            family:  'Quicksand',
+            size:    70
+        })    
+   my_title.attr({
+       x: work_title.bbox().x+work_title.bbox().width+5,
+       y: work_title.bbox().y+my_title.bbox().height+25
+   })
+    my_title.rotate(-90)*/
 }
 
 //-------------------------HEADLINE-INFO----------------------------------//

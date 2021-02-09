@@ -38,7 +38,7 @@ function create_menu(parent_gr, bar_gr, screen_width, screen_height) {
     var menu_background_gr = parent_gr.nested()
 
     var menu = menu_background_gr.rect(screen_width/2, screen_height)
-    .fill('#d9d26cff')
+    .fill('#ea7058ff')
     .attr({
         id:      "menu",
         opacity: 1.0,
@@ -53,9 +53,9 @@ function create_menu(parent_gr, bar_gr, screen_width, screen_height) {
         .font({
             opacity: 1.0,
             weight:  700,
-            fill:    '#467f8cff',
+            fill:    '#fff',
             family:  'Quicksand',
-            size:    45
+            size:    35
         })    
     home_title.attr({
         x: menu.bbox().width/2-home_title.bbox().width/2,
@@ -112,9 +112,9 @@ function create_menu(parent_gr, bar_gr, screen_width, screen_height) {
         .font({
             opacity: 1.0,
             weight:  700,
-            fill:    '#467f8cff',
+            fill:    '#fff',
             family:  'Quicksand',
-            size:    45
+            size:    35
         })    
     about_title.attr({
         x: menu.bbox().width/2-about_title.bbox().width/2,
@@ -171,9 +171,9 @@ function create_menu(parent_gr, bar_gr, screen_width, screen_height) {
         .font({
             opacity: 1.0,
             weight:  700,
-            fill:    '#467f8cff',
+            fill:    '#fff',
             family:  'Quicksand',
-            size:    45
+            size:    35
         })    
     design_title.attr({
         x: menu.bbox().width/2-design_title.bbox().width/2,
@@ -224,9 +224,9 @@ function create_menu(parent_gr, bar_gr, screen_width, screen_height) {
         .font({
             opacity: 1.0,
             weight:  700,
-            fill:    '#467f8cff',
+            fill:    '#fff',
             family:  'Quicksand',
-            size:    45
+            size:    35
         })    
     development_title.attr({
         x: menu.bbox().width/2-development_title.bbox().width/2,
@@ -278,9 +278,9 @@ function create_menu(parent_gr, bar_gr, screen_width, screen_height) {
         .font({
             opacity: 1.0,
             weight:  700,
-            fill:    '#467f8cff',
+            fill:    '#fff',
             family:  'Quicksand',
-            size:    45
+            size:    35
         })    
     moodboard_title.attr({
         x: menu.bbox().width/2-moodboard_title.bbox().width/2,
@@ -331,9 +331,9 @@ function create_menu(parent_gr, bar_gr, screen_width, screen_height) {
         .font({
             opacity: 1.0,
             weight:  700,
-            fill:    '#467f8cff',
+            fill:    '#fff',
             family:  'Quicksand',
-            size:    45
+            size:    35
         })    
     contact_title.attr({
         x: menu.bbox().width/2-contact_title.bbox().width/2,
@@ -343,12 +343,12 @@ function create_menu(parent_gr, bar_gr, screen_width, screen_height) {
     //-----------------BUTTONS HOVER-MOUSEOVER------------------------
 
     menu.mouseover(function() {                     //when hovered over background titles color return to its origin
-        home_title.fill({ color: '#467f8cff' })
-        design_title.fill({ color: '#467f8cff' })
-        development_title.fill({ color: '#467f8cff' })
-        about_title.fill({ color: '#467f8cff' })
-        moodboard_title.fill({ color: '#467f8cff' })
-        contact_title.fill({ color: '#467f8cff' })
+        home_title.fill({ color: '#fff' })
+        design_title.fill({ color: '#fff' })
+        development_title.fill({ color: '#fff' })
+        about_title.fill({ color: '#fff' })
+        moodboard_title.fill({ color: '#fff' })
+        contact_title.fill({ color: '#fff' })
 
     })
 
@@ -374,8 +374,15 @@ function create_menu(parent_gr, bar_gr, screen_width, screen_height) {
 
     var menu_info = {
         "menu":               menu,
-        "menu_background_gr": menu_background_gr
+        "menu_background_gr": menu_background_gr,
+        "home_title":         home_title,
+        "about_title":         about_title,
+        "design_title":       design_title,
+        "development_title":  development_title,
+        "moodboard_title":    moodboard_title,
+        "contact_title":      contact_title
     }
+    animate_menu__activate(menu_info)
     close_menu(menu_background_gr, menu_info)
 
     return menu_info
@@ -391,13 +398,13 @@ function close_menu(parent_gr, menu_info){
         close_menu_gr.attr({
             opacity: 1.0,
             x: 100,
-            y: 100
+            y: 110
         })
 
     var close_menu_rect = close_menu_gr.rect(50,50)
-    .fill("#d9d26cff")
-    var line_top        = close_menu_gr.line(5, 5, 40, 40).stroke({color: '#467f8cff', width: 6, linecap: 'round', opacity: 1.0 })
-    var line_bottom     = close_menu_gr.line(40, 5, 5, 40).stroke({color: '#467f8cff', width: 6, linecap: 'round', opacity: 1.0 })
+    .fill("#ea7058ff")
+    var line_top        = close_menu_gr.line(5, 5, 40, 40).stroke({color: '#fff', width: 6, linecap: 'round', opacity: 1.0 })
+    var line_bottom     = close_menu_gr.line(40, 5, 5, 40).stroke({color: '#fff', width: 6, linecap: 'round', opacity: 1.0 })
 
     line_top.mouseover(function() {
         line_top.fill({ color: '#8c8300ff' })
@@ -420,20 +427,147 @@ function close_menu(parent_gr, menu_info){
         if (close_menu_clicked == false) {
             
             // ANIMATE
-            menu_background_gr.remove()
-
+            animate_menu__deactivate(menu_info,function(){
+                menu_background_gr.remove()     //called when last animation is completed
+            })
             close_menu_clicked = true;
         }
 
-        // DEACTIVATE
-        else {
-
-            // ANIMATE
-            create_menu(menu_background_gr, screen_width_in_px, screen_height)
-
-            close_menu_clicked = false;
-        }
     })
 
 
+}
+
+
+//---------------------ANIMATE MENU-------------------------------------------------
+function animate_menu__activate(menu_info){
+    var menu              = menu_info["menu"];
+    var home_title        = menu_info["home_title"];
+    var about_title       = menu_info["about_title"];
+    var design_title      = menu_info["design_title"];
+    var development_title = menu_info["development_title"];
+    var moodboard_title   = menu_info["moodboard_title"];  
+    var contact_title     = menu_info["contact_title"];      
+
+    home_title.animate({
+        delay: 100,
+        duration: 200,
+    })
+    .font("size", "40")
+    .attr({
+        opacity: 1.0,
+        x: menu.bbox().width/2-(home_title.bbox().width+25)/2, //adding 30px to home_title.width() because initial font-size is smaller then given after in animation
+    })                                                         //without adding px home_title.width()/2 would be smaller and positioned wrong
+
+    about_title.animate({
+        duration: 200,
+        delay:    150,
+    })
+    .font("size", "40")
+    .attr({
+        x: menu.bbox().width/2-(about_title.bbox().width+25)/2,
+        opacity: 1.0,
+    })
+
+    design_title.animate({
+        duration: 200,
+        delay:    200,
+    })
+    .font("size", "40")
+    .attr({
+        opacity: 1.0,
+        x: menu.bbox().width/2-(design_title.bbox().width+35)/2,
+    })
+
+    development_title.animate({
+        duration: 200,
+        delay:    250,
+    })
+    .font("size", "40")
+    .attr({
+        opacity: 1.0,
+        x: menu.bbox().width/2-(development_title.bbox().width+50)/2,
+    })
+
+    moodboard_title.animate({
+        duration: 200,
+        delay:    300,
+    }).font("size", "40")
+    .attr({
+        opacity: 1.0,
+        x: menu.bbox().width/2-(moodboard_title.bbox().width+40)/2,
+    })
+
+    contact_title.animate({
+        duration: 200,
+        delay:    350,
+    }).font("size", "40")
+    .attr({
+        opacity: 1.0,
+        x: menu.bbox().width/2-(contact_title.bbox().width+30)/2,
+    })
+    
+
+}
+
+//---------------------ANIMATE MENU-------------------------------------------------
+function animate_menu__deactivate(menu_info, on_complete__fn){
+    var menu              = menu_info["menu"];
+    var home_title        = menu_info["home_title"];
+    var about_title       = menu_info["about_title"];
+    var design_title      = menu_info["design_title"];
+    var development_title = menu_info["development_title"];
+    var moodboard_title   = menu_info["moodboard_title"];  
+    var contact_title     = menu_info["contact_title"];      
+
+    contact_title.animate({
+        duration: 200,
+    }).font("size", "35")
+    .attr({
+        opacity: 0.2,
+        x: menu.bbox().width/2-(contact_title.bbox().width-25)/2,
+    })
+
+    moodboard_title.animate({
+        duration: 400,
+    }).font("size", "35")
+    .attr({
+        opacity: 0.2,
+        x: menu.bbox().width/2-(moodboard_title.bbox().width-35)/2,
+    })
+
+    development_title.animate({
+        duration: 600,
+    }).font("size", "35")
+    .attr({
+        opacity: 0.2,
+        x: menu.bbox().width/2-(development_title.bbox().width-50)/2,
+    })
+
+    design_title.animate({
+        duration: 800,
+    }).font("size", "35")
+    .attr({
+        opacity: 0.2,
+        x: menu.bbox().width/2-(design_title.bbox().width-30)/2,
+    })
+
+    about_title.animate({
+        duration: 1000,
+    }).font("size", "35")
+    .attr({
+        opacity: 0.2,
+        x: menu.bbox().width/2-(about_title.bbox().width-20)/2,
+    })
+
+    home_title.animate({
+        duration: 1000,
+    }).font("size", "35")
+    .attr({
+        opacity: 0.2,
+        x: menu.bbox().width/2-(home_title.bbox().width-20)/2,
+    })
+    .after(function(){
+        on_complete__fn();
+    })
 }

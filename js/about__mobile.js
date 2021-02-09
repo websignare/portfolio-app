@@ -21,7 +21,8 @@ function about__mobile__main() {
 }
 
 function about__mobile__activate(bar_gr) {
-
+    var screen_width_in_px = window.innerWidth;
+    var screen_height      = window.innerHeight;
     //document.title = "about_mobile"
     //window.history.pushState({page: "about_mobile"},"", "#about_mobile");
 
@@ -40,7 +41,8 @@ function about__mobile__activate(bar_gr) {
         </div>
     `);
 
-    about__mobile__create_responsive(bar_gr);
+    var about__mobile_info = about__mobile__create_responsive(bar_gr);
+    about_top__animate(about__mobile_info, screen_width_in_px, screen_height)
     //current_page = "about_mobile"
 }
     
@@ -48,6 +50,9 @@ function about__mobile__deactivate(bar_gr) {
 
     $("#about__mobile").remove();
     $("#contact_mobile_wrapper").remove();
+    remove_triggers("about_me_rect__trigger")
+    remove_triggers("history_rect__trigger")
+    remove_triggers("process_rect__trigger")
 
 }
 
@@ -76,12 +81,12 @@ function about__mobile__create_responsive(bar_gr) {
         "width":            screen_width_in_px,
     }); 
 
-    var bounding_rect          = $("#about__mobile #intro__info").get(0).getBoundingClientRect()
-    var headline__div_bottom_y = bounding_rect.bottom;
+    var current_scroll_y = window.scrollY;
+
+    var bounding_rect       = $("#about__mobile #about_me__info").get(0).getBoundingClientRect()
+    var about_me__div_bottom_y = current_scroll_y+(bounding_rect.bottom-250);
     console.log(bounding_rect.top, bounding_rect.right, bounding_rect.bottom, bounding_rect.left);
 
-    var intro__bounding_rect = $("#about__mobile #intro__info").get(0).getBoundingClientRect()
-    var intro__div_bottom_y  = intro__bounding_rect.bottom;
 
     $("#about__mobile #history__info").css({                    
         "position":"relative",
@@ -90,12 +95,20 @@ function about__mobile__create_responsive(bar_gr) {
         
     }); 
 
+    var bounding_rect       = $("#about__mobile #history__info").get(0).getBoundingClientRect()
+    var history__div_bottom_y = current_scroll_y+(bounding_rect.bottom-250);
+    console.log(bounding_rect.top, bounding_rect.right, bounding_rect.bottom, bounding_rect.left);
+
     $("#about__mobile #process__info").css({                    
         "position": "relative",
         "height":   screen_height,
         "width":    screen_width_in_px,
         
     }); 
+
+    var bounding_rect       = $("#about__mobile #process__info").get(0).getBoundingClientRect()
+    var process__div_bottom_y = current_scroll_y+(bounding_rect.bottom-250);
+    console.log(bounding_rect.top, bounding_rect.right, bounding_rect.bottom, bounding_rect.left);
 
     $("#about__mobile #video__info").css({   
         "background-color": '#262626', 
@@ -114,17 +127,18 @@ function about__mobile__create_responsive(bar_gr) {
 
     var intro_canvas     = SVG().addTo("#about__mobile #intro__info").size(screen_width_in_px, screen_height)
     var intro_canvas__gr = intro_canvas.nested()   
-    intro_canvas__gr.attr({opacity: 1.0})
 
     var about_me__canvas     = SVG().addTo("#about__mobile #about_me__info").size(screen_width_in_px, screen_height)
     var about_me__canvas__gr = about_me__canvas.nested()   
-    about_me__canvas__gr.attr({opacity: 1.0})
-
+    about_me__canvas__gr.attr({y: -30,opacity: 0.5})
+   
     var history_canvas     = SVG().addTo("#about__mobile #history__info").size(screen_width_in_px, screen_height)
     var history_canvas__gr = history_canvas.nested()   
+    history_canvas__gr.attr({y: -30,opacity: 0.5})
 
     var process_canvas     = SVG().addTo("#about__mobile #process__info").size(screen_width_in_px, screen_height)
     var process_canvas__gr = process_canvas.nested()   
+    process_canvas__gr.attr({y: -30,opacity: 0.5})
 
     var video_canvas     = SVG().addTo("#about__mobile #video__info").size(screen_width_in_px, screen_height)
     var video_canvas__gr = video_canvas.nested()   
@@ -132,13 +146,87 @@ function about__mobile__create_responsive(bar_gr) {
     var screen_physical_width_cm = get_physical_screen_width(screen_width_in_px);
     console.log(screen_physical_width_cm, '!!!SCREEN WIDTH')
 
-    about_intro_mobile__info(intro_canvas__gr, bar_gr, screen_width_in_px, screen_height)
+    var about__mobile_info = about_intro_mobile__info(intro_canvas__gr, bar_gr, screen_width_in_px, screen_height)
     about_me__info(about_me__canvas__gr, screen_width_in_px, screen_height)
     about_history_mobile__info(history_canvas__gr, screen_width_in_px, screen_height)
     about_process_mobile__info(process_canvas__gr, screen_width_in_px, screen_height)
     about_video__mobile__info(video_canvas__gr, screen_width_in_px, screen_height)
 
     create_mobile_contact_section(screen_width_in_px,screen_height)
+
+    // ABOUT__SCROLL_TRIGGER
+    var trigger_y_position__info_canvas = about_me__div_bottom_y;
+    sc_trigger__create(trigger_y_position__info_canvas,
+        "about_me_rect__trigger",
+        screen_height,
+        // activate_fn
+        function() {
+            about_me__canvas__gr.animate({
+                    duration: 600,
+                    delay:    300, 
+                    ease: '<' 
+                })
+                .attr({y:0, opacity: 1.0})
+        },
+        // deactivate
+        function() {
+            about_me__canvas__gr.animate({
+                duration: 600,
+                delay:    300, 
+                ease: '<' 
+            })
+            .attr({y: -30, opacity: 0.5})
+        });
+
+    // HISTORY__SCROLL_TRIGGER
+    var trigger_y_position__history_canvas = history__div_bottom_y;
+    sc_trigger__create(trigger_y_position__history_canvas,
+        "history_rect__trigger",
+        screen_height,
+        // activate_fn
+        function() {
+            history_canvas__gr.animate({
+                    duration: 600,
+                    delay:    300, 
+                    ease: '<' 
+                })
+                .attr({y: 0,opacity: 1.0})
+        },
+        // deactivate
+        function() {
+            history_canvas__gr.animate({
+                duration: 600,
+                delay:    300, 
+                ease: '<' 
+            })
+            .attr({y: -30, opacity: 0.5})
+        });
+
+    // PROCESS__SCROLL_TRIGGER
+    var trigger_y_position__process_canvas = process__div_bottom_y;
+    sc_trigger__create(trigger_y_position__process_canvas,
+        "process_rect__trigger",
+        screen_height,
+        // activate_fn
+        function() {
+            process_canvas__gr.animate({
+                    duration: 600,
+                    delay:    300, 
+                    ease: '<' 
+                })
+                .attr({y: 0,opacity: 1.0})
+        },
+        // deactivate
+        function() {
+            process_canvas__gr.animate({
+                duration: 200,
+                //delay:    400, 
+                ease: '<' 
+            })
+            .attr({y: -30, opacity: 0.5})
+        });
+
+    return about__mobile_info;
 }
 
 function about_create__image(parent_gr, image_url, rect_width, rect_height, x, y, opacity, view_box_x, view_box_y){
@@ -212,10 +300,13 @@ function about_intro_mobile__info(parent_gr, bar_gr, screen_width_in_px, screen_
         id:    "about_me_path__gr",
     })
     about_me_path.fill('#262626ff')
-    about_me_path.move(screen_width_in_px/2+about_me_path.bbox().width/2-15,menu_rect_gr.bbox().height+about_me_path.bbox().height+25)
+    about_me_path.move(screen_width_in_px/2+about_me_path.bbox().width/2-15,menu_rect_gr.bbox().height+200)
     //about_me_path.rotate(-90)
     about_me_path.scale(2.2)
-    about_me_path.attr({id: 'about_me_path'})
+    about_me_path.attr({
+        id:     'about_me_path',
+        opacity: 0.0
+    })
 
     //---------------------------SYMBOL----------------------------------
     var hashtag_symbol_gr = container__gr.nested().fill("#0000000")   
@@ -227,7 +318,10 @@ function about_intro_mobile__info(parent_gr, bar_gr, screen_width_in_px, screen_
     hashtag_symbol.move(screen_width_in_px/2-hashtag_symbol.bbox().width/2,screen_height/2+60)
     //hashtag_symbol.rotate(180)
     hashtag_symbol.scale(3)
-    hashtag_symbol.attr({id: 'hashtag_symbol'})
+    hashtag_symbol.attr({
+        id: 'hashtag_symbol',
+        opacity: 0.0
+    })
 
     hashtag_symbol_gr.attr({
         id: "hashtag_symbol_gr"
@@ -246,8 +340,17 @@ function about_intro_mobile__info(parent_gr, bar_gr, screen_width_in_px, screen_
     background_img__gr.attr({
         id: "background_img__gr",
         y: screen_height/2-background_img__gr.bbox().height/2,
-        x: screen_width_in_px-background_img__gr.bbox().width
+        x: screen_width_in_px
     })
+
+    var about__mobile_info = {
+        "about_me_path":       about_me_path,
+        "hashtag_symbol":      hashtag_symbol,
+        "background_img__gr":  background_img__gr,
+        "menu_rect_gr":        menu_rect_gr
+    }
+
+    return about__mobile_info;
 
 }
 
@@ -521,4 +624,31 @@ function about_video__mobile__info(parent_gr, screen_width_in_px, screen_height)
         height:     video_global_height
     })
 
+}
+
+
+function about_top__animate(about__mobile_info, screen_width_in_px, screen_height){
+    var about_me_path      = about__mobile_info["about_me_path"];
+    var hashtag_symbol     = about__mobile_info["hashtag_symbol"];
+    var background_img__gr = about__mobile_info["background_img__gr"];
+    var menu_rect_gr       = about__mobile_info["menu_rect_gr"];
+
+    hashtag_symbol.animate({
+        duration: 1500,
+    }).attr({
+        opacity: 1.0
+    })
+    background_img__gr.animate({
+        duration: 600
+    }).attr({
+        y: screen_height/2-background_img__gr.bbox().height/2,
+        x: screen_width_in_px-background_img__gr.bbox().width
+    })
+    about_me_path.animate({
+        delay: 200,
+        duration: 600,
+    }).move(screen_width_in_px/2+about_me_path.bbox().width/2-15,menu_rect_gr.bbox().height+about_me_path.bbox().height+110)
+    .attr({
+        opacity: 1.0
+    })
 }

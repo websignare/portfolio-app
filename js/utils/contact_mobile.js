@@ -5,9 +5,11 @@ function create_mobile_contact_section(screen_width_in_px,screen_height){
         </div>
     `);
 
-    var contact__bounding_rect = $("#contact_mobile_wrapper").get(0).getBoundingClientRect()
-    var contact__div_top_y  = contact__bounding_rect.top;
-    console.log(contact__bounding_rect.top, contact__bounding_rect.right, contact__bounding_rect.bottom, contact__bounding_rect.left);
+    var current_scroll_y = window.scrollY;
+
+    var bounding_rect       = $("#contact_mobile_wrapper").get(0).getBoundingClientRect()
+    var contact__div_top_y = current_scroll_y+(bounding_rect.top);
+    console.log(bounding_rect.top, bounding_rect.right, bounding_rect.bottom, bounding_rect.left);
     
     var contact_height = screen_height;
     
@@ -22,7 +24,7 @@ function create_mobile_contact_section(screen_width_in_px,screen_height){
     var contact_gr     = contact_canvas.nested()   
 
     contact_mobile(contact_gr, screen_width_in_px, contact_height, screen_height, contact__div_top_y)
-    
+
     return contact_gr;
 }
 
@@ -389,8 +391,33 @@ function contact_mobile(contact_gr, screen_width_in_px, contact_height, screen_h
         "submission_form_gr": {x:submission_form_gr.x(),y:submission_form_gr.y()}
     }
 
-    animate_contact__activate(contact_info, initial_coords, final_coords, screen_width_in_px, screen_height)
-    animate_contact__deactivate(contact_info, initial_coords, final_coords, screen_width_in_px, screen_height)
+    // CONTACT__SCROLL_TRIGGER
+        var trigger_y_position__contact_canvas = contact__div_top_y + 300;
+        sc_trigger__create(trigger_y_position__contact_canvas,
+            "contact_desktop_canvas__trigger",
+            screen_height,
+            // activate_fn
+            function() {
+                animate_contact__activate(contact_info, 
+                    initial_coords, 
+                    final_coords, 
+                    screen_width_in_px, 
+                    screen_height)
+
+
+            },
+            // deactivate
+            function() {
+                animate_contact__deactivate(contact_info, 
+                    initial_coords, 
+                    final_coords, 
+                    screen_width_in_px, 
+                    screen_height)
+
+            });
+
+    //animate_contact__activate(contact_info, initial_coords, final_coords, screen_width_in_px, screen_height)
+    //animate_contact__deactivate(contact_info, initial_coords, final_coords, screen_width_in_px, screen_height)
     
 }
 //---------------------ANIMATE SUBMIT-------------------------------------------------
@@ -479,7 +506,8 @@ function animate_contact__activate(contact_info, initial_coords, final_coords, s
 
     hashtag.attr({x: initial_coords["hashtag"]["x"] })
     hashtag.animate({
-        duration: 500,
+        delay: 800,
+        duration: 1000,
     }).attr({x: final_coords["hashtag"]["x"] })
     
     .after(function() {
@@ -488,16 +516,17 @@ function animate_contact__activate(contact_info, initial_coords, final_coords, s
         question_gr.attr({x : initial_coords["question_gr"]["x"] })
         
         question_gr.animate({
-            duration: 500,
+            delay: 400,
+            duration: 1000,
         }).attr({x: final_coords["question_gr"]["x"] })
 
+        paragraph.animate({
+            duration: 1000,
+        }).attr({y: final_coords["paragraph"]["y"] })
         submission_form_gr.animate({
-            duration: 500,
+            duration: 1000,
         }).attr({y: final_coords["submission_form_gr"]["y"] })
 
-        paragraph.animate({
-            duration: 200,
-        }).attr({y: final_coords["paragraph"]["y"] })
 
     });
 }
