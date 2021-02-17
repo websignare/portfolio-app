@@ -12,6 +12,9 @@ function web_development__main() {
 
 function web_development__activate(bar_gr) {
 
+    var screen_width_in_px = window.innerWidth;
+    var screen_height      = window.innerHeight;
+
     document.title = "web_development"
     window.history.pushState({page: "web_development"},"", "#web_development");
 
@@ -35,7 +38,8 @@ function web_development__activate(bar_gr) {
         </div>
     `);
 
-    web_development__create_responsive(bar_gr);
+    var develop__desktop_info = web_development__create_responsive(bar_gr);
+    develop_animate__activate(develop__desktop_info, screen_width_in_px, screen_height)
     current_page = "web_development"
 }
     
@@ -57,9 +61,9 @@ function web_development__create_responsive(bar_gr) {
 
     //-------STYLE-------
     $("#web_development #wrapper").css({                    
-        "background-color": '#d9d9d9ff',
+        "background-color": '#fafafaff',
         "position":         "relative",
-        "height":           screen_height+500,
+        "height":           screen_height,
         "width":            screen_width_in_px
     }); 
 
@@ -90,7 +94,7 @@ function web_development__create_responsive(bar_gr) {
         "width":            screen_width_in_px
     }); 
 
-    var container       = SVG().addTo("#web_development #wrapper").size(screen_width_in_px, screen_height+500)
+    var container       = SVG().addTo("#web_development #wrapper").size(screen_width_in_px, screen_height)
     var container_gr    = container.nested()   
 
     var headline_animation__container    = SVG().addTo("#web_development #web_development__headline_animation_info").size(screen_width_in_px, screen_height/2)
@@ -130,11 +134,11 @@ function web_development__create_responsive(bar_gr) {
     }
 
     else {
-        var web_development__layout_gr = web_development__create_background__desktop(container_gr, bar_gr, screen_width_in_px, screen_height+500)
+        var web_development__layout_gr = web_development__create_background__desktop(container_gr, bar_gr, screen_width_in_px, screen_height)
         var web_development__background_gr = web_development__layout_gr.find("#web_development__background_gr")
-        web_development__images__desktop(web_development__background_gr, screen_width_in_px, screen_height)
+        var develop__top_rects = web_development__images__desktop(web_development__background_gr, screen_width_in_px, screen_height)
 
-        web_development_text__desktop(container_gr, screen_width_in_px, screen_height)
+        var develop_text_info = web_development_text__desktop(container_gr, screen_width_in_px, screen_height)
 
         web_development__headline_animation_info(headline_animation__container_gr, screen_width_in_px, screen_height)
         animations(web_development__animations_canvas_gr, screen_width_in_px, 3000, screen_height)
@@ -143,6 +147,14 @@ function web_development__create_responsive(bar_gr) {
         web_development__video(video_canvas_gr, screen_width_in_px, screen_height)
 
         create_contact_section(screen_width_in_px, screen_height)
+
+        // RETURNED INFO
+        var develop__desktop_info = {
+            "develop__top_rects": develop__top_rects,
+            "develop_text_info":  develop_text_info
+        }
+
+        return develop__desktop_info
     }
 }
 
@@ -339,10 +351,10 @@ function web_development__images__desktop(parent_gr, screen_width_in_px, screen_
         var a_rect_x      = image_gr_0.x()
         var a_rect_y      = image_gr_0.y()    
     
-        var a_rect = a_rect_gr.rect(rect_width+screen_width_in_px,a_rect_height)
+        var a_rect = a_rect_gr.rect(rect_width+500,a_rect_height)
         a_rect.attr({
                 fill: "#597f83ff",
-                x: a_rect_x-rect_width-screen_width_in_px,
+                x: -900,
                 y: a_rect_y
             })
     
@@ -357,7 +369,7 @@ function web_development__images__desktop(parent_gr, screen_width_in_px, screen_
         var b_rect = b_rect_gr.rect(rect_width,b_rect_height)
         b_rect.attr({
                 fill: "#597f83ff",
-                x: b_rect_x-rect_width,
+                x: b_rect_x-rect_width-800,
                 y: b_rect_y
             })
     
@@ -369,12 +381,27 @@ function web_development__images__desktop(parent_gr, screen_width_in_px, screen_
         var c_rect_x      = image_gr_2.x()
         var c_rect_y      = image_gr_2.y()
      
-        var c_rect = c_rect_gr.rect(rect_width+screen_width_in_px,c_rect_height)
+        var c_rect = c_rect_gr.rect(rect_width+500,c_rect_height)
             .attr({
                 fill: "#597f83ff",
-                x: c_rect_x+c_rect_width,
+                x: c_rect_x+c_rect_width+600,
                 y: c_rect_y
             })
+
+        var develop__top_rects = {
+            "a_rect":        a_rect,
+            "a_rect_x":      a_rect_x,
+            "a_rect_width":  a_rect_width,
+            "b_rect":        b_rect,
+            "b_rect_x":      b_rect_x,
+            "b_rect_width":  b_rect_width,
+            "c_rect":        c_rect,
+            "c_rect_x":      c_rect_x,
+            "c_rect_width":  c_rect_width,
+            "rect_width":    rect_width
+        }
+    
+        return develop__top_rects
 
 }
 
@@ -401,6 +428,18 @@ function web_development_text__desktop(parent_gr, screen_width_in_px, screen_hei
     plus_symbol_gr.attr({
         id: "plus_symbol_gr"
     })
+
+    // SYMBOL ROTATION
+    function rotatePositive() {
+        plus_symbol.animate({duration: 3500}).ease(">").rotate(10).after(rotateNegative)
+    }
+        
+    function rotateNegative() {
+        plus_symbol.animate({duration: 3500}).ease(">").rotate(-10).after(rotatePositive)
+    }
+        
+    rotatePositive()
+
     //---------------------DEV-TITLE--------------------
     var develop_path__gr = text_gr.nested()
     var develop_path = develop_path__gr.path("m 1048.5132,-1272.4361 q 0,-0.6632 0.3411,-1.1843 0.3316,-0.5306 0.919,-0.8338 0.5875,-0.3127 1.3644,-0.3127 0.7769,0 1.3738,0.3127 0.5874,0.3032 0.9285,0.8243 0.3316,0.5116 0.3316,1.1559 0,0.379 -0.1231,0.7106 -0.1232,0.3316 -0.3127,0.5874 -0.1895,0.2464 -0.379,0.3885 -0.199,0.1326 -0.3316,0.1326 l -0.1232,-0.2937 h 0.6917 q 0.2463,0 0.4169,0.1611 0.161,0.1611 0.161,0.4074 0,0.2463 -0.161,0.4074 -0.1611,0.1611 -0.4169,0.1611 h -5.9501 q -0.2463,0 -0.4074,-0.1611 -0.1706,-0.1611 -0.1706,-0.4074 0,-0.2463 0.1706,-0.4074 0.1611,-0.1611 0.4074,-0.1611 h 2.4066 l -0.085,0.1611 q -0.1232,0 -0.2937,-0.1327 -0.1801,-0.1326 -0.3506,-0.36 -0.18,-0.2274 -0.2937,-0.5211 -0.1137,-0.3032 -0.1137,-0.6348 z m 1.0422,0.1421 q 0,0.4169 0.2085,0.7296 0.2084,0.3126 0.5684,0.4926 0.3506,0.1706 0.8054,0.1706 0.4453,0 0.8148,-0.1706 0.3601,-0.18 0.5685,-0.4926 0.2084,-0.3127 0.2084,-0.7296 0,-0.4169 -0.2084,-0.7201 -0.2084,-0.3126 -0.5685,-0.4832 -0.3695,-0.18 -0.8148,-0.18 -0.4548,0 -0.8054,0.18 -0.36,0.1706 -0.5684,0.4832 -0.2085,0.3032 -0.2085,0.7201 z m 4.2162,5.6382 q 0,0.8053 -0.3316,1.4022 -0.3411,0.5875 -0.919,0.9096 -0.578,0.3127 -1.3075,0.3127 -0.8527,0 -1.4496,-0.3411 -0.6064,-0.3506 -0.9286,-0.9096 -0.3221,-0.559 -0.3221,-1.1843 0,-0.4832 0.199,-0.9096 0.1989,-0.4358 0.5495,-0.7674 0.3411,-0.3317 0.7959,-0.5212 0.4547,-0.1989 0.9664,-0.1989 0.2274,0.01 0.3695,0.18 0.1421,0.1705 0.1421,0.3979 v 3.6194 l -0.9474,0.2842 v -3.4772 l 0.1895,0.2084 h -0.2559 q -0.2747,0.019 -0.4927,0.199 -0.2179,0.1706 -0.3411,0.4358 -0.1326,0.2559 -0.1326,0.5496 0,0.2842 0.076,0.5306 0.076,0.2463 0.2558,0.4263 0.1801,0.18 0.4832,0.2843 0.3032,0.1042 0.7675,0.1042 0.5116,0 0.8717,-0.2085 0.3505,-0.2179 0.54,-0.5495 0.18,-0.3411 0.18,-0.7201 0,-0.3505 -0.057,-0.559 -0.057,-0.2084 -0.1326,-0.3316 -0.085,-0.1326 -0.1422,-0.2369 -0.085,-0.1705 -0.085,-0.3221 0,-0.2084 0.1421,-0.3411 0.1421,-0.1421 0.3316,-0.1421 0.2558,0 0.4643,0.2653 0.2084,0.2463 0.3695,0.6916 0.1515,0.4453 0.1515,0.9191 z m -5.1637,3.7764 q 0,-0.2179 0.1706,-0.379 0.1611,-0.1611 0.4169,-0.1611 0.066,0 0.1231,0.01 0.048,0.01 0.095,0.028 l 3.9036,1.4496 q 0.1895,0.066 0.2937,0.2369 0.095,0.1705 0.066,0.36 -0.019,0.3222 -0.36,0.4832 l -2.7003,0.938 0.01,-0.2463 2.6908,0.8811 q 0.3411,0.1611 0.3601,0.4832 0.029,0.1801 -0.066,0.3601 -0.1042,0.1705 -0.2937,0.2368 l -3.9035,1.4497 q -0.1043,0.038 -0.218,0.038 -0.2274,0 -0.4074,-0.1515 -0.18,-0.1516 -0.18,-0.4169 0,-0.1801 0.085,-0.3222 0.085,-0.1421 0.2747,-0.1989 l 3.1077,-1.1465 -0.019,0.2369 -2.3403,-0.8622 q -0.3505,-0.1516 -0.3505,-0.5211 0,-0.2085 0.095,-0.3127 0.085,-0.1137 0.2558,-0.18 l 2.3403,-0.8622 0.038,0.2843 -3.1266,-1.1654 q -0.3601,-0.1137 -0.3601,-0.5496 z m 94.8447,-8.2718 q 1.6317,0 2.9137,0.8391 1.3054,0.8159 2.0513,2.261 0.7692,1.4453 0.7692,3.3566 0,1.9115 -0.7692,3.3801 -0.7459,1.4451 -2.0279,2.2842 -1.2588,0.8159 -2.8439,0.8159 -0.9323,0 -1.7482,-0.3029 -0.8158,-0.3032 -1.4452,-0.7693 -0.6061,-0.4662 -0.9557,-0.9325 -0.3264,-0.4895 -0.3264,-0.8157 l 0.7226,-0.3031 v 6.1305 q 0,0.6061 -0.3962,1.0023 -0.3963,0.4196 -1.0023,0.4196 -0.6061,0 -1.0024,-0.3962 -0.3962,-0.3963 -0.3962,-1.0257 v -14.2889 q 0,-0.6061 0.3962,-1.0024 0.3963,-0.4196 1.0024,-0.4196 0.606,0 1.0023,0.4196 0.3962,0.3963 0.3962,1.0024 v 1.1421 l -0.3962,-0.2097 q 0,-0.303 0.3263,-0.7226 0.3264,-0.443 0.8858,-0.8626 0.5594,-0.4428 1.282,-0.7225 0.746,-0.2797 1.5618,-0.2797 z m -0.3496,2.5641 q -1.0257,0 -1.7949,0.5128 -0.7692,0.5127 -1.2121,1.3986 -0.4196,0.8624 -0.4196,1.9812 0,1.0957 0.4196,2.0047 0.4429,0.8859 1.2121,1.3986 0.7692,0.5128 1.7949,0.5128 1.0256,0 1.7715,-0.5128 0.7692,-0.5127 1.1888,-1.3986 0.4429,-0.909 0.4429,-2.0047 0,-1.1188 -0.4429,-1.9812 -0.4196,-0.8859 -1.1888,-1.3986 -0.7459,-0.5128 -1.7715,-0.5128 z m -8.4215,3.916 q 0,1.9114 -0.8624,3.3799 -0.8392,1.4453 -2.2844,2.261 -1.4219,0.8159 -3.1934,0.8159 -1.7716,0 -3.2168,-0.8159 -1.4219,-0.8157 -2.2844,-2.261 -0.8391,-1.4685 -0.8391,-3.3799 0,-1.9115 0.8391,-3.3566 0.8625,-1.4685 2.2844,-2.2844 1.4452,-0.8391 3.2168,-0.8391 1.7715,0 3.1934,0.8391 1.4452,0.8159 2.2844,2.2844 0.8624,1.4451 0.8624,3.3566 z m -2.7972,0 q 0,-1.1888 -0.4895,-2.0513 -0.4662,-0.8857 -1.282,-1.3752 -0.7925,-0.4895 -1.7715,-0.4895 -0.9791,0 -1.7949,0.4895 -0.7925,0.4895 -1.2821,1.3752 -0.4662,0.8625 -0.4662,2.0513 0,1.1655 0.4662,2.0513 0.4896,0.8624 1.2821,1.3519 0.8158,0.4895 1.7949,0.4895 0.979,0 1.7715,-0.4895 0.8158,-0.4895 1.282,-1.3519 0.4895,-0.8858 0.4895,-2.0513 z m -12.2089,4.8018 q 0,0.6061 -0.4195,1.0257 -0.3963,0.3963 -1.0024,0.3963 -0.5827,0 -0.979,-0.3963 -0.3962,-0.4196 -0.3962,-1.0257 v -14.4055 q 0,-0.606 0.3962,-1.0023 0.4196,-0.4196 1.0257,-0.4196 0.606,0 0.979,0.4196 0.3962,0.3963 0.3962,1.0023 z m -10.7943,1.655 q -1.9813,0 -3.4498,-0.8159 -1.4452,-0.8391 -2.2378,-2.261 -0.7692,-1.4218 -0.7692,-3.2167 0,-2.0979 0.8392,-3.5664 0.8624,-1.4918 2.2377,-2.2845 1.3753,-0.7924 2.9137,-0.7924 1.1888,0 2.2378,0.4895 1.0723,0.4895 1.8881,1.3519 0.8158,0.8391 1.282,1.958 0.4895,1.1189 0.4895,2.3776 -0.023,0.5595 -0.4428,0.9091 -0.4196,0.3497 -0.9791,0.3497 h -8.9043 l -0.6993,-2.331 h 8.5547 l -0.5128,0.4663 v -0.6294 q -0.047,-0.676 -0.4895,-1.2122 -0.4196,-0.536 -1.0723,-0.8392 -0.6293,-0.3262 -1.352,-0.3262 -0.6993,0 -1.3053,0.1864 -0.6061,0.1865 -1.0489,0.6293 -0.4429,0.443 -0.6993,1.1888 -0.2565,0.746 -0.2565,1.8881 0,1.2588 0.5129,2.1446 0.5361,0.8624 1.3519,1.3287 0.8392,0.4428 1.7716,0.4428 0.8624,0 1.3753,-0.1399 0.5128,-0.1398 0.8158,-0.3262 0.3263,-0.2098 0.5828,-0.3496 0.4195,-0.2098 0.7925,-0.2098 0.5128,0 0.8391,0.3496 0.3497,0.3497 0.3497,0.8158 0,0.6293 -0.6527,1.1422 -0.606,0.5128 -1.7016,0.9091 -1.0956,0.3729 -2.2611,0.3729 z m -18.1733,-12.7039 q 0.4429,0 0.8159,0.2332 0.3729,0.2098 0.5594,0.6526 l 3.4265,7.8321 -0.5128,0.2331 3.4965,-8.0419 q 0.3963,-0.9324 1.2354,-0.8857 0.5828,0 0.9324,0.3729 0.373,0.3497 0.373,0.8858 0,0.1632 -0.07,0.3497 -0.047,0.1864 -0.1166,0.3496 l -4.359,9.6037 q -0.3729,0.8391 -1.1888,0.8858 -0.4429,0.07 -0.8625,-0.1633 -0.3962,-0.233 -0.606,-0.7225 l -4.3357,-9.6037 q -0.047,-0.117 -0.1166,-0.3031 -0.047,-0.1864 -0.047,-0.4428 0,-0.4196 0.3729,-0.8159 0.373,-0.4196 1.0024,-0.4196 z m -8.1869,12.7039 q -1.9813,0 -3.4498,-0.8159 -1.4452,-0.8391 -2.2378,-2.261 -0.7692,-1.4218 -0.7692,-3.2167 0,-2.0979 0.8392,-3.5664 0.8624,-1.4918 2.2377,-2.2845 1.3753,-0.7924 2.9137,-0.7924 1.1888,0 2.2378,0.4895 1.0723,0.4895 1.8881,1.3519 0.8158,0.8391 1.282,1.958 0.4896,1.1189 0.4896,2.3776 -0.023,0.5595 -0.4429,0.9091 -0.4196,0.3497 -0.9791,0.3497 h -8.9043 l -0.6993,-2.331 h 8.5547 l -0.5128,0.4663 v -0.6294 q -0.047,-0.676 -0.4895,-1.2122 -0.4196,-0.536 -1.0723,-0.8392 -0.6293,-0.3262 -1.352,-0.3262 -0.6993,0 -1.3053,0.1864 -0.6061,0.1865 -1.0489,0.6293 -0.4429,0.443 -0.6993,1.1888 -0.2565,0.746 -0.2565,1.8881 0,1.2588 0.5129,2.1446 0.5361,0.8624 1.3519,1.3287 0.8392,0.4428 1.7716,0.4428 0.8624,0 1.3753,-0.1399 0.5128,-0.1398 0.8158,-0.3262 0.3264,-0.2098 0.5828,-0.3496 0.4195,-0.2098 0.7925,-0.2098 0.5128,0 0.8392,0.3496 0.3496,0.3497 0.3496,0.8158 0,0.6293 -0.6527,1.1422 -0.606,0.5128 -1.7016,0.9091 -1.0956,0.3729 -2.2611,0.3729 z m -10.1875,-17.4824 q 0.6061,0 1.0024,0.3963 0.3962,0.3962 0.3962,1.0256 v 14.4055 q 0,0.6061 -0.3962,1.0257 -0.3963,0.3963 -1.0024,0.3963 -0.606,0 -1.0023,-0.3963 -0.3963,-0.4196 -0.3963,-1.0257 v -1.1421 l 0.5129,0.2097 q 0,0.303 -0.3264,0.746 -0.3263,0.4196 -0.8858,0.8392 -0.5594,0.4195 -1.3286,0.7225 -0.7459,0.2797 -1.6317,0.2797 -1.6084,0 -2.9137,-0.8159 -1.3054,-0.8391 -2.0746,-2.2842 -0.7459,-1.4686 -0.7459,-3.3567 0,-1.9115 0.7459,-3.3566 0.7692,-1.4685 2.0513,-2.2844 1.282,-0.8391 2.8438,-0.8391 1.0023,0 1.8414,0.3029 0.8392,0.3032 1.4453,0.7693 0.6293,0.4662 0.9556,0.9557 0.3497,0.4663 0.3497,0.7925 l -0.8392,0.3031 v -6.2471 q 0,-0.606 0.3963,-1.0023 0.3963,-0.4196 1.0023,-0.4196 z m -4.7086,14.9183 q 1.0257,0 1.7949,-0.5128 0.7692,-0.5127 1.1888,-1.3986 0.4429,-0.8858 0.4429,-1.9813 0,-1.1188 -0.4429,-2.0046 -0.4196,-0.8859 -1.1888,-1.3986 -0.7692,-0.5128 -1.7949,-0.5128 -1.0023,0 -1.7715,0.5128 -0.7692,0.5127 -1.2121,1.3986 -0.4196,0.8858 -0.4196,2.0046 0,1.0955 0.4196,1.9813 0.4429,0.8859 1.2121,1.3986 0.7692,0.5128 1.7715,0.5128 z")
@@ -412,7 +451,10 @@ function web_development_text__desktop(parent_gr, screen_width_in_px, screen_hei
     //develop_path.rotate(-90)
     develop_path.scale(4.8)
     develop_path.attr({id: 'develop_path'})
-
+    develop_path__gr.attr({
+        x:       800,
+        opacity: 0.0
+    })
     //-----------------QUOTES------------------------
 
     var paragraph = text_gr.text(function(add){
@@ -427,81 +469,67 @@ function web_development_text__desktop(parent_gr, screen_width_in_px, screen_hei
             weight:  600,
             fill:    '#863845ff',
             family:  'Quicksand',
-            size:    23
+            size:    "1.2rem"
         })    
     paragraph.attr({
-        x: 130,
+        x: 800,
         y: screen_height/2+35
     })  
 
+    var develop_text_info = {
+        "develop_path__gr": develop_path__gr,
+        "paragraph":        paragraph,
+    }
+    
+    return develop_text_info;
 }
 //-------------------------HEADLINE-ANIMATION-INFO----------------------------------//
 function web_development__headline_animation_info(parent_gr, screen_width_in_px, screen_height){
 
     var headline_gr = parent_gr.nested()
  
-    var yellow_rect = headline_gr.rect(screen_width_in_px,screen_height/20)
-    .fill('#863845ff')
-    yellow_rect.attr({
-        id:      "yellow_rect",
+    var blue_rect = headline_gr.rect(screen_width_in_px/2-350,100)
+    .fill('#597f83ff')
+    blue_rect.attr({
+        id:      "blue_rect",
         opacity: 1.0,
         'x':     0,
-        'y':    headline_gr.bbox().height-yellow_rect.bbox().height-20
+        'y':     screen_height/5
     })
+
+    var art_title = headline_gr.text(function(add){
+        add.tspan('art')
+    })
+        .font({
+            opacity: 1.0,
+            weight:  700,
+            fill:    '#863845ff',
+            family:  'Quicksand',
+            size:    "3vw"
+        })    
+    art_title.attr({
+        x: blue_rect.bbox().x+blue_rect.bbox().width,
+        y: blue_rect.bbox().y+blue_rect.bbox().height/2+25
+    })
+    art_title.rotate(-90)
+
 
     var work_title = headline_gr.text(function(add){
-        add.tspan('P').font({weight: '500', size:'190'})
-        add.tspan('rocedural art')
+        add.tspan('procedural')
     })
         .font({
             opacity: 1.0,
             weight:  700,
             fill:    '#863845ff',
             family:  'Quicksand',
-            size:    130
+            size:    "7vw"
         })    
     work_title.attr({
-        x: screen_width_in_px/2-work_title.bbox().width/2,
-        y: headline_gr.bbox().height/2+work_title.bbox().height+100
+        x: blue_rect.bbox().x+blue_rect.bbox().width+art_title.bbox().width,
+        y: blue_rect.bbox().y+blue_rect.bbox().height-art_title.bbox().height/2+10
     })
+    
 
-    var paragraph = headline_gr.text(function(add){
-        add.tspan('Creativity is inventing, experimenting, ').newLine()
-        add.tspan('growing, taking risk, breaking rules, ').newLine()
-        add.tspan('making mistakes and having fun.').newLine()         
-        add.tspan('Creativity is inventing, experimenting, ').newLine()
-        add.tspan('growing, taking risk, breaking rules, ').newLine()
-        add.tspan('making mistakes and having fun.').newLine() 
-
-    })
-        .font({
-            opacity: 1.0,
-            weight:  600,
-            fill:    '#863845ff',
-            family:  'Quicksand',
-            size:    23
-        })    
-    paragraph.attr({
-        x: work_title.bbox().width/2+paragraph.bbox().width,
-        y: work_title.bbox().y-paragraph.bbox().height+50
-    })  
-
-     /*
-    var my_title = headline_gr.text(function(text_element){
-        text_element.tspan('art')
-    })
-        .font({
-            opacity: 1.0,
-            weight:  700,
-            fill:    '#cdcdcdff',
-            family:  'Quicksand',
-            size:    70
-        })    
-   my_title.attr({
-       x: work_title.bbox().x+work_title.bbox().width+5,
-       y: work_title.bbox().y+my_title.bbox().height+25
-   })
-    my_title.rotate(-90)*/
 }
 
 //-------------------------HEADLINE-INFO----------------------------------//
@@ -510,7 +538,7 @@ function web_development__headline__info(parent_gr, screen_width_in_px, screen_h
     var headline_gr = parent_gr.nested()
  
     var yellow_rect = headline_gr.rect(screen_width_in_px/2-350,100)
-    .fill('#812f3eff')
+    .fill('#597f83ff')
     .attr({
         id:      "yellow_rect",
         opacity: 1.0,
@@ -612,4 +640,57 @@ function web_development__video(parent_gr, screen_width_in_px, screen_height){
             width:      screen_width_in_px,
             height:     video_global_height
         })
+}
+
+function develop_animate__activate(develop__desktop_info, screen_width_in_px, screen_height){
+
+    var develop_path__gr = develop__desktop_info["develop_text_info"]["develop_path__gr"]
+    var paragraph        = develop__desktop_info["develop_text_info"]["paragraph"]
+    var rect_width      = develop__desktop_info["develop__top_rects"]["rect_width"]
+    var a_rect           = develop__desktop_info["develop__top_rects"]["a_rect"]
+    var a_rect_y         = develop__desktop_info["develop__top_rects"]["a_rect_y"]
+    var a_rect_x         = develop__desktop_info["develop__top_rects"]["a_rect_x"]
+    var b_rect           = develop__desktop_info["develop__top_rects"]["b_rect"]
+    var b_rect_x         = develop__desktop_info["develop__top_rects"]["b_rect_x"]
+    var b_rect_width    = develop__desktop_info["develop__top_rects"]["b_rect_width"]
+    var c_rect           = develop__desktop_info["develop__top_rects"]["c_rect"]
+    var c_rect_x         = develop__desktop_info["develop__top_rects"]["c_rect_x"]
+    var c_rect_width    = develop__desktop_info["develop__top_rects"]["c_rect_width"]
+
+    a_rect.animate({
+        delay: 550,
+        duration:500
+    }).ease('>')
+    .attr({
+       x: a_rect_x-rect_width-500,
+    })
+    b_rect.animate({
+        delay: 500,
+        duration:500
+    }).ease('>')
+    .attr({
+        x: b_rect_x-rect_width,
+    })
+    c_rect.animate({
+        delay: 350,
+        duration:500
+    }).ease('>')
+    .attr({
+        x: c_rect_x+c_rect_width,
+    })
+    develop_path__gr.animate({
+        delay: 350,
+        duration:500
+    }).ease('>')
+    .attr({x: 0, opacity: 1.0})
+    
+    paragraph.animate({
+        delay: 450,
+        duration:500
+    }).ease('>')
+    .attr({
+        x: 130,
+        y: screen_height/2+35
+    })
+
 }

@@ -53,6 +53,8 @@ function hp_tablet__activate(bar_gr) {
 
         //-----------------------------
     };*/
+    var screen_width_in_px = window.innerWidth;
+    var screen_height      = window.innerHeight;
 
     $("body").append(`
         <div id="hp_tablet">
@@ -60,7 +62,8 @@ function hp_tablet__activate(bar_gr) {
         </div>
     `);
 
-    hp_tablet__create_responsive(bar_gr);
+    var hp__buttons__tablet_info = hp_tablet__create_responsive(bar_gr);
+    hp_top__tablet_animate(hp__buttons__tablet_info , screen_width_in_px, screen_height)
 }
 
 function hp_tablet__deactivate() {
@@ -121,8 +124,9 @@ function hp_tablet__create_responsive(bar_gr) {
 
         nevena_create_text__tablet(container_gr, screen_width_in_px, screen_height)
         section_images__tablet(tablet_white_background_gr)
-        buttons_tablet(container_gr, bar_gr, screen_height, screen_width_in_px)
+        var hp__buttons__tablet_info = buttons_tablet(container_gr, bar_gr, screen_height, screen_width_in_px)
         create_contact_section(screen_width_in_px, screen_height)
+        return hp__buttons__tablet_info
 
     }
 
@@ -192,7 +196,7 @@ function nevena_create_text__tablet(parent_gr, screen_width_in_px, screen_height
                 weight:  800,
                 fill:    '#bdbdbdff',
                 family:  'Spartan',
-                size:    210
+                size:    "14rem"
             })    
         dot_up.attr({
             x: screen_width_in_px-dot_up.bbox().width-20,
@@ -207,11 +211,11 @@ function nevena_create_text__tablet(parent_gr, screen_width_in_px, screen_height
                 weight:  800,
                 fill:    '#bdbdbdff',
                 family:  'Spartan',
-                size:    210
+                size:    "14rem"
             })    
         dot_down.attr({
             x: screen_width_in_px-dot_down.bbox().width-20,
-            y: (parentheses.bbox().y+parentheses.bbox().height/2)-dot_down.bbox().y-dot_down.bbox().height/2
+            y: (parentheses.bbox().y+parentheses.bbox().height/2)-dot_down.bbox().y-dot_down.bbox().height/2+5
         })
 }
 
@@ -321,7 +325,15 @@ function section_images__tablet(parent_gr){
             view_box_y)
     }
 
+    var hp_images__tablet__info = {
+        "view_box_y":         (element_data['view_box_y']),
+        /*"element_x":             element_x,
+        "element_position_y_px": element_position_y_px*/
 
+    }
+
+
+    return hp_images__tablet__info
 
     // IMPORTANT!! - this function has to be called after all the image_elements
     //               are created, because it gets some of those elements
@@ -333,6 +345,11 @@ function section_images__tablet(parent_gr){
 function buttons_tablet(parent_gr, bar_gr, screen_height, screen_width_in_px){
 
     var buttons_tablet_gr = parent_gr.nested()
+    var buttons_tablet    = buttons_tablet_gr.rect(screen_width_in_px,screen_height)
+    .attr({
+        opacity: 0.0,
+        id:     "buttons"
+    })
     var rect_height = 150;
     //--------------------------UI----------------------------------
     var ui_gr         = buttons_tablet_gr.nested()
@@ -356,7 +373,7 @@ function buttons_tablet(parent_gr, bar_gr, screen_height, screen_width_in_px){
             weight:  700,
             fill:    '#fff',
             family:  'Quicksand',
-            size:    82
+            size:    "5.5vw"
         })    
     ui_title.attr({
         x: ui_rect.bbox().width/2-ui_title.bbox().width/2,
@@ -365,7 +382,7 @@ function buttons_tablet(parent_gr, bar_gr, screen_height, screen_width_in_px){
 
     ui_gr.attr({
         id: "ui_gr",
-        "x": ui_x,
+        "x": ui_x-500,
         "y": ui_base_image.y()-ui_rect.bbox().height
     })
 
@@ -393,7 +410,7 @@ function buttons_tablet(parent_gr, bar_gr, screen_height, screen_width_in_px){
             weight:  700,
             fill:    '#fff',
             family:  'Quicksand',
-            size:    105
+            size:    "6.5vw"
         })    
     ux_title.attr({
         x: ux_rect.bbox().width/2-ux_title.bbox().width/2,
@@ -402,7 +419,7 @@ function buttons_tablet(parent_gr, bar_gr, screen_height, screen_width_in_px){
 
     ux_gr.attr({
         id: "ux_gr",
-        "x": ux_x,
+        "x": ux_x-500,
         "y": ux_base_image_first.y()+ux_height
     })
 
@@ -429,7 +446,7 @@ function buttons_tablet(parent_gr, bar_gr, screen_height, screen_width_in_px){
             weight:  700,
             fill:    '#BF1F1F',
             family:  'Quicksand',
-            size:    26
+            size:    "2vw"
         })    
     contact_title.attr({
         x: contact_rect.bbox().width/2-contact_title.bbox().width/2+2,
@@ -437,9 +454,10 @@ function buttons_tablet(parent_gr, bar_gr, screen_height, screen_width_in_px){
     })
 
     contact_gr.attr({
-        id: "contact_gr",
-        "x": contact_x,
-        "y": contact_base_image.y()-contact_rect.bbox().height
+        opacity: 1.0,
+        id:     "contact_gr",
+        "x":     contact_x,
+        "y":    contact_base_image.y()-contact_rect.bbox().height-500
     })
 
     //--------------------------DESIGN----------------------------------
@@ -464,7 +482,7 @@ function buttons_tablet(parent_gr, bar_gr, screen_height, screen_width_in_px){
             weight:  700,
             fill:    '#fff',
             family:  'Quicksand',
-            size:    26
+            size:    "2vw"
         })    
         design_title.attr({
         x: design_rect.bbox().width/2-design_title.bbox().width/2,
@@ -472,9 +490,10 @@ function buttons_tablet(parent_gr, bar_gr, screen_height, screen_width_in_px){
     })
 
     design_gr.attr({
-        id: "design_gr",
-        "x": design_x,
-        "y": design_base_image.y()-design_rect.bbox().height
+        opacity: 1.0,
+        id:     "design_gr",
+        "x":     design_x,
+        "y":     design_base_image.y()-design_rect.bbox().height-500
     })
 
     //////////////////////////////////////--PAGE TRANSITION ON BUTTON CLICKED--////////////////////////////////////////////
@@ -539,7 +558,7 @@ function buttons_tablet(parent_gr, bar_gr, screen_height, screen_width_in_px){
             weight:  700,
             fill:    '#fff',
             family:  'Quicksand',
-            size:    28
+            size:    "2.2vw"
         })    
     development_title.attr({
         x: development_rect.bbox().width/2-development_title.bbox().width/2,
@@ -547,9 +566,10 @@ function buttons_tablet(parent_gr, bar_gr, screen_height, screen_width_in_px){
     })
 
     development_gr.attr({
-        id: "development_gr",
-        "x": development_x,
-        "y": development_base_image_first.y()-development_rect.bbox().height
+        opacity: 1.0,
+        id:     "development_gr",
+        "x":     development_x,
+        "y":     development_base_image_first.y()-development_rect.bbox().height-500
     })
     //////////////////////////////////////--PAGE TRANSITION ON BUTTON CLICKED--////////////////////////////////////////////
     development_clicked = false;
@@ -653,18 +673,18 @@ function buttons_tablet(parent_gr, bar_gr, screen_height, screen_width_in_px){
             weight:  700,
             fill:    '#BF1F1F',
             family:  'Quicksand',
-            size:    53
+            size:    "3.7vw"//"3.7vw"
         })    
         nevena_title.attr({
-        x: nevena_rect.bbox().width/2-nevena_title.bbox().width/2,
-        y: nevena_rect.bbox().height/2+nevena_title.bbox().height/2-5
+            x: nevena_rect.bbox().width/2-nevena_title.bbox().width/2,
+            y: nevena_rect.bbox().height/2+nevena_title.bbox().height/2-5
     })
-    nevena_title.css({ width: '100%'})
+    //nevena_title.css({ width: '100%'})
 
     nevena_gr.attr({
-        id: "nevena_gr",
-        "x": nevena_x,
-        "y": nevena_base_image_first.y()+nevena_height-nevena_title.bbox().height/2
+        id:     "nevena_gr",
+        "x":     nevena_x,
+        "y":     nevena_base_image_first.y()+nevena_height-nevena_title.bbox().height/2+600
     })
     //--------------------------ANIMATION----------------------------------
     var moodboard_gr          = buttons_tablet_gr.nested()
@@ -689,7 +709,7 @@ function buttons_tablet(parent_gr, bar_gr, screen_height, screen_width_in_px){
             weight:  700,
             fill:    '#fff',
             family:  'Quicksand',
-            size:    34  
+            size:    "3.2vw"  
         })    
     moodboard_title.attr({
         x: moodboard_rect.bbox().width/2-moodboard_title.bbox().width/2,
@@ -697,9 +717,11 @@ function buttons_tablet(parent_gr, bar_gr, screen_height, screen_width_in_px){
     })
 
     moodboard_gr.attr({
-        id: "moodboard_gr",
-        "x": mooodboard_x-moodboard_width-moodboard_rect.bbox().width/2,
-        "y": moodboard_base_image.y()+moodboard_height-moodboard_rect.bbox().height
+        opacity: 1.0,
+        id:     "moodboard_gr",
+        width:   moodboard_rect.bbox().width,
+        x: mooodboard_x-moodboard_width-moodboard_rect.bbox().width/2,
+        "y":     moodboard_base_image.y()+moodboard_height+500
     })
     //////////////////////////////////////--PAGE TRANSITION ON BUTTON CLICKED--////////////////////////////////////////////
     moodboard_clicked = false;
@@ -735,5 +757,162 @@ function buttons_tablet(parent_gr, bar_gr, screen_height, screen_width_in_px){
             moodboard_clicked = false;
         }
     })
+    buttons_tablet.mouseover(function() {                     //when hovered over background titles color return to its origin
+        nevena_title.fill({ color: '#BF1F1F' })
+        moodboard_title.fill({ color: '#fff' })
+        development_title.fill({ color: '#fff' })
+        design_title.fill({ color: '#fff' })
+        contact_title.fill({ color: '#BF1F1F' })
+
+    })
+
+    nevena_title.mouseover(function() {               //when hovered over title it changes color
+        nevena_title.fill({ color: '#720e0eff' })
+    })
+    design_title.mouseover(function() {
+        design_title.fill({ color: '#720e0eff' })
+    })
+    moodboard_title.mouseover(function() {
+        moodboard_title.fill({ color: '#720e0eff' })
+    })
+    development_title.mouseover(function() {
+        development_title.fill({ color: '#720e0eff' })
+    })
+    contact_title.mouseover(function() {
+        contact_title.fill({ color: '#720e0eff' })
+    })
+     var hp__buttons__tablet_info = {
+        "ui_gr":                        ui_gr,
+        "ui_x":                         ui_x,
+        "ux_gr":                        ux_gr,
+        "ux_x":                         ux_x,
+        "contact_gr":                   contact_gr,
+        "contact_base_image":           contact_base_image,
+        "contact_rect":                 contact_rect,
+        "nevena_gr":                    nevena_gr,
+        "nevena_title":                 nevena_title,
+        "nevena_rect":                  nevena_rect,
+        "nevena_base_image_first":      nevena_base_image_first,
+        "nevena_height":                nevena_height,
+        "design_gr":                    design_gr,
+        "design_rect":                  design_rect,
+        "design_base_image":            design_base_image,
+        "development_gr":               development_gr,
+        "development_base_image_first": development_base_image_first,
+        "development_rect":             development_rect,
+        "moodboard_gr":                 moodboard_gr,
+        "moodboard_height":             moodboard_height,
+        "moodboard_rect":               moodboard_rect,
+        "moodboard_base_image":         moodboard_base_image
+
+    }
+    return hp__buttons__tablet_info
+
+}
+
+function hp_top__tablet_animate(hp__buttons__tablet_info , screen_width_in_px, screen_height){
+    var ui_gr                         = hp__buttons__tablet_info["ui_gr"];
+    var ui_x                          = hp__buttons__tablet_info["ui_x"];
+    var ux_gr                         = hp__buttons__tablet_info["ux_gr"];
+    var ux_x                          = hp__buttons__tablet_info["ux_x"];
+    var contact_gr                    = hp__buttons__tablet_info["contact_gr"];
+    var contact_base_image            = hp__buttons__tablet_info["contact_base_image"];
+    var contact_rect                  = hp__buttons__tablet_info["contact_rect"];
+    var nevena_gr                     = hp__buttons__tablet_info["nevena_gr"];
+    var nevena_title                  = hp__buttons__tablet_info["nevena_title"];
+    var nevena_rect                   = hp__buttons__tablet_info["nevena_rect"];
+    var nevena_base_image_first       = hp__buttons__tablet_info["nevena_base_image_first"];
+    var nevena_height                 = hp__buttons__tablet_info["nevena_height"];
+    var design_gr                     = hp__buttons__tablet_info["design_gr"];
+    var design_base_image             = hp__buttons__tablet_info["design_base_image"];
+    var design_rect                   = hp__buttons__tablet_info["design_rect"];
+    var development_gr                = hp__buttons__tablet_info["development_gr"];
+    var development_rect              = hp__buttons__tablet_info["development_rect"];
+    var development_base_image_first  = hp__buttons__tablet_info["development_base_image_first"];
+    var moodboard_gr                  = hp__buttons__tablet_info["moodboard_gr"];
+    var moodboard_base_image          = hp__buttons__tablet_info["moodboard_base_image"];
+    var moodboard_height              = hp__buttons__tablet_info["moodboard_height"];
+    var moodboard_rect                = hp__buttons__tablet_info["moodboard_rect"];
+
+    /*ui_gr.animate({
+        duration: 1000,
+    }).attr({
+        opacity: 0.6,
+        //"y": ui_base_image.y()-ui_rect.bbox().height
+    })
+    ux_gr.animate({
+        duration: 1000,
+    }).attr({
+        opacity: 0.6,
+        //"y": ui_base_image.y()-ui_rect.bbox().height
+    })*/
+    design_gr.animate({
+        duration: 500,
+    }).ease('>')
+    .attr({
+        opacity: 1.0,
+        y: design_base_image.y()-design_rect.bbox().height
+    })
+    development_gr.animate({
+        duration: 500,
+        delay: 250,
+    })
+    .ease('>')
+    .attr({
+        opacity: 1.0,
+        y: development_base_image_first.y()-development_rect.bbox().height
+    })
+    moodboard_gr.animate({
+        delay: 650,
+        duration: 500,
+    })
+    .ease('>')
+    .attr({
+        opacity: 1.0,
+        "y": moodboard_base_image.y()+moodboard_height-moodboard_rect.bbox().height
+    })
+    contact_gr.animate({
+        delay: 350,
+        duration: 500,
+    })
+    .ease('>')
+    .attr({
+        opacity: 1.0,
+        y: contact_base_image.y()-contact_rect.bbox().height
+    })
+    nevena_gr.animate({
+        delay:    450,
+        duration: 500,
+    }).ease('>')
+    .attr({
+        y:nevena_base_image_first.y()+nevena_height-nevena_title.bbox().height/2
+    })
+
+    nevena_title.animate({
+        delay: 450,
+        duration: 500,
+    }).font({"size": "4vw", "weight": "700", "opacity": "1.0"}) //"4vw"
+    .ease('>')
+    .attr({
+        x: nevena_rect.bbox().width/2-nevena_title.bbox().width/2-10,
+        y: nevena_rect.bbox().height/2+nevena_title.bbox().height/2-5
+    })
+
+    ui_gr.animate({
+        duration: 600,
+    }).ease('>')
+    .attr({
+        opacity: 1.0,
+        x: ui_x,
+    })
+    ux_gr.animate({
+        delay: 350,
+        duration: 600,
+    }).ease('>')
+    .attr({
+        opacity: 1.0,
+        "x":     ux_x,
+    })
+        
 }
 

@@ -15,6 +15,9 @@ function moodboard__main() {
 
 function moodboard__activate(bar_gr){
 
+    var screen_width_in_px  = window.innerWidth;
+    var screen_height       = window.innerHeight; 
+
     document.title = "moodboard"
     window.history.pushState({page: "moodboard"},"", "#moodboard");
 
@@ -29,7 +32,8 @@ function moodboard__activate(bar_gr){
         </div>
     `);
 
-    moodboard__create_responsive(bar_gr);
+    var moodboard__desktop_info = moodboard__create_responsive(bar_gr);
+    moodboard_animate__activate(moodboard__desktop_info, screen_width_in_px, screen_height)
     current_page = "moodboard";
 }
 
@@ -92,14 +96,22 @@ function moodboard__create_responsive(bar_gr) {
     else {
         var moodboard__layout_gr = moodboard__intro_section__desktop(container_gr, bar_gr, screen_width_in_px, screen_height)
         var moodboard__background_gr = moodboard__layout_gr.find("#moodboard__background_gr")
-        moodboard__images__desktop(moodboard__background_gr, screen_width_in_px, screen_height)
-        moodboard_text__desktop(container_gr, screen_width_in_px, screen_height)
+        var moodboard__top_rects = moodboard__images__desktop(moodboard__background_gr, screen_width_in_px, screen_height)
+        var moodboard_text_info = moodboard_text__desktop(container_gr, screen_width_in_px, screen_height)
 
         moodboard__headline__info(headline_canvas__gr, screen_width_in_px, screen_height)
         masonry(screen_width_in_px, screen_height)
         moodboard__video(screen_width_in_px, screen_height)
 
         create_contact_section(screen_width_in_px, screen_height)
+
+        // RETURNED INFO
+        var moodboard__desktop_info = {
+            "moodboard__top_rects": moodboard__top_rects,
+            "moodboard_text_info":  moodboard_text_info
+        }
+
+        return moodboard__desktop_info
     }
 }
 
@@ -173,6 +185,16 @@ function moodboard__intro_section__desktop(parent_gr, bar_gr, screen_width_in_px
     square_brackets_symbol_gr.attr({
         id: "square_brackets_symbol_gr"
     })
+
+    // SYMBOL ROTATION
+
+    function rotatePositive(){
+        square_brackets_symbol_gr.animate({duration: 4000}).ease(">").rotate(10).after(rotateNegative)
+    }
+    function rotateNegative(){
+        square_brackets_symbol_gr.animate({duration: 4000}).ease("<").rotate(-10).after(rotatePositive)
+    }
+    rotatePositive()
 
     return moodboard__layout_gr;
 }
@@ -310,7 +332,7 @@ function moodboard__images__desktop(parent_gr, screen_width_in_px, screen_height
         var a_rect = a_rect_gr.rect(rect_width+screen_width_in_px,a_rect_height)
         a_rect.attr({
                 fill: "#f57714fe",
-                x: a_rect_x+a_rect_width,
+                x: a_rect_x+a_rect_width+800,
                 y: a_rect_y
             })
     
@@ -324,7 +346,7 @@ function moodboard__images__desktop(parent_gr, screen_width_in_px, screen_height
         var b_rect = b_rect_gr.rect(rect_width,b_rect_height)
         b_rect.attr({
                 fill: "#f57714fe",
-                x: b_rect_x-rect_width,
+                x: 0,
                 y: b_rect_y
             })
     
@@ -338,7 +360,7 @@ function moodboard__images__desktop(parent_gr, screen_width_in_px, screen_height
         var c_rect = c_rect_gr.rect(rect_width,c_rect_height+1)
             .attr({
                 fill: "#f57714fe",
-                x: c_rect_x+c_rect_width,
+                x: c_rect_x+c_rect_width+800,
                 y: c_rect_y-1
             })
     
@@ -352,9 +374,27 @@ function moodboard__images__desktop(parent_gr, screen_width_in_px, screen_height
         var d_rect = d_rect_gr.rect(rect_width+screen_width_in_px,d_rect_height)
             .attr({
                 fill: "#f57714fe",
-                x: d_rect_x-screen_width_in_px,
+                x: 0-screen_width_in_px-200,
                 y: d_rect_y
             })
+
+        var moodboard__top_rects = {
+            "a_rect":        a_rect,
+            "a_rect_x":      a_rect_x,
+            "a_rect_width":  a_rect_width,
+            "b_rect":        b_rect,
+            "b_rect_x":      b_rect_x,
+            "b_rect_width":  b_rect_width,
+            "c_rect":        c_rect,
+            "c_rect_x":      c_rect_x,
+            "c_rect_width":  c_rect_width,
+            "d_rect":        d_rect,
+            "d_rect_x":      d_rect_x,
+            "d_rect_width":  d_rect_width,
+            "rect_width":    rect_width
+        }
+    
+        return moodboard__top_rects
 }
 
 //----------------------------------------------TEXT----------------------------------------------------------------
@@ -372,6 +412,10 @@ function moodboard_text__desktop(parent_gr, screen_width_in_px, screen_height){
     //moodboard_path.rotate(-90)
     moodboard_path.scale(5.75)
     moodboard_path.attr({id: 'moodboard_path'})
+    moodboard_path__gr.attr({
+        x:       -500,
+        opacity: 0.0
+    })
 
     //-----------------QUOTES------------------------
     var paragraph = text_gr.text(function(add){
@@ -384,14 +428,22 @@ function moodboard_text__desktop(parent_gr, screen_width_in_px, screen_height){
         .font({
             opacity: 1.0,
             weight:  600,
-            fill:    '#863845ff',
+            fill:    '#ac3323ff',
             family:  'Quicksand',
-            size:    23
+            size:    "1.2rem"
         })    
     paragraph.attr({
-        x: screen_width_in_px/2-paragraph.bbox().width-180,
-        y: screen_height/2-105
+        x:       screen_width_in_px/2-paragraph.bbox().width-500,
+        y:       screen_height/2-105,
+        opacity: 0.0
     })   
+
+    var moodboard_text_info = {
+        "moodboard_path__gr": moodboard_path__gr,
+        "paragraph":          paragraph,
+    }
+    
+    return moodboard_text_info;
 
 }
 
@@ -657,6 +709,70 @@ function moodboard__video(screen_width_in_px, screen_height){
         top:        video_global_y+250,
         width:      screen_width_in_px,
         height:     video_global_height
+    })
+
+}
+
+function moodboard_animate__activate(moodboard__desktop_info, screen_width_in_px, screen_height){
+
+    var moodboard_path__gr = moodboard__desktop_info["moodboard_text_info"]["moodboard_path__gr"]
+    var paragraph          = moodboard__desktop_info["moodboard_text_info"]["paragraph"]
+    var rect_width         = moodboard__desktop_info["moodboard__top_rects"]["rect_width"]
+    var a_rect             = moodboard__desktop_info["moodboard__top_rects"]["a_rect"]
+    var a_rect_x           = moodboard__desktop_info["moodboard__top_rects"]["a_rect_x"]
+    var a_rect_width       = moodboard__desktop_info["moodboard__top_rects"]["a_rect_width"]
+    var b_rect             = moodboard__desktop_info["moodboard__top_rects"]["b_rect"]
+    var b_rect_x           = moodboard__desktop_info["moodboard__top_rects"]["b_rect_x"]
+    var b_rect_width       = moodboard__desktop_info["moodboard__top_rects"]["b_rect_width"]
+    var c_rect             = moodboard__desktop_info["moodboard__top_rects"]["c_rect"]
+    var c_rect_x           = moodboard__desktop_info["moodboard__top_rects"]["c_rect_x"]
+    var c_rect_width       = moodboard__desktop_info["moodboard__top_rects"]["c_rect_width"]
+    var d_rect             = moodboard__desktop_info["moodboard__top_rects"]["d_rect"]
+    var d_rect_x           = moodboard__desktop_info["moodboard__top_rects"]["d_rect_x"]
+    var d_rect_width       = moodboard__desktop_info["moodboard__top_rects"]["d_rect_width"]
+
+    moodboard_path__gr.animate({
+        delay: 450,
+        duration:500
+    }).ease('>')
+    .attr({x: 0, opacity: 1.0})
+
+   a_rect.animate({
+        delay: 650,
+        duration:500
+    }).ease('>')
+    .attr({
+        x: a_rect_x+a_rect_width,
+    })
+    b_rect.animate({
+        delay: 450,
+        duration:500
+    }).ease('>')
+    .attr({
+        x: b_rect_x-rect_width,
+    })
+    c_rect.animate({
+        delay: 450,
+        duration:500
+    }).ease('>')
+    .attr({
+        x: c_rect_x+c_rect_width,
+    })
+    d_rect.animate({
+        delay: 450,
+        duration:500
+    }).ease('>')
+    .attr({
+        x: d_rect_x-screen_width_in_px,
+    })
+    
+    paragraph.animate({
+        delay: 550,
+        duration:500
+    }).ease('>')
+    .attr({
+        x: screen_width_in_px/2-paragraph.bbox().width-190,
+        opacity: 1.0
     })
 
 }

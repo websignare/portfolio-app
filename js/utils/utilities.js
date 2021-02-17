@@ -428,8 +428,8 @@ function run_page_transition(target_page_name, transition_type, current_page_nam
 function pulsating_circle(parent_gr, animation_time, screen_width, screen_height){
     var circle_button_gr = parent_gr.nested()
 
-    var circle_button = circle_button_gr.ellipse(30).fill("#B12F2B").attr({cx: screen_width/2-15, cy: screen_height/2}).opacity(0.95)
-    var stroke_button = circle_button_gr.ellipse(34).attr({cx: screen_width/2-15, cy: screen_height/2}).fill("none").stroke({ color: '#B12F2B', width: 4}).opacity(0.95)
+    var circle_button = circle_button_gr.ellipse(30).fill("#fafafaff").attr({cx: screen_width/2-15, cy: screen_height/2}).opacity(0.95)
+    var stroke_button = circle_button_gr.ellipse(34).attr({cx: screen_width/2-15, cy: screen_height/2}).fill("none").stroke({ color: '#fafafaff', width: 4}).opacity(0.95)
     circle_button_gr.attr({
         id:     "circle_button__gr",
         width:  screen_width,
@@ -454,4 +454,37 @@ function pulsating_circle(parent_gr, animation_time, screen_width, screen_height
         opacity: 0.0
     })
     stroke_button__runner.loop()
+}
+
+function scroll_to_top__btn(){
+    var btn_gr = SVG().addTo("body").size(100,100)
+
+    $("body").css({
+        position: "fixed",
+        bottom:   "0",
+        "z-index":  "20"
+    })
+
+    var btn = btn_gr.rect(50,50).fill("#fff")
+    var polyline = btn_gr.polyline([0,0, 25,50, 50,25]).attr({
+        fill: "none"
+    }).stroke({ color: '#f06', width: 4, linecap: 'round', linejoin: 'round' })
+
+
+
+    var element_activated = false;
+
+    btn_gr.click(function() {
+
+        // ACTIVATE 
+        if (element_activated == false) {
+            
+            window.scrollTo({
+                top: 0,
+                left: 0,
+                //behavior: 'smooth'
+              });
+
+        }
+    });
 }

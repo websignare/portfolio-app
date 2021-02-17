@@ -541,7 +541,7 @@ function create_element(parent_gr, column_info, element_data, element_y, screen_
     //BACKGROUND_element
     var element_gr = parent_gr.nested().move(0, element_y).size(screen_width, screen_height)
     var background = element_gr.rect(element_width,element_height).fill('none')
-    
+    /*
     //NAME_element
     var element_name_gr   = parent_gr.nested().move(-60, element_y+50)
         element_name_gr.attr({opacity: 0.0})
@@ -562,32 +562,39 @@ function create_element(parent_gr, column_info, element_data, element_y, screen_
     //set rect width to be the same as text width
     element_name_rect.attr({"width": element_name_text.length()+20})
     element_name_rect.attr({"x": 150-element_name_text.length()})
-
+*/
     //NUMBER_element_rect
     var element_number_gr   = parent_gr.nested().move(0, element_y)
         element_number_gr.attr({opacity:  0.0})
-    var element_number_rect = element_number_gr.rect(50,50).fill(element_number_color)
+    var element_number_rect = element_number_gr.rect(50,50).fill("#2f4858")
     var element_number_text = element_number_gr.text(element_number).attr({opacity: 0.0})
         .move(element_number_rect.bbox().width/2-10,-8)
         .font({
             opacity: 1.0,
-            fill:    '#fff',
+            fill:    '#fafafaff',
             family:  'Quicksand',
-            weight:  '500',
+            weight:  '600',
             size:    40
         });
 
     //CANCEL_rect
-    var cancel_gr = parent_gr.nested().move(element_width, element_y)
-        cancel_gr.attr({opacity: 0.0})
-    var element_cancel_rect = cancel_gr.rect(50,50).fill(element_number_color)
-    var line_top            = cancel_gr.line(10, 10, 40, 40).stroke({color: '#fff', width: 4, linecap: 'round', opacity: 1.0 })
-    var line_bottom         = cancel_gr.line(40, 10, 10, 40).stroke({color: '#fff', width: 4, linecap: 'round', opacity: 1.0 })
+    var cancel_gr = parent_gr.nested().move(element_width, element_y).attr({opacity: 0.0})
+
+    var element_cancel_rect = cancel_gr.rect(50,50).fill("#2f4858").attr({opacity: 0.8})
+    var line_top            = cancel_gr.line(10, 10, 40, 40).stroke({color: '#fafafaff', width: 5, linecap: 'round', opacity: 1.0 })
+    var line_bottom         = cancel_gr.line(40, 10, 10, 40).stroke({color: '#fafafaff', width: 5, linecap: 'round', opacity: 1.0 })
   
     //OVERLAY_element
     var overlay_gr = parent_gr.nested().move(0, element_y).size(screen_width, screen_height).attr({id: "overlay"})
-    var overlay    = overlay_gr.rect(element_width, element_height).fill("#533065ff").opacity(0.7).attr({id: "overlay_rect"})
-    pulsating_circle(overlay_gr, 2000, screen_width/2+200, screen_height/2+200)
+    var overlay    = overlay_gr.rect(element_width, element_height).fill("#533065ff").opacity(0.6).attr({id: "overlay_rect"})
+
+    var screen_physical_width_cm = get_physical_screen_width(screen_width);
+
+    if(screen_physical_width_cm < 33.8){
+        pulsating_circle(overlay_gr, 2000, screen_width-280, screen_height/1.2)
+    }else{
+        pulsating_circle(overlay_gr, 2000, screen_width-400, screen_height/1.2)
+    }
 
     var element_activated = false;
 
@@ -611,16 +618,6 @@ function create_element(parent_gr, column_info, element_data, element_y, screen_
                 })
                 .attr({opacity: 0.0})
                 .attr({ width: '0' }); 
-
-                element_name_gr.animate({
-                    duration: 100,
-                    //delay: 500,
-                    when: 'now',
-                    swing: true,
-                    times: 1,
-                    wait: 20
-                })
-                .attr({opacity: 1.0})
                 
                     element_number_gr.animate({
                         duration: 100,
@@ -662,26 +659,16 @@ function create_element(parent_gr, column_info, element_data, element_y, screen_
                 })
                 .attr({opacity: 0.9})
                 .attr({ width: element_width })
-                
-                    element_name_gr.animate({
+
+                    element_number_gr.animate({
                         duration: 100,
                         //delay: 500,
                         when: 'now',
                         swing: true,
                         times: 1,
-                        wait: 20
+                        wait: 40
                     })
                     .attr({opacity: 0.0})
-
-                        element_number_gr.animate({
-                            duration: 100,
-                            //delay: 500,
-                            when: 'now',
-                            swing: true,
-                            times: 1,
-                            wait: 40
-                        })
-                        .attr({opacity: 0.0})
 
             })
             element_data["deactivate_fn"](deactivate_fn_gr);

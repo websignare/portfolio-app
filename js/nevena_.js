@@ -99,7 +99,7 @@ function hp__create_responsive(bar_gr) {
     var screen_height      = window.innerHeight;
 
     $("#hp #wrapper").css({                    
-        "background-color": '#D9D9D9',
+        "background-color": '#fafafaff',
         "position":         "relative",
        // "top":              current_scroll_y+"px",
         "width":            screen_width_in_px
@@ -141,7 +141,6 @@ function hp__create_responsive(bar_gr) {
         section_images__desktop(white_background_gr)
         hp__buttons__desktop_info = buttons(container_gr, bar_gr, screen_height, screen_width_in_px)
         create_contact_section(screen_width_in_px, screen_height)
-
         return hp__buttons__desktop_info
 
     }
@@ -171,7 +170,7 @@ function hp__create_background__desktop(parent_gr, screen_width_in_px, screen_he
     var white_background_gr = home_orange_background_gr.nested().attr({id :"white_background_gr"})
 
     var white_background = white_background_gr.rect(screen_width_in_px-100,screen_height-100)
-    .fill('#D9D9D9')
+    .fill('#fafafaff')
     .attr({
         id:      "white_background",
         opacity: 1.0,
@@ -192,7 +191,7 @@ function nevena_create_text__desktop(parent_gr, screen_width_in_px, screen_heigh
 
     var parentheses = parentheses_gr.path("m -468.90528,-194.24566 -8e-5,20.84703 -57.80397,-0.20873 c -4.08747,-0.0167 -7.40087,1.42447 -9.94017,4.27335 -2.5393,2.7869 -3.80893,6.44088 -3.80893,10.9619 v 50.35097 c 0,4.64484 -0.95989,8.391743 -2.8797,11.240629 -1.91995,2.848804 -4.27338,5.016412 -7.06026,6.502784 2.78688,1.486372 5.14031,3.623047 7.06026,6.410068 1.91981,2.848928 2.8797,6.626766 2.8797,11.333513 v 50.350967 c 0,4.521024 1.26963,8.175004 3.80893,10.9619 2.5393,2.8488863 5.85266,4.2733505 9.94017,4.2733505 l 57.80397,-1.252e-4 -0.0669,20.7163257 -66.4696,1.25e-4 c -5.94553,0 -10.83813,-1.021876 -14.6779,-3.065585 -3.83976,-1.9819266 -6.8435,-4.6450481 -9.01119,-7.9893642 -2.16756,-3.28240833 -3.68485,-6.905414 -4.55191,-10.869017 -0.86722,-3.9636868 -1.30083,-7.8654238 -1.30083,-11.7051688 v -51.372717 c 0,-4.087544 -1.08376,-6.998339 -3.25132,-8.732467 -2.16765,-1.734129 -5.07848,-2.601214 -8.73245,-2.601214 v -15.421015 c 3.65397,0 6.5648,-0.867085 8.73245,-2.601209 2.16756,-1.73413 3.25132,-4.64493 3.25132,-8.73247 v -51.37272 c 0,-3.83974 0.43361,-7.74148 1.30083,-11.70517 0.86718,-3.96373 2.38451,-7.58673 4.55191,-10.86901 2.16769,-3.34432 5.17143,-6.00744 9.01119,-7.98937 3.83977,-2.04371 8.73237,-3.06554 14.6779,-3.06554 z")
 
-    parentheses.fill('#bdbdbdff').move(screen_width_in_px-parentheses.bbox().width-120,screen_height/2-parentheses.bbox().height/2)
+    parentheses.fill('#f1f1f1ff').move(screen_width_in_px-parentheses.bbox().width-120,screen_height/2-parentheses.bbox().height/2)
     //parentheses.rotate(180)
     parentheses.scale(3.8)
     parentheses.attr({id: 'parentheses'})
@@ -208,7 +207,7 @@ function nevena_create_text__desktop(parent_gr, screen_width_in_px, screen_heigh
             .font({
                 opacity: 1.0,
                 weight:  800,
-                fill:    '#bdbdbdff',
+                fill:    '#f1f1f1ff',
                 family:  'Spartan',
                 size:    230
             })    
@@ -223,7 +222,7 @@ function nevena_create_text__desktop(parent_gr, screen_width_in_px, screen_heigh
             .font({
                 opacity: 1.0,
                 weight:  800,
-                fill:    '#bdbdbdff',
+                fill:    '#f1f1f1ff',
                 family:  'Spartan',
                 size:    230
             })    
@@ -485,10 +484,10 @@ function buttons(parent_gr, bar_gr, screen_height, screen_width_in_px){
             weight:  700,
             fill:    '#BF1F1F',
             family:  'Quicksand',
-            size:    39
+            size:    "1.5vw"
         })    
     contact_title.attr({
-        x: contact_rect.bbox().width/2-contact_title.bbox().width/2+2,
+        x: contact_rect.bbox().width/2-contact_title.bbox().width/2,
         y: contact_rect.bbox().height/2+contact_title.bbox().height+10
     })
 
@@ -521,7 +520,7 @@ function buttons(parent_gr, bar_gr, screen_height, screen_width_in_px){
             weight:  700,
             fill:    '#fff',
             family:  'Quicksand',
-            size:    30
+            size:    "1.5vw"
         })    
         design_title.attr({
         x: design_rect.bbox().width/2-design_title.bbox().width/2,
@@ -597,7 +596,7 @@ function buttons(parent_gr, bar_gr, screen_height, screen_width_in_px){
             weight:  700,
             fill:    '#fff',
             family:  'Quicksand',
-            size:    36
+            size:    "2vw"
         })    
     development_title.attr({
         x: development_rect.bbox().width/2-development_title.bbox().width/2,
@@ -712,13 +711,13 @@ function buttons(parent_gr, bar_gr, screen_height, screen_width_in_px){
         weight:  500,
         fill:    '#BF1F1F',
         family:  'Quicksand',
-        size:    65
+        size:    "3.7vw"//"3.7vw"
     })    
     nevena_title.attr({
         x: nevena_rect.bbox().width/2-nevena_title.bbox().width/2,
         y: nevena_rect.bbox().height/2+nevena_title.bbox().height/2-5
     })
-    nevena_title.css({ width: '100%'})
+    //nevena_title.css({ width: '100%'})
 
     nevena_gr.attr({
         id:     "nevena_gr",
@@ -748,7 +747,7 @@ function buttons(parent_gr, bar_gr, screen_height, screen_width_in_px){
             weight:  700,
             fill:    '#fff',
             family:  'Quicksand',
-            size:    34  
+            size:    "2rem"//"2vw"  
         })    
     moodboard_title.attr({
         x: moodboard_rect.bbox().width/2-moodboard_title.bbox().width/2,
@@ -827,7 +826,7 @@ function buttons(parent_gr, bar_gr, screen_height, screen_width_in_px){
 
      var hp__buttons__desktop_info = {
         "ui_gr":                        ui_gr,
-        "ui_x":                     ui_x,
+        "ui_x":                         ui_x,
         "ux_gr":                        ux_gr,
         "ux_x":                         ux_x,
         "contact_gr":                   contact_gr,
@@ -835,8 +834,9 @@ function buttons(parent_gr, bar_gr, screen_height, screen_width_in_px){
         "contact_rect":                 contact_rect,
         "nevena_gr":                    nevena_gr,
         "nevena_title":                 nevena_title,
-        "nevena_base_image_first":                 nevena_base_image_first,
-        "nevena_height":                 nevena_height,
+        "nevena_rect":                  nevena_rect,
+        "nevena_base_image_first":      nevena_base_image_first,
+        "nevena_height":                nevena_height,
         "design_gr":                    design_gr,
         "design_rect":                  design_rect,
         "design_base_image":            design_base_image,
@@ -863,6 +863,7 @@ function hp_top__animate(hp__buttons__desktop_info , screen_width_in_px, screen_
     var contact_rect       = hp__buttons__desktop_info["contact_rect"];
     var nevena_gr          = hp__buttons__desktop_info["nevena_gr"];
     var nevena_title       = hp__buttons__desktop_info["nevena_title"];
+    var nevena_rect       = hp__buttons__desktop_info["nevena_rect"];
     var nevena_base_image_first       = hp__buttons__desktop_info["nevena_base_image_first"];
     var nevena_height       = hp__buttons__desktop_info["nevena_height"];
     var design_gr          = hp__buttons__desktop_info["design_gr"];
@@ -933,10 +934,11 @@ function hp_top__animate(hp__buttons__desktop_info , screen_width_in_px, screen_
     nevena_title.animate({
         delay: 450,
         duration: 500,
-    }).font({"size": "85", "weight": "700", "opacity": "1.0"})
+    }).font({"size": "4vw", "weight": "700", "opacity": "1.0"}) //"4vw"
     .ease('>')
     .attr({
-        x: 15,
+        x: nevena_rect.bbox().width/2-nevena_title.bbox().width/2-10,
+        y: nevena_rect.bbox().height/2+nevena_title.bbox().height/2-5
     })
 
     ui_gr.animate({

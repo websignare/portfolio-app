@@ -4,6 +4,10 @@ $(document).ready(function(){
 })
 
 function web_development__main() {
+    var screen_width_in_px = window.innerWidth;
+
+    // NAVIGATION_BAR
+    var bar_gr = nav_bar__create(screen_width_in_px);  
 
     web_development__activate();
 
@@ -16,9 +20,11 @@ function web_development__main() {
 }
 
 function web_development__activate(bar_gr) {
+    var screen_width_in_px = window.innerWidth;
+    var screen_height      = window.innerHeight;
 
-    document.title = "web_development"
-    window.history.pushState({page: "web_development"},"", "#web_development");
+    /*document.title = "web_development__tablet"
+    window.history.pushState({page: "web_development__tablet"},"", "#web_development__tablet");*/
 
     $("body").append(`
         <div id="web_development">
@@ -32,16 +38,16 @@ function web_development__activate(bar_gr) {
 
             <div id="web_development__headline__info">
             </div>
-            <div id="technologies">
-            </div>
 
             <div id="video__info">
             </div>
         </div>
     `);
 
-    web_development__create_responsive(bar_gr);
-    current_page = "web_development"
+    var develop__tablet_info = web_development__create_responsive(bar_gr);
+    develop_animate__tablet_activate(develop__tablet_info, screen_width_in_px, screen_height)
+
+    //current_page = "web_development__tablet"
 }
     
 function web_development__deactivate() {
@@ -62,21 +68,21 @@ function web_development__create_responsive(bar_gr) {
 
     //-------STYLE-------
     $("#web_development #wrapper").css({                    
-        "background-color": '#d9d9d9ff',
+        "background-color": '#fafafaff',
         "position":         "relative",
         "height":           screen_height,
         "width":            screen_width_in_px
     }); 
 
     $("#web_development #web_development__headline_animation_info").css({                    
-        "background-color": '#812f3eff',
+        "background-color": '#617999',
         "position":         "relative",
-        "height":           screen_height/2,
+        "height":           screen_height/2.5,
         "width":            screen_width_in_px
     }); 
 
     $("#web_development #web_development__animations").css({                    
-        "background-color": '#812f3eff',
+        "background-color": '#617999',
         "position":         "relative",
         "width":            screen_width_in_px
     });
@@ -84,15 +90,9 @@ function web_development__create_responsive(bar_gr) {
     $("#web_development #web_development__headline__info").css({                    
         "background-color": '#4f7779ff',
         "position":         "relative",
-        "height":           screen_height/2,
+        "height":           screen_height/2.5,
         "width":            screen_width_in_px
     }); 
-
-    $("#web_development #technologies").css({                    
-        "background-color": '#4f7779ff',
-        "position":         "relative",
-        "width":            screen_width_in_px
-    });
 
     $("#web_development #video__info").css({                    
         "background-color": '#012a31ff',
@@ -104,17 +104,14 @@ function web_development__create_responsive(bar_gr) {
     var container       = SVG().addTo("#web_development #wrapper").size(screen_width_in_px, screen_height)
     var container_gr    = container.nested()   
 
-    var headline_animation__container    = SVG().addTo("#web_development #web_development__headline_animation_info").size(screen_width_in_px, screen_height/2)
+    var headline_animation__container    = SVG().addTo("#web_development #web_development__headline_animation_info").size(screen_width_in_px, screen_height/2.5)
     var headline_animation__container_gr = headline_animation__container.nested()
 
     var web_development__animations_canvas    = SVG().addTo("#web_development #web_development__animations").size(screen_width_in_px, 2400)
     var web_development__animations_canvas_gr = web_development__animations_canvas.nested()
 
-    var headline_container     = SVG().addTo("#web_development #web_development__headline__info").size(screen_width_in_px, screen_height/2)
+    var headline_container     = SVG().addTo("#web_development #web_development__headline__info").size(screen_width_in_px, screen_height/2.5)
     var headline__container_gr = headline_container.nested()
-
-    var technologies_canvas    = SVG().addTo("#web_development #technologies").size(screen_width_in_px, 1600)
-    var technologies_canvas_gr = technologies_canvas.nested()
 
     var video_canvas    = SVG().addTo("#web_development #video__info").size(screen_width_in_px, screen_height)
     var video_canvas_gr = video_canvas.nested()
@@ -136,19 +133,25 @@ function web_development__create_responsive(bar_gr) {
         // TABLET
         var web_development__layout_gr = web_development__create_background__desktop(container_gr, bar_gr, screen_width_in_px, screen_height)
         var web_development__background_gr = web_development__layout_gr.find("#web_development__background_gr")
-        web_development__images__desktop(web_development__background_gr, screen_width_in_px, screen_height)
+        var develop__top__tablet_rects = web_development__images__desktop(web_development__background_gr, screen_width_in_px, screen_height)
 
-        web_development_text__desktop(container_gr, screen_width_in_px, screen_height)
+        var develop_text_tablet__info = web_development_text__desktop(container_gr, screen_width_in_px, screen_height)
 
         web_development__headline_animation_info(headline_animation__container_gr, screen_width_in_px, screen_height)
         animations(web_development__animations_canvas_gr, screen_width_in_px, 2400, screen_height)
         web_development__headline__info(headline__container_gr, screen_width_in_px, screen_height)
-        //technologies(technologies_canvas_gr, screen_width_in_px, 1800)
-        technology_components(screen_width_in_px, 3000, screen_height)
+        //technology_components(screen_width_in_px, screen_height)
         web_development__video(video_canvas_gr, screen_width_in_px, screen_height)
 
         create_contact_section(screen_width_in_px, screen_height)
 
+        // RETURNED INFO
+        var develop__tablet_info = {
+            "develop__top__tablet_rects": develop__top__tablet_rects,
+            "develop_text_tablet__info":  develop_text_tablet__info
+        }
+
+        return develop__tablet_info
     }
 
     else {
@@ -182,9 +185,9 @@ function web_development__create_background__desktop(parent_gr, bar_gr, screen_w
         y: 100
     })
     var menu_rect         = menu_rect_gr.rect(50,50).attr({ opacity: 0.0, color: '#c2c2c2ff'})
-    var menu_line_top     = menu_rect_gr.line(3, 20, 40, 20).stroke({ width: 5, color: '#c2c2c2ff', linecap: 'round' })
-    var menu_line_midddle = menu_rect_gr.line(3, 35, 40, 35).stroke({ width: 5, color: '#c2c2c2ff', linecap: 'round' })
-    var menu_line_bottom  = menu_rect_gr.line(3, 50, 40, 50).stroke({ width: 5, color: '#c2c2c2ff', linecap: 'round' })
+    var menu_line_top     = menu_rect_gr.line(3, 20, 40, 20).stroke({ width: 5, color: '#617999', linecap: 'round' })
+    var menu_line_midddle = menu_rect_gr.line(3, 35, 40, 35).stroke({ width: 5, color: '#617999', linecap: 'round' })
+    var menu_line_bottom  = menu_rect_gr.line(3, 50, 40, 50).stroke({ width: 5, color: '#617999', linecap: 'round' })
 
     var menu_rect_clicked = false;
 
@@ -243,7 +246,7 @@ function web_development__images__desktop(parent_gr, screen_width_in_px, screen_
             {
                 'img_url':   './../portfolio-app-media/media/d_2.png',
                 'width':     rect_width/2.1,
-                'position_x': screen_width_in_px/2-rect_width/1.75,
+                'position_x': screen_width_in_px/2-rect_width/1.88,
                 'position_y': rect_height+75,
                 'view_box_x': '0',
                 'view_box_y': '0'
@@ -251,16 +254,16 @@ function web_development__images__desktop(parent_gr, screen_width_in_px, screen_
 
             {
                 'img_url':   './../portfolio-app-media/media/d_3.png',
-                'width':     rect_width/1.8,
-                'position_x': screen_width_in_px/2-rect_width/1.45,
+                'width':     rect_width/2.35,
+                'position_x': screen_width_in_px/2-rect_width/1.8,
                 'position_y': rect_height*2+90,
                 'view_box_x': '0',
                 'view_box_y': '0'
             },
             {
                 'img_url':   './../portfolio-app-media/media/d_4.png',
-                'width':     rect_width/1.6,
-                'position_x': screen_width_in_px/2-rect_width/1.1,
+                'width':     rect_width/1.185,
+                'position_x': screen_width_in_px/2-rect_width/1.113,
                 'position_y': rect_height*3+105,
                 'view_box_x': '0',
                 'view_box_y': '0'
@@ -268,7 +271,7 @@ function web_development__images__desktop(parent_gr, screen_width_in_px, screen_
             {
                 'img_url':   './../portfolio-app-media/media/d_5.png',
                 'width':     rect_width/2.25,
-                'position_x': screen_width_in_px/2-rect_width/1.49,
+                'position_x': screen_width_in_px/2-rect_width/1.75,
                 'position_y': rect_height*4+120,
                 'view_box_x': '0',
                 'view_box_y': '0'
@@ -352,7 +355,7 @@ function web_development__images__desktop(parent_gr, screen_width_in_px, screen_
     
         var a_rect = a_rect_gr.rect(rect_width+screen_width_in_px,a_rect_height)
         a_rect.attr({
-                fill: "#597f83ff",
+                fill: "#274c50",
                 x: a_rect_x-rect_width-screen_width_in_px,
                 y: a_rect_y
             })
@@ -367,7 +370,7 @@ function web_development__images__desktop(parent_gr, screen_width_in_px, screen_
     
         var b_rect = b_rect_gr.rect(rect_width,b_rect_height)
         b_rect.attr({
-                fill: "#597f83ff",
+                fill: "#274c50",
                 x: b_rect_x-rect_width,
                 y: b_rect_y
             })
@@ -382,10 +385,25 @@ function web_development__images__desktop(parent_gr, screen_width_in_px, screen_
      
         var c_rect = c_rect_gr.rect(rect_width+screen_width_in_px,c_rect_height)
             .attr({
-                fill: "#597f83ff",
+                fill: "#274c50",
                 x: c_rect_x+c_rect_width,
                 y: c_rect_y
             })
+
+        var develop__top__tablet_rects = {
+            "a_rect":        a_rect,
+            "a_rect_x":      a_rect_x,
+            "a_rect_width":  a_rect_width,
+            "b_rect":        b_rect,
+            "b_rect_x":      b_rect_x,
+            "b_rect_width":  b_rect_width,
+            "c_rect":        c_rect,
+            "c_rect_x":      c_rect_x,
+            "c_rect_width":  c_rect_width,
+            "rect_width":    rect_width
+        }
+    
+        return develop__top__tablet_rects
 
 }
 
@@ -404,7 +422,7 @@ function web_development_text__desktop(parent_gr, screen_width_in_px, screen_hei
     var plus_symbol = plus_symbol_gr.path("m 786.55532,-1194.9604 q -8.7225,4.1731 -17.58674,0.962 -8.86429,-3.2113 -13.4382,-12.2013 -4.57384,-8.9899 -1.61756,-17.3908 2.95636,-8.4007 11.67886,-12.5738 l 147.91915,-70.7694 q 8.72249,-4.1732 17.58673,-0.962 8.67372,2.8367 13.24756,11.8266 4.57391,8.99 1.8082,17.7654 -2.95636,8.4008 -11.67886,12.5739 z m 110.57735,37.9196 q -10.17627,4.8687 -20.51203,1.4299 -9.97232,-3.6127 -15.30854,-14.101 l -74.32571,-146.0868 q -5.33622,-10.4883 -1.86135,-20.5346 3.47493,-10.0461 13.65119,-14.9147 10.53969,-5.0426 20.14852,-1.2561 9.97232,3.6126 15.30854,14.1009 l 74.32572,146.0869 q 5.33621,10.4883 2.22478,20.3606 -3.11144,9.8724 -13.65112,14.9149 z")
     plus_symbol_gr.css( "position", "fixed")
 
-    plus_symbol.fill('#cdcdcdff')
+    plus_symbol.fill('#f1f1f1ff')
     plus_symbol.move(plus_symbol_gr.bbox().width+plus_symbol.bbox().width+150,screen_height/2+plus_symbol.bbox().height+70)
     //plus_symbol.rotate(180)
     plus_symbol.scale(5.8)
@@ -419,10 +437,10 @@ function web_development_text__desktop(parent_gr, screen_width_in_px, screen_hei
     develop_path__gr.attr({
         id:    "develop_path__gr",
     })
-    develop_path.fill('#863845ff')
+    develop_path.fill('#a26378')
     develop_path.move(develop_path.bbox().width+70,screen_height/2-develop_path.bbox().height-15)
     //develop_path.rotate(-90)
-    develop_path.scale(3.9)
+    develop_path.scale(4.6)
     develop_path.attr({id: 'develop_path'})
 
     //-----------------QUOTES------------------------
@@ -437,28 +455,34 @@ function web_development_text__desktop(parent_gr, screen_width_in_px, screen_hei
         .font({
             opacity: 1.0,
             weight:  600,
-            fill:    '#863845ff',
+            fill:    '#a26378',
             family:  'Quicksand',
-            size:    19
+            size:    "1.2rem"
         })    
     paragraph.attr({
         x: 35,
         y: screen_height/2+35
     })  
 
+    var develop_text_tablet__info = {
+        "develop_path__gr": develop_path__gr,
+        "paragraph":        paragraph,
+    }
+    
+    return develop_text_tablet__info;
 }
 //-------------------------HEADLINE-ANIMATION-INFO----------------------------------//
 function web_development__headline_animation_info(parent_gr, screen_width_in_px, screen_height){
 
     var headline_gr = parent_gr.nested()
  
-    var blue_rect = headline_gr.rect(screen_width_in_px/4,100)
+    var blue_rect = headline_gr.rect(100,100)
     .fill('#4f7779ff')
     .attr({
         id:      "blue_rect",
         opacity: 1.0,
-        'x':     0,
-        'y':     screen_height/4
+        'x':     50,
+        'y':     screen_height/6.5
     })
      //---------------------DEV-TITLE--------------------
      var pro_art_path__gr = headline_gr.nested()
@@ -583,4 +607,57 @@ function web_development__video(parent_gr, screen_width_in_px, screen_height){
             width:      screen_width_in_px,
             height:     video_global_height
         })
+}
+
+function develop_animate__tablet_activate(develop__tablet_info, screen_width_in_px, screen_height){
+
+    var develop_path__gr = develop__tablet_info["develop__top__tablet_rects"]["develop_path__gr"]
+    var paragraph        = develop__tablet_info["develop__top__tablet_rects"]["paragraph"]
+    var rect_width      = develop__tablet_info["develop__top__tablet_rects"]["rect_width"]
+    var a_rect           = develop__tablet_info["develop__top__tablet_rects"]["a_rect"]
+    var a_rect_y         = develop__tablet_info["develop__top__tablet_rects"]["a_rect_y"]
+    var a_rect_x         = develop__tablet_info["develop__top__tablet_rects"]["a_rect_x"]
+    var b_rect           = develop__tablet_info["develop__top__tablet_rects"]["b_rect"]
+    var b_rect_x         = develop__tablet_info["develop__top__tablet_rects"]["b_rect_x"]
+    var b_rect_width    = develop__tablet_info["develop__top__tablet_rects"]["b_rect_width"]
+    var c_rect           = develop__tablet_info["develop__top__tablet_rects"]["c_rect"]
+    var c_rect_x         = develop__tablet_info["develop__top__tablet_rects"]["c_rect_x"]
+    var c_rect_width    = develop__tablet_info["develop__top__tablet_rects"]["c_rect_width"]
+/*
+    a_rect.animate({
+        delay: 550,
+        duration:500
+    }).ease('>')
+    .attr({
+       x: a_rect_x-rect_width-500,
+    })
+    b_rect.animate({
+        delay: 500,
+        duration:500
+    }).ease('>')
+    .attr({
+        x: b_rect_x-rect_width,
+    })
+    c_rect.animate({
+        delay: 350,
+        duration:500
+    }).ease('>')
+    .attr({
+        x: c_rect_x+c_rect_width,
+    })
+    develop_path__gr.animate({
+        delay: 350,
+        duration:500
+    }).ease('>')
+    .attr({x: 0, opacity: 1.0})
+    
+    paragraph.animate({
+        delay: 450,
+        duration:500
+    }).ease('>')
+    .attr({
+        x: 130,
+        y: screen_height/2+35
+    })
+*/
 }
