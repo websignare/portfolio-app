@@ -503,20 +503,20 @@ function create_info_column(parent_gr, screen_height, screen_width, x, y, column
 }
 
 
-function apply_filter(p_shadow_gr) {
+function apply_filter(p_shadow_parent_gr, shadow_filter_id, shadow_rect_id) {
 
     let filter = document.createElementNS('http://www.w3.org/2000/svg','filter');
-    filter.setAttribute("id", "element_shadow")
-    p_shadow_gr.node.appendChild(filter);
+    filter.setAttribute("id", shadow_filter_id)
+    p_shadow_parent_gr.node.appendChild(filter);
 
 
     let blur = document.createElementNS('http://www.w3.org/2000/svg','feGaussianBlur');
-    blur.setAttribute('stdDeviation','0.9');
+    blur.setAttribute('stdDeviation','15');
     filter.appendChild(blur);
 
 
 
-    p_shadow_gr.find("#element_shadow_rect").attr({"filter": "url(#element_shadow)"})
+    p_shadow_parent_gr.find("#"+shadow_rect_id).attr({"filter": "url(#"+shadow_filter_id+")"})
 
 }
 
@@ -533,10 +533,10 @@ function create_element(parent_gr, column_info, element_data, element_y, screen_
 
 
     //SHADOW_rect
-    /*var shadow_gr         = parent_gr.nested().move(0, element_y).size(screen_width, screen_height).attr({id: "element_shadow"})
-    var background_shadow = shadow_gr.rect(element_width,element_height+100).fill("#000").move(5,5).attr({id: "element_shadow_rect"})
+    var shadow_gr         = parent_gr.nested().move(-10, element_y-10).size(screen_width, screen_height).attr({id: "element_shadow"})
+    var background_shadow = shadow_gr.rect(element_width+20,element_height+20).fill("#3e0731ff").move(-10,-10).attr({opacity: "0.4", id: "column_shadow_rect"})
 
-    apply_filter(shadow_gr);*/
+    apply_filter(shadow_gr, "column_shadow", "column_shadow_rect")
 
     //BACKGROUND_element
     var element_gr = parent_gr.nested().move(0, element_y).size(screen_width, screen_height)
@@ -566,7 +566,7 @@ function create_element(parent_gr, column_info, element_data, element_y, screen_
     //NUMBER_element_rect
     var element_number_gr   = parent_gr.nested().move(0, element_y)
         element_number_gr.attr({opacity:  0.0})
-    var element_number_rect = element_number_gr.rect(50,50).fill("#2f4858")
+    var element_number_rect = element_number_gr.rect(50,50).fill("#442b3eff")
     var element_number_text = element_number_gr.text(element_number).attr({opacity: 0.0})
         .move(element_number_rect.bbox().width/2-10,-8)
         .font({
@@ -580,13 +580,13 @@ function create_element(parent_gr, column_info, element_data, element_y, screen_
     //CANCEL_rect
     var cancel_gr = parent_gr.nested().move(element_width, element_y).attr({opacity: 0.0})
 
-    var element_cancel_rect = cancel_gr.rect(50,50).fill("#2f4858").attr({opacity: 0.8})
+    var element_cancel_rect = cancel_gr.rect(50,50).fill("#442b3eff").attr({opacity: 0.8})
     var line_top            = cancel_gr.line(10, 10, 40, 40).stroke({color: '#fafafaff', width: 5, linecap: 'round', opacity: 1.0 })
     var line_bottom         = cancel_gr.line(40, 10, 10, 40).stroke({color: '#fafafaff', width: 5, linecap: 'round', opacity: 1.0 })
   
     //OVERLAY_element
     var overlay_gr = parent_gr.nested().move(0, element_y).size(screen_width, screen_height).attr({id: "overlay"})
-    var overlay    = overlay_gr.rect(element_width, element_height).fill("#533065ff").opacity(0.6).attr({id: "overlay_rect"})
+    var overlay    = overlay_gr.rect(element_width, element_height).fill("#ece8e7f3").opacity(0.55).attr({id: "overlay_rect"})
 
     var screen_physical_width_cm = get_physical_screen_width(screen_width);
 

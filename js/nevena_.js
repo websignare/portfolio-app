@@ -73,7 +73,7 @@ function hp__deactivate() {
     $("body #hp").remove();
     $("#hp #wrapper").remove();
     $("#contact_wrapper").remove();
-
+    //hp__mobile__deactivate()
 
     /*remove_triggers("contact_canvas__trigger") // contact_canvas TRIGGER*/
     
@@ -113,23 +113,18 @@ function hp__create_responsive(bar_gr) {
 
     if (screen_physical_width_cm < 20.5) {
         // MOBILE
-        //hp__mobile__activate(bar_gr)        
-        //nevena(container_gr, screen_width_in_px, screen_height)
-        //web_design(container_gr, screen_width_in_px, screen_height)
-        //web_development(container_gr, screen_width_in_px, screen_height)        
-        //animation(container_gr, screen_width_in_px, screen_height)
-        //contact(container_gr, screen_width_in_px, screen_height)
+        /*hp__mobile__activate(bar_gr)
+        about__mobile__activate(bar_gr)
+        web_design__mobile__activate(bar_gr)
+        web_development__mobile__activate(bar_gr)
+        moodboard__mobile__activate(bar_gr)
+        $("body #hp").remove();
+        $("#hp #wrapper").remove();*/
     }
     else if (screen_physical_width_cm < 33.8) { // max width for tablet 2736px, max height 2048px
 
-        /*// TABLET
-        var layout_tablet_gr           = create_background__tablet(container_gr, screen_width_in_px, screen_height)
-        var background_white_tablet_gr = layout_tablet_gr.findOne('#background_white_tablet_gr')
-
-        section_images__tablet(background_white_tablet_gr, screen_width_in_px, screen_height)
-        create_text__tablet(container_gr, screen_width_in_px, screen_height)
-        buttons_tablet(container_gr, screen_height, screen_width_in_px)
-        create_contact_section(screen_width_in_px)*/
+        // TABLET
+        
 
     }
 
@@ -191,7 +186,7 @@ function nevena_create_text__desktop(parent_gr, screen_width_in_px, screen_heigh
 
     var parentheses = parentheses_gr.path("m -468.90528,-194.24566 -8e-5,20.84703 -57.80397,-0.20873 c -4.08747,-0.0167 -7.40087,1.42447 -9.94017,4.27335 -2.5393,2.7869 -3.80893,6.44088 -3.80893,10.9619 v 50.35097 c 0,4.64484 -0.95989,8.391743 -2.8797,11.240629 -1.91995,2.848804 -4.27338,5.016412 -7.06026,6.502784 2.78688,1.486372 5.14031,3.623047 7.06026,6.410068 1.91981,2.848928 2.8797,6.626766 2.8797,11.333513 v 50.350967 c 0,4.521024 1.26963,8.175004 3.80893,10.9619 2.5393,2.8488863 5.85266,4.2733505 9.94017,4.2733505 l 57.80397,-1.252e-4 -0.0669,20.7163257 -66.4696,1.25e-4 c -5.94553,0 -10.83813,-1.021876 -14.6779,-3.065585 -3.83976,-1.9819266 -6.8435,-4.6450481 -9.01119,-7.9893642 -2.16756,-3.28240833 -3.68485,-6.905414 -4.55191,-10.869017 -0.86722,-3.9636868 -1.30083,-7.8654238 -1.30083,-11.7051688 v -51.372717 c 0,-4.087544 -1.08376,-6.998339 -3.25132,-8.732467 -2.16765,-1.734129 -5.07848,-2.601214 -8.73245,-2.601214 v -15.421015 c 3.65397,0 6.5648,-0.867085 8.73245,-2.601209 2.16756,-1.73413 3.25132,-4.64493 3.25132,-8.73247 v -51.37272 c 0,-3.83974 0.43361,-7.74148 1.30083,-11.70517 0.86718,-3.96373 2.38451,-7.58673 4.55191,-10.86901 2.16769,-3.34432 5.17143,-6.00744 9.01119,-7.98937 3.83977,-2.04371 8.73237,-3.06554 14.6779,-3.06554 z")
 
-    parentheses.fill('#f1f1f1ff').move(screen_width_in_px-parentheses.bbox().width-120,screen_height/2-parentheses.bbox().height/2)
+    parentheses.fill('#d2d1d1fe').move(screen_width_in_px-parentheses.bbox().width-120,screen_height/2-parentheses.bbox().height/2)
     //parentheses.rotate(180)
     parentheses.scale(3.8)
     parentheses.attr({id: 'parentheses'})
@@ -207,7 +202,7 @@ function nevena_create_text__desktop(parent_gr, screen_width_in_px, screen_heigh
             .font({
                 opacity: 1.0,
                 weight:  800,
-                fill:    '#f1f1f1ff',
+                fill:    '#d2d1d1fe',
                 family:  'Spartan',
                 size:    230
             })    
@@ -222,7 +217,7 @@ function nevena_create_text__desktop(parent_gr, screen_width_in_px, screen_heigh
             .font({
                 opacity: 1.0,
                 weight:  800,
-                fill:    '#f1f1f1ff',
+                fill:    '#d2d1d1fe',
                 family:  'Spartan',
                 size:    230
             })    
@@ -896,6 +891,7 @@ function hp_top__animate(hp__buttons__desktop_info , screen_width_in_px, screen_
         opacity: 1.0,
         y: design_base_image.y()-design_rect.bbox().height
     })
+    console.log(design_gr, "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaakjjjjjjjjauigoduywgefuygf")
     development_gr.animate({
         duration: 500,
         delay: 250,

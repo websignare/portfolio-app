@@ -21,6 +21,22 @@ function deactivate_current_page(current_page_name) {
         case "moodboard":
             moodboard__deactivate();
             break;
+        //MOBILE
+        /*case "home_page_mobile":
+            hp__mobile__deactivate();
+            break;
+        case "about_mobile":
+            about__mobile__deactivate();
+            break;
+        case "web_design_mobile":
+            web_design__deactivate();
+            break;
+        case "web_development_mobile":
+            web_development__mobile__deactivate();
+            break;
+        case "moodboard_mobile":
+            moodboard__mobile__deactivate();
+            break;*/
     }
 }
 
@@ -387,6 +403,22 @@ function run_page_transition(target_page_name, transition_type, current_page_nam
                 case "moodboard":
                     moodboard__activate(bar_gr);
                     break;
+                //MOBILE
+                /*case "home_page_mobile":
+                    hp__mobile__deactivate();
+                    break;
+                case "about_mobile":
+                    about__mobile__deactivate();
+                    break;
+                case "web_design_mobile":
+                    web_design__deactivate();
+                    break;
+                case "web_development_mobile":
+                    web_development__mobile__deactivate();
+                    break;
+                case "moodboard_mobile":
+                    moodboard__mobile__deactivate();
+                    break;*/
                 default:
                     console.log("add support for this target_page ["+target_page_name+"]!")
             }
@@ -428,8 +460,8 @@ function run_page_transition(target_page_name, transition_type, current_page_nam
 function pulsating_circle(parent_gr, animation_time, screen_width, screen_height){
     var circle_button_gr = parent_gr.nested()
 
-    var circle_button = circle_button_gr.ellipse(30).fill("#fafafaff").attr({cx: screen_width/2-15, cy: screen_height/2}).opacity(0.95)
-    var stroke_button = circle_button_gr.ellipse(34).attr({cx: screen_width/2-15, cy: screen_height/2}).fill("none").stroke({ color: '#fafafaff', width: 4}).opacity(0.95)
+    var circle_button = circle_button_gr.ellipse(30).fill("#442b3eff").attr({cx: screen_width/2-15, cy: screen_height/2}).opacity(0.95)
+    var stroke_button = circle_button_gr.ellipse(34).attr({cx: screen_width/2-15, cy: screen_height/2}).fill("none").stroke({ color: '#442b3eff', width: 4}).opacity(0.95)
     circle_button_gr.attr({
         id:     "circle_button__gr",
         width:  screen_width,

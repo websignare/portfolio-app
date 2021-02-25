@@ -23,8 +23,8 @@ function moodboard__mobile__main() {
 function moodboard__mobile__activate(bar_gr) {
     var screen_width_in_px = window.innerWidth;
     var screen_height      = window.innerHeight;
-    //document.title = "moodboard_mobile"
-    //window.history.pushState({page: "moodboard_mobile"},"", "#moodboard_mobile");
+    document.title = "moodboard_mobile"
+    window.history.pushState({page: "moodboard_mobile"},"", "#moodboard_mobile");
 
     $("body").append(`
         <div id="moodboard__mobile">
@@ -39,7 +39,7 @@ function moodboard__mobile__activate(bar_gr) {
 
     var moodboard__mobile_info = moodboard__mobile__create_responsive(bar_gr);
     moodboard_top__animate(moodboard__mobile_info, screen_width_in_px, screen_height)
-    //current_page = "moodboard_mobile"
+    current_page = "moodboard_mobile"
 }
     
 function moodboard__mobile__deactivate(bar_gr) {

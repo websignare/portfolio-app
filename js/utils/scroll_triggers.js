@@ -12,9 +12,9 @@ function sc_trigger__create(trigger_y_position, name, screen_height, activate_fn
         position: "absolute",
         right:    "0px",
         top:      trigger_y_position+"px",
-        width:    "10px",
-        height:   "2px",
-        "background-color": "yellow",
+        //width:    "10px",
+        //height:   "2px",
+        //"background-color": "yellow",
         "z-index": 20
 
     })

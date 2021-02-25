@@ -36,22 +36,23 @@ function create_info_column__mobile(parent_gr, screen_height, screen_width, x, y
 }
 
 
-function apply_filter__mobile(p_shadow_gr) {
+function apply_filter(p_shadow_parent_gr, shadow_filter_id, shadow_rect_id) {
 
     let filter = document.createElementNS('http://www.w3.org/2000/svg','filter');
-    filter.setAttribute("id", "element_shadow__mobile")
-    p_shadow_gr.node.appendChild(filter);
+    filter.setAttribute("id", shadow_filter_id)
+    p_shadow_parent_gr.node.appendChild(filter);
 
 
     let blur = document.createElementNS('http://www.w3.org/2000/svg','feGaussianBlur');
-    blur.setAttribute('stdDeviation','0.9');
+    blur.setAttribute('stdDeviation','15');
     filter.appendChild(blur);
 
 
 
-    p_shadow_gr.find("#element_shadow__mobile_rect").attr({"filter": "url(#element_shadow__mobile)"})
+    p_shadow_parent_gr.find("#"+shadow_rect_id).attr({"filter": "url(#"+shadow_filter_id+")"})
 
 }
+
 
 function create_element_mobile(parent_gr, column_info__mobile, element_data, element_y, screen_height, screen_width){
     var element_name         = element_data["name"];
@@ -63,10 +64,10 @@ function create_element_mobile(parent_gr, column_info__mobile, element_data, ele
     var element_number       = element_data["element_number"];
 
     //SHADOW_rect
-    var shadow_gr         = parent_gr.nested().move(20, element_y).size(screen_width, screen_height/0.8).attr({id: "element_shadow__mobile"})
-    var background_shadow = shadow_gr.rect(element_width+50,element_height+50).fill("gray").move(5,5).attr({id: "element_shadow_rect"})
+    var shadow_gr         = parent_gr.nested().move(20, element_y).size(screen_width, screen_height/0.8).attr({id: "column_shadow_mobile"})
+    var background_shadow = shadow_gr.rect(element_width+50,element_height+50).fill("gray").move(5,5).attr({opacity: "0.5",id: "column_shadow_rect_mobile"})
 
-    apply_filter__mobile(shadow_gr);
+    apply_filter(shadow_gr, "column_shadow_mobile", "column_shadow_rect_mobile")
 
     //BACKGROUND_element
     var element_gr = parent_gr.nested().move(0, element_y).size(screen_width, screen_height)

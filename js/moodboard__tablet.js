@@ -3,17 +3,25 @@ $(document).ready(function(){
 })
 
 function moodboard__tablet__main() {
-    moodboard__tablet__activate();
+    var screen_width_in_px = window.innerWidth;
+
+    // NAVIGATION_BAR
+    var bar_gr = nav_bar__create(screen_width_in_px);
+
+    moodboard__tablet__activate(bar_gr);
 
     $(window).resize(function() {
         
         moodboard__tablet__deactivate();
 
-        moodboard__tablet__activate();
+        moodboard__tablet__activate(bar_gr);
     });
 }
 
 function moodboard__tablet__activate(bar_gr){
+
+    var screen_width_in_px  = window.innerWidth;
+    var screen_height       = window.innerHeight;
 
     document.title = "moodboard"
     window.history.pushState({page: "moodboard"},"", "#moodboard");
@@ -29,7 +37,9 @@ function moodboard__tablet__activate(bar_gr){
         </div>
     `);
 
-    moodboard__tablet__create_responsive(bar_gr);
+    var moodboard__tablet_info = moodboard__tablet__create_responsive(bar_gr);
+    moodboard_animate__tablet_activate(moodboard__tablet_info, screen_width_in_px, screen_height)
+
     current_page = "moodboard";
 }
 
@@ -82,14 +92,23 @@ function moodboard__tablet__create_responsive(bar_gr) {
         // TABLET
         var moodboard__tablet__layout_gr = moodboard__tablet__intro_section__desktop(container_gr, bar_gr, screen_width_in_px, screen_height)
         var moodboard__tablet__background_gr = moodboard__tablet__layout_gr.find("#moodboard__tablet__background_gr")
-        moodboard__tablet__images__desktop(moodboard__tablet__background_gr, screen_width_in_px, screen_height)
-        moodboard_text__desktop(container_gr, screen_width_in_px, screen_height)
+        var moodboard__tablet__top_rects = moodboard__tablet__images__desktop(moodboard__tablet__background_gr, screen_width_in_px, screen_height)
+        var moodboard_text__tablet__info = moodboard_text__desktop(container_gr, screen_width_in_px, screen_height)
 
         moodboard__tablet__headline__info(headline_canvas__gr, screen_width_in_px, screen_height)
         masonry__tablet(screen_width_in_px, screen_height)
         moodboard__tablet__video(screen_width_in_px, screen_height)
 
         create_contact_section(screen_width_in_px, screen_height)
+
+
+        // RETURNED INFO
+        var moodboard__tablet_info = {
+            "moodboard__tablet__top_rects": moodboard__tablet__top_rects,
+            "moodboard_text__tablet__info":  moodboard_text__tablet__info
+        }
+
+        return moodboard__tablet_info
     }
 
     else {
@@ -156,20 +175,31 @@ function moodboard__tablet__intro_section__desktop(parent_gr, bar_gr, screen_wid
     var square_brackets_symbol_gr = moodboard__tablet__background_gr.nested() 
 
     var square_brackets_symbol = square_brackets_symbol_gr.path("m 935.81176,-1112.7249 q 4.05889,-2.3434 8.13386,-1.0881 4.15668,0.9503 6.5001,5.0093 l 88.60378,153.46619 q 2.3434,4.05893 1.0881,8.13391 -0.9504,4.15665 -5.0093,6.50005 l -40.78258,23.54585 q -4.05897,2.34345 -8.32715,1.19975 -3.96338,-1.06198 -6.30681,-5.12091 -2.23183,-3.86564 -1.28142,-8.0223 1.2552,-4.07492 5.31418,-6.41837 l 28.79908,-16.62715 -0.074,2.10422 -80.34596,-139.16334 3.65848,0.9803 -30.15206,17.4083 q -4.05897,2.3434 -8.21556,1.393 -4.07497,-1.2552 -6.41839,-5.3142 -2.23184,-3.8656 -1.16984,-7.829 1.14361,-4.2682 5.20258,-6.6116 z m -8.39006,234.2058 q -4.05897,2.34345 -8.32723,1.1998 -3.9633,-1.06203 -6.30672,-5.12096 l -88.60377,-153.46624 q -2.34343,-4.0589 -1.28152,-8.0222 1.1437,-4.2683 5.20268,-6.6117 l 40.78252,-23.5458 q 4.05897,-2.3435 8.13394,-1.0882 4.15659,0.9504 6.50001,5.0093 2.23184,3.8657 1.08822,8.1339 -1.06199,3.9633 -5.12096,6.3068 l -28.79907,16.6271 0.0737,-2.1042 80.34599,139.16336 -3.65849,-0.98029 30.15206,-17.4083 q 4.05897,-2.34345 8.02235,-1.28148 4.26818,1.14371 6.61161,5.20264 2.23183,3.86564 0.97663,7.94057 -0.95041,4.15665 -5.00939,6.5001 z")
-    square_brackets_symbol_gr.css( "position", "fixed")
+    //square_brackets_symbol_gr.css( "position", "fixed")
 
     square_brackets_symbol.fill('#cdcdcdff')
     square_brackets_symbol.move(screen_width_in_px/2-square_brackets_symbol.bbox().width-100,screen_height/2-square_brackets_symbol.bbox().height/2+15)
     //square_brackets_symbol.rotate(180)
-    square_brackets_symbol.scale(5.5)
+    square_brackets_symbol.scale(4)
     square_brackets_symbol.attr({id: 'square_brackets_symbol'})
 
     square_brackets_symbol_gr.attr({
         id: "square_brackets_symbol_gr"
     })
 
+    // SYMBOL ROTATION
+
+    function rotatePositive(){
+        square_brackets_symbol_gr.animate({duration: 4000}).ease(">").rotate(5).after(rotateNegative)
+    }
+    function rotateNegative(){
+        square_brackets_symbol_gr.animate({duration: 4000}).ease("<").rotate(-5).after(rotatePositive)
+    }
+    rotatePositive()
+
     return moodboard__tablet__layout_gr;
 }
+
 
 //----------------------------------------------IMAGES-DESKTOP----------------------------------------------------------------
 function moodboard__tablet__images__desktop(parent_gr, screen_width_in_px, screen_height){
@@ -304,8 +334,9 @@ function moodboard__tablet__images__desktop(parent_gr, screen_width_in_px, scree
     
         var a_rect = a_rect_gr.rect(rect_width+screen_width_in_px,a_rect_height)
         a_rect.attr({
+                opacity: 0.0,
                 fill: "#f57714fe",
-                x: a_rect_x+a_rect_width,
+                x: a_rect_x+a_rect_width+800,
                 y: a_rect_y
             })
     
@@ -318,8 +349,9 @@ function moodboard__tablet__images__desktop(parent_gr, screen_width_in_px, scree
     
         var b_rect = b_rect_gr.rect(rect_width,b_rect_height)
         b_rect.attr({
+                opacity: 0.0,
                 fill: "#f57714fe",
-                x: b_rect_x-rect_width,
+                x: 0,
                 y: b_rect_y
             })
     
@@ -332,8 +364,9 @@ function moodboard__tablet__images__desktop(parent_gr, screen_width_in_px, scree
      
         var c_rect = c_rect_gr.rect(rect_width,c_rect_height+1)
             .attr({
+                opacity: 0.0,
                 fill: "#f57714fe",
-                x: c_rect_x+c_rect_width,
+                x: c_rect_x+c_rect_width+800,
                 y: c_rect_y-1
             })
     
@@ -346,10 +379,29 @@ function moodboard__tablet__images__desktop(parent_gr, screen_width_in_px, scree
     
         var d_rect = d_rect_gr.rect(rect_width+screen_width_in_px,d_rect_height)
             .attr({
+                opacity: 0.0,
                 fill: "#f57714fe",
-                x: d_rect_x-screen_width_in_px,
+                x: 0-screen_width_in_px-200,
                 y: d_rect_y
             })
+
+        var moodboard__tablet__top_rects = {
+            "a_rect":        a_rect,
+            "a_rect_x":      a_rect_x,
+            "a_rect_width":  a_rect_width,
+            "b_rect":        b_rect,
+            "b_rect_x":      b_rect_x,
+            "b_rect_width":  b_rect_width,
+            "c_rect":        c_rect,
+            "c_rect_x":      c_rect_x,
+            "c_rect_width":  c_rect_width,
+            "d_rect":        d_rect,
+            "d_rect_x":      d_rect_x,
+            "d_rect_width":  d_rect_width,
+            "rect_width":    rect_width
+        }
+    
+        return moodboard__tablet__top_rects
 }
 
 //----------------------------------------------TEXT----------------------------------------------------------------
@@ -365,9 +417,12 @@ function moodboard_text__desktop(parent_gr, screen_width_in_px, screen_height){
     moodboard_path.fill('#ac3323ff')
     moodboard_path.move(screen_width_in_px/2-moodboard_path.bbox().width-120,screen_height/2-moodboard_path.bbox().height-150)
     //moodboard_path.rotate(-90)
-    moodboard_path.scale(3.75)
+    moodboard_path.scale(4)
     moodboard_path.attr({id: 'moodboard_path'})
-
+    moodboard_path__gr.attr({
+        x:       -500,
+        opacity: 0.0
+    })
     //-----------------QUOTES------------------------
     var paragraph = text_gr.text(function(add){
         add.tspan('Creativity is inventing, experimenting, ').newLine()
@@ -381,13 +436,21 @@ function moodboard_text__desktop(parent_gr, screen_width_in_px, screen_height){
             weight:  600,
             fill:    '#ac3323ff',
             family:  'Quicksand',
-            size:    19
+            size:    "1.2rem"
         })    
     paragraph.attr({
-        x: screen_width_in_px/2-paragraph.bbox().width-30,
-        y: screen_height/2-105
+        x: screen_width_in_px/2-paragraph.bbox().width-500,
+        y: screen_height/2-105,
+        opacity: 0.0
     })   
 
+    // INFO
+    var moodboard_text__tablet__info = {
+        "moodboard_path__gr": moodboard_path__gr,
+        "paragraph":          paragraph,
+    }
+    
+    return moodboard_text__tablet__info;
 }
 
 function moodboard__tablet__headline__info(parent_gr, screen_width_in_px, screen_height){
@@ -634,6 +697,73 @@ function moodboard__tablet__video(screen_width_in_px, screen_height){
         top:        video_global_y+150,
         width:      screen_width_in_px,
         height:     video_global_height
+    })
+
+}
+function moodboard_animate__tablet_activate(moodboard__tablet_info, screen_width_in_px, screen_height){
+
+    var moodboard_path__gr = moodboard__tablet_info["moodboard_text__tablet__info"]["moodboard_path__gr"]
+    var paragraph          = moodboard__tablet_info["moodboard_text__tablet__info"]["paragraph"]
+    var rect_width         = moodboard__tablet_info["moodboard__tablet__top_rects"]["rect_width"]
+    var a_rect             = moodboard__tablet_info["moodboard__tablet__top_rects"]["a_rect"]
+    var a_rect_x           = moodboard__tablet_info["moodboard__tablet__top_rects"]["a_rect_x"]
+    var a_rect_width       = moodboard__tablet_info["moodboard__tablet__top_rects"]["a_rect_width"]
+    var b_rect             = moodboard__tablet_info["moodboard__tablet__top_rects"]["b_rect"]
+    var b_rect_x           = moodboard__tablet_info["moodboard__tablet__top_rects"]["b_rect_x"]
+    var b_rect_width       = moodboard__tablet_info["moodboard__tablet__top_rects"]["b_rect_width"]
+    var c_rect             = moodboard__tablet_info["moodboard__tablet__top_rects"]["c_rect"]
+    var c_rect_x           = moodboard__tablet_info["moodboard__tablet__top_rects"]["c_rect_x"]
+    var c_rect_width       = moodboard__tablet_info["moodboard__tablet__top_rects"]["c_rect_width"]
+    var d_rect             = moodboard__tablet_info["moodboard__tablet__top_rects"]["d_rect"]
+    var d_rect_x           = moodboard__tablet_info["moodboard__tablet__top_rects"]["d_rect_x"]
+    var d_rect_width       = moodboard__tablet_info["moodboard__tablet__top_rects"]["d_rect_width"]
+
+    moodboard_path__gr.animate({
+        delay: 450,
+        duration:500
+    }).ease('>')
+    .attr({x: -10, opacity: 1.0})
+
+   a_rect.animate({
+        delay: 650,
+        duration:500
+    }).ease('>')
+    .attr({
+        opacity: 1.0,
+        x: a_rect_x+a_rect_width,
+    })
+    b_rect.animate({
+        delay: 450,
+        duration:500
+    }).ease('>')
+    .attr({
+        opacity: 1.0,
+        x: b_rect_x-rect_width,
+    })
+    c_rect.animate({
+        delay: 450,
+        duration:500
+    }).ease('>')
+    .attr({
+        opacity: 1.0,
+        x: c_rect_x+c_rect_width,
+    })
+    d_rect.animate({
+        delay: 450,
+        duration:500
+    }).ease('>')
+    .attr({
+        opacity: 1.0,
+        x: d_rect_x-screen_width_in_px,
+    })
+    
+    paragraph.animate({
+        delay: 550,
+        duration:500
+    }).ease('>')
+    .attr({
+        x: screen_width_in_px/2-paragraph.bbox().width-50,
+        opacity: 1.0
     })
 
 }

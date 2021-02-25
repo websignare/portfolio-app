@@ -23,8 +23,8 @@ function web_design__mobile__main() {
 function web_design__mobile__activate(bar_gr) {
     var screen_width_in_px = window.innerWidth;
     var screen_height      = window.innerHeight;
-    //document.title = "web_design__mobile"
-    //window.history.pushState({page: "web_design__mobile"},"", "#web_design__mobile");
+    document.title = "web_design_mobile"
+    window.history.pushState({page: "web_design_mobile"},"", "#web_design_mobile");
 
     $("body").append(`
         <div id="web_design__mobile">
@@ -43,7 +43,7 @@ function web_design__mobile__activate(bar_gr) {
 
     var design__mobile_info = web_design__mobile__create_responsive(bar_gr);
     web_design_top__animate(design__mobile_info, screen_width_in_px, screen_height)
-    //current_page = "web_design__mobile"
+    current_page = "web_design_mobile"
 }
     
 function web_design__mobile__deactivate(bar_gr) {

@@ -2,12 +2,13 @@ $( document ).ready(function() {
     hp__mobile__main()
     console.log( "ready!" );
 });
+var current_page = "home_page_mobile"
 
 function hp__mobile__main() {
     var screen_width_in_px = window.innerWidth;
 
     // NAVIGATION_BAR
-    var bar_gr = nav_bar__create(screen_width_in_px);  
+    var bar_gr = nav_bar__create(screen_width_in_px); 
 
     hp__mobile__activate(bar_gr);
 
@@ -24,8 +25,8 @@ function hp__mobile__main() {
 function hp__mobile__activate(bar_gr) {
     var screen_width_in_px = window.innerWidth;
     var screen_height      = window.innerHeight;
-    //document.title = "web_development"
-    //window.history.pushState({page: "web_development"},"", "#web_development");
+    document.title = "home_page_mobile"
+    window.history.pushState({page: "home_page_mobile"},"", "#home_page_mobile");
 
     $("body").append(`
         <div id="hp__mobile">
@@ -36,13 +37,17 @@ function hp__mobile__activate(bar_gr) {
 
     var hp__mobile_info = hp__mobile__create_responsive(bar_gr);
     hp_top__animate(hp__mobile_info, screen_width_in_px, screen_height)
-    //current_page = "web_development"
+    current_page = "home_page_mobile"
 }
     
 function hp__mobile__deactivate() {
 
     $("#hp__mobile").remove();
+    $("#hp__mobile #wrapper").remove();
+
     $("#contact_mobile_wrapper").remove();
+    $("body #hp").remove();
+    $("#hp #wrapper").remove();
     remove_triggers("hp_canvas__trigger")
 
 }
@@ -210,7 +215,7 @@ function hp__mobile(parent_gr, bar_gr, screen_width_in_px, screen_height, double
 
             //-----------------------------
             // RUN_PAGE_TRANSITION
-            var target_page_name = "about";
+            var target_page_name = "about_mobile";
             run_page_transition(target_page_name, "1_plane_scale", current_page, bar_gr,
                 // on_complete - called when the page_transition completes (X number of seconds in the future)
                 function() {
@@ -319,7 +324,7 @@ function hp__mobile(parent_gr, bar_gr, screen_width_in_px, screen_height, double
 
             //-----------------------------
             // RUN_PAGE_TRANSITION
-            var target_page_name = "web_design";
+            var target_page_name = "web_design_mobile";
             run_page_transition(target_page_name, "1_plane_swipe_to_right", current_page, bar_gr,
                 // on_complete - called when the page_transition completes (X number of seconds in the future)
                 function() {
@@ -387,7 +392,7 @@ function hp__mobile(parent_gr, bar_gr, screen_width_in_px, screen_height, double
 
             //-----------------------------
             // RUN_PAGE_TRANSITION
-            var target_page_name = "web_development";
+            var target_page_name = "web_development_mobile";
             run_page_transition(target_page_name, "4_plane_in_circle", current_page, bar_gr,
                 // on_complete - called when the page_transition completes (X number of seconds in the future)
                 function() {
@@ -457,7 +462,7 @@ function hp__mobile(parent_gr, bar_gr, screen_width_in_px, screen_height, double
 
             //-----------------------------
             // RUN_PAGE_TRANSITION
-            var target_page_name = "moodboard";
+            var target_page_name = "moodboard_mobile";
             run_page_transition(target_page_name, "2_plane_swipe_up_and_down", current_page, bar_gr,
                 // on_complete - called when the page_transition completes (X number of seconds in the future)
                 function() {
@@ -526,7 +531,7 @@ function hp__mobile(parent_gr, bar_gr, screen_width_in_px, screen_height, double
 
             //-----------------------------
             // RUN_PAGE_TRANSITION
-            var target_page_name = "contact";
+            var target_page_name = "contact_mobile";
             run_page_transition(target_page_name, "2_plane_swipe_up_and_down", current_page, bar_gr,
                 // on_complete - called when the page_transition completes (X number of seconds in the future)
                 function() {

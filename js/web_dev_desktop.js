@@ -47,7 +47,7 @@ function web_development__deactivate() {
 
     $("#web_development").remove();
     $("#sketch_p5").remove();
-    $("#technologies__mobile__info").remove();
+    //$("#technologies__mobile__info").remove();
     $("#contact_wrapper").remove();
 
     /*remove_triggers("contact_canvas__trigger") // contact_canvas TRIGGER*/
@@ -81,12 +81,17 @@ function web_development__create_responsive(bar_gr) {
     });
 
     $("#web_development #web_development__headline__info").css({                    
-        "background-color": '#4f7779ff',
+        "background-color": '#cadddfcc',
         "position":         "relative",
         "height":           screen_height/2,
         "width":            screen_width_in_px
     }); 
-
+    $("#web_development #tech_components").css({                    
+        "background-color": '#cadddfcc',
+        "position":         "relative",
+        "height":           screen_height+250,
+        "width":            screen_width_in_px
+    }); 
     $("#web_development #video__info").css({                    
         "background-color": '#012a31ff',
         "position":         "relative",
@@ -114,12 +119,7 @@ function web_development__create_responsive(bar_gr) {
 
     if (screen_physical_width_cm < 20.5) {
         // MOBILE
-        //intro(container_gr, screen_width_in_px, screen_height)
-        //nevena(container_gr, screen_width_in_px, screen_height)
-        //web_design(container_gr, screen_width_in_px, screen_height)
-        web_development(container_gr, screen_width_in_px, screen_height)
-        //animation(container_gr, screen_width_in_px, screen_height)
-        //contact(container_gr, screen_width_in_px, screen_height)
+        web_development__mobile__activate(bar_gr)
     }
     else if (screen_physical_width_cm < 33.8) { // max width for tablet 2736px, max height 2048px
 
@@ -143,7 +143,7 @@ function web_development__create_responsive(bar_gr) {
         web_development__headline_animation_info(headline_animation__container_gr, screen_width_in_px, screen_height)
         animations(web_development__animations_canvas_gr, screen_width_in_px, 3000, screen_height)
         web_development__headline__info(headline__container_gr, screen_width_in_px, screen_height)
-        technology_components(screen_width_in_px, screen_height)
+        technology_components()
         web_development__video(video_canvas_gr, screen_width_in_px, screen_height)
 
         create_contact_section(screen_width_in_px, screen_height)
@@ -538,7 +538,7 @@ function web_development__headline__info(parent_gr, screen_width_in_px, screen_h
     var headline_gr = parent_gr.nested()
  
     var yellow_rect = headline_gr.rect(screen_width_in_px/2-350,100)
-    .fill('#597f83ff')
+    .fill('#688295ff')
     .attr({
         id:      "yellow_rect",
         opacity: 1.0,
@@ -547,28 +547,28 @@ function web_development__headline__info(parent_gr, screen_width_in_px, screen_h
     })
  
     var my_title = headline_gr.text(function(text_element){
-         text_element.tspan('about')
+         text_element.tspan('tech')
      })
          .font({
              opacity: 1.0,
              weight:  700,
-             fill:    '#d9d9d9ff',
+             fill:    '#863845ff',
              family:  'Quicksand',
              size:    50
          })    
     my_title.attr({
         x: yellow_rect.bbox().x+yellow_rect.bbox().width-25,
-        y: yellow_rect.bbox().y+my_title.bbox().height
+        y: yellow_rect.bbox().y+my_title.bbox().height+8
     })
      my_title.rotate(-90)
  
      var work_title = headline_gr.text(function(text_element){
-         text_element.tspan('technologies')
+         text_element.tspan('skills')
      })
          .font({
              opacity: 1.0,
              weight:  700,
-             fill:    '#d9d9d9ff',
+             fill:    '#863845ff',
              family:  'Quicksand',
              size:    135
          })    

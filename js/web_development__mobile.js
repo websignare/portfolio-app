@@ -22,8 +22,8 @@ function web_development__mobile__main() {
 
 function web_development__mobile__activate(bar_gr) {
 
-    //document.title = "web_development__mobile"
-    //window.history.pushState({page: "web_development__mobile"},"", "#web_development__mobile");
+    document.title = "web_development_mobile"
+    window.history.pushState({page: "web_development_mobile"},"", "#web_development_mobile");
 
     $("body").append(`
         <div id="web_development__mobile">
@@ -41,7 +41,7 @@ function web_development__mobile__activate(bar_gr) {
 
     var develop__mobile_info = web_development__mobile__create_responsive(bar_gr);
     web_develop_top__animate(develop__mobile_info, screen_width_in_px, screen_height)
-    //current_page = "web_development__mobile"
+    current_page = "web_development_mobile"
 }
     
 function web_development__mobile__deactivate(bar_gr) {

@@ -1,16 +1,26 @@
 
 function nav_bar__create(screen_width) {
+    var screen_physical_width_cm = get_physical_screen_width(screen_width);
 
     var bar_width_int  = 400
     var bar_height_int = 40
 
-    var pages_map = {
-        "home_page":  {},
-        "about":      {},
-        "web_design": {},
-        "web_development": {},
-        "moodboard":       {},
-    }
+    /*if(screen_physical_width_cm < 33.8){
+        var pages_map = { 
+            "home_page_mobile":  {},
+            "about_mobile":      {},
+            "web_design_mobile": {},
+            "web_development_mobile": {},
+            "moodboard_mobile":       {},
+        }*/
+    
+    var pages_map = { 
+            "home_page":  {},
+            "about":      {},
+            "web_design": {},
+            "web_development": {},
+            "moodboard":       {},
+        }
 
 
     $("body").append('<div id="nav_bar"></div>');
@@ -65,6 +75,34 @@ function nav_bar__create(screen_width) {
         //               if this switch statement was creating variables directly in a loop, outside this function,
         //               it would create variables with the same name multiple times. but because these variables are in the same namespace
         //               only 1 will ever be created, and that ones variables value would change multiple times (once for each execution of the loop).
+        
+        
+        /*if(screen_physical_width_cm < 20.5){
+            switch(page_name){    
+                //mobile
+                case "home_page_mobile":
+                    var transition_type = "2_plane_swipe_to_center"
+                    var button_color    = colors_map["home_page"]["main_color"]
+                    break
+                case "about_mobile":
+                    var transition_type = "1_plane_scale"
+                    var button_color    = colors_map["about"]["main_color"]
+                    break
+                case "web_design_mobile":
+                    var transition_type = "1_plane_swipe_to_right"
+                    var button_color    = colors_map["web_design"]["main_color"]
+                    break
+                case "web_development_mobile":
+                    var transition_type = "4_plane_in_circle"
+                    var button_color    = colors_map["web_development"]["main_color"]
+                    break
+                case "moodboard_mobile":
+                    var transition_type = "2_plane_swipe_up_and_down"
+                    var button_color    = colors_map["moodboard"]["main_color"]
+                    break
+            }
+
+        }*/
         switch(page_name){
             case "home_page":
                 var transition_type = "2_plane_swipe_to_center"
@@ -162,11 +200,12 @@ function nav_bar__reset(bar_gr) {
         const button_width = 20;
 
         var button = buttons[i];
+        
         button.attr({
             width:button_width, 
             height: button_width
 
-            })
+        })
     }
 
 }

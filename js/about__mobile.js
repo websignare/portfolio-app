@@ -2,12 +2,11 @@ $( document ).ready(function() {
     about__mobile__main()
     console.log( "about__ready!" );
 });
-
 function about__mobile__main() {
     var screen_width_in_px = window.innerWidth;
 
     // NAVIGATION_BAR
-    var bar_gr = nav_bar__create(screen_width_in_px);  
+    var bar_gr = nav_bar__create(screen_width_in_px); 
 
     about__mobile__activate(bar_gr);
 
@@ -23,8 +22,8 @@ function about__mobile__main() {
 function about__mobile__activate(bar_gr) {
     var screen_width_in_px = window.innerWidth;
     var screen_height      = window.innerHeight;
-    //document.title = "about_mobile"
-    //window.history.pushState({page: "about_mobile"},"", "#about_mobile");
+    document.title = "about_mobile"
+    window.history.pushState({page: "about_mobile"},"", "#about_mobile");
 
     $("body").append(`
         <div id="about__mobile">
@@ -43,7 +42,7 @@ function about__mobile__activate(bar_gr) {
 
     var about__mobile_info = about__mobile__create_responsive(bar_gr);
     about_top__animate(about__mobile_info, screen_width_in_px, screen_height)
-    //current_page = "about_mobile"
+    current_page = "about_mobile"
 }
     
 function about__mobile__deactivate(bar_gr) {

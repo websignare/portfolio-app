@@ -14,7 +14,7 @@ function create_contact_section(screen_width_in_px,screen_height){
     var contact_height = screen_height;
     
     $("#contact_wrapper").css({                    
-        "background-color": '#fb836bff',
+        "background-color": '#e66e56ff',
         "position":         "relative",
         "height":           contact_height,
         "width":            screen_width_in_px
@@ -38,7 +38,7 @@ function contact_big_screens(contact_gr, screen_width_in_px, contact_height, scr
         })  
 
         var background_rect = layout_gr.rect(screen_width_in_px,contact_height)
-            .fill('#fb836bff')
+            .fill('#e66e56ff')
             .attr({
                 id:      "orange",
                 opacity: 1.0,
@@ -119,9 +119,10 @@ function contact_big_screens(contact_gr, screen_width_in_px, contact_height, scr
         .attr({ id: "submission_form_gr"})
 
         var submission_form_shadow = submission_form_shadow__gr.rect(screen_width_in_px/3.4,screen_height/1.65)
-            .fill('#bf5b5bff')
+            .fill('#bc513bff')
         submission_form_shadow.attr({ 
-                id: "submission_form_gr",
+                opacity: 0.6,
+                id: "submission_form_rect",
                 x: screen_width_in_px/2+30,
                 y: screen_height/2-submission_form_shadow.bbox().height/2
             })
@@ -132,6 +133,8 @@ function contact_big_screens(contact_gr, screen_width_in_px, contact_height, scr
             x: submission_form_shadow.bbox().x+10,
             y: submission_form_shadow.bbox().y+10
         })
+
+        apply_filter(submission_form_shadow__gr, "submission_form_shadow_filter", "submission_form_rect")
 
         var forms_width = submission_form_shadow.bbox().width-20
     //--------------------------------------------------------------
@@ -224,7 +227,12 @@ function contact_big_screens(contact_gr, screen_width_in_px, contact_height, scr
         //---------------ANIMATE SUBMIT BUTTON-----------------------------------------------
         var submit_gr = submission_form_gr.nested()
             .attr({ id: "submit_gr"})
-
+        /*var submit_rect_shadow = submit_gr.rect(forms_width/3+10,submission_form_shadow.bbox().height/10+10)
+            .fill('#000')
+        submit_rect_shadow.attr({
+            id:      "submit_rect_shadow",
+            opacity: 0.5,
+        })*/
         var submit_rect = submit_gr.rect(forms_width/3,submission_form_shadow.bbox().height/10)
             .fill('#bf5b5bff')
         submit_rect.attr({
@@ -253,6 +261,7 @@ function contact_big_screens(contact_gr, screen_width_in_px, contact_height, scr
             y: message_rect.bbox().y+message_rect.bbox().height,
             x: message_rect.bbox().x+message_rect.bbox().width/2-submit_rect.bbox().width/2
         })
+        //apply_filter(submit_gr, "submit_btn_shadow_filter", "submit_rect_shadow")
 
         var submit_info = {
             "submit_gr":   submit_gr,
@@ -311,20 +320,7 @@ function contact_big_screens(contact_gr, screen_width_in_px, contact_height, scr
             y:  question.bbox().y+question.bbox().height+50
         })
 
-        submission_form_shadow.attr({ 
-            id: "submission_form_gr",
-            x: screen_width_in_px/2+30,
-            y: screen_height/2-submission_form_shadow.bbox().height/2
-        })
     } 
-////////////////////////////////////////////////////////////////////////////////
-
-
-        var hashtag_info = {
-            "hashtag":            hashtag,
-            "question_gr":        question_gr,
-            "submission_form_gr": submission_form_gr
-        }
 
         //----------------------SUBMISSION FORM INPUT----------------------------------
         
@@ -379,30 +375,28 @@ function contact_big_screens(contact_gr, screen_width_in_px, contact_height, scr
             height:     message_global_height
         })
 
-
-        apply_filter(layout_gr, "apply_shadow_filter", "apply_shadow")
-
         var contact_info = {
-            "question_gr":        question_gr,
-            "hashtag":            hashtag,
-            "paragraph":          paragraph,
-            "submission_form_gr": submission_form_gr,
+            "question_gr":            question_gr,
+            "hashtag":                hashtag,
+            "paragraph":              paragraph,
+            "submission_form_gr":     submission_form_gr,
+            "submission_form_shadow": submission_form_shadow,
         }
 
         var initial_dekstop_coords = {
             "question_gr":               {x:0-600,y:question_gr.y()},
             "hashtag":                   {x:0-100,y:hashtag.y()},
             "paragraph":                 {x:0-600,y: contact_height},
-            "submission_form_shadow__gr": {x:submission_form_shadow__gr.x(),y: contact_height},
-            "submission_form_gr":        {x:submission_form_gr.x(),y:contact_height}
+            "submission_form_gr":        {x:submission_form_gr.x(),y: contact_height},
+            "submission_form_shadow":    {x:submission_form_shadow.x(),y:contact_height}
         }
 
         var final_desktop_coords = {
             "question_gr":               {x:question_gr.x(),y:question_gr.y()},
             "hashtag":                   {x:hashtag.x(),y:hashtag.y()},
             "paragraph":                 {x:paragraph.x(),y:paragraph.y()},
-            "submission_form_shadow__gr": {x:submission_form_shadow__gr.x(),y: submission_form_shadow__gr.y()},
-            "submission_form_gr":        {x:submission_form_gr.x(),y:submission_form_gr.y()}
+            "submission_form_gr":        {x:submission_form_gr.x(),y: submission_form_gr.y()},
+            "submission_form_shadow":    {x:submission_form_shadow.x(),y:submission_form_shadow.y()}
         }
 
         // CONTACT__SCROLL_TRIGGER
@@ -515,7 +509,7 @@ function animate_hashtag_desktop__deactivate(hashtag_info, contact_height, scree
 //---------------------ANIMATE CONTACT-------------------------------------------------
 function animate_contact_desktop__activate(contact_info, initial_dekstop_coords, final_desktop_coords, screen_width_in_px, contact_height){
    
-    var submission_form_shadow_gr = contact_info["submission_form_shadow_gr"];
+    var submission_form_shadow = contact_info["submission_form_shadow"];
     var question_gr               = contact_info["question_gr"];
     var hashtag                   = contact_info["hashtag"];
     var paragraph                 = contact_info["paragraph"];
@@ -527,6 +521,7 @@ function animate_contact_desktop__activate(contact_info, initial_dekstop_coords,
     }).attr({x: final_desktop_coords["hashtag"]["x"] })
     
     .after(function() {
+        submission_form_shadow.attr({y : initial_dekstop_coords["submission_form_shadow"]["y"] })
         submission_form_gr.attr({y : initial_dekstop_coords["submission_form_gr"]["y"] })
         paragraph.attr({y: initial_dekstop_coords["paragraph"]["y"] })
         question_gr.attr({x : initial_dekstop_coords["question_gr"]["x"] })
@@ -538,6 +533,9 @@ function animate_contact_desktop__activate(contact_info, initial_dekstop_coords,
         submission_form_gr.animate({
             duration: 500,
         }).attr({y: final_desktop_coords["submission_form_gr"]["y"] })
+        submission_form_shadow.animate({
+            duration: 500,
+        }).attr({y: final_desktop_coords["submission_form_shadow"]["y"] })
 
         paragraph.animate({
             duration: 200,
@@ -548,7 +546,7 @@ function animate_contact_desktop__activate(contact_info, initial_dekstop_coords,
 
 function animate_contact_desktop__deactivate(contact_info, initial_dekstop_coords, final_desktop_coords, screen_width_in_px, contact_height){
    
-    var submission_form_shadow_gr = contact_info["submission_form_shadow_gr"];
+    var submission_form_shadow = contact_info["submission_form_shadow"];
     var question_gr               = contact_info["question_gr"];
     var hashtag                   = contact_info["hashtag"];
     var paragraph                 = contact_info["paragraph"];
