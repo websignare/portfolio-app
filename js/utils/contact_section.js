@@ -14,7 +14,7 @@ function create_contact_section(screen_width_in_px,screen_height){
     var contact_height = screen_height;
     
     $("#contact_wrapper").css({                    
-        "background-color": '#e66e56ff',
+        "background-color": '#c84519ff',
         "position":         "relative",
         "height":           contact_height,
         "width":            screen_width_in_px
@@ -38,7 +38,7 @@ function contact_big_screens(contact_gr, screen_width_in_px, contact_height, scr
         })  
 
         var background_rect = layout_gr.rect(screen_width_in_px,contact_height)
-            .fill('#e66e56ff')
+            .fill('#c84519ff')
             .attr({
                 id:      "orange",
                 opacity: 1.0,
@@ -70,7 +70,7 @@ function contact_big_screens(contact_gr, screen_width_in_px, contact_height, scr
         //-------------------------PARAGRAPH--------------------------
 
         var paragraph = question_gr.text(function(add) {
-            add.tspan('Pop me an a e-mail at nevena_create@gmail.com')
+            add.tspan('Pop me an a e-mail at nevena.create@gmail.com')
         })
         paragraph.font({
             opacity: 1.0,
@@ -119,7 +119,7 @@ function contact_big_screens(contact_gr, screen_width_in_px, contact_height, scr
         .attr({ id: "submission_form_gr"})
 
         var submission_form_shadow = submission_form_shadow__gr.rect(screen_width_in_px/3.4,screen_height/1.65)
-            .fill('#bc513bff')
+            .fill('#8e1700ff')
         submission_form_shadow.attr({ 
                 opacity: 0.6,
                 id: "submission_form_rect",
@@ -138,32 +138,32 @@ function contact_big_screens(contact_gr, screen_width_in_px, contact_height, scr
 
         var forms_width = submission_form_shadow.bbox().width-20
     //--------------------------------------------------------------
-        var from_gr = submission_form_gr.nested()
-            .attr({ id: "from_gr"})
+        var senders_name__gr = submission_form_gr.nested()
+            .attr({ id: "senders_name__gr"})
 
-        var from_rect = from_gr.rect(forms_width,submission_form_shadow.bbox().height/5.5)
-            .fill('#fba16bff')
-        from_rect.attr({
-            id:      "from_rect",
+        var senders_name__rect = senders_name__gr.rect(forms_width,submission_form_shadow.bbox().height/5.5)
+            .fill('#f6782dff')
+        senders_name__rect.attr({
+            id:      "senders_name__rect",
             opacity: 1.0,
             x:       0,
             y:       0
         })
 
-        var from_text = from_gr.text(function(text_element){
+        var senders_name__text = senders_name__gr.text(function(text_element){
             text_element.tspan('Your name...')
         })
         .font({
-            opacity: 1.0,
+            opacity: 0.65,
             weight:  600,
             fill:    '#fff',
             family:  'Quicksand',
             size:    16
         })
-        from_text.attr({
-            id: 'from_text',
-            x:  from_rect.bbox().x+30,
-            y:  from_rect.bbox().height/2+from_text.bbox().height/2
+        senders_name__text.attr({
+            id: 'senders_name__text',
+            x:  senders_name__rect.bbox().x+30,
+            y:  senders_name__rect.bbox().height/2+senders_name__text.bbox().height/2-5
         })
 
 
@@ -172,18 +172,18 @@ function contact_big_screens(contact_gr, screen_width_in_px, contact_height, scr
                 .attr({ id: "subject_gr"})
 
         var subject_rect = subject_gr.rect(forms_width,submission_form_shadow.bbox().height/5.5)
-            .fill('#fbae6bff')
+            .fill('#fe8e2cff')
         subject_rect.attr({
             id:      "subject_rect",
             opacity: 1.0,
             x:       0,
-            y:       from_rect.bbox().height
+            y:       senders_name__rect.bbox().height
         })
         var subject_text = subject_gr.text(function(text_element){
             text_element.tspan('Subject...')
         })
             .font({
-                opacity: 1.0,
+                opacity: 0.65,
                 weight:  600,
                 fill:    '#fff',
                 family:  'Quicksand',
@@ -192,7 +192,7 @@ function contact_big_screens(contact_gr, screen_width_in_px, contact_height, scr
         subject_text.attr({
                 id: 'subject_text',
                 x:  subject_rect.bbox().x+30,
-                y:  from_gr.bbox().y+from_gr.bbox().height+from_gr.bbox().height/2
+                y:  senders_name__gr.bbox().y+senders_name__gr.bbox().height+senders_name__gr.bbox().height/2+5
             })
 
 
@@ -201,18 +201,18 @@ function contact_big_screens(contact_gr, screen_width_in_px, contact_height, scr
         .attr({ id: "message_gr"})
 
         var message_rect = message_gr.rect(forms_width,submission_form_shadow.bbox().height/1.68)
-            .fill('#fbbc6bff')
+            .fill('#ffa531ff')
         message_rect.attr({
             id:      "message_rect",
             opacity: 1.0,
             x:       0,
-            y:       from_rect.bbox().height+subject_rect.bbox().height
+            y:       senders_name__rect.bbox().height+subject_rect.bbox().height
         })
         var message_text = message_gr.text(function(text_element){
             text_element.tspan('Your message...')
         })
         .font({
-            opacity: 1.0,
+            opacity: 0.65,
             weight:  600,
             fill:    '#fff',
             family:  'Quicksand',
@@ -221,7 +221,7 @@ function contact_big_screens(contact_gr, screen_width_in_px, contact_height, scr
         message_text.attr({
             id: 'message_text',
             x:  message_rect.bbox().x+30,
-            y:  from_gr.bbox().y+from_gr.bbox().height+subject_gr.bbox().height+40
+            y:  senders_name__gr.bbox().y+senders_name__gr.bbox().height+subject_gr.bbox().height+175
         })
 
         //---------------ANIMATE SUBMIT BUTTON-----------------------------------------------
@@ -234,7 +234,7 @@ function contact_big_screens(contact_gr, screen_width_in_px, contact_height, scr
             opacity: 0.5,
         })*/
         var submit_rect = submit_gr.rect(forms_width/3,submission_form_shadow.bbox().height/10)
-            .fill('#bf5b5bff')
+            .fill('#872529ff')
         submit_rect.attr({
             id:      "submit_rect",
             opacity: 1.0,
@@ -324,26 +324,28 @@ function contact_big_screens(contact_gr, screen_width_in_px, contact_height, scr
 
         //----------------------SUBMISSION FORM INPUT----------------------------------
         
-        //FROM
-        var from_global_x      = submission_form_gr.x()+from_gr.x()
-        var from_global_y      = submission_form_gr.y()+from_gr.y()
-        var from_global_width  = from_gr.bbox().width
-        var from_global_height = from_gr.bbox().height
+        //SENDER
+        var senders_name__global_x      = submission_form_gr.x()+senders_name__gr.x()
+        var senders_name__global_y      = submission_form_gr.y()+senders_name__gr.y()
+        var senders_name__global_width  = senders_name__gr.bbox().width
+        var senders_name__global_height = senders_name__gr.bbox().height
         
-        $("#contact_wrapper").append("<input id='from_desktop_input'></input>");
-        $("#contact_wrapper").find("#from_desktop_input").css({
+        $("#contact_wrapper").append("<input id='senders_name__desktop_input'></input>");
+        $("#contact_wrapper").find("#senders_name__desktop_input").css({
             position:   "absolute",
             background: "none",
+            color:      "#8e1700ff",
+            "font-size": "1.2rem",
             border:     "none",
-            top:        from_global_y+"px",
-            left:       from_global_x+"px",
-            width:      from_global_width,
-            height:     from_global_height
+            top:        senders_name__global_y+"px",
+            left:       senders_name__global_x+"px",
+            width:      senders_name__global_width,
+            height:     senders_name__global_height,
         })
 
         //SUBJECT
         var subject_global_x = submission_form_gr.x()+subject_gr.x()
-        var subject_global_y = submission_form_gr.y()+subject_gr.y()+40
+        var subject_global_y = submission_form_gr.y()+subject_gr.y()+105
         var subject_width    = subject_gr.bbox().width
         var subject_height   = subject_gr.bbox().height
         
@@ -351,6 +353,8 @@ function contact_big_screens(contact_gr, screen_width_in_px, contact_height, scr
         $("#contact_wrapper").find("#subject_desktop_input").css({
             position:   "absolute",
             background: "none",
+            color:      "#8e1700ff",
+            "font-size": "1.2rem",
             border:     "none",
             top:        subject_global_y+"px",
             left:       subject_global_x+"px",
@@ -360,7 +364,7 @@ function contact_big_screens(contact_gr, screen_width_in_px, contact_height, scr
 
         //MESSAGE
         var message_global_x      = submission_form_gr.x()+message_gr.x()
-        var message_global_y      = submission_form_gr.y()+message_gr.y()+80
+        var message_global_y      = submission_form_gr.y()+message_gr.y()+210
         var message_global_width  = message_gr.bbox().width
         var message_global_height = message_gr.bbox().height
         
@@ -368,6 +372,10 @@ function contact_big_screens(contact_gr, screen_width_in_px, contact_height, scr
         $("#contact_wrapper").find("#message_desktop_input").css({
             position:   "absolute",
             background: "none",
+            color:      "#8e1700ff",
+            //"word-break": "break-all",
+            "max-width": "20em",
+            "font-size": "1.2rem",
             border:     "none",
             top:        message_global_y+"px",
             left:       message_global_x+"px",
@@ -458,7 +466,7 @@ function animate_submit_desktop__deactivate(submit_info) {
     var submit_text = submit_info["submit_text"];
     var submit_rect = submit_info["submit_rect"];
 
-    submit_rect.fill("#bf5b5bff")
+    submit_rect.fill("#872529ff")
     submit_text.text('SUBMIT')
     submit_text.animate({
         duration: 200,

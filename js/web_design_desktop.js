@@ -24,7 +24,7 @@ function web_design__activate(bar_gr) {
 
     $("body").append(`
         <div id="web_design">
-            <div id="wrapper">
+            <div id="wd_wrapper">
             </div>
             <div id="headline__info">
             </div>
@@ -49,7 +49,7 @@ function web_design__activate(bar_gr) {
 function web_design__deactivate() {
 
     $("#web_design").remove();
-    $("#contact_wrapper").remove();
+    $("#contact_wd_wrapper").remove();
 
     remove_triggers("artist_canvas__trigger") // contact_canvas TRIGGER*/
     remove_triggers("suprematism_canvas__trigger")
@@ -62,7 +62,7 @@ function web_design_create_responsive(bar_gr) {
     var screen_width_in_px  = window.innerWidth;
     var screen_height = window.innerHeight;
 
-    $("#web_design #wrapper").css({                    
+    $("#web_design #wd_wrapper").css({                    
         "background-color": '#ece8e7f3',
         "position":         "relative",
         "height":           screen_height+screen_height/5,
@@ -121,7 +121,7 @@ function web_design_create_responsive(bar_gr) {
     }); 
 
     //----------SVG_CANVASES-----------//
-    var container                      = SVG().addTo("#web_design #wrapper").size(screen_width_in_px, screen_height+screen_height/5)
+    var container                      = SVG().addTo("#web_design #wd_wrapper").size(screen_width_in_px, screen_height+screen_height/5)
     var container_gr                   = container.nested()   
 
     var headline_container             = SVG().addTo("#web_design #headline__info").size(screen_width_in_px, screen_height/2.5)
@@ -148,7 +148,6 @@ function web_design_create_responsive(bar_gr) {
 
     if (screen_physical_width_cm < 20.5) {
         // MOBILE
-        web_design__mobile__activate(bar_gr)
     }
     else if (screen_physical_width_cm < 33.8) { // max width for tablet 2736px, max height 2048px
 
@@ -156,7 +155,7 @@ function web_design_create_responsive(bar_gr) {
         //var layout_tablet_gr = create_background__tablet(container_gr, screen_width_in_px, screen_height)
         //var background_white_tablet_gr = layout_tablet_gr.findOne('#background_white_tablet_gr')
         //section_images__tablet(background_white_tablet_gr, screen_width_in_px, screen_height)
-        //create_text__tablet(container_gr, wrapperscreen_width_in_px, screen_height)
+        //create_text__tablet(container_gr, wd_wrapperscreen_width_in_px, screen_height)
         //buttons_tablet(container_gr, screen_height, screen_width_in_px)
         //create_contact_section(contact_gr, screen_width_in_px)
 
@@ -355,7 +354,7 @@ function web_design_text__desktop(parent_gr, screen_width_in_px, screen_height){
         id: "star_symbol_gr"
     })
 
-     // SYMBOL ROTATION
+     /*// SYMBOL ROTATION
      function rotatePositive() {
         star_symbol.animate({duration: 9000}).ease("<>").rotate(180)
         line_symbol.animate({duration: 4000}).ease("<").rotate(10).after(rotateNegative)
@@ -365,7 +364,7 @@ function web_design_text__desktop(parent_gr, screen_width_in_px, screen_height){
         line_symbol.animate({duration: 4000}).ease(">").rotate(-10).after(rotatePositive)
     }
       
-    rotatePositive()
+    rotatePositive()*/
 
     //---------------PARAGRAPH------------------------
 
@@ -405,7 +404,7 @@ function web_design_text__desktop(parent_gr, screen_width_in_px, screen_height){
         "wdesign_path__gr": wdesign_path__gr,
         "paragraph":        paragraph,
     }
-    
+    console.log(design_text_info,"AGAGAGAGAAAAAAAAAAAAAGAGAGAGAGAGAO////////////////////******************/////////////////*********")
     return design_text_info;
 }
 
@@ -684,7 +683,7 @@ function artist_portfolio(parent_gr, screen_width_in_px, screen_height){
                 "date":"",    
                 "draw_fn": function(artist_portfolio__gr){
                     var rect_height = screen_height/1.2
-                    var rect_width  = screen_width_in_px-420
+                    var rect_width  = screen_width_in_px-280
 
                     var left_top_gr    = artist_portfolio__gr.nested()
                     var left_top_rect  = left_top_gr.rect(rect_width/2-10,rect_height/3-10)
@@ -777,7 +776,7 @@ function artist_portfolio(parent_gr, screen_width_in_px, screen_height){
 
                 },     
                 "height":                screen_height/1.2,       
-                "width":                 screen_width_in_px-420,                              //shadow height
+                "width":                 screen_width_in_px-280,                              //shadow height
                 "color":                "#204c39",
                 "element_number_color": "#d90f0f",
                 "element_number":       "1"
@@ -806,7 +805,7 @@ function suprematism(parent_gr, screen_width_in_px, screen_height){
                 "draw_fn": function(suprematism__gr){
                     //element_number
                     var rect_height = screen_height/1.2
-                    var rect_width  = screen_width_in_px-420                             //shadow height
+                    var rect_width  = screen_width_in_px-280                             //shadow height
 
                     var right_middle__gr = suprematism__gr.nested()
                     right_middle__gr.attr({ 
@@ -916,7 +915,7 @@ function suprematism(parent_gr, screen_width_in_px, screen_height){
 
                 },     
                 "height":  screen_height/1.2,       
-                "width": screen_width_in_px-420,                             //shadow height
+                "width": screen_width_in_px-280,                             //shadow height
                 "color":                "#204c39",
                 "element_number_color": "#d90f0f",
                 "element_number":       "2"
@@ -941,7 +940,7 @@ function deep_blue(parent_gr, screen_width_in_px, screen_height){
                 "date":"",    
                 "draw_fn": function(deep_blue__gr){
                     var rect_height = screen_height/1.2
-                    var rect_width  = screen_width_in_px-420
+                    var rect_width  = screen_width_in_px-280
 
                     var left_top_gr    = deep_blue__gr.nested()
                     var left_top_rect  = left_top_gr.rect(rect_width/2-10,rect_height/3-10)
@@ -1034,8 +1033,8 @@ function deep_blue(parent_gr, screen_width_in_px, screen_height){
 
                 },     
                 "height":  screen_height/1.2,       
-                "width": screen_width_in_px-420,                               //shadow height
-                "color": "#204c39",
+                "width": screen_width_in_px-280,                               //shadow height
+                "color": "#350028ff",
                 "element_number_color": "#d90f0f",
                 "element_number": "1"
             }

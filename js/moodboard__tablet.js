@@ -23,8 +23,9 @@ function moodboard__tablet__activate(bar_gr){
     var screen_width_in_px  = window.innerWidth;
     var screen_height       = window.innerHeight;
 
-    document.title = "moodboard"
-    window.history.pushState({page: "moodboard"},"", "#moodboard");
+    document.title = "moodboard_tablet"
+    window.history.pushState({page: "moodboard_tablet"},"", "#moodboard_tablet");
+    current_page = "moodboard_tablet"
 
     $("body").append(`
         <div id="moodboard_tablet">
@@ -39,8 +40,6 @@ function moodboard__tablet__activate(bar_gr){
 
     var moodboard__tablet_info = moodboard__tablet__create_responsive(bar_gr);
     moodboard_animate__tablet_activate(moodboard__tablet_info, screen_width_in_px, screen_height)
-
-    current_page = "moodboard";
 }
 
 function moodboard__tablet__deactivate(){

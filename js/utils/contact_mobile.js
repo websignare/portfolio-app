@@ -1,6 +1,6 @@
 //-----------------------------------CONTACT---------------------------------------------------------------
 function create_mobile_contact_section(screen_width_in_px,screen_height){
-    $("body").append(`
+    $("body #hp").append(`
         <div id="contact_mobile_wrapper">
         </div>
     `);
@@ -14,7 +14,7 @@ function create_mobile_contact_section(screen_width_in_px,screen_height){
     var contact_height = screen_height;
     
     $("#contact_mobile_wrapper").css({                    
-        "background-color": '#fb836bff',
+        "background-color": '#c84519ff',
         "position":         "relative",
         "height":           contact_height,
         "width":            screen_width_in_px
@@ -36,7 +36,7 @@ function contact_mobile(contact_gr, screen_width_in_px, contact_height, screen_h
     })  
 
     var background_mobile_rect = contact_layout_gr__mobile.rect(screen_width_in_px,screen_height)
-        .fill('#fb836bff')
+        .fill('#c84519ff')
         .attr({
             id:      "background_mobile_rect",
             opacity: 1.0,
@@ -47,8 +47,8 @@ function contact_mobile(contact_gr, screen_width_in_px, contact_height, screen_h
     var question_shadow = question_shadow_gr.rect(280,50)
         .fill('#ce7f4aff')
     question_shadow_gr.attr({
-        id:      "apply_shadow",
-        opacity: 0.3,
+        id:      "question_shadow",
+        opacity: 0.0,
         width:   question_shadow.bbox().width,
         height:  question_shadow.bbox().height,
         x:       screen_width_in_px-question_shadow.bbox().width+40,
@@ -61,7 +61,7 @@ function contact_mobile(contact_gr, screen_width_in_px, contact_height, screen_h
         })
 
     var question_rect = question_gr.rect(250,50)
-        .fill('#bf5b5bff')
+        .fill('#872529ff')
     question_rect.attr({
         id:      "question_rect",
         opacity: 1.0
@@ -75,7 +75,7 @@ function contact_mobile(contact_gr, screen_width_in_px, contact_height, screen_h
             weight:  600,
             fill:    '#fff',
             family:  'Quicksand',
-            size:    14
+            size:    "1rem"
         })
     question.attr({
         id: 'web',
@@ -120,28 +120,33 @@ function contact_mobile(contact_gr, screen_width_in_px, contact_height, screen_h
 
     //-------------------------SUBMISSION FORM--------------------------
     var submission_form_shadow_gr = contact_layout_gr__mobile.nested()
+        .attr({ id: "submission_form_shadow_gr"})
 
-    var submission_form_shadow = submission_form_shadow_gr.rect(330,360)
-        .fill('#ce7f4aff')
+    var submission_form_shadow = submission_form_shadow_gr.rect(330,340)
+        .fill('#872529ff')
 
-    submission_form_shadow_gr.attr({
+    submission_form_shadow.attr({
         id:      "apply_shadow",
-        opacity: 0.5,
+        opacity: 0.6,
         width:   submission_form_shadow.bbox().width,
         height:  submission_form_shadow.bbox().height,
         x:       screen_width_in_px/2-submission_form_shadow.bbox().width/2,
-        y:       screen_height/2-90
+        y:       screen_height/2-110
     })
-
-    var submission_form_gr = contact_layout_gr__mobile.nested()
-        .attr({ id: "submission_form_gr"})
+    var submission_form_gr = submission_form_shadow_gr.nested()
+    .attr({ 
+        id: "submission_form_gr",
+        x: submission_form_shadow.bbox().x+10,
+        y: submission_form_shadow.bbox().y+10
+    })
+    apply_filter(submission_form_shadow_gr, "submission_form_shadow_mobile_filter", "apply_shadow")
 
 //--------------------------------------------------------------
     var from_gr = submission_form_gr.nested()
         .attr({ id: "from_gr"})
 
     var from_rect = from_gr.rect(300,40)
-        .fill('#fba16bff')
+        .fill('#f6782dff')
     from_rect.attr({
         id:      "from_rect",
         opacity: 1.0,
@@ -154,10 +159,10 @@ function contact_mobile(contact_gr, screen_width_in_px, contact_height, screen_h
     })
     .font({
         opacity: 0.8,
-        weight:  400,
+        weight:  500,
         fill:    '#fff',
         family:  'Quicksand',
-        size:    14
+        size:    "1rem"
     })
     from_text.attr({
         id: 'from_text',
@@ -170,7 +175,7 @@ function contact_mobile(contact_gr, screen_width_in_px, contact_height, screen_h
         .attr({ id: "subject_gr"})
 
     var subject_rect = subject_gr.rect(300,40)
-        .fill('#fbae6bff')
+        .fill('#fe8e2cff')
     subject_rect.attr({
         id:      "subject_rect",
         opacity: 1.0,
@@ -182,10 +187,10 @@ function contact_mobile(contact_gr, screen_width_in_px, contact_height, screen_h
     })
     .font({
         opacity: 0.8,
-        weight:  400,
+        weight:  500,
         fill:    '#fff',
         family:  'Quicksand',
-        size:    14
+        size:    "1rem"
     })
    subject_text.attr({
         id: 'subject_text',
@@ -198,7 +203,7 @@ function contact_mobile(contact_gr, screen_width_in_px, contact_height, screen_h
     .attr({ id: "message_gr"})
 
     var message_rect = message_gr.rect(300,250)
-        .fill('#fbbc6bff')
+        .fill('#ffa531ff')
     message_rect.attr({
         id:      "message_rect",
         opacity: 1.0,
@@ -210,10 +215,10 @@ function contact_mobile(contact_gr, screen_width_in_px, contact_height, screen_h
     })
     .font({
         opacity: 0.8,
-        weight:  400,
+        weight:  500,
         fill:    '#fff',
         family:  'Quicksand',
-        size:    14
+        size:    "1rem"
     })
     message_text.attr({
         id: 'to_text',
@@ -226,7 +231,7 @@ function contact_mobile(contact_gr, screen_width_in_px, contact_height, screen_h
         .attr({ id: "submit_gr"})
 
     var submit_rect = submit_gr.rect(100,40)
-        .fill('#bf5b5bff')
+        .fill('#872529ff')
     submit_rect.attr({
         id:      "submit_rect",
         opacity: 1.0,
@@ -242,7 +247,7 @@ function contact_mobile(contact_gr, screen_width_in_px, contact_height, screen_h
         weight:  600,
         fill:    '#fff',
         family:  'Quicksand',
-        size:    14
+        size:    "1.1rem"
     })
     submit_text.attr({
         id: 'submit_text',
@@ -288,8 +293,7 @@ function contact_mobile(contact_gr, screen_width_in_px, contact_height, screen_h
 
     //-------------------------PARAGRAPH--------------------------
     var paragraph = contact_layout_gr__mobile.text(function(add) {
-        add.tspan('Pop me an a e-mail').newLine().dx(20)
-        add.tspan(' at').font({weight: 400})
+        add.tspan('Pop me an a e-mail at' ).newLine().dx(20)
         add.tspan('nevena_create@gmail.com').newLine()
       })
     paragraph.font({
@@ -297,7 +301,7 @@ function contact_mobile(contact_gr, screen_width_in_px, contact_height, screen_h
         weight:  600,
         fill:    '#fff',
         family:  'Quicksand',
-        size:    15
+        size:    "1.05rem"
     })
     paragraph.attr({
         id: "paragraph",
@@ -307,11 +311,12 @@ function contact_mobile(contact_gr, screen_width_in_px, contact_height, screen_h
 
 
     var hashtag_info = {
-        "hashtag":            hashtag,
-        "question_shadow_gr": question_shadow_gr,
-        "question_gr":        question_gr,
-        "question_rect":      question_rect,
-        "submission_form_gr": submission_form_gr
+        "hashtag":                   hashtag,
+        "question_shadow_gr":        question_shadow_gr,
+        "question_gr":               question_gr,
+        "question_rect":             question_rect,
+        "submission_form_gr":        submission_form_gr,
+        "submission_form_shadow": submission_form_shadow,
     }
 
     //----------------------SUBMISSION FORM INPUT----------------------------------
@@ -364,14 +369,14 @@ function contact_mobile(contact_gr, screen_width_in_px, contact_height, screen_h
         height:     message_global_height
     })
 
-    apply_filter(contact_layout_gr__mobile, "apply_shadow_filter", "apply_shadow")
 
     var contact_info = {
-        "question_shadow_gr": question_shadow_gr,
+        "submission_form_shadow_gr": submission_form_shadow_gr,
         "question_gr":        question_gr,
         "hashtag":            hashtag,
         "paragraph":          paragraph,
         "submission_form_gr": submission_form_gr,
+        "submission_form_shadow": submission_form_shadow,
     }
 
     var initial_coords = {
@@ -379,7 +384,7 @@ function contact_mobile(contact_gr, screen_width_in_px, contact_height, screen_h
         "question_gr":               {x:screen_width_in_px,y:question_gr.y()},
         "hashtag":                   {x:screen_width_in_px,y:hashtag.y()},
         "paragraph":                 {x:paragraph.x(),y: screen_height},
-        "submission_form_shadow_gr": {x:paragraph.x(),y: screen_height},
+        "submission_form_shadow":    {x:submission_form_shadow.x(),y:contact_height},
         "submission_form_gr":        {x:submission_form_gr.x(),y:screen_height}
     }
 
@@ -388,7 +393,8 @@ function contact_mobile(contact_gr, screen_width_in_px, contact_height, screen_h
         "question_gr":        {x:question_gr.x(),y:question_gr.y()},
         "hashtag":            {x:hashtag.x(),y:hashtag.y()},
         "paragraph":          {x:paragraph.x(),y:paragraph.y()},
-        "submission_form_gr": {x:submission_form_gr.x(),y:submission_form_gr.y()}
+        "submission_form_gr": {x:submission_form_gr.x(),y:submission_form_gr.y()},
+        "submission_form_shadow": {x:submission_form_shadow.x(),y:submission_form_shadow.y()}
     }
 
     // CONTACT__SCROLL_TRIGGER
@@ -437,10 +443,10 @@ function animate_submit__activate(submit_info) {
         submit_text.animate({
                 duration: 200
             })
-        submit_text.attr({fill: "#bf5b5bff"})
+        submit_text.attr({fill: "#872529ff"})
             .attr({
-                x: submit_rect.bbox().width/2-submit_text.bbox().width/2,
-                y: 337
+                x:   submit_rect.bbox().width/2-submit_text.bbox().width/2,
+                y: 335
             })
     });
 }
@@ -450,15 +456,15 @@ function animate_submit__deactivate(submit_info) {
     var submit_text = submit_info["submit_text"];
     var submit_rect = submit_info["submit_rect"];
 
-    submit_rect.fill("#bf5b5bff")
+    submit_rect.fill("#872529ff")
     submit_text.text('SUBMIT')
     submit_text.animate({
         duration: 200,
     })
     submit_text.attr({fill: "#fff"})
     .attr({
-        x: submit_rect.bbox().width/2-submit_text.bbox().width/2,
-        y: 337
+        x:   submit_rect.bbox().width/2-submit_text.bbox().width/2,
+        y: 335
     })
 }
 
@@ -498,33 +504,37 @@ function animate_hashtag__deactivate(hashtag_info, screen_height, screen_width_i
 }
 //---------------------ANIMATE CONTACT-------------------------------------------------
 function animate_contact__activate(contact_info, initial_coords, final_coords, screen_width_in_px, screen_height){
-    var question_shadow_gr = contact_info["question_shadow_gr"];
-    var question_gr        = contact_info["question_gr"];
-    var hashtag            = contact_info["hashtag"];
-    var paragraph          = contact_info["paragraph"];
-    var submission_form_gr = contact_info["submission_form_gr"];
+    var submission_form_shadow = contact_info["submission_form_shadow"];
+    var question_gr               = contact_info["question_gr"];
+    var hashtag                   = contact_info["hashtag"];
+    var paragraph                 = contact_info["paragraph"];
+    var submission_form_gr        = contact_info["submission_form_gr"];
 
     hashtag.attr({x: initial_coords["hashtag"]["x"] })
     hashtag.animate({
-        delay: 800,
+        delay: 300,
         duration: 1000,
     }).attr({x: final_coords["hashtag"]["x"] })
     
     .after(function() {
+        submission_form_shadow.attr({y : initial_coords["submission_form_shadow"]["y"] })
         submission_form_gr.attr({y : initial_coords["submission_form_gr"]["y"] })
         paragraph.attr({y: initial_coords["paragraph"]["y"] })
         question_gr.attr({x : initial_coords["question_gr"]["x"] })
         
         question_gr.animate({
             delay: 400,
-            duration: 1000,
+            duration: 300,
         }).attr({x: final_coords["question_gr"]["x"] })
 
         paragraph.animate({
-            duration: 1000,
+            duration: 500,
         }).attr({y: final_coords["paragraph"]["y"] })
+        submission_form_shadow.animate({
+            duration: 500,
+        }).attr({y: final_coords["submission_form_shadow"]["y"] })
         submission_form_gr.animate({
-            duration: 1000,
+            duration: 500,
         }).attr({y: final_coords["submission_form_gr"]["y"] })
 
 

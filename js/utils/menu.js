@@ -38,7 +38,7 @@ function create_menu(parent_gr, bar_gr, screen_width, screen_height) {
     var menu_background_gr = parent_gr.nested()
 
     var menu = menu_background_gr.rect(screen_width/2, screen_height)
-    .fill('#e66e56ff')
+    .fill('#c84519ff')
     .attr({
         id:      "menu",
         opacity: 1.0,
@@ -353,22 +353,22 @@ function create_menu(parent_gr, bar_gr, screen_width, screen_height) {
     })
 
     home_title.mouseover(function() {               //when hovered over title it changes color
-        home_title.fill({ color: '#bc513bff' })
+        home_title.fill({ color: '#8e1700ff' })
     })
     about_title.mouseover(function() {
-        about_title.fill({ color: '#bc513bff' })
+        about_title.fill({ color: '#8e1700ff' })
     })
     design_title.mouseover(function() {
-        design_title.fill({ color: '#bc513bff' })
+        design_title.fill({ color: '#8e1700ff' })
     })
     development_title.mouseover(function() {
-        development_title.fill({ color: '#bc513bff' })
+        development_title.fill({ color: '#8e1700ff' })
     })
     moodboard_title.mouseover(function() {
-        moodboard_title.fill({ color: '#bc513bff' })
+        moodboard_title.fill({ color: '#8e1700ff' })
     })
     contact_title.mouseover(function() {
-        contact_title.fill({ color: '#bc513bff' })
+        contact_title.fill({ color: '#8e1700ff' })
     })
     //home_title.mouseover(null)
 
@@ -402,7 +402,7 @@ function close_menu(parent_gr, menu_info){
         })
 
     var close_menu_rect = close_menu_gr.rect(50,50)
-    .fill("#ea7058ff")
+    .fill("#c84519ff")
     var line_top        = close_menu_gr.line(5, 5, 40, 40).stroke({color: '#fff', width: 6, linecap: 'round', opacity: 1.0 })
     var line_bottom     = close_menu_gr.line(40, 5, 5, 40).stroke({color: '#fff', width: 6, linecap: 'round', opacity: 1.0 })
 

@@ -56,6 +56,9 @@ function hp_tablet__activate(bar_gr) {
     var screen_width_in_px = window.innerWidth;
     var screen_height      = window.innerHeight;
 
+    document.title = "hp_tablet"
+    window.history.pushState({page: "hp_tablet"},"", "#hp_tablet");
+
     $("body").append(`
         <div id="hp_tablet">
             <div id="wrapper"></div>
@@ -63,7 +66,9 @@ function hp_tablet__activate(bar_gr) {
     `);
 
     var hp__buttons__tablet_info = hp_tablet__create_responsive(bar_gr);
-    hp_top__tablet_animate(hp__buttons__tablet_info , screen_width_in_px, screen_height)
+    hp_top__tablet_animate(hp__buttons__tablet_info , screen_width_in_px, screen_height)    
+    current_page = "hp_tablet"
+
 }
 
 function hp_tablet__deactivate() {

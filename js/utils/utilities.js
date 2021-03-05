@@ -22,21 +22,37 @@ function deactivate_current_page(current_page_name) {
             moodboard__deactivate();
             break;
         //MOBILE
-        /*case "home_page_mobile":
+        case "home_page_mobile":
             hp__mobile__deactivate();
             break;
         case "about_mobile":
             about__mobile__deactivate();
             break;
         case "web_design_mobile":
-            web_design__deactivate();
+            web_design__mobile__deactivate();
             break;
         case "web_development_mobile":
             web_development__mobile__deactivate();
             break;
         case "moodboard_mobile":
             moodboard__mobile__deactivate();
-            break;*/
+            break;
+        //TABLET
+        case "hp_tablet":
+            hp_tablet__deactivate();
+            break;
+        case "about_tablet":
+            about_tablet__deactivate();
+            break;
+        case "web_design_tablet":
+            web_design__tablet__deactivate();
+            break;
+        case "web_development_tablet":
+            web_development_tablet__deactivate();
+            break;
+        case "moodboard_tablet":
+            moodboard__tablet__deactivate();
+            break;
     }
 }
 
@@ -302,10 +318,10 @@ function run_page_transition(target_page_name, transition_type, current_page_nam
 
         case "4_plane_in_circle":
             
-            var swipe_right_rect = transitions_container_gr.rect(0, screen_height/2+5).fill('#7e2c3cff').attr({opacity: 1.0, x: 0})
-            var swipe_down_rect  = transitions_container_gr.rect(screen_width/2, 0).fill('#7e2c3cff').attr({opacity: 1.0, x: screen_width/2, y:0})
-            var swipe_left_rect  = transitions_container_gr.rect(0, screen_height/2).fill('#7e2c3cff').attr({opacity: 1.0, x: screen_width, y: screen_height/2})
-            var swipe_up_rect    = transitions_container_gr.rect(screen_width/2, 0).fill('#7e2c3cff').attr({opacity: 1.0, x: 0, y: screen_height})
+            var swipe_right_rect = transitions_container_gr.rect(0, screen_height/2+5).fill('#0f5d66fe').attr({opacity: 1.0, x: 0})
+            var swipe_down_rect  = transitions_container_gr.rect(screen_width/2, 0).fill('#0f5d66fe').attr({opacity: 1.0, x: screen_width/2, y:0})
+            var swipe_left_rect  = transitions_container_gr.rect(0, screen_height/2).fill('#0f5d66fe').attr({opacity: 1.0, x: screen_width, y: screen_height/2})
+            var swipe_up_rect    = transitions_container_gr.rect(screen_width/2, 0).fill('#0f5d66fe').attr({opacity: 1.0, x: 0, y: screen_height})
             var transition_info = {
                 "swipe_right_rect": swipe_right_rect,
                 "swipe_down_rect":  swipe_down_rect,
@@ -322,7 +338,7 @@ function run_page_transition(target_page_name, transition_type, current_page_nam
 
         case "1_plane_swipe_to_right":
 
-            var full_screen_rect = transitions_container_gr.rect(0, screen_height).fill('#533065ff').attr({opacity: 1.0})
+            var full_screen_rect = transitions_container_gr.rect(0, screen_height).fill('#48233fff').attr({opacity: 1.0})
             var transition_info  = {
                 "full_screen_rect": full_screen_rect
             }
@@ -336,7 +352,7 @@ function run_page_transition(target_page_name, transition_type, current_page_nam
 
         case "1_plane_scale":
 
-            var full_screen_rect_scale = transitions_container_gr.rect(0, 0).fill('#db7310ff').attr({opacity: 1.0, x: screen_width/2, y: screen_height/2})
+            var full_screen_rect_scale = transitions_container_gr.rect(0, 0).fill('#f78e0bff').attr({opacity: 1.0, x: screen_width/2, y: screen_height/2})
             var transition_info = {
                 "full_screen_rect_scale": full_screen_rect_scale,
             }
@@ -350,8 +366,8 @@ function run_page_transition(target_page_name, transition_type, current_page_nam
         
         case "2_plane_swipe_up_and_down":
 
-            var full_screen_rect_up    = transitions_container_gr.rect(screen_width/2, 0).fill('#ae3600ff').attr({opacity: 1.0})
-            var full_screen_rect_down  = transitions_container_gr.rect(screen_width/2, 0).fill('#cb3f00ff').attr({opacity: 1.0, y: screen_height, x: screen_width/2})
+            var full_screen_rect_up    = transitions_container_gr.rect(screen_width/2, 0).fill('#bb4502fe').attr({opacity: 1.0})
+            var full_screen_rect_down  = transitions_container_gr.rect(screen_width/2, 0).fill('#bd2b0dfe').attr({opacity: 1.0, y: screen_height, x: screen_width/2})
 
             var transition_info = {
                 "transitions_container_gr": transitions_container_gr,
@@ -404,21 +420,37 @@ function run_page_transition(target_page_name, transition_type, current_page_nam
                     moodboard__activate(bar_gr);
                     break;
                 //MOBILE
-                /*case "home_page_mobile":
-                    hp__mobile__deactivate();
+                case "home_page_mobile":
+                    hp__mobile__activate();
                     break;
                 case "about_mobile":
-                    about__mobile__deactivate();
+                    about__mobile__activate();
                     break;
                 case "web_design_mobile":
-                    web_design__deactivate();
+                    web_design__mobile__activate();
                     break;
                 case "web_development_mobile":
-                    web_development__mobile__deactivate();
+                    web_development__mobile__activate();
                     break;
                 case "moodboard_mobile":
-                    moodboard__mobile__deactivate();
-                    break;*/
+                    moodboard__mobile__activate();
+                    break;
+                //TABLET
+                case "hp_tablet":
+                    hp_tablet__activate();
+                    break;
+                case "about_tablet":
+                    about_tablet__activate();
+                    break;
+                case "web_design_tablet":
+                    web_design__tablet__activate();
+                    break;
+                case "web_development_tablet":
+                    web_development_tablet__activate();
+                    break;
+                case "moodboard_tablet":
+                    moodboard__tablet__activate();
+                    break;
                 default:
                     console.log("add support for this target_page ["+target_page_name+"]!")
             }

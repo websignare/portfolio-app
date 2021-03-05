@@ -23,8 +23,9 @@ function web_design__tablet__activate(bar_gr) {
     var screen_width_in_px  = window.innerWidth;
     var screen_height = window.innerHeight;
 
-    document.title = "web design"
-    window.history.pushState({page: "web_design"},"", "#web_design");
+    document.title = "web_design_tablet"
+    window.history.pushState({page: "web_design_tablet"},"", "#web_design_tablet");
+    current_page = "web_design_tablet"
 
     $("body").append(`
         <div id="web_design_tablet">
@@ -45,8 +46,6 @@ function web_design__tablet__activate(bar_gr) {
 
     var design__tablet_info = web_design_create__tablet__responsive(bar_gr);
     design_animate__tablet_activate(design__tablet_info, screen_width_in_px, screen_height)
-
-    current_page = "web_design";
 
 }
 

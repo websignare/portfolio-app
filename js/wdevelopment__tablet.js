@@ -9,22 +9,23 @@ function web_development__main() {
     // NAVIGATION_BAR
     var bar_gr = nav_bar__create(screen_width_in_px);  
 
-    web_development__activate();
+    web_development_tablet__activate();
 
     $(window).resize(function() {
         
-        web_development__deactivate();
+        web_development_tablet__deactivate();
 
-        web_development__activate();
+        web_development_tablet__activate();
     });
 }
 
-function web_development__activate(bar_gr) {
+function web_development_tablet__activate(bar_gr) {
     var screen_width_in_px = window.innerWidth;
     var screen_height      = window.innerHeight;
 
-    /*document.title = "web_development__tablet"
-    window.history.pushState({page: "web_development__tablet"},"", "#web_development__tablet");*/
+    document.title = "web_development_tablet"
+    window.history.pushState({page: "web_development_tablet"},"", "#web_development_tablet");
+    current_page = "web_development_tablet"
 
     $("body").append(`
         <div id="web_development">
@@ -47,10 +48,9 @@ function web_development__activate(bar_gr) {
     var develop__tablet_info = web_development__create_responsive(bar_gr);
     develop_animate__tablet_activate(develop__tablet_info, screen_width_in_px, screen_height)
 
-    //current_page = "web_development__tablet"
 }
     
-function web_development__deactivate() {
+function web_development_tablet__deactivate() {
 
     $("#web_development").remove();
     $("#sketch_p5").remove();

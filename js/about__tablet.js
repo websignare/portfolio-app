@@ -25,6 +25,10 @@ function about_tablet__activate(bar_gr) {
     var screen_width_in_px = window.innerWidth;
     var screen_height      = window.innerHeight; 
 
+    document.title = "about_tablet"
+    window.history.pushState({page: "about_tablet"},"", "#about_tablet");
+    current_page = "about_tablet"
+
     $("body").append(`
 
         <div id="about_tablet">
@@ -44,7 +48,6 @@ function about_tablet__activate(bar_gr) {
     var tablet_info = about__tablet_create_responsive(bar_gr);
     animate_all_activate(tablet_info, screen_width_in_px, screen_height)
 
-    //current_page = "about";
 
 }
 

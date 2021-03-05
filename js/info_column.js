@@ -533,8 +533,8 @@ function create_element(parent_gr, column_info, element_data, element_y, screen_
 
 
     //SHADOW_rect
-    var shadow_gr         = parent_gr.nested().move(-10, element_y-10).size(screen_width, screen_height).attr({id: "element_shadow"})
-    var background_shadow = shadow_gr.rect(element_width+20,element_height+20).fill("#3e0731ff").move(-10,-10).attr({opacity: "0.4", id: "column_shadow_rect"})
+    var shadow_gr         = parent_gr.nested().move(5, element_y+5).size(screen_width, screen_height).attr({id: "element_shadow"})
+    var background_shadow = shadow_gr.rect(element_width+10,element_height+10).fill("#350028ff").move(5,5).attr({opacity: "0.7", id: "column_shadow_rect"})
 
     apply_filter(shadow_gr, "column_shadow", "column_shadow_rect")
 
@@ -593,7 +593,7 @@ function create_element(parent_gr, column_info, element_data, element_y, screen_
     if(screen_physical_width_cm < 33.8){
         pulsating_circle(overlay_gr, 2000, screen_width-280, screen_height/1.2)
     }else{
-        pulsating_circle(overlay_gr, 2000, screen_width-400, screen_height/1.2)
+        pulsating_circle(overlay_gr, 2000, screen_width-260, screen_height/1.2)
     }
 
     var element_activated = false;

@@ -52,7 +52,7 @@ function create_full_screen_animations(bar_gr, screen_width, screen_height) {
 //--------------------------------------------BUTTON_ONE------------------------------------------------------------------
 function swipe_to_right(parent_gr, transition_elements_gr, bar_gr, screen_width, screen_height) {
     //create full_screen
-    var full_screen_rect    = transition_elements_gr.rect(0, screen_height).fill('#164372').attr({opacity: 1.0})
+    var full_screen_rect    = transition_elements_gr.rect(0, screen_height).fill('#442b3eff').attr({opacity: 1.0})
     var swipe_to_right_info = {
         "full_screen_rect": full_screen_rect
     }

@@ -1,7 +1,7 @@
-$( document ).ready(function() {
+/*$( document ).ready(function() {
     hp__mobile__main()
     console.log( "ready!" );
-});
+});*/
 var current_page = "home_page_mobile"
 
 function hp__mobile__main() {
@@ -25,29 +25,22 @@ function hp__mobile__main() {
 function hp__mobile__activate(bar_gr) {
     var screen_width_in_px = window.innerWidth;
     var screen_height      = window.innerHeight;
-    document.title = "home_page_mobile"
+    document.title = "home page mobile"
     window.history.pushState({page: "home_page_mobile"},"", "#home_page_mobile");
-
-    $("body").append(`
-        <div id="hp__mobile">
-            <div id="wrapper">
-            </div>
-        </div>
-    `);
+    current_page = "home_page_mobile"
 
     var hp__mobile_info = hp__mobile__create_responsive(bar_gr);
-    hp_top__animate(hp__mobile_info, screen_width_in_px, screen_height)
-    current_page = "home_page_mobile"
+    hp_top__mobile__animate(hp__mobile_info, screen_width_in_px, screen_height)
+
+    return hp__mobile_info;
 }
     
 function hp__mobile__deactivate() {
 
     $("#hp__mobile").remove();
-    $("#hp__mobile #wrapper").remove();
 
     $("#contact_mobile_wrapper").remove();
-    $("body #hp").remove();
-    $("#hp #wrapper").remove();
+
     remove_triggers("hp_canvas__trigger")
 
 }
@@ -56,23 +49,26 @@ function hp__mobile__create_responsive(bar_gr) {
 
     var screen_width_in_px = window.innerWidth;
     var screen_height      = window.innerHeight;
-
+    $("body #hp").append(`
+        <div id="hp__mobile">
+            </div>
+        </div>
+    `);
     var double_screen_height = screen_height*2-110;
     //-------STYLE-------
-    $("#hp__mobile #wrapper").css({                    
-        "background-color": '#d9d9d9ff',
+    $("#hp__mobile").css({                    
+        "background-color": '#ece8e7f3',
         "position":         "relative",
-        "height":           double_screen_height,
         "width":            screen_width_in_px
     }); 
 
     var current_scroll_y = window.scrollY;
 
-    var bounding_rect    = $("#hp__mobile #wrapper").get(0).getBoundingClientRect()
+    var bounding_rect    = $("#hp__mobile").get(0).getBoundingClientRect()
     var hp__div_bottom_y = current_scroll_y+(bounding_rect.bottom-150);
     console.log(bounding_rect.top, bounding_rect.right, bounding_rect.bottom, bounding_rect.left);
 
-    var hp__mobile__container    = SVG().addTo("#hp__mobile #wrapper").size(screen_width_in_px, double_screen_height)
+    var hp__mobile__container    = SVG().addTo("#hp__mobile").size(screen_width_in_px, double_screen_height)
     var hp__mobile__container_gr = hp__mobile__container.nested()   
 
     var screen_physical_width_cm = get_physical_screen_width(screen_width_in_px);
@@ -105,15 +101,15 @@ function hp__mobile(parent_gr, bar_gr, screen_width_in_px, screen_height, double
 
     //CALL MENU FUNCTION
     var menu_rect_gr = hp__mobile__layout_gr.nested()
-    .attr({
+    menu_rect_gr.attr({
         x: screen_width_in_px-60,
         y: 0
     })
     
     var menu_rect         = menu_rect_gr.rect(50,50).attr({ opacity: 0.0, color: '#839b8bff'})
-    var menu_line_top     = menu_rect_gr.line(3, 20, 40, 20).stroke({ width: 5, color: '#fff', linecap: 'round' })
-    var menu_line_midddle = menu_rect_gr.line(3, 35, 40, 35).stroke({ width: 5, color: '#fff', linecap: 'round' })
-    var menu_line_bottom  = menu_rect_gr.line(3, 50, 40, 50).stroke({ width: 5, color: '#fff', linecap: 'round' })
+    var menu_line_top     = menu_rect_gr.line(3, 20, 35, 20).stroke({ width: 5, color: '#fff', linecap: 'round' })
+    var menu_line_midddle = menu_rect_gr.line(3, 32, 35, 32).stroke({ width: 5, color: '#fff', linecap: 'round' })
+    var menu_line_bottom  = menu_rect_gr.line(3, 45, 35, 45).stroke({ width: 5, color: '#fff', linecap: 'round' })
 
     var menu_rect_clicked = false;
 
@@ -145,7 +141,7 @@ function hp__mobile(parent_gr, bar_gr, screen_width_in_px, screen_height, double
     var parentheses = parentheses_gr.path("m -2009.0649,148.1955 h 3.5897 v 20.16483 h -3.5897 z m 57.4847,146.18287 q -11.6662,0 -19.2004,-4.01022 -7.5343,-3.88868 -11.7876,-10.45086 -4.2533,-6.44066 -5.9546,-14.21804 -1.7013,-7.77741 -1.7013,-15.31174 v -67.20152 q 0,-8.02043 -4.2532,-11.42303 -4.2533,-3.40263 -11.4231,-3.40263 v -20.17259 q 7.1698,0 11.4231,-3.40261 4.2532,-3.4026 4.2532,-11.42306 V 66.16058 q 0,-7.534355 1.7013,-15.311739 1.7013,-7.777404 5.9546,-14.21804 4.2533,-6.562179 11.7876,-10.450881 7.5342,-4.010207 19.2004,-4.010207 h 20.2942 v 27.099331 h -8.8711 q -8.0205,0 -13.0029,5.590004 -4.8608,5.468479 -4.8608,14.339563 V 135.0634 q 0,9.23563 -3.7672,14.82564 -3.7672,5.46848 -9.3571,8.385 5.5899,2.91651 9.3571,8.50652 3.7672,5.59 3.7672,14.70413 v 65.86477 q 0,8.87108 4.8608,14.33956 4.9824,5.59 13.0029,5.59 h 8.8711 v 27.09935 z")
     parentheses_gr.css("position", "fixed")
 
-    parentheses.fill('#bdbdbdff')
+    parentheses.fill('#d2d1d1ff')
     parentheses.move(screen_width_in_px/2-12,double_screen_height/2-parentheses.bbox().height/2)
     //parentheses.rotate(180)
     parentheses.scale(4.6)
@@ -163,7 +159,7 @@ function hp__mobile(parent_gr, bar_gr, screen_width_in_px, screen_height, double
 
     var dots = dots_gr.path("m -1754.4056,199.84313 q -2.4405,0 -4.4817,-1.19807 -1.9968,-1.19807 -3.1948,-3.19485 -1.1981,-1.99679 -1.1981,-4.48168 0,-2.44051 1.1981,-4.43729 1.198,-1.99679 3.1948,-3.19486 2.0412,-1.24244 4.4817,-1.24244 2.4849,0 4.4817,1.24244 1.9968,1.19807 3.1948,3.19486 1.1981,1.99678 1.1981,4.43729 0,2.48489 -1.1981,4.48168 -1.198,1.99678 -3.1948,3.19485 -1.9968,1.19807 -4.4817,1.19807 z m 0,34.78843 q -2.4405,0 -4.4817,-1.19807 -1.9968,-1.19807 -3.1948,-3.19486 -1.1981,-2.04115 -1.1981,-4.48167 0,-2.48489 1.1981,-4.48167 1.198,-1.99679 3.1948,-3.19486 2.0412,-1.19807 4.4817,-1.19807 2.4849,0 4.4817,1.19807 1.9968,1.19807 3.1948,3.19486 1.1981,1.99678 1.1981,4.48167 0,2.44052 -1.1981,4.48167 -1.198,1.99679 -3.1948,3.19486 -1.9968,1.19807 -4.4817,1.19807 z")
 
-    dots.fill('#bdbdbdff')
+    dots.fill('#d2d1d1ff')
     dots.move(screen_width_in_px-dots.bbox().width-50,(parentheses.bbox().y+parentheses.bbox().height/2)-dots.bbox().height/2)
     dots.scale(3)
     dots.attr({
@@ -250,7 +246,7 @@ function hp__mobile(parent_gr, bar_gr, screen_width_in_px, screen_height, double
         x: 0,
         y: ui_and_ux.bbox().y+ui_and_ux.bbox().height+35//designer_dev__rect.bbox().height/2+designer_dev__title.bbox().height/2-10
     })
-    var designer_dev__rect = designer_dev__gr.rect(screen_width_in_px,100)
+    var designer_dev__rect = designer_dev__gr.rect(screen_width_in_px,"10vh")
         .fill('#c12d2dff')
         .attr({
             id:  "designer_dev__rect",
@@ -270,7 +266,7 @@ function hp__mobile(parent_gr, bar_gr, screen_width_in_px, screen_height, double
             weight:  700,
             fill:    '#fff',
             family:  'Quicksand',
-            size:    24
+            size:    "5.5vw"
         })    
     designer_dev__title.attr({
         x: designer_dev__gr.bbox().width/2+designer_dev__title.bbox().width/2,
@@ -284,7 +280,7 @@ function hp__mobile(parent_gr, bar_gr, screen_width_in_px, screen_height, double
     var design__gr = des_dev_mood__gr.nested()
 
     var design__rect = design__gr.rect(screen_width_in_px,100)
-        .fill('#533065ff')
+        .fill('#442b3eff')
         .attr({
             id:  "designer_dev__rect",
             opacity: 1.0,
@@ -300,7 +296,7 @@ function hp__mobile(parent_gr, bar_gr, screen_width_in_px, screen_height, double
             weight:  700,
             fill:    '#fff',
             family:  'Quicksand',
-            size:    24
+            size:    "5.5vw"
         })    
     design__title.attr({
         x: design__gr.bbox().width/2-design__title.bbox().width/2,
@@ -353,7 +349,7 @@ function hp__mobile(parent_gr, bar_gr, screen_width_in_px, screen_height, double
     var development__gr = des_dev_mood__gr.nested().fill("#0000000")   
 
     var development__rect = development__gr.rect(screen_width_in_px,100)
-        .fill('#8a2337ff')
+        .fill('#22646bff')
         .attr({
             id:  "designer_dev__rect",
             opacity: 1.0,
@@ -369,7 +365,7 @@ function hp__mobile(parent_gr, bar_gr, screen_width_in_px, screen_height, double
             weight:  700,
             fill:    '#fff',
             family:  'Quicksand',
-            size:    24
+            size:    "5.5vw"
         })    
     development__title.attr({
         x: development__gr.bbox().width/2-development__title.bbox().width/2,
@@ -422,7 +418,7 @@ function hp__mobile(parent_gr, bar_gr, screen_width_in_px, screen_height, double
     var moodboard__gr = des_dev_mood__gr.nested().fill("#0000000")   
 
     var moodboard__rect = moodboard__gr.rect(screen_width_in_px,100)
-        .fill('#cb3f00ff')
+        .fill('#cf6d20ff')
         .attr({
             id:  "moodboard__rect",
             opacity: 1.0,
@@ -438,7 +434,7 @@ function hp__mobile(parent_gr, bar_gr, screen_width_in_px, screen_height, double
             weight:  700,
             fill:    '#fff',
             family:  'Quicksand',
-            size:    24
+            size:    "5.5vw"
         })    
     moodboard__title.attr({
         x: moodboard__gr.bbox().width/2-moodboard__title.bbox().width/2,
@@ -490,7 +486,7 @@ function hp__mobile(parent_gr, bar_gr, screen_width_in_px, screen_height, double
     var contact__gr = text_gr.nested()
 
     var contact__rect = contact__gr.rect(screen_width_in_px,100)
-        .fill('#bdbdbdff')
+        .fill('#c84519ff')
         .attr({
             id:  "contact__rect",
             opacity: 0.0,
@@ -503,19 +499,21 @@ function hp__mobile(parent_gr, bar_gr, screen_width_in_px, screen_height, double
         .font({
             opacity: 1.0,
             weight:  700,
-            fill:    '#bf5b5bff',
+            fill:    '#c84519ff',
             family:  'Quicksand',
-            size:    28
+            size:    "6vw"
         })    
     contact__title.attr({
         x: contact__gr.bbox().width/2-contact__title.bbox().width/2,
         y: contact__gr.bbox().height/2-contact__title.bbox().height/2+10
     })
     var contact_underline = contact__gr.line(contact__gr.bbox().width/2-contact__title.bbox().width/2, contact__gr.bbox().height/2+contact__title.bbox().height/2-10, contact__gr.bbox().width/2+contact__title.bbox().width/2, contact__gr.bbox().height/2+contact__title.bbox().height/2-10)
-    contact_underline.stroke({ width: 3, color: "#bf5b5bff", linecap: 'round' })
+    contact_underline.stroke({ width: 3, color: "#c84519ff", linecap: 'round' })
     
     contact__gr.attr({
         opacity: 0.0,
+        width: contact__gr.bbox().width,
+        height: contact__gr.bbox().height,
         x: 0,
         y: double_screen_height-contact__gr.bbox().height-40
         //y: design__gr.bbox().height+20+development__gr.bbox().height+20+moodboard__gr.bbox().height+50
@@ -593,7 +591,7 @@ function hp__mobile(parent_gr, bar_gr, screen_width_in_px, screen_height, double
         "designer_dev__gr":    designer_dev__gr,
         "designer_dev__rect":  designer_dev__rect,
         "designer_dev__title": designer_dev__title,
-        "design__gr":          design__gr,
+        "design_gr":           design__gr,
         "development__gr":     development__gr,
         "moodboard__gr":       moodboard__gr,
         "contact__gr":         contact__gr
@@ -604,7 +602,7 @@ function hp__mobile(parent_gr, bar_gr, screen_width_in_px, screen_height, double
     return hp__mobile_info
 }
 
-function hp_top__animate(hp__mobile_info, screen_width_in_px, screen_height){
+function hp_top__mobile__animate(hp__mobile_info, screen_width_in_px, screen_height){
     var parentheses         = hp__mobile_info["parentheses"];
     var ui_and_ux           = hp__mobile_info["ui_and_ux"];
     var dots                = hp__mobile_info["dots"];
@@ -640,15 +638,15 @@ function hp_top__animate(hp__mobile_info, screen_width_in_px, screen_height){
         delay:    150,
         duration: 700
     }).attr({
-        x: designer_dev__gr.bbox().width/2-designer_dev__title.bbox().width/2-70,
-        y: designer_dev__gr.bbox().height/2-designer_dev__title.bbox().height/2+10
+        x: screen_width_in_px/2-designer_dev__title.bbox().width/2,
+        y: designer_dev__gr.bbox().height/2-designer_dev__title.bbox().height/2+10    
     })
         
 }
 
 
 function buttons__animate__activate(hp__mobile_info, screen_width_in_px, double_screen_height){
-    var design__gr         = hp__mobile_info["design__gr"];
+    var design__gr         = hp__mobile_info["design_gr"];
     var development__gr    = hp__mobile_info["development__gr"];
     var moodboard__gr      = hp__mobile_info["moodboard__gr"];
     var contact__gr        = hp__mobile_info["contact__gr"]
@@ -678,7 +676,7 @@ function buttons__animate__activate(hp__mobile_info, screen_width_in_px, double_
         delay:    900
     }).attr({
         opacity: 1.0,
-        y: double_screen_height-contact__gr.bbox().height-40
+        y: double_screen_height-contact__gr.bbox().height-100
 
     })
   
@@ -687,7 +685,7 @@ function buttons__animate__activate(hp__mobile_info, screen_width_in_px, double_
 
 
 function buttons__animate__deactivate(hp__mobile_info, screen_width_in_px, double_screen_height){
-    var design__gr         = hp__mobile_info["design__gr"];
+    var design__gr         = hp__mobile_info["design_gr"];
     var development__gr    = hp__mobile_info["development__gr"];
     var moodboard__gr      = hp__mobile_info["moodboard__gr"];
     var contact__gr        = hp__mobile_info["contact__gr"]

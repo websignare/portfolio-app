@@ -641,30 +641,92 @@ function history__info(parent_gr, screen_width_in_px, screen_height, history__di
 
     about_create__image(images_gr, bist__url, rect_width, rect_height, 0, rect_height/2, 0.7, 0, 0)
 
-    var paragraph__b = images_gr.text(function(add){
-        add.tspan('After graduating as a sculptor on Faculty').newLine()
-        add.tspan('of Fine Arts I`ve developed passion').newLine() 
-        add.tspan('for creating through digital media.').newLine()
-        add.tspan('I`ve spent the last 4 years exploring').newLine()
-        add.tspan('programming languages ').fill('#fff').newLine()//.font('size','36')
-        add.tspan('& wide palette')
-        add.tspan('of different design genres.').newLine()
-    })
+    var paragraph_gr = images_gr.nested()
+    var paragraph__a = paragraph_gr.text('After graduating as a sculptor on Faculty')
     .font({
         opacity: 1.0,
         weight:  700,
-        leading:  '1.5em',
         fill:    '#fff',
         family:  'Open Sans',
         size:    '1.5vw'
     })    
-
+    paragraph__a.attr({
+        id: 'paragraph__a',
+        x: paragraph_gr.bbox().width/2-paragraph__a.bbox().width/2,
+        y: 0
+    })
+    var paragraph__b = paragraph_gr.text('of Fine Arts I`ve developed passion')
+    .font({
+        opacity: 1.0,
+        weight:  700,
+        fill:    '#fff',
+        family:  'Open Sans',
+        size:    '1.5vw'
+    })    
     paragraph__b.attr({
-        id:     'paragraph__b',
-        opacity: 0.0,
-        x:       screen_width_in_px,
-        y:       screen_height/2-paragraph__b.bbox().height/2
+        id: 'paragraph__b',
+        x: paragraph_gr.bbox().width/2-paragraph__b.bbox().width/2,
+        y: paragraph__a.bbox().height+20
     }) 
+    var paragraph__c = paragraph_gr.text('for creating through digital media.')
+    .font({
+        opacity: 1.0,
+        weight:  700,
+        fill:    '#fff',
+        family:  'Open Sans',
+        size:    '1.5vw'
+    })    
+    paragraph__c.attr({
+        id: 'paragraph__c',
+        x: paragraph_gr.bbox().width/2-paragraph__c.bbox().width/2,
+        y: paragraph__a.bbox().height+paragraph__b.bbox().height+40
+    })
+    var paragraph__d = paragraph_gr.text('I`ve spent the last 4 years exploring')
+    .font({
+        opacity: 1.0,
+        weight:  700,
+        fill:    '#fff',
+        family:  'Open Sans',
+        size:    '1.5vw'
+    })    
+    paragraph__d.attr({
+        id: 'paragraph__d',
+        x: paragraph_gr.bbox().width/2-paragraph__d.bbox().width/2,
+        y: paragraph__a.bbox().height+paragraph__b.bbox().height+paragraph__c.bbox().height+60
+    })
+    var paragraph__e = paragraph_gr.text('programming languages & wide pallete')
+    .font({
+        opacity: 1.0,
+        weight:  700,
+        fill:    '#fff',
+        family:  'Open Sans',
+        size:    '1.5vw'
+    })    
+    paragraph__e.attr({
+        id: 'paragraph__e',
+        x: paragraph_gr.bbox().width/2-paragraph__e.bbox().width/2,
+        y: paragraph__a.bbox().height+paragraph__b.bbox().height+paragraph__c.bbox().height+paragraph__d.bbox().height+80
+    })
+    var paragraph__f = paragraph_gr.text('of different design genres.')
+    .font({
+        opacity: 1.0,
+        weight:  700,
+        fill:    '#fff',
+        family:  'Open Sans',
+        size:    '1.5vw'
+    })    
+    paragraph__f.attr({
+        id: 'paragraph__f',
+        x: paragraph_gr.bbox().width/2-paragraph__f.bbox().width/2,
+        y: paragraph__a.bbox().height+paragraph__b.bbox().height+paragraph__c.bbox().height+paragraph__d.bbox().height+paragraph__e.bbox().height+100
+    })
+
+
+    paragraph_gr.attr({
+        opacity: 0.0,
+        x: rect_width-paragraph_gr.bbox().width,
+        y: rect_height/2+paragraph_gr.bbox().height/2+35
+    })
 
     // HISTORY__SCROLL_TRIGGER
     var trigger_y_position__history_canvas = history__div_bottom_y-200;
@@ -678,13 +740,13 @@ function history__info(parent_gr, screen_width_in_px, screen_height, history__di
                 delay: 400
             }).ease('>') 
             .attr({y: 0, opacity: 1.0})
-            paragraph__b.animate({
+            paragraph_gr.animate({
                 delay:    200,
                 duration: 400,
             }).ease('>') 
             .attr({
                 opacity: 1.0,
-                x:       screen_width_in_px/2,
+                x: rect_width-paragraph_gr.bbox().width-300,
             })
         },
         // deactivate
@@ -694,13 +756,13 @@ function history__info(parent_gr, screen_width_in_px, screen_height, history__di
                 delay:    400, 
             }).ease('>') 
             .attr({y: -50, opacity: 0.1})
-            paragraph__b.animate({
+            paragraph_gr.animate({
                 delay:    200,
                 duration: 400,
             }).ease('>') 
             .attr({
                 opacity: 0.0,
-                x:       screen_width_in_px,
+                x: rect_width-paragraph_gr.bbox().width,
             })
         });
     
@@ -717,28 +779,80 @@ function process__info(parent_gr, screen_width_in_px, screen_height, process__di
 
     about_create__image(images_gr, stickers__url, rect_width, rect_height, 0, rect_height/2, 0.6, 0, 0)
 
-    var paragraph__c = images_gr.text(function(add){
-        add.tspan('I find my passion in creating and coding').newLine() 
-        add.tspan('visualy appealing, responsive websites with').newLine()
-        add.tspan('focus on friendly, emotive, aesthetically').newLine()
-        add.tspan('pleasing, clear, on-brand and usable').newLine()
-        add.tspan('interfaces.').newLine()
-
-    }) 
+    var paragraph_gr = images_gr.nested()
+    var paragraph__a = paragraph_gr.text('I find my passion in creating and coding')
     .font({
         opacity: 1.0,
         weight:  700,
-        leading:  '1.5em',
-        fill:    '#ebf2edff',
+        fill:    '#fff',
         family:  'Open Sans',
-        size:    '1.5vw'
+        size:    "1.5vw"
+    })    
+    paragraph__a.attr({
+        id: 'paragraph__a',
+        x: paragraph_gr.bbox().width/2-paragraph__a.bbox().width/2+50,
+        y: 0
+    })
+    var paragraph__b = paragraph_gr.text('visualy appealing, responsive websites with')
+    .font({
+        opacity: 1.0,
+        weight:  700,
+        fill:    '#fff',
+        family:  'Open Sans',
+        size:    "1.5vw"
+    })    
+    paragraph__b.attr({
+        id: 'paragraph__b',
+        x: paragraph_gr.bbox().width/2-paragraph__b.bbox().width/2+45,
+        y: paragraph__a.bbox().height+20
+    }) 
+    var paragraph__c = paragraph_gr.text('focus on friendly, emotive, aesthetically')
+    .font({
+        opacity: 1.0,
+        weight:  700,
+        fill:    '#fff',
+        family:  'Open Sans',
+        size:    "1.5vw"
     })    
     paragraph__c.attr({
-        opacity: 0.0,
         id: 'paragraph__c',
-        x: 50,
-        y: screen_height/2-paragraph__c.bbox().height/2
-    }) 
+        x: paragraph_gr.bbox().width/2-paragraph__c.bbox().width/2+50,
+        y: paragraph__a.bbox().height+paragraph__b.bbox().height+40
+    })
+    var paragraph__d = paragraph_gr.text('pleasing, clear, on-brand and usable')
+    .font({
+        opacity: 1.0,
+        weight:  700,
+        fill:    '#fff',
+        family:  'Open Sans',
+        size:    "1.5vw"
+    })    
+    paragraph__d.attr({
+        id: 'paragraph__d',
+        x: paragraph_gr.bbox().width/2-paragraph__d.bbox().width/2+50,
+        y: paragraph__a.bbox().height+paragraph__b.bbox().height+paragraph__c.bbox().height+60
+    })
+    var paragraph__e = paragraph_gr.text('interfaces.')
+    .font({
+        opacity: 1.0,
+        weight:  700,
+        fill:    '#fff',
+        family:  'Open Sans',
+        size:    "1.5vw"
+    })    
+    paragraph__e.attr({
+        id: 'paragraph__e',
+        x: paragraph_gr.bbox().width/2-paragraph__e.bbox().width/2+50,
+        y: paragraph__a.bbox().height+paragraph__b.bbox().height+paragraph__c.bbox().height+paragraph__d.bbox().height+80
+    })
+
+
+    paragraph_gr.attr({
+        opacity: 0.0,
+        width: paragraph_gr.bbox().width+100,
+        x: -350,
+        y: screen_height/2-paragraph_gr.bbox().height/2-130
+    })
 
     // PROCESS__SCROLL_TRIGGER
     var trigger_y_position__process_canvas = process__div_bottom_y-200;
@@ -752,13 +866,13 @@ function process__info(parent_gr, screen_width_in_px, screen_height, process__di
                 delay:    400, 
             }).ease('>') 
             .attr({y: 0, opacity: 1.0})
-            paragraph__c.animate({
+            paragraph_gr.animate({
                 duration: 400,
                 delay:    400, 
             }).ease('>') 
             .attr({
                 opacity: 1.0,
-                x: 240,
+                x: 250,
             })
         },
         // deactivate
@@ -768,13 +882,13 @@ function process__info(parent_gr, screen_width_in_px, screen_height, process__di
                 delay:    400,  
             }).ease('<') 
             .attr({y: -50, opacity: 0.1})
-            paragraph__c.animate({
+            paragraph_gr.animate({
                 duration: 400,
                 delay:    400, 
             }).ease('>') 
             .attr({
                 opacity: 0.0,
-                x: 50,
+                x: -350,
             })
         });
 

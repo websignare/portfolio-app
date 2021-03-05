@@ -1,7 +1,7 @@
-$( document ).ready(function() {
+/*$( document ).ready(function() {
     web_development__mobile__main()
     console.log( "web_development__ready!" );
-});
+});*/
 
 function web_development__mobile__main() {
     var screen_width_in_px = window.innerWidth;
@@ -25,7 +25,7 @@ function web_development__mobile__activate(bar_gr) {
     document.title = "web_development_mobile"
     window.history.pushState({page: "web_development_mobile"},"", "#web_development_mobile");
 
-    $("body").append(`
+    $("body #hp").append(`
         <div id="web_development__mobile">
             <div id="headline__info">
             </div>
@@ -58,7 +58,7 @@ function web_development__mobile__create_responsive(bar_gr) {
 
     //-------STYLE-------
     $("#web_development__mobile").css({                    
-        "background-color": '#d8d8d8ff',
+        "background-color": '#ece8e7f3',
         "position":         "relative",
         "width":             screen_width_in_px
     }); 
@@ -76,13 +76,15 @@ function web_development__mobile__create_responsive(bar_gr) {
         "width":            screen_width_in_px
     }); */
 
-    $("#web_development__mobile #procedural_art__info").css({                    
+    $("#web_development__mobile #procedural_art__info").css({   
+        "background-color": '#0e282eff', 
         "position":         "relative",
         "height":           "2900px",
         "width":            screen_width_in_px
     }); 
 
-    $("#web_development__mobile #video__info").css({                    
+    $("#web_development__mobile #video__info").css({
+        "background-color": '#27040aff',
         "position":         "relative",
         "height":           screen_height,
         "width":            screen_width_in_px
@@ -144,25 +146,25 @@ function web_development_mobile_headline__info(parent_gr, bar_gr, screen_width_i
 
     //--------------------------RECT---------------------------------------
     var strip__gr = dev_container__gr.nested()
-    var strip = strip__gr.rect(75,screen_height+50)
-        .fill('#812f3eff')
+    var strip = strip__gr.rect(screen_width_in_px/2,screen_height+50)
+        .fill('#597f83ff')
     strip.attr({
         id:      "strip",
         opacity: 1.0,
-        'x':     screen_width_in_px-strip.bbox().width,
+        'x':     screen_width_in_px/2,
         'y':     0
     })
 
     //---------------------CALL MENU FUNCTION-------------------------------
     var menu_rect_gr = strip__gr.nested()
     .attr({
-        x: strip.bbox().x+15,
+        x: screen_width_in_px-60,
         y: 0
     })
     var menu_rect         = menu_rect_gr.rect(50,50).attr({ opacity: 0.0, color: '#c2c2c2ff'})
-    var menu_line_top     = menu_rect_gr.line(3, 20, 40, 20).stroke({ width: 5, color: '#c2c2c2ff', linecap: 'round' })
-    var menu_line_midddle = menu_rect_gr.line(3, 35, 40, 35).stroke({ width: 5, color: '#c2c2c2ff', linecap: 'round' })
-    var menu_line_bottom  = menu_rect_gr.line(3, 50, 40, 50).stroke({ width: 5, color: '#c2c2c2ff', linecap: 'round' })
+    var menu_line_top     = menu_rect_gr.line(3, 20, 35, 20).stroke({ width: 5, color: '#c2c2c2ff', linecap: 'round' })
+    var menu_line_midddle = menu_rect_gr.line(3, 32, 35, 32).stroke({ width: 5, color: '#c2c2c2ff', linecap: 'round' })
+    var menu_line_bottom  = menu_rect_gr.line(3, 45, 35, 45).stroke({ width: 5, color: '#c2c2c2ff', linecap: 'round' })
 
 
     var menu_rect_clicked = false;
@@ -184,7 +186,7 @@ function web_development_mobile_headline__info(parent_gr, bar_gr, screen_width_i
     var plus_symbol = plus_symbol_gr.path("m 786.55532,-1194.9604 q -8.7225,4.1731 -17.58674,0.962 -8.86429,-3.2113 -13.4382,-12.2013 -4.57384,-8.9899 -1.61756,-17.3908 2.95636,-8.4007 11.67886,-12.5738 l 147.91915,-70.7694 q 8.72249,-4.1732 17.58673,-0.962 8.67372,2.8367 13.24756,11.8266 4.57391,8.99 1.8082,17.7654 -2.95636,8.4008 -11.67886,12.5739 z m 110.57735,37.9196 q -10.17627,4.8687 -20.51203,1.4299 -9.97232,-3.6127 -15.30854,-14.101 l -74.32571,-146.0868 q -5.33622,-10.4883 -1.86135,-20.5346 3.47493,-10.0461 13.65119,-14.9147 10.53969,-5.0426 20.14852,-1.2561 9.97232,3.6126 15.30854,14.1009 l 74.32572,146.0869 q 5.33621,10.4883 2.22478,20.3606 -3.11144,9.8724 -13.65112,14.9149 z")
     plus_symbol_gr.css( "position", "fixed")
 
-    plus_symbol.fill('#c2c2c2ff')
+    plus_symbol.fill('#d2d1d1ff')
     plus_symbol.move(screen_width_in_px/2-plus_symbol.bbox().width/2-30,screen_height/2+plus_symbol.bbox().width/2+30)
     //plus_symbol.rotate(180)
     plus_symbol.scale(2.6)
@@ -219,7 +221,7 @@ function web_development_mobile_headline__info(parent_gr, bar_gr, screen_width_i
     develop_path__gr.attr({
         id:    "develop_path__gr",
     })
-    develop_path.fill('#4a868cff')
+    develop_path.fill('#863845ff')
     develop_path.move(0-develop_path.bbox().width-110,screen_height/1.35)
     //develop_path.rotate(-90)
     develop_path.scale(3)

@@ -1,7 +1,9 @@
-$( document ).ready(function() {
+/*$( document ).ready(function() {
     about__mobile__main()
     console.log( "about__ready!" );
-});
+});*/
+var current_page = "about_mobile"
+
 function about__mobile__main() {
     var screen_width_in_px = window.innerWidth;
 
@@ -25,7 +27,7 @@ function about__mobile__activate(bar_gr) {
     document.title = "about_mobile"
     window.history.pushState({page: "about_mobile"},"", "#about_mobile");
 
-    $("body").append(`
+    $("body #hp").append(`
         <div id="about__mobile">
             <div id="intro__info">
             </div>
@@ -62,19 +64,20 @@ function about__mobile__create_responsive(bar_gr) {
 
     //-------STYLE-------
     $("#about__mobile").css({                    
-        "background-color": '#d8d8d8ff',
+        "background-color": '#193136ff',
         "position":         "relative",
         "width":             screen_width_in_px
     }); 
 
     $("#about__mobile #intro__info").css({     
-        //"background-color": '#000',               
+        //"background-color": '#193136ff',               
         "position": "relative",
         "height":    screen_height+70,
         "width":     screen_width_in_px,
     }); 
     
-    $("#about__mobile #about_me__info").css({                    
+    $("#about__mobile #about_me__info").css({   
+        "background-color": '#193136ff',                                
         "position":         "relative",
         "height":           screen_height,
         "width":            screen_width_in_px,
@@ -87,7 +90,8 @@ function about__mobile__create_responsive(bar_gr) {
     console.log(bounding_rect.top, bounding_rect.right, bounding_rect.bottom, bounding_rect.left);
 
 
-    $("#about__mobile #history__info").css({                    
+    $("#about__mobile #history__info").css({    
+        "background-color": '#193136ff',                                                
         "position":"relative",
         "height":   screen_height,
         "width":    screen_width_in_px,
@@ -98,7 +102,8 @@ function about__mobile__create_responsive(bar_gr) {
     var history__div_bottom_y = current_scroll_y+(bounding_rect.bottom-250);
     console.log(bounding_rect.top, bounding_rect.right, bounding_rect.bottom, bounding_rect.left);
 
-    $("#about__mobile #process__info").css({                    
+    $("#about__mobile #process__info").css({    
+        "background-color": '#193136ff',                                                
         "position": "relative",
         "height":   screen_height,
         "width":    screen_width_in_px,
@@ -110,7 +115,7 @@ function about__mobile__create_responsive(bar_gr) {
     console.log(bounding_rect.top, bounding_rect.right, bounding_rect.bottom, bounding_rect.left);
 
     $("#about__mobile #video__info").css({   
-        "background-color": '#262626', 
+        "background-color": '#204057ff', 
         "position": "relative",
         "height":    screen_height,
         "width":     screen_width_in_px,
@@ -255,28 +260,28 @@ function about_create__image(parent_gr, image_url, rect_width, rect_height, x, y
 function about_intro_mobile__info(parent_gr, bar_gr, screen_width_in_px, screen_height){
 
     container__gr = parent_gr.nested()
-
+    var background_rect = container__gr.rect(screen_width_in_px,screen_height).fill("#ece8e7ff")
     //--------------------------RECT---------------------------------------
     var strip__gr = container__gr.nested()
-    var strip = strip__gr.rect(75,screen_height)
-        .fill('#f18b0fff')
+    var strip = strip__gr.rect(screen_width_in_px/2,screen_height)
+        .fill('#f7a60bf2')
     strip.attr({
         id:      "strip",
         opacity: 1.0,
-        'x':     screen_width_in_px-strip.bbox().width,
+        'x':     screen_width_in_px/2,
         'y':     0
     })
 
     //---------------------CALL MENU FUNCTION-------------------------------
     var menu_rect_gr = strip__gr.nested()
     .attr({
-        x: strip.bbox().x+15,
+        x: screen_width_in_px-60,
         y: 0
     })
     var menu_rect         = menu_rect_gr.rect(50,50).attr({ opacity: 0.0, color: '#262626ff'})
-    var menu_line_top     = menu_rect_gr.line(3, 20, 40, 20).stroke({ width: 5, color: '#262626ff', linecap: 'round' })
-    var menu_line_midddle = menu_rect_gr.line(3, 35, 40, 35).stroke({ width: 5, color: '#262626ff', linecap: 'round' })
-    var menu_line_bottom  = menu_rect_gr.line(3, 50, 40, 50).stroke({ width: 5, color: '#262626ff', linecap: 'round' })
+    var menu_line_top     = menu_rect_gr.line(3, 20, 35, 20).stroke({ width: 5, color: '#262626ff', linecap: 'round' })
+    var menu_line_midddle = menu_rect_gr.line(3, 32, 35, 32).stroke({ width: 5, color: '#262626ff', linecap: 'round' })
+    var menu_line_bottom  = menu_rect_gr.line(3, 45, 35, 45).stroke({ width: 5, color: '#262626ff', linecap: 'round' })
 
 
     var menu_rect_clicked = false;
@@ -313,7 +318,7 @@ function about_intro_mobile__info(parent_gr, bar_gr, screen_width_in_px, screen_
     var hashtag_symbol = hashtag_symbol_gr.path("m -833.94527,-1714.4575 c -3.5569,-0.9531 -6.26175,-2.921 -8.11454,-5.9038 -1.65675,-3.0959 -2.00857,-6.4223 -1.05546,-9.9792 0.91158,-3.4023 2.81738,-5.8752 5.71717,-7.4187 3.05454,-1.502 6.36026,-1.7766 9.91716,-0.8235 l 110.65102,29.6488 c 3.5569,0.9531 6.16372,2.9777 7.82047,6.0736 1.85279,2.9827 2.30264,6.2525 1.3496,9.8095 -0.91165,3.4022 -2.89471,5.8544 -5.94925,7.3564 -2.89986,1.5436 -6.12825,1.8388 -9.68515,0.8857 z m 69.32744,58.6052 c -4.17551,-1.1188 -7.02946,-3.4581 -8.56185,-7.018 -1.49101,-3.7146 -1.26973,-7.6333 0.66377,-11.7563 l 60.10182,-130.586 c 1.29269,-2.9687 3.24949,-5.0136 5.8704,-6.1346 2.66237,-1.2756 5.54003,-1.4991 8.633,-0.6703 4.02083,1.0774 6.77676,3.4734 8.2677,7.1879 1.53245,3.5599 1.33187,7.4013 -0.60163,11.5243 l -60.10182,130.5861 c -1.25131,2.814 -3.20811,4.8588 -5.8704,6.1345 -2.5077,1.317 -5.30803,1.5612 -8.40099,0.7324 z m -43.46482,-120.7938 c -3.5569,-0.9531 -6.26175,-2.921 -8.11455,-5.9038 -1.65674,-3.0959 -2.00856,-6.4223 -1.05552,-9.9793 0.91165,-3.4022 2.81744,-5.8751 5.71724,-7.4187 3.05454,-1.502 6.36026,-1.7765 9.91716,-0.8234 l 110.41901,29.5867 c 3.5569,0.953 6.16373,2.9775 7.82047,6.0735 1.8528,2.9827 2.30271,6.2526 1.34961,9.8095 -0.91166,3.4023 -2.89472,5.8544 -5.94918,7.3565 -2.89987,1.5435 -6.12826,1.8387 -9.68523,0.8857 z m -19.3998,103.9493 c -4.02084,-1.0774 -6.79752,-3.396 -8.32991,-6.9559 -1.33634,-3.6731 -1.11506,-7.5919 0.66384,-11.7562 l 60.10182,-130.5861 c 1.29268,-2.9687 3.24948,-5.0135 5.8704,-6.1345 2.6623,-1.2757 5.46263,-1.5198 8.40099,-0.7325 4.17551,1.1188 7.0087,3.5355 8.4997,7.25 1.53239,3.5599 1.33187,7.4013 -0.60162,11.5243 l -36.51091,79.3289 -23.59091,51.2572 c -1.25131,2.814 -3.20811,4.8588 -5.87041,6.1345 -2.66236,1.2756 -5.54003,1.4991 -8.63299,0.6703 z")
     hashtag_symbol_gr.css( "position", "fixed")
 
-    hashtag_symbol.fill('#bdbdbdff')
+    hashtag_symbol.fill('#d0d0d0f3')
     hashtag_symbol.move(screen_width_in_px/2-hashtag_symbol.bbox().width/2,screen_height/2+60)
     //hashtag_symbol.rotate(180)
     hashtag_symbol.scale(3)
@@ -598,7 +603,7 @@ function about_video__mobile__info(parent_gr, screen_width_in_px, screen_height)
         background: "none",
         border:     "none",
         left:       video_global_x,
-        top:        video_global_y+50,
+        top:        video_global_y+100,
         width:      screen_width_in_px,
         height:     video_global_height
     })
@@ -608,7 +613,7 @@ function about_video__mobile__info(parent_gr, screen_width_in_px, screen_height)
         background: "none",
         border:     "none",
         left:       video_global_x,
-        top:        video_global_y+200,
+        top:        video_global_y+250,
         width:      screen_width_in_px,
         height:     video_global_height
     })
@@ -618,7 +623,7 @@ function about_video__mobile__info(parent_gr, screen_width_in_px, screen_height)
         background: "none",
         border:     "none",
         left:       video_global_x,
-        top:        video_global_y+350,
+        top:        video_global_y+400,
         width:      screen_width_in_px,
         height:     video_global_height
     })

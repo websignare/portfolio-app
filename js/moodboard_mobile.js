@@ -1,7 +1,7 @@
-$( document ).ready(function() {
+/*$( document ).ready(function() {
     moodboard__mobile__main()
     console.log( "moodboard__ready!" );
-});
+});*/
 
 function moodboard__mobile__main() {
     var screen_width_in_px = window.innerWidth;
@@ -26,7 +26,7 @@ function moodboard__mobile__activate(bar_gr) {
     document.title = "moodboard_mobile"
     window.history.pushState({page: "moodboard_mobile"},"", "#moodboard_mobile");
 
-    $("body").append(`
+    $("body #hp").append(`
         <div id="moodboard__mobile">
             <div id="headline_info">
             </div>
@@ -56,7 +56,7 @@ function moodboard__mobile__create_responsive(bar_gr) {
 
     //-------STYLE-------
     $("#moodboard__mobile").css({                    
-        "background-color": '#d8d8d8ff',
+        "background-color": '#ece8e7f3',
         "position":         "relative",
         "width":             screen_width_in_px
     }); 
@@ -78,7 +78,7 @@ function moodboard__mobile__create_responsive(bar_gr) {
 
 
     $("#moodboard__mobile #video__info").css({    
-        "background-color": '#732424',                
+        "background-color": '#5d0e11ff',                
         "position": "relative",
         "height":    screen_height,
         "width":     screen_width_in_px,
@@ -145,7 +145,7 @@ function moodboard_headline__mobile(parent_gr, bar_gr, screen_width_in_px, scree
     var square_brackets_symbol = square_brackets_symbol_gr.path("m 935.81176,-1112.7249 q 4.05889,-2.3434 8.13386,-1.0881 4.15668,0.9503 6.5001,5.0093 l 88.60378,153.46619 q 2.3434,4.05893 1.0881,8.13391 -0.9504,4.15665 -5.0093,6.50005 l -40.78258,23.54585 q -4.05897,2.34345 -8.32715,1.19975 -3.96338,-1.06198 -6.30681,-5.12091 -2.23183,-3.86564 -1.28142,-8.0223 1.2552,-4.07492 5.31418,-6.41837 l 28.79908,-16.62715 -0.074,2.10422 -80.34596,-139.16334 3.65848,0.9803 -30.15206,17.4083 q -4.05897,2.3434 -8.21556,1.393 -4.07497,-1.2552 -6.41839,-5.3142 -2.23184,-3.8656 -1.16984,-7.829 1.14361,-4.2682 5.20258,-6.6116 z m -8.39006,234.2058 q -4.05897,2.34345 -8.32723,1.1998 -3.9633,-1.06203 -6.30672,-5.12096 l -88.60377,-153.46624 q -2.34343,-4.0589 -1.28152,-8.0222 1.1437,-4.2683 5.20268,-6.6117 l 40.78252,-23.5458 q 4.05897,-2.3435 8.13394,-1.0882 4.15659,0.9504 6.50001,5.0093 2.23184,3.8657 1.08822,8.1339 -1.06199,3.9633 -5.12096,6.3068 l -28.79907,16.6271 0.0737,-2.1042 80.34599,139.16336 -3.65849,-0.98029 30.15206,-17.4083 q 4.05897,-2.34345 8.02235,-1.28148 4.26818,1.14371 6.61161,5.20264 2.23183,3.86564 0.97663,7.94057 -0.95041,4.15665 -5.00939,6.5001 z")
     square_brackets_symbol_gr.css( "position", "fixed")
 
-    square_brackets_symbol.fill('#c5c5c5ff')
+    square_brackets_symbol.fill('#d2d1d1ff')
     square_brackets_symbol.move(screen_width_in_px/2-square_brackets_symbol.bbox().width/2,screen_height/2-square_brackets_symbol.bbox().height/2+15)
     //square_brackets_symbol.rotate(180)
     square_brackets_symbol.scale(2.9)
@@ -157,25 +157,25 @@ function moodboard_headline__mobile(parent_gr, bar_gr, screen_width_in_px, scree
 
     //--------------------------RECT---------------------------------------
     var strip__gr = container__gr.nested()
-    var strip = strip__gr.rect(75,screen_height)
-        .fill('#f6720aff')
+    var strip = strip__gr.rect(screen_width_in_px/2,screen_height)
+        .fill('#e77e2efe')
     strip.attr({
         id:      "strip",
         opacity: 1.0,
-        'x':     screen_width_in_px-strip.bbox().width,
+        'x':     screen_width_in_px/2,
         'y':     0
     })
 
     //---------------------CALL MENU FUNCTION-------------------------------
     var menu_rect_gr = strip__gr.nested()
     .attr({
-        x: strip.bbox().x+15,
+        x: screen_width_in_px-60,
         y: 0
     })
     var menu_rect         = menu_rect_gr.rect(50,50).attr({ opacity: 0.0, color: '#ac3323ff'})
-    var menu_line_top     = menu_rect_gr.line(3, 20, 40, 20).stroke({ width: 5, color: '#ac3323ff', linecap: 'round' })
-    var menu_line_midddle = menu_rect_gr.line(3, 35, 40, 35).stroke({ width: 5, color: '#ac3323ff', linecap: 'round' })
-    var menu_line_bottom  = menu_rect_gr.line(3, 50, 40, 50).stroke({ width: 5, color: '#ac3323ff', linecap: 'round' })
+    var menu_line_top     = menu_rect_gr.line(3, 20, 35, 20).stroke({ width: 5, color: '#921a1fff', linecap: 'round' })
+    var menu_line_midddle = menu_rect_gr.line(3, 32, 35, 32).stroke({ width: 5, color: '#921a1fff', linecap: 'round' })
+    var menu_line_bottom  = menu_rect_gr.line(3, 45, 35, 45).stroke({ width: 5, color: '#921a1fff', linecap: 'round' })
 
 
     var menu_rect_clicked = false;
@@ -197,7 +197,7 @@ function moodboard_headline__mobile(parent_gr, bar_gr, screen_width_in_px, scree
     moodboard_path__gr.attr({
         id: "moodboard_path__gr",
     })
-    moodboard_path.fill('#ac3323ff')
+    moodboard_path.fill('#921a1fff')
     moodboard_path.move(screen_width_in_px+moodboard_path.bbox().width,menu_rect_gr.bbox().height+moodboard_path.bbox().height+45)
     //moodboard_path.rotate(-90)
     moodboard_path.scale(2.75)
@@ -237,7 +237,7 @@ function masonry_mobile(screen_width_in_px, screen_height){
     $("#moodboard__mobile #masonry_a").append(`
         <div id="blog_masonry_section">
 
-            <h1>Inspiring art</h1>
+            <h1>Inspiration</h1>
             <p>Typography, illustrations & installations</p>
                 <div id="masonry_blog">
                     <div class="blog_item">
@@ -355,7 +355,7 @@ function masonry_mobile(screen_width_in_px, screen_height){
     `)
 
     $("#blog_masonry_section").css({                    
-        "background-color": '#AC3323',
+        "background-color": '#872529ff',
         "position":         "relative",
         "width":            screen_width_in_px,
     }); 
