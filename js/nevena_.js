@@ -65,6 +65,7 @@ function hp__deactivate() {
 
     $("body #hp").remove();
     $("#hp #wrapper").remove();
+    $("#nav_bar").remove();
     $("#contact_wrapper").remove();
 
 }
@@ -100,7 +101,8 @@ function hp__create_responsive(bar_gr) {
     else if (screen_physical_width_cm < 33.8) { // max width for tablet 2736px, max height 2048px
 
         // TABLET
-        
+        var hp_tablet_info = hp_tablet__activate()
+        hp_top__tablet_animate(hp_tablet_info , screen_width_in_px, screen_height)    
 
     }
 

@@ -38,7 +38,7 @@ function deactivate_current_page(current_page_name) {
             moodboard__mobile__deactivate();
             break;
         //TABLET
-        case "hp_tablet":
+        case "home_page_tablet":
             hp_tablet__deactivate();
             break;
         case "about_tablet":
@@ -436,20 +436,20 @@ function run_page_transition(target_page_name, transition_type, current_page_nam
                     moodboard__mobile__activate();
                     break;
                 //TABLET
-                case "hp_tablet":
-                    hp_tablet__activate();
+                case "home_page_tablet":
+                    hp_tablet__activate(bar_gr);
                     break;
                 case "about_tablet":
-                    about_tablet__activate();
+                    about_tablet__activate(bar_gr);
                     break;
                 case "web_design_tablet":
-                    web_design__tablet__activate();
+                    web_design__tablet__activate(bar_gr);
                     break;
                 case "web_development_tablet":
-                    web_development_tablet__activate();
+                    web_development_tablet__activate(bar_gr);
                     break;
                 case "moodboard_tablet":
-                    moodboard__tablet__activate();
+                    moodboard__tablet__activate(bar_gr);
                     break;
                 default:
                     console.log("add support for this target_page ["+target_page_name+"]!")

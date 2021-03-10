@@ -41,6 +41,8 @@ function hp__mobile__deactivate() {
 
     $("#contact_mobile_wrapper").remove();
 
+    $("#nav_bar").remove();
+
     remove_triggers("hp_canvas__trigger")
 
 }

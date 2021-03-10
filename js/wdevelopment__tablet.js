@@ -1,7 +1,7 @@
 
-$(document).ready(function(){
+/*$(document).ready(function(){
     web_development__main();
-})
+})*/
 
 function web_development__main() {
     var screen_width_in_px = window.innerWidth;
@@ -55,7 +55,7 @@ function web_development_tablet__deactivate() {
     $("#web_development").remove();
     $("#sketch_p5").remove();
     $("#technologies__mobile__info").remove();
-    $("#contact_wrapper").remove();
+    $("#contact_mobile_wrapper").remove();
 
     /*remove_triggers("contact_canvas__trigger") // contact_canvas TRIGGER*/
 

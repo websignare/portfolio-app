@@ -1,6 +1,6 @@
-$(document).ready(function(){
+/*$(document).ready(function(){
     about_tablet__main();
-})
+})*/
 
 function about_tablet__main() {
     var screen_width_in_px = window.innerWidth;
@@ -45,8 +45,8 @@ function about_tablet__activate(bar_gr) {
         </div>
     `);
 
-    var tablet_info = about__tablet_create_responsive(bar_gr);
-    animate_all_activate(tablet_info, screen_width_in_px, screen_height)
+    var about_tablet_info = about__tablet_create_responsive(bar_gr);
+    animate_all_tablet__activate(about_tablet_info, screen_width_in_px, screen_height)
 
 
 }
@@ -55,7 +55,7 @@ function about_tablet__activate(bar_gr) {
 function about_tablet__deactivate() {
 
     $("#about_tablet").remove();
-    $("#contact_wrapper").remove();
+    $("#contact_mobile_wrapper").remove();
     remove_triggers("about_canvas__tablet_trigger")
     remove_triggers("history_canvas__tablet_trigger")
     remove_triggers("process_canvas__tablet__trigger")
@@ -828,21 +828,21 @@ function about_video_tablet__info(parent_gr, screen_width_in_px, screen_height){
     })
 
 }
-function animate_all_activate(info, screen_width_in_px, screen_height){
+function animate_all_tablet__activate(about_tablet_info, screen_width_in_px, screen_height){
 
-    var about_me_path__gr  = info["text_tablet_info"]["about_me_path__gr"]
-    var paragraph_gr      = info["text_tablet_info"]["paragraph_gr"]
-    var hashtag_symbol = info["text_tablet_info"]["hashtag_symbol"]
-    var rect_height    = info["rects_tablet"]["rect_height"]
-    var a_rect         = info["rects_tablet"]["a_rect"]
-    var a_rect_y       = info["rects_tablet"]["a_rect_y"]
-    var a_rect_height  = info["rects_tablet"]["a_rect_height"]
-    var b_rect         = info["rects_tablet"]["b_rect"]
-    var b_rect_y       = info["rects_tablet"]["b_rect_y"]
-    var b_rect_height  = info["rects_tablet"]["b_rect_height"]
-    var c_rect         = info["rects_tablet"]["c_rect"]
-    var c_rect_y       = info["rects_tablet"]["c_rect_y"]
-    var c_rect_height  = info["rects_tablet"]["c_rect_height"]
+    var about_me_path__gr  = about_tablet_info["text_tablet_info"]["about_me_path__gr"]
+    var paragraph_gr      = about_tablet_info["text_tablet_info"]["paragraph_gr"]
+    var hashtag_symbol = about_tablet_info["text_tablet_info"]["hashtag_symbol"]
+    var rect_height    = about_tablet_info["rects_tablet"]["rect_height"]
+    var a_rect         = about_tablet_info["rects_tablet"]["a_rect"]
+    var a_rect_y       = about_tablet_info["rects_tablet"]["a_rect_y"]
+    var a_rect_height  = about_tablet_info["rects_tablet"]["a_rect_height"]
+    var b_rect         = about_tablet_info["rects_tablet"]["b_rect"]
+    var b_rect_y       = about_tablet_info["rects_tablet"]["b_rect_y"]
+    var b_rect_height  = about_tablet_info["rects_tablet"]["b_rect_height"]
+    var c_rect         = about_tablet_info["rects_tablet"]["c_rect"]
+    var c_rect_y       = about_tablet_info["rects_tablet"]["c_rect_y"]
+    var c_rect_height  = about_tablet_info["rects_tablet"]["c_rect_height"]
 
     a_rect.animate({
         delay: 600,

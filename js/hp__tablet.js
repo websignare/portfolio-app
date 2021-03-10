@@ -1,11 +1,11 @@
-$(document).ready(function(){
+/*$(document).ready(function(){
     main();
 })
-
+*/
 // IMPORTANT!! - this variable memorizes which page is the current page
-//var current_page = "home_page"
+var current_page = "home_page_tablet"
 
-function main() {
+function hp_tablet__main() {
     
 
     var screen_width_in_px = window.innerWidth;
@@ -56,27 +56,20 @@ function hp_tablet__activate(bar_gr) {
     var screen_width_in_px = window.innerWidth;
     var screen_height      = window.innerHeight;
 
-    document.title = "hp_tablet"
-    window.history.pushState({page: "hp_tablet"},"", "#hp_tablet");
-
-    $("body").append(`
-        <div id="hp_tablet">
-            <div id="wrapper"></div>
-        </div>
-    `);
+    document.title = "home_page_tablet"
+    window.history.pushState({page: "home_page_tablet"},"", "#home_page_tablet");
+    current_page = "home_page_tablet"
 
     var hp__buttons__tablet_info = hp_tablet__create_responsive(bar_gr);
     hp_top__tablet_animate(hp__buttons__tablet_info , screen_width_in_px, screen_height)    
-    current_page = "hp_tablet"
-
+    return hp__buttons__tablet_info
 }
 
 function hp_tablet__deactivate() {
 
-    $("body #hp_tablet").remove();
-    $("#hp_tablet #wrapper").remove();
-    $("#contact_wrapper").remove();
-
+    $("#hp_tablet").remove();
+    $("#nav_bar").remove();
+    $("#contact_mobile_wrapper").remove();
 
     /*remove_triggers("contact_canvas__trigger") // contact_canvas TRIGGER*/
     
@@ -100,7 +93,11 @@ function hp_tablet__create_responsive(bar_gr) {
 
     var screen_width_in_px = window.innerWidth;
     var screen_height      = window.innerHeight;
-
+    $("body #hp").append(`
+        <div id="hp_tablet">
+            <div id="wrapper"></div>
+        </div>
+    `);
     $("#hp_tablet #wrapper").css({                    
         "background-color": '#D9D9D9',
         "position":         "relative",
@@ -113,16 +110,7 @@ function hp_tablet__create_responsive(bar_gr) {
     var screen_physical_width_cm = get_physical_screen_width(screen_width_in_px);
     console.log(screen_physical_width_cm, '!!!SCREEN WIDTH')
 
-    if (screen_physical_width_cm < 22.5) {
-        // MOBILE
-        //hp_tablet__mobile__activate(bar_gr)        
-        //nevena(container_gr, screen_width_in_px, screen_height)
-        //web_design(container_gr, screen_width_in_px, screen_height)
-        //web_development(container_gr, screen_width_in_px, screen_height)        
-        //animation(container_gr, screen_width_in_px, screen_height)
-        //contact(container_gr, screen_width_in_px, screen_height)
-    }
-    else if (screen_physical_width_cm < 33.8) { // max width for tablet 2736px, max height 2048px
+    if (screen_physical_width_cm < 33.8) { // max width for tablet 2736px, max height 2048px
         // TABLET
         var tablet_home_layout_gr      = hp_tablet__create_background__tablet(container_gr, screen_width_in_px, screen_height)
         var tablet_white_background_gr = tablet_home_layout_gr.find("#tablet_white_background_gr")

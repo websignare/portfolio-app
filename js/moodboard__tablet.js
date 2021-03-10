@@ -1,6 +1,6 @@
-$(document).ready(function(){
+/*$(document).ready(function(){
     moodboard__tablet__main();
-})
+})*/
 
 function moodboard__tablet__main() {
     var screen_width_in_px = window.innerWidth;
@@ -44,7 +44,7 @@ function moodboard__tablet__activate(bar_gr){
 
 function moodboard__tablet__deactivate(){
     $("#moodboard_tablet").remove();
-    $("#contact_wrapper").remove();
+    $("#contact_mobile_wrapper").remove();
 
     /*remove_triggers("contact_canvas__trigger") // contact_canvas TRIGGER*/
 }

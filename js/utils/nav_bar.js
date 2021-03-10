@@ -5,7 +5,7 @@ function nav_bar__create(screen_width) {
     var bar_width_int  = 400
     var bar_height_int = 40
 
-    if(screen_physical_width_cm < 33.8){
+    if(screen_physical_width_cm < 20.5){
         var pages_map = { 
             "home_page_mobile":  {},
             "about_mobile":      {},
@@ -13,7 +13,17 @@ function nav_bar__create(screen_width) {
             "web_development_mobile": {},
             "moodboard_mobile":       {},
         }
-    } else {
+    } else if(screen_physical_width_cm < 33.8){
+        var pages_map = { 
+            "home_page_tablet":  {},
+            "about_tablet":      {},
+            "web_design_tablet": {},
+            "web_development_tablet": {},
+            "moodboard_tablet":       {},
+        }
+    }
+    
+    else {
     
         var pages_map = { 
             "home_page":  {},
@@ -103,7 +113,32 @@ function nav_bar__create(screen_width) {
                     break
             }
 
-        } else { 
+        } else if(screen_physical_width_cm < 33.8){
+            switch(page_name){    
+                //tablet
+                case "home_page_tablet":
+                    var transition_type = "2_plane_swipe_to_center"
+                    var button_color    = colors_map["home_page"]["main_color"]
+                    break
+                case "about_tablet":
+                    var transition_type = "1_plane_scale"
+                    var button_color    = colors_map["about"]["main_color"]
+                    break
+                case "web_design_tablet":
+                    var transition_type = "1_plane_swipe_to_right"
+                    var button_color    = colors_map["web_design"]["main_color"]
+                    break
+                case "web_development_tablet":
+                    var transition_type = "4_plane_in_circle"
+                    var button_color    = colors_map["web_development"]["main_color"]
+                    break
+                case "moodboard_tablet":
+                    var transition_type = "2_plane_swipe_up_and_down"
+                    var button_color    = colors_map["moodboard"]["main_color"]
+                    break
+            }
+        }
+        else { 
             switch(page_name){
                 case "home_page":
                     var transition_type = "2_plane_swipe_to_center"

@@ -1,6 +1,6 @@
-$(document).ready(function(){
+/*$(document).ready(function(){
     web_design_tablet__main();
-})
+})*/
 
 function web_design_tablet__main(screen_width_in_px) {
 
@@ -53,7 +53,7 @@ function web_design__tablet__activate(bar_gr) {
 function web_design__tablet__deactivate() {
 
     $("#web_design_tablet").remove();
-    $("#contact_wrapper").remove();
+    $("#contact_mobile_wrapper").remove();
     remove_triggers("artist_canvas__tablet_trigger") 
     remove_triggers("suprematism_canvas__tablet_trigger")
     remove_triggers("deep_blue_canvas__tablet_trigger")
