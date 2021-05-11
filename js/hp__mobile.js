@@ -2,7 +2,6 @@
     hp__mobile__main()
     console.log( "ready!" );
 });*/
-var current_page = "home_page_mobile"
 
 function hp__mobile__main() {
     var screen_width_in_px = window.innerWidth;
@@ -40,8 +39,6 @@ function hp__mobile__deactivate() {
     $("#hp__mobile").remove();
 
     $("#contact_mobile_wrapper").remove();
-
-    $("#nav_bar").remove();
 
     remove_triggers("hp_canvas__trigger")
 
@@ -122,7 +119,7 @@ function hp__mobile(parent_gr, bar_gr, screen_width_in_px, screen_height, double
             
             // ANIMATE
             console.log(create_mobile_menu,"defined")
-            create_mobile_menu(parent_gr, bar_gr, screen_width_in_px, screen_height)
+            create_mobile_menu(hp__mobile__layout_gr, bar_gr, screen_width_in_px, screen_height)
 
             menu_rect_clicked = true;
         }
@@ -131,7 +128,7 @@ function hp__mobile(parent_gr, bar_gr, screen_width_in_px, screen_height, double
         else {
 
             // ANIMATE
-            create_mobile_menu(parent_gr, bar_gr, screen_width_in_px, screen_height)
+            create_mobile_menu(hp__mobile__layout_gr, bar_gr, screen_width_in_px, screen_height)
 
             menu_rect_clicked = false;
         }
@@ -388,7 +385,7 @@ function hp__mobile(parent_gr, bar_gr, screen_width_in_px, screen_height, double
         // DEVELOPMENT CLICKED
         if (development_clicked == false) {
 
-            //-----------------------------
+            //----------------------------
             // RUN_PAGE_TRANSITION
             var target_page_name = "web_development_mobile";
             run_page_transition(target_page_name, "4_plane_in_circle", current_page, bar_gr,

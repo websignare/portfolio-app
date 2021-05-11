@@ -3,6 +3,7 @@ $(document).ready(function(){
 })
 
 // IMPORTANT!! - this variable memorizes which page is the current page
+// THIS HAS TO BE A GLOBAL VARIABLE 
 var current_page = "home_page"
 
 function main() {
@@ -64,8 +65,6 @@ function hp__activate(bar_gr) {
 function hp__deactivate() {
 
     $("body #hp").remove();
-    $("#hp #wrapper").remove();
-    $("#nav_bar").remove();
     $("#contact_wrapper").remove();
 
 }

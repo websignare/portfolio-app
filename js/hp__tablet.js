@@ -2,8 +2,6 @@
     main();
 })
 */
-// IMPORTANT!! - this variable memorizes which page is the current page
-var current_page = "home_page_tablet"
 
 function hp_tablet__main() {
     
@@ -53,6 +51,7 @@ function hp_tablet__activate(bar_gr) {
 
         //-----------------------------
     };*/
+
     var screen_width_in_px = window.innerWidth;
     var screen_height      = window.innerHeight;
 
@@ -66,24 +65,8 @@ function hp_tablet__activate(bar_gr) {
 }
 
 function hp_tablet__deactivate() {
-
-    $("#hp_tablet").remove();
-    $("#nav_bar").remove();
-    $("#contact_mobile_wrapper").remove();
-
-    /*remove_triggers("contact_canvas__trigger") // contact_canvas TRIGGER*/
-    
-    // $("#wrapper svg").remove();
-    // $("#contact_wrapper").remove();
-    
-    //container_gr.remove(); // IMPORTANT!! - remove everything previously drawnscreen_width_in_px, screen_height
-    //container_gr = container.nested();
-
-
-    //$('#wrapper').attr('height', $(window).height());
-    //$('#wrapper').attr('width', $(window).width());
-    // hp_tablet__create_background__tablet(container_gr, screen_width_in_px, screen_heightnevena_create_text__tablet(container_gr, screen_width_in_px, screen_height)
-    // section_images__tablet(container_gr)
+    $("body #hp_tablet").remove();
+    $("#contact_wrapper").remove();
 
 }
 
@@ -93,7 +76,7 @@ function hp_tablet__create_responsive(bar_gr) {
 
     var screen_width_in_px = window.innerWidth;
     var screen_height      = window.innerHeight;
-    $("body #hp").append(`
+    $("body").append(`
         <div id="hp_tablet">
             <div id="wrapper"></div>
         </div>
@@ -499,7 +482,7 @@ function buttons_tablet(parent_gr, bar_gr, screen_height, screen_width_in_px){
 
             //-----------------------------
             // RUN_PAGE_TRANSITION
-            var target_page_name = "web_design";
+            var target_page_name = "web_design_tablet";
             run_page_transition(target_page_name, "1_plane_swipe_to_right", current_page, bar_gr,
                 // on_complete - called when the page_transition completes (X number of seconds in the future)
                 function() {
@@ -574,7 +557,7 @@ function buttons_tablet(parent_gr, bar_gr, screen_height, screen_width_in_px){
 
             //-----------------------------
             // RUN_PAGE_TRANSITION
-            var target_page_name = "web_development";
+            var target_page_name = "web_development_tablet";
             run_page_transition(target_page_name, "4_plane_in_circle", current_page, bar_gr,
                 // on_complete - called when the page_transition completes (X number of seconds in the future)
                 function() {
@@ -628,7 +611,7 @@ function buttons_tablet(parent_gr, bar_gr, screen_height, screen_width_in_px){
 
             //-----------------------------
             // RUN_PAGE_TRANSITION
-            var target_page_name = "about";
+            var target_page_name = "about_tablet";
             run_page_transition(target_page_name, "1_plane_scale", current_page, bar_gr,
                 // on_complete - called when the page_transition completes (X number of seconds in the future)
                 function() {
@@ -726,7 +709,7 @@ function buttons_tablet(parent_gr, bar_gr, screen_height, screen_width_in_px){
 
             //-----------------------------
             // RUN_PAGE_TRANSITION
-            var target_page_name = "moodboard";
+            var target_page_name = "moodboard_tablet";
             run_page_transition(target_page_name, "2_plane_swipe_up_and_down", current_page, bar_gr,
                 // on_complete - called when the page_transition completes (X number of seconds in the future)
                 function() {

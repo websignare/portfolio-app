@@ -5,7 +5,9 @@
 function deactivate_current_page(current_page_name) {
 
 
+    console.log(current_page_name, "CURRENT PAGE NAME!!!!!!!!!!!!!!!!!!!")
     switch (current_page_name) {
+        //DESKTOP
         case "home_page":
             hp__deactivate();
             break;
@@ -21,6 +23,7 @@ function deactivate_current_page(current_page_name) {
         case "moodboard":
             moodboard__deactivate();
             break;
+
         //MOBILE
         case "home_page_mobile":
             hp__mobile__deactivate();
@@ -37,6 +40,7 @@ function deactivate_current_page(current_page_name) {
         case "moodboard_mobile":
             moodboard__mobile__deactivate();
             break;
+
         //TABLET
         case "home_page_tablet":
             hp_tablet__deactivate();
@@ -170,7 +174,6 @@ function open_sketch__p5(sketch_name, screen_width_in_px, screen_height) {
         var canvasHeight = screen_height-2*offset
     }
 
-
     var canvas_id    = "canvas__"+sketch_name
 
     $("body").append(`
@@ -194,7 +197,6 @@ function open_sketch__p5(sketch_name, screen_width_in_px, screen_height) {
     })
 
     var current_scroll_y = window.scrollY;
-
     $(sketch).css({                    
         "position":         "absolute",
         "height":           screen_height,

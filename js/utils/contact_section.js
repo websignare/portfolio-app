@@ -7,7 +7,7 @@ function create_contact_section(screen_width_in_px,screen_height){
 
     var current_scroll_y = window.scrollY;
 
-    var bounding_rect       = $("#contact_wrapper").get(0).getBoundingClientRect()
+    var bounding_rect      = $("#contact_wrapper").get(0).getBoundingClientRect()
     var contact__div_top_y = current_scroll_y+(bounding_rect.top);
     console.log(bounding_rect.top, bounding_rect.right, bounding_rect.bottom, bounding_rect.left);
     

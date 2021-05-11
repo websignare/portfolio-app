@@ -562,7 +562,7 @@ function draw_ui_element(name,
     console.log(content_info, "-------------------------------------------------------------------------------content_info")
 
     var icon_info = create_icon(name, container, color_icon, content_info, title, icon_paths, screen_height);
-    console.log(icon_info, "///////////////////////////////////////////////////////////////////////////////////icon_info")
+    console.log(icon_info, "/////////////////////////////////////////////////////////////////////////////////icon_info")
 
     var main_button_info = create_main_button(name, container, color_btn, icon_info, content_info, screen_height);
     console.log(main_button_info, "***********************************************************************************main_BTN")

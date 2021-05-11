@@ -1,21 +1,21 @@
-
-/*$(document).ready(function(){
-    web_development__main();
+/*
+$(document).ready(function(){
+    web_development__tablet_main();
 })*/
 
-function web_development__main() {
+function web_development__tablet_main() {
     var screen_width_in_px = window.innerWidth;
 
     // NAVIGATION_BAR
     var bar_gr = nav_bar__create(screen_width_in_px);  
 
-    web_development_tablet__activate();
+    web_development_tablet__activate(bar_gr);
 
     $(window).resize(function() {
         
         web_development_tablet__deactivate();
 
-        web_development_tablet__activate();
+        web_development_tablet__activate(bar_gr);
     });
 }
 
@@ -28,16 +28,16 @@ function web_development_tablet__activate(bar_gr) {
     current_page = "web_development_tablet"
 
     $("body").append(`
-        <div id="web_development">
+        <div id="web_development_tablet">
             <div id="wrapper">
             </div>
 
-            <div id="web_development__headline_animation_info">
+            <div id="web_development__tablet_headline_animation_info">
             </div>
             <div id="web_development__animations">
             </div>
 
-            <div id="web_development__headline__info">
+            <div id="web_development__tablet_headline__info">
             </div>
 
             <div id="video__info">
@@ -45,75 +45,75 @@ function web_development_tablet__activate(bar_gr) {
         </div>
     `);
 
-    var develop__tablet_info = web_development__create_responsive(bar_gr);
-    develop_animate__tablet_activate(develop__tablet_info, screen_width_in_px, screen_height)
+    var develop__tablet_all_info = web_development_tablet__create_responsive(bar_gr);
+    develop_animate__tablet_activate(develop__tablet_all_info, screen_width_in_px, screen_height)
 
 }
     
 function web_development_tablet__deactivate() {
 
-    $("#web_development").remove();
+    $("#web_development_tablet").remove();
     $("#sketch_p5").remove();
     $("#technologies__mobile__info").remove();
-    $("#contact_mobile_wrapper").remove();
+    $("#contact_wrapper").remove();
 
     /*remove_triggers("contact_canvas__trigger") // contact_canvas TRIGGER*/
 
 }
 
-function web_development__create_responsive(bar_gr) {
+function web_development_tablet__create_responsive(bar_gr) {
 
     var screen_width_in_px = window.innerWidth;
     var screen_height      = window.innerHeight;
 
     //-------STYLE-------
-    $("#web_development #wrapper").css({                    
+    $("#web_development_tablet #wrapper").css({                    
         "background-color": '#fafafaff',
         "position":         "relative",
         "height":           screen_height,
         "width":            screen_width_in_px
     }); 
 
-    $("#web_development #web_development__headline_animation_info").css({                    
+    $("#web_development_tablet #web_development__tablet_headline_animation_info").css({                    
         "background-color": '#617999',
         "position":         "relative",
         "height":           screen_height/2.5,
         "width":            screen_width_in_px
     }); 
 
-    $("#web_development #web_development__animations").css({                    
+    $("#web_development_tablet #web_development__animations").css({                    
         "background-color": '#617999',
         "position":         "relative",
         "width":            screen_width_in_px
     });
 
-    $("#web_development #web_development__headline__info").css({                    
+    $("#web_development_tablet #web_development__tablet_headline__info").css({                    
         "background-color": '#4f7779ff',
         "position":         "relative",
         "height":           screen_height/2.5,
         "width":            screen_width_in_px
     }); 
 
-    $("#web_development #video__info").css({                    
+    $("#web_development_tablet #video__info").css({                    
         "background-color": '#012a31ff',
         "position":         "relative",
         "height":           screen_height,
         "width":            screen_width_in_px
     }); 
 
-    var container       = SVG().addTo("#web_development #wrapper").size(screen_width_in_px, screen_height)
+    var container       = SVG().addTo("#web_development_tablet #wrapper").size(screen_width_in_px, screen_height)
     var container_gr    = container.nested()   
 
-    var headline_animation__container    = SVG().addTo("#web_development #web_development__headline_animation_info").size(screen_width_in_px, screen_height/2.5)
+    var headline_animation__container    = SVG().addTo("#web_development_tablet #web_development__tablet_headline_animation_info").size(screen_width_in_px, screen_height/2.5)
     var headline_animation__container_gr = headline_animation__container.nested()
 
-    var web_development__animations_canvas    = SVG().addTo("#web_development #web_development__animations").size(screen_width_in_px, 2400)
+    var web_development__animations_canvas    = SVG().addTo("#web_development_tablet #web_development__animations").size(screen_width_in_px, 2400)
     var web_development__animations_canvas_gr = web_development__animations_canvas.nested()
 
-    var headline_container     = SVG().addTo("#web_development #web_development__headline__info").size(screen_width_in_px, screen_height/2.5)
+    var headline_container     = SVG().addTo("#web_development_tablet #web_development__tablet_headline__info").size(screen_width_in_px, screen_height/2.5)
     var headline__container_gr = headline_container.nested()
 
-    var video_canvas    = SVG().addTo("#web_development #video__info").size(screen_width_in_px, screen_height)
+    var video_canvas    = SVG().addTo("#web_development_tablet #video__info").size(screen_width_in_px, screen_height)
     var video_canvas_gr = video_canvas.nested()
 
     var screen_physical_width_cm = get_physical_screen_width(screen_width_in_px);
@@ -131,17 +131,16 @@ function web_development__create_responsive(bar_gr) {
     else if (screen_physical_width_cm < 33.8) { // max width for tablet 2736px, max height 2048px
 
         // TABLET
-        var web_development__layout_gr = web_development__create_background__desktop(container_gr, bar_gr, screen_width_in_px, screen_height)
-        var web_development__background_gr = web_development__layout_gr.find("#web_development__background_gr")
-        var develop__top__tablet_rects = web_development__images__desktop(web_development__background_gr, screen_width_in_px, screen_height)
+        var web_development__layout_gr = web_development__create_background__tablet(container_gr, bar_gr, screen_width_in_px, screen_height)
+        var web_development__tablet_background_gr = web_development__layout_gr.find("#web_development__tablet_background_gr")
+        var develop__top__tablet_rects = web_development__images__tablet(web_development__tablet_background_gr, screen_width_in_px, screen_height)
 
-        var develop_text_tablet__info = web_development_text__desktop(container_gr, screen_width_in_px, screen_height)
+        var develop_text_tablet__info = web_development_text__tablet(container_gr, screen_width_in_px, screen_height)
 
-        web_development__headline_animation_info(headline_animation__container_gr, screen_width_in_px, screen_height)
+        web_development__tablet_headline_animation_info(headline_animation__container_gr, screen_width_in_px, screen_height)
         animations(web_development__animations_canvas_gr, screen_width_in_px, 2400, screen_height)
-        web_development__headline__info(headline__container_gr, screen_width_in_px, screen_height)
-        //technology_components(screen_width_in_px, screen_height)
-        web_development__video(video_canvas_gr, screen_width_in_px, screen_height)
+        web_development__tablet_headline__info(headline__container_gr, screen_width_in_px, screen_height)
+        web_development_tablet__video(video_canvas_gr, screen_width_in_px, screen_height)
 
         create_contact_section(screen_width_in_px, screen_height)
 
@@ -160,16 +159,16 @@ function web_development__create_responsive(bar_gr) {
 }
 
 //----------------------------------------------CREATE-LAYOUT-DESKTOP----------------------------------------------------------------
-function web_development__create_background__desktop(parent_gr, bar_gr, screen_width_in_px, screen_height){
+function web_development__create_background__tablet(parent_gr, bar_gr, screen_width_in_px, screen_height){
 
     var web_development__layout_gr = parent_gr.nested()
 
-    var web_development__background_gr = web_development__layout_gr.nested()
+    var web_development__tablet_background_gr = web_development__layout_gr.nested()
         .attr({
-            id: "web_development__background_gr",
+            id: "web_development__tablet_background_gr",
         })
 
-    var background_color = web_development__background_gr.rect(screen_width_in_px,screen_height)
+    var background_color = web_development__tablet_background_gr.rect(screen_width_in_px,screen_height)
         .fill('#759aa292')
         .attr({
             id:      "background_color",
@@ -198,7 +197,7 @@ function web_development__create_background__desktop(parent_gr, bar_gr, screen_w
             
             // ANIMATE
             console.log(create_menu)
-            create_menu(parent_gr, bar_gr, screen_width_in_px, screen_height)
+            create_tablet__menu(parent_gr, bar_gr, screen_width_in_px, screen_height)
 
             menu_rect_clicked = true;
         }
@@ -207,7 +206,7 @@ function web_development__create_background__desktop(parent_gr, bar_gr, screen_w
         else {
 
             // ANIMATE
-            create_menu(parent_gr, bar_gr, screen_width_in_px, screen_height)
+            create_tablet__menu(parent_gr, bar_gr, screen_width_in_px, screen_height)
 
             menu_rect_clicked = false;
         }
@@ -219,7 +218,7 @@ function web_development__create_background__desktop(parent_gr, bar_gr, screen_w
 }
 
 //----------------------------------------------IMAGES-DESKTOP----------------------------------------------------------------
-function web_development__images__desktop(parent_gr, screen_width_in_px, screen_height){
+function web_development__images__tablet(parent_gr, screen_width_in_px, screen_height){
 
     var images_gr = parent_gr.nested()
     images_gr.attr({
@@ -353,10 +352,10 @@ function web_development__images__desktop(parent_gr, screen_width_in_px, screen_
         var a_rect_x      = image_gr_0.x()
         var a_rect_y      = image_gr_0.y()    
     
-        var a_rect = a_rect_gr.rect(rect_width+screen_width_in_px,a_rect_height)
+        var a_rect = a_rect_gr.rect(rect_width+500,a_rect_height)
         a_rect.attr({
                 fill: "#274c50",
-                x: a_rect_x-rect_width-screen_width_in_px,
+                x: a_rect_x-rect_width,
                 y: a_rect_y
             })
     
@@ -408,7 +407,7 @@ function web_development__images__desktop(parent_gr, screen_width_in_px, screen_
 }
 
 //----------------------------------------------TEXT----------------------------------------------------------------
-function web_development_text__desktop(parent_gr, screen_width_in_px, screen_height){
+function web_development_text__tablet(parent_gr, screen_width_in_px, screen_height){
     var text_gr = parent_gr.nested()
     .attr({
         id: "text_gr",
@@ -472,7 +471,7 @@ function web_development_text__desktop(parent_gr, screen_width_in_px, screen_hei
     return develop_text_tablet__info;
 }
 //-------------------------HEADLINE-ANIMATION-INFO----------------------------------//
-function web_development__headline_animation_info(parent_gr, screen_width_in_px, screen_height){
+function web_development__tablet_headline_animation_info(parent_gr, screen_width_in_px, screen_height){
 
     var headline_gr = parent_gr.nested()
  
@@ -500,7 +499,7 @@ function web_development__headline_animation_info(parent_gr, screen_width_in_px,
 }
 
 //-------------------------HEADLINE-INFO----------------------------------//
-function web_development__headline__info(parent_gr, screen_width_in_px, screen_height){
+function web_development__tablet_headline__info(parent_gr, screen_width_in_px, screen_height){
 
     var headline_gr = parent_gr.nested()
  
@@ -545,7 +544,7 @@ function web_development__headline__info(parent_gr, screen_width_in_px, screen_h
     })
 }
 
-function web_development__video(parent_gr, screen_width_in_px, screen_height){
+function web_development_tablet__video(parent_gr, screen_width_in_px, screen_height){
 
         var video_gr   = parent_gr.nested()
         var video_gr_y = 100;
@@ -609,20 +608,20 @@ function web_development__video(parent_gr, screen_width_in_px, screen_height){
         })
 }
 
-function develop_animate__tablet_activate(develop__tablet_info, screen_width_in_px, screen_height){
+function develop_animate__tablet_activate(develop__tablet_all_info, screen_width_in_px, screen_height){
 
-    var develop_path__gr = develop__tablet_info["develop__top__tablet_rects"]["develop_path__gr"]
-    var paragraph        = develop__tablet_info["develop__top__tablet_rects"]["paragraph"]
-    var rect_width      = develop__tablet_info["develop__top__tablet_rects"]["rect_width"]
-    var a_rect           = develop__tablet_info["develop__top__tablet_rects"]["a_rect"]
-    var a_rect_y         = develop__tablet_info["develop__top__tablet_rects"]["a_rect_y"]
-    var a_rect_x         = develop__tablet_info["develop__top__tablet_rects"]["a_rect_x"]
-    var b_rect           = develop__tablet_info["develop__top__tablet_rects"]["b_rect"]
-    var b_rect_x         = develop__tablet_info["develop__top__tablet_rects"]["b_rect_x"]
-    var b_rect_width    = develop__tablet_info["develop__top__tablet_rects"]["b_rect_width"]
-    var c_rect           = develop__tablet_info["develop__top__tablet_rects"]["c_rect"]
-    var c_rect_x         = develop__tablet_info["develop__top__tablet_rects"]["c_rect_x"]
-    var c_rect_width    = develop__tablet_info["develop__top__tablet_rects"]["c_rect_width"]
+    var develop_path__gr = develop__tablet_all_info["develop__top__tablet_rects"]["develop_path__gr"]
+    var paragraph        = develop__tablet_all_info["develop__top__tablet_rects"]["paragraph"]
+    var rect_width      = develop__tablet_all_info["develop__top__tablet_rects"]["rect_width"]
+    var a_rect           = develop__tablet_all_info["develop__top__tablet_rects"]["a_rect"]
+    var a_rect_y         = develop__tablet_all_info["develop__top__tablet_rects"]["a_rect_y"]
+    var a_rect_x         = develop__tablet_all_info["develop__top__tablet_rects"]["a_rect_x"]
+    var b_rect           = develop__tablet_all_info["develop__top__tablet_rects"]["b_rect"]
+    var b_rect_x         = develop__tablet_all_info["develop__top__tablet_rects"]["b_rect_x"]
+    var b_rect_width    = develop__tablet_all_info["develop__top__tablet_rects"]["b_rect_width"]
+    var c_rect           = develop__tablet_all_info["develop__top__tablet_rects"]["c_rect"]
+    var c_rect_x         = develop__tablet_all_info["develop__top__tablet_rects"]["c_rect_x"]
+    var c_rect_width    = develop__tablet_all_info["develop__top__tablet_rects"]["c_rect_width"]
 /*
     a_rect.animate({
         delay: 550,

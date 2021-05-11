@@ -49,7 +49,9 @@ function web_design__activate(bar_gr) {
 function web_design__deactivate() {
 
     $("#web_design").remove();
-    $("#contact_wd_wrapper").remove();
+    $("#wd_wrapper").remove();
+    $("#contact_wrapper").remove();
+
 
     remove_triggers("artist_canvas__trigger") // contact_canvas TRIGGER*/
     remove_triggers("suprematism_canvas__trigger")

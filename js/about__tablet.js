@@ -59,10 +59,6 @@ function about_tablet__deactivate() {
     remove_triggers("about_canvas__tablet_trigger")
     remove_triggers("history_canvas__tablet_trigger")
     remove_triggers("process_canvas__tablet__trigger")
-    /* REMOVE/CLEANUP TRIGGERS (for this page)
-    remove_triggers("headline_canvas__trigger")
-    remove_triggers("intro_canvas__trigger")
-    remove_triggers("contact_canvas__trigger") // contact_canvas TRIGGER*/
 }
 
 function about__tablet_create_responsive(bar_gr) {
@@ -164,7 +160,7 @@ function about__tablet_create_responsive(bar_gr) {
 
         var rects_tablet = about__images__tablet(about_background_tablet__gr, screen_width_in_px, screen_height)
         
-        var text_tablet_info = about_text__desktop(main_canvas_tablet__gr, screen_width_in_px, screen_height)
+        var text_tablet_info = about_text__tablet(main_canvas_tablet__gr, screen_width_in_px, screen_height)
         about_intro_tablet__info(intro_canvas__gr, screen_width_in_px, screen_height, about__tablet__div_bottom_y)
         history_tablet__info(history_canvas__gr, screen_width_in_px, screen_height, history__tablet__div_bottom_y)
         process_tablet__info(process_canvas__gr, screen_width_in_px, screen_height, process__tablet_div_bottom_y)
@@ -443,7 +439,7 @@ function about__create_background__tablet(parent_gr, bar_gr, screen_width_in_px,
 
 }
 //----------------------------------------------TEXT----------------------------------------------------------------
-function about_text__desktop(parent_gr, screen_width_in_px, screen_height){
+function about_text__tablet(parent_gr, screen_width_in_px, screen_height){
     var text_gr = parent_gr.nested()
     //---------------------------SYMBOL----------------------------------
     var hashtag_symbol_gr = text_gr.nested()   
@@ -461,16 +457,16 @@ function about_text__desktop(parent_gr, screen_width_in_px, screen_height){
         id: "hashtag_symbol_gr"
     })
     
-        // SYMBOL ROTATION
-        function rotatePositive() {
-            hashtag_symbol.animate({duration: 4000}).ease("<").rotate(15).after(rotateNegative)
-          }
-          
-        function rotateNegative() {
-            hashtag_symbol.animate({duration: 4000}).ease(">").rotate(-15).after(rotatePositive)
+    // SYMBOL ROTATION
+    /*function rotatePositive() {
+        hashtag_symbol.animate({duration: 4000}).ease("<").rotate(15).after(rotateNegative)
         }
-          
-        rotatePositive()
+        
+    function rotateNegative() {
+        hashtag_symbol.animate({duration: 4000}).ease(">").rotate(-15).after(rotatePositive)
+    }
+        
+    rotatePositive()*/
         
     //---------------------ABOUT TITLE--------------------
     var about_me_path__gr = text_gr.nested()

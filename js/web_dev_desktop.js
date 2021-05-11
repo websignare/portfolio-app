@@ -14,6 +14,7 @@ function web_development__activate(bar_gr) {
 
     var screen_width_in_px = window.innerWidth;
     var screen_height      = window.innerHeight;
+    current_page = "web_development"
 
     document.title = "web_development"
     window.history.pushState({page: "web_development"},"", "#web_development");
@@ -35,14 +36,13 @@ function web_development__activate(bar_gr) {
         </div>
     `);
 
-    var develop__desktop_info = web_development__create_responsive(bar_gr);
-    develop_animate__activate(develop__desktop_info, screen_width_in_px, screen_height)
-    current_page = "web_development"
+    var develop__desktop_all_info = web_development__create_responsive(bar_gr);
+    develop_animate__activate(develop__desktop_all_info, screen_width_in_px, screen_height)
 }
     
 function web_development__deactivate() {
 
-    $("#web_development").remove();
+    $("body #web_development").remove();
     $("#sketch_p5").remove();
     //$("#technologies__mobile__info").remove();
     $("#contact_wrapper").remove();
@@ -104,43 +104,26 @@ function web_development__create_responsive(bar_gr) {
     var screen_physical_width_cm = get_physical_screen_width(screen_width_in_px);
     console.log(screen_physical_width_cm, '!!!SCREEN WIDTH')
 
-    if (screen_physical_width_cm < 20.5) {
-        // MOBILE
-        //web_development__mobile__activate(bar_gr)
+
+    var web_development__layout_gr = web_development__create_background__desktop(container_gr, bar_gr, screen_width_in_px, screen_height)
+    var web_development__background_gr = web_development__layout_gr.find("#web_development__background_gr")
+    var develop__top_rects = web_development__images__desktop(web_development__background_gr, screen_width_in_px, screen_height)
+
+    var develop_text_info = web_development_text__desktop(container_gr, screen_width_in_px, screen_height)
+    animations(web_development__animations_canvas_gr, screen_width_in_px, 3100, screen_height)
+    web_development__headline__info(headline__container_gr, screen_width_in_px, screen_height)
+    technology_components()
+    web_development__video(video_canvas_gr, screen_width_in_px, screen_height)
+
+    create_contact_section(screen_width_in_px, screen_height)
+
+    // RETURNED INFO
+    var develop__desktop_info = {
+        "develop__top_rects": develop__top_rects,
+        "develop_text_info":  develop_text_info
     }
-    else if (screen_physical_width_cm < 33.8) { // max width for tablet 2736px, max height 2048px
 
-        // TABLET
-        //var layout_tablet_gr = create_background__tablet(container_gr, screen_width_in_px, screen_height)
-        //var background_white_tablet_gr = layout_tablet_gr.findOne('#background_white_tablet_gr')
-        //section_images__tablet(background_white_tablet_gr, screen_width_in_px, screen_height)
-        //create_text__tablet(container_gr, wrapperscreen_width_in_px, screen_height)
-        //buttons_tablet(container_gr, screen_height, screen_width_in_px)
-        //create_contact_section(contact_gr, screen_width_in_px)
-
-    }
-
-    else {
-        var web_development__layout_gr = web_development__create_background__desktop(container_gr, bar_gr, screen_width_in_px, screen_height)
-        var web_development__background_gr = web_development__layout_gr.find("#web_development__background_gr")
-        var develop__top_rects = web_development__images__desktop(web_development__background_gr, screen_width_in_px, screen_height)
-
-        var develop_text_info = web_development_text__desktop(container_gr, screen_width_in_px, screen_height)
-        animations(web_development__animations_canvas_gr, screen_width_in_px, 3100, screen_height)
-        web_development__headline__info(headline__container_gr, screen_width_in_px, screen_height)
-        technology_components()
-        web_development__video(video_canvas_gr, screen_width_in_px, screen_height)
-
-        create_contact_section(screen_width_in_px, screen_height)
-
-        // RETURNED INFO
-        var develop__desktop_info = {
-            "develop__top_rects": develop__top_rects,
-            "develop_text_info":  develop_text_info
-        }
-
-        return develop__desktop_info
-    }
+    return develop__desktop_info
 }
 
 //----------------------------------------------CREATE-LAYOUT-DESKTOP----------------------------------------------------------------
@@ -336,8 +319,9 @@ function web_development__images__desktop(parent_gr, screen_width_in_px, screen_
         var a_rect_x      = image_gr_0.x()
         var a_rect_y      = image_gr_0.y()    
     
-        var a_rect = a_rect_gr.rect(rect_width+500,a_rect_height)
+        var a_rect = a_rect_gr.rect(rect_width-500,a_rect_height)
         a_rect.attr({
+            id: "a_rect",
                 fill: "#597f83ff",
                 x: -900,
                 y: a_rect_y
@@ -414,16 +398,6 @@ function web_development_text__desktop(parent_gr, screen_width_in_px, screen_hei
         id: "plus_symbol_gr"
     })
 
-    // SYMBOL ROTATION
-    function rotatePositive() {
-        plus_symbol.animate({duration: 3500}).ease(">").rotate(10).after(rotateNegative)
-    }
-        
-    function rotateNegative() {
-        plus_symbol.animate({duration: 3500}).ease(">").rotate(-10).after(rotatePositive)
-    }
-        
-    rotatePositive()
 
     //---------------------DEV-TITLE--------------------
     var develop_path__gr = text_gr.nested()
@@ -555,27 +529,27 @@ function web_development__video(parent_gr, screen_width_in_px, screen_height){
         })
 }
 
-function develop_animate__activate(develop__desktop_info, screen_width_in_px, screen_height){
+function develop_animate__activate(develop__desktop_all_info, screen_width_in_px, screen_height){
 
-    var develop_path__gr = develop__desktop_info["develop_text_info"]["develop_path__gr"]
-    var paragraph        = develop__desktop_info["develop_text_info"]["paragraph"]
-    var rect_width      = develop__desktop_info["develop__top_rects"]["rect_width"]
-    var a_rect           = develop__desktop_info["develop__top_rects"]["a_rect"]
-    var a_rect_y         = develop__desktop_info["develop__top_rects"]["a_rect_y"]
-    var a_rect_x         = develop__desktop_info["develop__top_rects"]["a_rect_x"]
-    var b_rect           = develop__desktop_info["develop__top_rects"]["b_rect"]
-    var b_rect_x         = develop__desktop_info["develop__top_rects"]["b_rect_x"]
-    var b_rect_width    = develop__desktop_info["develop__top_rects"]["b_rect_width"]
-    var c_rect           = develop__desktop_info["develop__top_rects"]["c_rect"]
-    var c_rect_x         = develop__desktop_info["develop__top_rects"]["c_rect_x"]
-    var c_rect_width    = develop__desktop_info["develop__top_rects"]["c_rect_width"]
+    var develop_path__gr = develop__desktop_all_info["develop_text_info"]["develop_path__gr"]
+    var paragraph        = develop__desktop_all_info["develop_text_info"]["paragraph"]
+    var rect_width      = develop__desktop_all_info["develop__top_rects"]["rect_width"]
+    var a_rect           = develop__desktop_all_info["develop__top_rects"]["a_rect"]
+    var a_rect_y         = develop__desktop_all_info["develop__top_rects"]["a_rect_y"]
+    var a_rect_x         = develop__desktop_all_info["develop__top_rects"]["a_rect_x"]
+    var b_rect           = develop__desktop_all_info["develop__top_rects"]["b_rect"]
+    var b_rect_x         = develop__desktop_all_info["develop__top_rects"]["b_rect_x"]
+    var b_rect_width    = develop__desktop_all_info["develop__top_rects"]["b_rect_width"]
+    var c_rect           = develop__desktop_all_info["develop__top_rects"]["c_rect"]
+    var c_rect_x         = develop__desktop_all_info["develop__top_rects"]["c_rect_x"]
+    var c_rect_width    = develop__desktop_all_info["develop__top_rects"]["c_rect_width"]
 
     a_rect.animate({
         delay: 550,
         duration:500
     }).ease('>')
     .attr({
-       x: a_rect_x-rect_width-500,
+       x: a_rect_x-rect_width-1000,
     })
     b_rect.animate({
         delay: 500,
